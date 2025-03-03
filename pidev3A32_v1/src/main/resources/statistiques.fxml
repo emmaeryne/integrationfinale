@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.emmapi.controllers.StatistiquesController"
+            prefWidth="600" prefHeight="500">
+
+    <!-- ComboBox pour choisir le critère -->
+    <ComboBox fx:id="comboBoxCritere" layoutX="50" layoutY="20" prefWidth="200"
+              promptText="Choisir un critère"/>
+
+    <!-- PieChart pour afficher les statistiques -->
+    <PieChart fx:id="pieChart" layoutX="50" layoutY="70" prefWidth="500" prefHeight="350"/>
+
+    <!-- Bouton pour fermer -->
+    <Button fx:id="btnFermer" layoutX="250" layoutY="450" text="Fermer" onAction="#fermerFenetre"/>
+</AnchorPane>

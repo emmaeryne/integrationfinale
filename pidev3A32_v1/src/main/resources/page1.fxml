@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<?import javafx.util.Callback?>
+<?import edu.emmapi.controllers.QRCodeCellFactory?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #1e1e1e, #2e2e2e);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.produitpage1">
+
+    <!-- Titre de la page -->
+    <Label layoutX="20.0" layoutY="10.0" style="-fx-font-size: 24px; -fx-text-fill: #FFC107; -fx-font-weight: bold;" text="Gestion des Produits" />
+
+    <!-- 📌 HBox contenant la barre de recherche et le bouton Réinitialiser -->
+    <HBox layoutX="20.0" layoutY="50.0" spacing="10.0">
+        <TextField fx:id="searchField" promptText="🔍 Rechercher un produit..."
+                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-font-size: 14px; -fx-prompt-text-fill: gray;"
+                   prefWidth="300.0"/>
+        <Button text="🔄 Réinitialiser" onAction="#resetSearch"
+                style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- TableView pour afficher les produits -->
+    <TableView fx:id="tableProduit" layoutX="20.0" layoutY="100.0" prefWidth="600.0" prefHeight="350.0">
+        <columns>
+            <TableColumn fx:id="colNom" text="Nom Produit" prefWidth="150"/>
+            <TableColumn fx:id="colCategorie" text="Catégorie" prefWidth="120"/>
+            <TableColumn fx:id="colPrix" text="Prix (TND)" prefWidth="80"/>
+            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
+            <TableColumn fx:id="colFournisseur" text="Fournisseur" prefWidth="150"/>
+            <TableColumn fx:id="colQRCode" text="QR Code" prefWidth="100">
+                <cellFactory>
+
+                </cellFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <!-- 📌 VBox pour les boutons sur le côté droit -->
+    <VBox layoutX="640.0" layoutY="100.0" spacing="15.0">
+        <Button fx:id="btnAjouter" onAction="#ouvrirAjouterProduit" prefWidth="200.0"
+                style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-font-weight: bold;" text="➕ Ajouter Produit" />
+        <Button fx:id="btnModifier" onAction="#modifierProduit" prefWidth="200.0"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" text="✏ Modifier Produit" />
+        <Button fx:id="btnSupprimer" onAction="#supprimerProduit" prefWidth="200.0"
+                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-weight: bold;" text="🗑 Supprimer Produit" />
+        <Button fx:id="naviguerverscategorie" onAction="#ouvrirpage2" prefWidth="200.0"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="📂 Liste Catégories" />
+        <Button fx:id="btnExportExcel" onAction="#exportToExcel" prefWidth="200.0"
+                style="-fx-background-color: #2ECC71; -fx-text-fill: white; -fx-font-weight: bold;" text="📄 Exporter en Excel" />
+        <Button fx:id="btnExportPDF" onAction="#exportToPDF" prefWidth="200.0"
+                style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-font-weight: bold;" text="📄 Exporter en PDF" />
+    </VBox>
+
+    <VBox layoutX="20.0" layoutY="470.0" spacing="10.0" prefWidth="400.0"
+          style="-fx-background-color: #2e2e2e; -fx-padding: 20; -fx-background-radius: 10;">
+        <Label style="-fx-font-size: 18px; -fx-text-fill: #FFC107; -fx-font-weight: bold;" text="✏ Modifier le produit" />
+
+        <TextField fx:id="nomProduitField" promptText="Nom du produit"
+                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-prompt-text-fill: gray; -fx-font-size: 14px;" />
+
+        <Label text="Prix en Tunisie :" />
+
+
+        <TextField fx:id="prixField" promptText="Prix (TND)"
+                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-prompt-text-fill: gray; -fx-font-size: 14px;" />
+        <DatePicker fx:id="dateField"
+                    style="-fx-background-color: #424242; -fx-text-fill: white; -fx-font-size: 14px;" />
+        <Button fx:id="btnEnregistrer" onAction="#enregistrerModification"
+                style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="💾 Enregistrer" /><Button fx:id="btnStatistiques" layoutX="100.0" layoutY="520.0"
+                                               onAction="#afficherStatistiques" prefWidth="200.0"
+                                               style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px;"
+                                               text="📊 Afficher Statistiques"/>
+    </VBox>
+
+    <!-- 📌 Lien vers les styles CSS externes -->
+    <stylesheets>
+        <URL value="@stylem.css" />
+    </stylesheets>
+
+</AnchorPane>

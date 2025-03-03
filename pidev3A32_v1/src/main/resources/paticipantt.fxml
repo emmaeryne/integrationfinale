@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="438.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Participantt">
+    <children>
+        <!-- Titre -->
+        <Label layoutX="250.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Les Participants" textAlignment="CENTER" textFill="#a48441" />
+
+        <!-- Image de fond -->
+        <ImageView fitHeight="439.0" fitWidth="620.0">
+            <image>
+                <Image url="@interface-services.png" />
+            </image>
+        </ImageView>
+
+        <!-- FlowPane pour afficher dynamiquement les cartes de participants -->
+        <FlowPane fx:id="participantFlowPane" hgap="10" layoutX="169.0" layoutY="162.0" prefHeight="74.0" prefWidth="433.0" vgap="10" />
+
+        <!-- Bouton pour générer le PDF, avec l'ID fx:id pour le lier au contrôleur -->
+        <Button fx:id="generatePdfButton" layoutX="494.0" layoutY="384.0" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: orange; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 10px 20px;" text="Générer PDF" textFill="#080505" />
+
+        <!-- Labels inutilisés (retirés ou ajustés selon ton besoin) -->
+        <Label fx:id="labelplanning" layoutX="73.0" layoutY="202.0" text="Planning" textFill="#c79520">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="74.0" layoutY="250.0" text="Cours" textFill="#c79520">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="73.0" layoutY="295.0" text="Participant" textFill="#c79520">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="74.0" layoutY="343.0" text="Detail" textFill="#c79520">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="79.0" layoutY="116.0" text="Gestion" textFill="#5b410c">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="75.0" layoutY="150.0" text="Planning" textFill="#5b410c">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+      <Label layoutX="316.0" layoutY="75.0" text="Les Participants" textFill="#a98417">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

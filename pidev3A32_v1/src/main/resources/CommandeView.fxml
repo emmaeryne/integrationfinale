@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="533.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pidev3a32.controllers.CommandeController">
+   <ImageView fitHeight="698.0" fitWidth="858.0" layoutY="-18.0">
+      <image>
+         <Image url="@Orange and Black Modern Bold Sport Presentation (5).png" />
+      </image>
+   </ImageView>
+    <Button fx:id="test" layoutX="20" layoutY="20" onAction="#goBack" style="-fx-background-color: #e1a12f; -fx-text-fill: white; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: bold;" text="Back" />
+
+
+    <VBox alignment="CENTER" layoutX="116.0" layoutY="-41.0" prefHeight="639.0" prefWidth="626.0" spacing="20">
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Baskerville Old Face';" text="Gestion des Commandes" textFill="WHITE" />
+
+        <HBox alignment="CENTER" spacing="20">
+
+            <VBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Liste des Commandes" />
+            </VBox>
+        </HBox>
+
+        <ListView fx:id="commandeList" prefHeight="282.0" prefWidth="626.0" style="-fx-font-family: 'Segoe UI';" />
+
+        <HBox alignment="CENTER" prefHeight="28.0" prefWidth="626.0" spacing="20">
+         <Button fx:id="AjC" mnemonicParsing="false" onAction="#gotoAj" style="-fx-background-color: #ffffff; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px;" text="Ajoute" />
+         <Button fx:id="modiff" mnemonicParsing="false" onAction="#gotomodif" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-font-family: 'Segoe UI'; -fx-background-color: #e1a12f;" text="Modifier" />
+            <Button onAction="#supprimerCommande" style="-fx-background-color: #d33; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: bold;" text="Supprimer" />
+            <Button onAction="#refreshCommandes" prefHeight="28.0" prefWidth="111.0" style="-fx-background-color: #f6bf32; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-text-fill: white;" text="Rafraîchir" />
+        </HBox>
+    </VBox>
+</AnchorPane>

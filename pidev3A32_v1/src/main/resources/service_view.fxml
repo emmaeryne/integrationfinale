@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ServiceController">
+    <content>
+        <VBox prefHeight="800.0" prefWidth="900.0" spacing="8" style="-fx-background-color: #2E3440;" styleClass="main-container">
+            <stylesheets>
+                <URL value="@styles.css" />
+            </stylesheets>
+
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <AnchorPane prefHeight="60.0" prefWidth="900.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="320.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" />
+                        </image>
+                    </ImageView>
+                    <Label layoutX="301.0" layoutY="70.0" styleClass="title" text="Gestion des Services" textFill="#f4eeee" />
+                </children>
+            </AnchorPane>
+
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Region HBox.hgrow="ALWAYS" />
+                <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+            </HBox>
+
+            <VBox fx:id="notificationPane" spacing="4" />
+
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="filters-container">
+                <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-field" HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="categorieFilter" promptText="Catégorie" />
+                <Label text="Prix max:" />
+                <Slider fx:id="prixFilter" max="1000" min="0" showTickLabels="true" />
+            </HBox>
+
+            <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+                <VBox spacing="8">
+                    <TableView fx:id="serviceTable" prefHeight="400.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
+                    <HBox alignment="CENTER_RIGHT" spacing="8">
+                        <Button onAction="#loadServices" styleClass="btn-secondary" text="Actualiser" />
+                        <Button onAction="#exportPDF" styleClass="btn-secondary" text="Exporter" />
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="8" styleClass="form-container">
+                    <Label styleClass="section-title" text="Détails du service" />
+
+                    <Label text="Nom" />
+                    <TextField fx:id="nomField" />
+
+                    <Label text="Description" />
+                    <TextArea fx:id="descriptionArea" wrapText="true" />
+
+                    <Label text="Prix" />
+                    <TextField fx:id="prixField" />
+
+                    <Label text="Capacité max" />
+                    <Spinner fx:id="capaciteSpinner" editable="true" initialValue="1" max="100" min="1" />
+
+                    <Label text="Catégorie" />
+                    <ComboBox fx:id="categorieCombo" promptText="Sélectionner une catégorie" />
+
+                    <Label text="Durée (min)" />
+                    <Spinner fx:id="dureeSpinner" editable="true" initialValue="30" max="240" min="15" />
+
+                    <Label text="Niveau" />
+                    <ComboBox fx:id="niveauCombo" />
+
+                    <CheckBox fx:id="actifCheck" selected="true" text="Service actif" />
+
+                    <HBox alignment="CENTER_RIGHT" spacing="8">
+                        <Button onAction="#clearFields" styleClass="btn-secondary" text="Annuler" />
+                        <Button onAction="#handleAjouterService" styleClass="btn-primary" text="Enregistrer" />
+                    </HBox>
+                </VBox>
+            </SplitPane>
+
+            <TitledPane expanded="false" text="Statistiques">
+                <LineChart fx:id="statsChart">
+                    <xAxis>
+                        <CategoryAxis label="Jour" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Nombre de réservations" />
+                    </yAxis>
+                </LineChart>
+            </TitledPane>
+
+            <Label prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" />
+        </VBox>
+    </content>
+</ScrollPane>

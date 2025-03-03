@@ -1,0 +1,11 @@
+.chart-pie-label-line {
+    -fx-stroke: transparent; /* rend la ligne invisible */
+}
+
+.chart-pie-label {
+    -fx-pie-label-line-length: 0; /* pas de “tige” */
+    -fx-pie-label-gap: 0;
+    -fx-pie-label-line-gap: -10;  /* pousse l’étiquette à l’intérieur */
+    -fx-fill: white;
+    -fx-font-weight: bold;
+}

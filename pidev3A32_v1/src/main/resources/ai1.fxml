@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.emmapi.controllers.AIController2">
+
+    <Label text="Chat avec l'IA" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextArea fx:id="userInput" promptText="Écrivez votre message ici..." wrapText="true" />
+
+    <Button text="Envoyer" onAction="#handleAIButtonClick"/>
+
+    <Label text="Réponse de l'IA:" style="-fx-font-size: 14px;"/>
+
+    <TextArea fx:id="aiResponseArea" editable="false" wrapText="true" prefHeight="200"/>
+
+</VBox>

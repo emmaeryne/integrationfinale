@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="428.0" prefWidth="624.0" style="-fx-background-color: #2e3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoursC"> <!-- Assurez-vous que le nom du contrôleur est correct -->
+    <children>
+        <Label layoutX="22.0" layoutY="28.0" text="Detail" textFill="#d4cfc4">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TableView fx:id="tablec" layoutX="100.0" layoutY="173.0" onMouseClicked="#show" prefHeight="226.0" prefWidth="432.0">
+        <columns>
+          <TableColumn fx:id="courc" prefWidth="143.199951171875" text="Nom_cours" />
+          <TableColumn fx:id="dureec" prefWidth="136.79998779296875" text="Duree_cours" />
+            <TableColumn fx:id="etatc" prefWidth="68.0" text="Etat_cours" />
+        </columns>
+      </TableView>
+      <Label fx:id="planninglabel" layoutX="119.0" layoutY="28.0" text="Planning" textFill="#c9c4b7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="401.0" layoutY="28.0" text="Cours" textFill="#cfcabf">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="participantlabel" layoutX="488.0" layoutY="28.0" text="Participant" textFill="#d1cab9">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="128.0" layoutY="100.0" text="Les Cours Disponibles:" textAlignment="CENTER" textFill="#e4e0dc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="233.0" layoutY="22.0">
+         <image>
+            <Image url="@hjk-removebg-preview.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

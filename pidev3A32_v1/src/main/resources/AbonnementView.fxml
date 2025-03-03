@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AbonnementController">
+    <content>
+        <VBox prefHeight="800.0" prefWidth="900.0" spacing="8" style="-fx-background-color: #2E3440;">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <AnchorPane prefHeight="60.0" prefWidth="900.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="381.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo image -->
+                        </image>
+                    </ImageView>
+                    <Label layoutX="301.0" layoutY="70.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #ffffff;" text="Association Abonnement" />
+                </children>
+            </AnchorPane>
+
+            <HBox alignment="CENTER_LEFT" spacing="10" />
+
+            <HBox spacing="10">
+                <ComboBox fx:id="sortComboBox" prefHeight="26.0" prefWidth="236.0" promptText="Trier par" />
+                <Button onAction="#loadAbonnements" prefHeight="26.0" prefWidth="75.0" styleClass="btn-secondary" text="Actualiser" />
+            </HBox>
+
+            <TableView fx:id="abonnementTable" prefHeight="562.0" prefWidth="840.0" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="serviceIdColumn" prefWidth="121.60000610351562" text="Service ID" />
+                    <TableColumn fx:id="typeAbonnementIdColumn" prefWidth="186.39999389648438" text="Type Abonnement ID" />
+                    <TableColumn fx:id="prixTotalColumn" prefWidth="137.60003662109375" text="Prix Total" />
+                    <TableColumn fx:id="statutColumn" prefWidth="171.99993896484375" text="Statut" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button onAction="#handleAddAbonnement" styleClass="btn-primary" text="Ajouter" />
+                <Button onAction="#handleEditAbonnement" styleClass="btn-primary" text="Modifier" />
+                <Button onAction="#handleDeleteAbonnement" styleClass="btn-danger" text="Supprimer" />
+            </HBox>
+
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                                       © 2025 HIVE" />
+        </VBox>
+    </content>
+</ScrollPane>

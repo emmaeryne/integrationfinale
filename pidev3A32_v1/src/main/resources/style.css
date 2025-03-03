@@ -1,0 +1,68 @@
+.button {
+    -fx-background-color: #008CBA;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+}
+
+.button:hover {
+    -fx-background-color: #007BA7;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.combo-box {
+    -fx-pref-width: 300px;
+}
+
+.text-field {
+    -fx-pref-width: 150px;
+}
+/* Style général */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Style pour les boutons */
+.button {
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-opacity: 0.8;
+}
+
+/* Style pour les champs de texte */
+.text-field {
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+/* Style pour les labels */
+.label {
+    -fx-text-fill: #333;
+}
+
+/* Style pour le WebView */
+.web-view {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+/* Style pour le VBox des détails du service */
+.service-details {
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}

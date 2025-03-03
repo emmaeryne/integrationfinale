@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Liste_Participant">
+   <children>
+      <Label layoutX="233.0" layoutY="128.0" prefHeight="47.0" prefWidth="222.0" text="Liste_Participant" textFill="#c9c3b8">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="planninglabel" layoutX="25.0" layoutY="31.0" prefHeight="20.0" prefWidth="70.0" text="Planning" textAlignment="CENTER" textFill="#d4cdbf">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="courslabel" layoutX="441.0" layoutY="31.0" prefHeight="20.0" prefWidth="62.0" text="Cours" textFill="#dcd7cd">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="participantlabel" layoutX="129.0" layoutY="31.0" prefHeight="20.0" prefWidth="78.0" text="Participants" textFill="#c9c4b8">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="detaillabel" layoutX="568.0" layoutY="17.0" prefHeight="47.0" prefWidth="124.0" text="Detail" textAlignment="CENTER" textFill="#d4d0c8">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="listpart" layoutX="102.0" layoutY="195.0" prefHeight="200.0" prefWidth="450.0">
+        <columns>
+          <TableColumn fx:id="nomp" prefWidth="75.0" text="nom" />
+          <TableColumn fx:id="prenomp" prefWidth="75.0" text="prenom" />
+            <TableColumn fx:id="agep" prefWidth="75.0" text="age" />
+            <TableColumn fx:id="adresep" prefWidth="75.0" text="adresse" />
+            <TableColumn fx:id="telp" prefWidth="148.80002441406248" text="tel" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="251.0" layoutY="31.0">
+         <image>
+            <Image url="@hjk-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="405.0" prefWidth="679.0" style="-fx-background-color: #2E3440; -fx-padding: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Detail_C">
+   <children>
+      
+      <TextArea layoutX="218.0" layoutY="227.0" prefHeight="224.0" prefWidth="359.0" />
+      <Label layoutX="248.0" layoutY="237.0" prefHeight="54.0" prefWidth="223.0" text="Nom_Cours:" textFill="#2b1d04">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="nom_courslabel" layoutX="392.0" layoutY="240.0" prefHeight="47.0" prefWidth="160.0" text="-">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="dureelabel" layoutX="398.0" layoutY="329.0" prefHeight="18.0" prefWidth="54.0" text="-">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="etatlabel" layoutX="385.0" layoutY="392.0" prefHeight="18.0" prefWidth="78.0" text="-">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="391.0" layoutY="148.0" prefHeight="35.0" prefWidth="106.0" text="Details">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="modifiercoursbutton" layoutX="538.0" layoutY="490.0" mnemonicParsing="false" onAction="#openModifierView" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white;" text="Modifier" textFill="#403f3d" />
+      <Button fx:id="supprimercoursbutton" layoutX="657.0" layoutY="490.0" mnemonicParsing="false" onAction="#deleteCourse" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white;" text="Supprimer" textFill="#403f3d" />
+      <Label layoutX="47.0" layoutY="72.0" prefHeight="27.0" prefWidth="54.0" text="Detail" textFill="#d9d6cd">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="194.0" layoutY="68.0" prefHeight="35.0" prefWidth="78.0" text="Planning" textFill="#cfcabf">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="519.0" layoutY="68.0" prefHeight="35.0" prefWidth="78.0" text="Cours" textFill="#d9d4c5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="657.0" layoutY="68.0" prefHeight="35.0" prefWidth="78.0" text="Participant" textFill="#e1ddd2">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="310.0" layoutY="156.0" text="Consulter" textFill="#d1cac0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="248.0" layoutY="375.0" prefHeight="54.0" prefWidth="223.0" text="Etat_Cours:" textFill="#231805">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="248.0" layoutY="302.0" prefHeight="54.0" prefWidth="223.0" text="Durée:" textFill="#2b1d02">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="122.0" fitWidth="162.0" layoutX="311.0" layoutY="46.0">
+         <image>
+            <Image url="@hjk-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="385.0" layoutY="527.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" />
+   </children>
+</AnchorPane>

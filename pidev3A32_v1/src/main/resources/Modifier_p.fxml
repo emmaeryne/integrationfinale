@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="458.0" prefWidth="653.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Modifier_P">
+   <children>
+      <Text fill="#c4c0b8" layoutX="122.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type_Activite:" wrappingWidth="132.53675079345703">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="typemodiftextfiels" layoutX="283.0" layoutY="191.0" prefHeight="26.0" prefWidth="165.0" />
+      <TextField fx:id="datefieldtextfield" layoutX="282.0" layoutY="249.0" prefHeight="26.0" prefWidth="166.0" />
+      <TextField fx:id="courmodifstextfield" layoutX="277.0" layoutY="307.0" prefHeight="26.0" prefWidth="166.0" />
+      <RadioButton fx:id="buttononattentemodif" layoutX="284.0" layoutY="367.0" mnemonicParsing="false" text="en attente" textFill="#e1d9d9" />
+      <RadioButton fx:id="buttonconfirmemodifier" layoutX="284.0" layoutY="411.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" text="confirme" textFill="#dfd5d5" />
+      <Label layoutX="26.0" layoutY="24.0" prefHeight="27.0" prefWidth="59.0" text="Detail" textFill="#e4e1d7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="149.0" layoutY="24.0" prefHeight="27.0" prefWidth="59.0" text="Planning" textFill="#ccc8bf">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Button fx:id="okmodifier" layoutX="509.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleOkModifier" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: white;" text="modifier" />
+      <Label layoutX="401.0" layoutY="28.0" prefHeight="27.0" prefWidth="59.0" text="Cours" textFill="#d1ccc0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="498.0" layoutY="24.0" prefHeight="35.0" prefWidth="76.0" text="Participant" textFill="#d4cfc1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="179.0" layoutY="119.0" prefHeight="58.0" prefWidth="337.0" text="Modifier_Planning" textFill="#ccc6be">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Text fill="#c9c5bd" layoutX="122.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="132.53675079345703">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#cfcbc2" layoutX="122.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cours:" wrappingWidth="132.53675079345703">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#e4e0d9" layoutX="122.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="132.53675079345703">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="255.0" layoutY="24.0">
+         <image>
+            <Image url="@hjk-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

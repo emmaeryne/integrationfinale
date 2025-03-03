@@ -1,0 +1,152 @@
+
+.button-yellow {
+    -fx-background-color: #FFC107;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.button-yellow:hover {
+    -fx-background-color: #FFA000;
+}
+
+.button-blue {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.button-blue:hover {
+    -fx-background-color: #1976D2;
+}
+
+.button-red {
+    -fx-background-color: #FF4500;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+
+.button-red:hover {
+    -fx-background-color: #FF6347;
+}
+.button-yellow {
+    -fx-background-color: #FFC107;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+}
+.list-view {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: #2b2b2b;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+/* === Style général === */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #232526, #414345);
+    -fx-font-family: "Arial";
+}
+
+/* === Titre principal === */
+.label-title {
+    -fx-font-size: 26px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* === Boutons === */
+.button-yellow {
+    -fx-background-color: #FFC107;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+}
+
+.button-blue {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+}
+
+.button-red {
+    -fx-background-color: #F44336;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+}
+
+.button-yellow:hover, .button-blue:hover, .button-red:hover {
+    -fx-opacity: 0.8;
+}
+
+/* === ListView === */
+.list-view {
+    -fx-background-color: #2E2E2E;
+    -fx-text-fill: white;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: #3E3E3E;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-cell:selected {
+    -fx-background-color: #007ACC;
+}
+
+/* === Formulaire de modification === */
+.vbox-form {
+    -fx-background-color: #333333;
+    -fx-padding: 15px;
+    -fx-border-radius: 10;
+}
+
+.text-field {
+    -fx-background-color: #444444;
+    -fx-text-fill: white;
+    -fx-border-radius: 5;
+    -fx-padding: 5px;
+}
+
+/* === Bouton Enregistrer === */
+.button-save {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+}
+/* === Bouton button === */
+.button-green {
+    -fx-background-color: #28a745; /* Vert */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10px; /* Assurez-vous d'ajouter 'px' */
+    -fx-padding: 8px 16px;
+    -fx-border-width: 2px;
+    -fx-border-color: #1e7e34; /* Bordure légèrement plus foncée */
+}
+
+
+.button-save:hover {
+    -fx-opacity: 0.8;
+}
+
+.button-yellow:hover {
+    -fx-background-color: #FFA000;
+}

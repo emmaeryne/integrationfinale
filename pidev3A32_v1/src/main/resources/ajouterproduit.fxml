@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: linear-gradient(to bottom, #1f1f1f, #333333);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ajouterproduit">
+
+    <!-- Titre -->
+    <Label layoutX="230.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-text-fill: yellow;" text="Ajouter un Produit" />
+
+    <GridPane hgap="15" layoutX="50.0" layoutY="70.0" vgap="10">
+        <!-- Catégorie -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Catégorie:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <ComboBox fx:id="CategorieComboBox" prefWidth="250" promptText="Sélectionnez une catégorie" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <!-- Nom Produit -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Nom Produit:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="NomProduit" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button onAction="#verifierProduit" style="-fx-background-color: #D3D3D3; -fx-text-fill: black;" text="Vérifier" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+        <!-- Prix -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Prix:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="Prix" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <ComboBox fx:id="CurrencyComboBox" prefWidth="80" promptText="Devise" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Button onAction="#verifierPrixMarche" style="-fx-background-color: #FFC107; -fx-text-fill: black;" text="Vérifier le Prix" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <ComboBox fx:id="prixComboBox" prefWidth="150" promptText="Prix en Tunisie" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+
+        <!-- Prix Converti -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Prix Converti:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label fx:id="ConvertedPriceLabel" style="-fx-text-fill: lightgreen; -fx-font-size: 14px;" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <!-- Stock Disponible -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Stock Disponible:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+
+        <!-- Date -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <DatePicker fx:id="Date" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+        <!-- Fournisseur -->
+        <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Fournisseur:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <ComboBox fx:id="FournisseurComboBox" prefWidth="250" promptText="Sélectionnez un fournisseur" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Spinner fx:id="Stock" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <!-- Boutons -->
+    <Button fx:id="btnsauvgarde" layoutX="100.0" layoutY="480.0" onAction="#ajouterProduit" prefWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" text="Ajouter Produit" />
+    <Button fx:id="btnRetour" layoutX="400.0" layoutY="480.0" onAction="#sauvgarderproduit" prefWidth="200.0" style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 14px;" text="Retour" />
+
+</AnchorPane>

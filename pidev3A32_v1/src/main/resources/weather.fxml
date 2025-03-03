@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ClientServiceController">
+    <Button text="Obtenir la météo" onAction="#handleGetWeather" />
+    <ComboBox fx:id="serviceComboBox" promptText="Sélectionner un service" />
+    <VBox fx:id="serviceDetailsCard" visible="false">
+        <Label fx:id="serviceName" />
+        <Label fx:id="servicePrice" />
+        <Label fx:id="serviceLevel" />
+        <Label fx:id="serviceDuration" />
+    </VBox>
+    <Slider fx:id="ratingSlider" />
+    <Label fx:id="reservationCountLabel" />
+</VBox>

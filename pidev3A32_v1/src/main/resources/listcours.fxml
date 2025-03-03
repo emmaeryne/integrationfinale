@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ListCours">
+
+    <!-- Image en arrière-plan -->
+    <ImageView fitHeight="444.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@interface-services.png" />
+        </image>
+    </ImageView>
+
+    <!-- Conteneur principal pour centrer le titre et le contenu -->
+    <VBox alignment="CENTER" layoutX="160.8" layoutY="26.0" prefHeight="147.0" prefWidth="431.0" spacing="20" style="-fx-padding: 50;" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="26.0">
+        <!-- Titre centré -->
+        <Text style="-fx-font-size: 30; -fx-font-weight: bold;" text="Liste des Cours" />
+
+        <!-- VBox pour afficher les informations des cours -->
+        <VBox fx:id="coursVBox" spacing="20" style="-fx-alignment: top-center;">
+            <!-- Les cartes de cours seront ajoutées ici dynamiquement -->
+        </VBox>
+    </VBox>
+   <Label fx:id="planninglabel" layoutX="74.0" layoutY="137.0" text="planning" textFill="#c79520">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label fx:id="courslabel" layoutX="72.0" layoutY="178.0" text="cours" textFill="#c79520">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label fx:id="participantlabel" layoutX="68.0" layoutY="226.0" text="Participant" textFill="#c79520">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label fx:id="Detaillabel" layoutX="71.0" layoutY="278.0" text="Detail" textFill="#c79520">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="72.0" layoutY="48.0" text="Gestion " textFill="#5b410c">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="74.0" layoutY="80.0" text="Planning" textFill="#5b410c">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
+</AnchorPane>
