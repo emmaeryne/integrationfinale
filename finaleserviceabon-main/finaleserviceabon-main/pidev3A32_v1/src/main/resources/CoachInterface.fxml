@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoachInterfaceController">
+    <content>
+        <VBox prefHeight="800.0" prefWidth="900.0" spacing="15" style="-fx-background-color: #2E3440;">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+
+            <!-- Header -->
+            <AnchorPane prefHeight="100.0" prefWidth="870.0">
+                <children>
+                    <ImageView fitHeight="124.0" fitWidth="220.0" layoutX="329.0" layoutY="10.0">
+                        <image>
+                            <Image url="@Capture-removebg-preview.png" /> <!-- Remplacez par votre logo -->
+                        </image>
+                    </ImageView>
+                </children>
+            </AnchorPane>
+              <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="                                                    Interface Coach" />
+
+            <!-- Filters and Actions -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <TextField fx:id="searchField" prefHeight="30.0" prefWidth="250.0" promptText="Rechercher un service..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                <Button onAction="#handleRefresh" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5;" text="Actualiser" />
+                <Region HBox.hgrow="ALWAYS" />
+
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="reservationTable" prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="serviceNameColumn" prefWidth="400.0" style="-fx-text-fill: #f4eeee;" text="Nom du Service" />
+                    <TableColumn fx:id="clientCountColumn" prefWidth="200.0" style="-fx-text-fill: #f4eeee; -fx-alignment: CENTER;" text="Nombre de Clients" />
+                </columns>
+            </TableView>
+
+            <!-- Feedback Area -->
+            <VBox spacing="5" />
+            <HBox spacing="10">
+                <Button text="Rafraîchir" onAction="#handleRefresh" />
+            </HBox>
+
+            <!-- Footer -->
+            <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                                 © HIVE Coaching System" />
+        </VBox>
+    </content>
+
+</ScrollPane>

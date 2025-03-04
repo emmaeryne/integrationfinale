@@ -15,6 +15,10 @@ import java.util.Comparator;
 
 public class TypeAbonnementService implements ITypeAbonnement {
     private final Connection conn;
+    public Map<String, Integer> getServiceReservationCounts() {
+        // Logique pour compter les clients par service depuis une base de données
+        return new HashMap<>();
+    }
 
     public TypeAbonnementService() {
         this.conn = MyConnection.getInstance().getCnx();
