@@ -12,4 +12,5 @@ public interface ITypeAbonnement {
 
     void deleteTypeAbonnement(Long id);
     void updateTypeAbonnement(TypeAbonnement typeAbonnement);
+    String genererDescription(TypeAbonnement typeAbonnement);
 }

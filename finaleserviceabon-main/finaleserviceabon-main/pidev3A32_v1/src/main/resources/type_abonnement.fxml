@@ -21,25 +21,23 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="777.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.TypeAbonnementController">
-
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
-   <AnchorPane prefHeight="200.0" prefWidth="200.0">
-      <children>
-         <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="326.0">
-            <image>
-               <Image url="@hjk-removebg-preview.png" />
-            </image>
-         </ImageView>
-      
-          <Label layoutX="300.0" layoutY="89.0" styleClass="title" text="Gestion des Abonnements" textFill="#f4eeee">
-              <font>
-                  <Font size="18.0" />
-              </font>
-          </Label>
-      </children>
-   </AnchorPane>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <children>
+            <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="326.0">
+                <image>
+                    <Image url="@hjk-removebg-preview.png" />
+                </image>
+            </ImageView>
+            <Label layoutX="300.0" layoutY="89.0" styleClass="title" text="Gestion des Abonnements" textFill="#f4eeee">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+        </children>
+    </AnchorPane>
 
     <!-- Search Bar -->
     <HBox alignment="CENTER_LEFT" spacing="10">
@@ -47,7 +45,7 @@
         <Button onAction="#handleSearch" text="Rechercher" />
     </HBox>
 
-    <!-- Sorting Options -->
+    <!-- Sorting Options and Load Excel -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Label prefHeight="18.0" prefWidth="104.0" text="Trier par:" />
         <ComboBox fx:id="sortComboBox" promptText="Sélectionner un critère">
@@ -59,7 +57,8 @@
             </items>
         </ComboBox>
         <Button onAction="#handleSort" prefHeight="26.0" prefWidth="142.0" text="Appliquer" />
-          <Button onAction="#handleAnalyzeTrends" text="Analyser les Tendances" />
+        <Button onAction="#handleAnalyzeTrends" text="Analyser les Tendances" />
+        <Button fx:id="loadExcelButton" onAction="#handleLoadExcel" text="Charger depuis Excel" /> <!-- Nouveau bouton -->
     </HBox>
 
     <!-- Main Content -->
@@ -83,7 +82,7 @@
             <Label text="Nom:" />
             <TextField fx:id="nomField" />
             <Label text="Description:" />
-            <TextArea fx:id="descriptionArea" prefWidth="200.0" wrapText="true" />
+            <TextArea fx:id="descriptionArea" prefWidth="200.0" wrapText="true" editable="false" /> <!-- Rendu non éditable -->
             <Label text="Prix:" />
             <TextField fx:id="prixField" />
             <Label text="Durée (mois):" />

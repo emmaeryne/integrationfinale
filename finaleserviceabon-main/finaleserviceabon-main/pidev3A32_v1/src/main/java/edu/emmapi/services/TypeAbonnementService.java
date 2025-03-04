@@ -385,4 +385,16 @@ public class TypeAbonnementService implements ITypeAbonnement {
             throw new RuntimeException("Erreur lors de la mise à jour du type d'abonnement", e);
         }
     }
+
+    @Override
+    public String genererDescription(TypeAbonnement typeAbonnement) {
+        String nom = typeAbonnement.getNom();
+        double prix = typeAbonnement.getPrix();
+        int duree = typeAbonnement.getDureeEnMois();
+        boolean isPremium = typeAbonnement.getIsPremium();
+
+        return String.format("Découvrez l'%s pour seulement %.2f€/mois ! Profitez d'une expérience %s pendant %d mois, parfaite pour %s.",
+                nom, prix, isPremium ? "premium complète" : "essentielle", duree,
+                isPremium ? "les utilisateurs exigeants" : "un usage quotidien");
+    }
 }
