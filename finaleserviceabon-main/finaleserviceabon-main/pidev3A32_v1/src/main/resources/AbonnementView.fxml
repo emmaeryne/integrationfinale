@@ -12,10 +12,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Region?>
-<ScrollPane fitToWidth="true" fitToHeight="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AbonnementController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AbonnementController">
     <content>
         <VBox prefHeight="800.0" prefWidth="900.0" spacing="10" style="-fx-background-color: #2E3440;">
             <padding>
@@ -60,12 +60,11 @@
 
             <!-- IoT Notification Area -->
             <VBox spacing="5">
-                <Label text="Notifications IoT" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" />
-                <TextArea fx:id="iotNotifications" prefHeight="100.0" prefWidth="880.0" editable="false" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="Notifications IoT" />
+                <TextArea fx:id="iotNotifications" editable="false" prefHeight="100.0" prefWidth="880.0" style="-fx-background-color: #5E81AC; -fx-text-fill: #000000; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
             </VBox>
-
             <!-- Footer -->
-            <Label style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" alignment="CENTER" />
+            <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" />
         </VBox>
     </content>
 </ScrollPane>
