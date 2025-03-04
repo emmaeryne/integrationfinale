@@ -4,7 +4,7 @@ import com.twilio.rest.api.v2010.account.Message;
 
 public class SmsService {
     // ✅ REMPLACE AVEC TES PROPRES IDENTIFIANTS TWILIO
-    public static final String ACCOUNT_SID = "AC0295f668cf414f7d9f3d97a4b7c08131";
+    public static final String ACCOUNT_SID = "\"TWILIO_ACCOUNT_SID\"";
     public static final String AUTH_TOKEN = "3826e38e706a07d51324db794e6c0dc8";
     public static final String TWILIO_PHONE_NUMBER = "+15513822584";
 
