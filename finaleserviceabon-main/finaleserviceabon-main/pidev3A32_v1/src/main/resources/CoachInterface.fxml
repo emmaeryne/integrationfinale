@@ -51,9 +51,7 @@
 
             <!-- Feedback Area -->
             <VBox spacing="5" />
-            <HBox spacing="10">
-                <Button text="Rafraîchir" onAction="#handleRefresh" />
-            </HBox>
+
 
             <!-- Footer -->
             <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                                 © HIVE Coaching System" />

@@ -1,7 +1,5 @@
 package edu.emmapi.controllers;
 
-import edu.emmapi.entities.TypeAbonnement;
-import edu.emmapi.services.TypeAbonnementService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// Supposons une nouvelle entité Service et un service associé
+import edu.emmapi.entities.Service; // À créer ou adapter selon votre modèle
+import edu.emmapi.services.ServiceService; // À créer ou adapter
+
 public class CoachInterfaceController {
     @FXML private TableView<ServiceReservation> reservationTable;
     @FXML private TableColumn<ServiceReservation, String> serviceNameColumn;
@@ -27,7 +29,7 @@ public class CoachInterfaceController {
     @FXML private TextField searchField;
     @FXML private TextArea feedbackArea;
 
-    private TypeAbonnementService typeAbonnementService;
+    private ServiceService serviceService; // Remplace TypeAbonnementService
     private ObservableList<ServiceReservation> reservations;
 
     public static class ServiceReservation {
@@ -58,7 +60,7 @@ public class CoachInterfaceController {
 
     @FXML
     public void initialize() {
-        typeAbonnementService = new TypeAbonnementService();
+        serviceService = new ServiceService(); // Initialisation du service des services
         reservations = FXCollections.observableArrayList();
         reservationTable.setItems(reservations);
 
@@ -96,21 +98,22 @@ public class CoachInterfaceController {
     }
 
     private void loadReservations() {
-        List<TypeAbonnement> services = typeAbonnementService.getAllTypeAbonnements(null);
+        List<Service> services = serviceService.getAllServices(); // Nouvelle méthode pour récupérer les services
         Map<String, Integer> reservationCounts = getReservationCounts();
 
         reservations.clear();
-        for (TypeAbonnement service : services) {
+        for (Service service : services) {
             int clientCount = reservationCounts.getOrDefault(service.getNom(), 0);
             reservations.add(new ServiceReservation(service.getNom(), clientCount));
         }
-        updateFeedback("Liste des réservations chargée avec succès : " + reservations.size() + " services.");
+        updateFeedback("Liste des réservations de services chargée avec succès : " + reservations.size() + " services.");
     }
 
     private Map<String, Integer> getReservationCounts() {
+        // Simule le nombre de clients par service (à remplacer par une vraie logique)
         Map<String, Integer> counts = new HashMap<>();
-        List<TypeAbonnement> services = typeAbonnementService.getAllTypeAbonnements(null);
-        for (TypeAbonnement service : services) {
+        List<Service> services = serviceService.getAllServices();
+        for (Service service : services) {
             counts.put(service.getNom(), (int) (Math.random() * 10)); // Simulation
         }
         return counts;
@@ -145,7 +148,7 @@ public class CoachInterfaceController {
     private void handleRefresh() {
         loadReservations();
         searchField.clear();
-        updateFeedback("Données actualisées.");
+        updateFeedback("Données des services actualisées.");
     }
 
     @FXML
