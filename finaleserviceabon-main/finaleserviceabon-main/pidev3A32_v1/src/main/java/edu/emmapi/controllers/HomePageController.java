@@ -120,22 +120,22 @@ public class HomePageController {
 
     @FXML
     private void openCoursDashboard(ActionEvent event) {
-        openDashboard("/cours.fxml", "Cours Dashboard");
+        openDashboard("/Ajouter_Cours.fxml", "Cours Dashboard");
     }
 
-    @FXML
-    private void openDetailsDashboard(ActionEvent event) {
-        openDashboard("/details.fxml", "Détails Dashboard");
-    }
+    //@FXML
+    //private void openDetailsDashboard(ActionEvent event) {
+       // openDashboard("/details.fxml", "Détails Dashboard");
+    //}
 
     @FXML
     private void openParticipantsDashboard(ActionEvent event) {
-        openDashboard("/participants.fxml", "Participants Dashboard");
+        openDashboard("/Ajouter_Cours_Participant.fxml", "Participants Dashboard");
     }
 
     @FXML
     private void openPlanningDashboard(ActionEvent event) {
-        openDashboard("/planning.fxml", "Planning Dashboard");
+        openDashboard("/Ajouter_Planning.fxml", "Planning Dashboard");
     }
 
     // Méthode générique pour ouvrir un dashboard

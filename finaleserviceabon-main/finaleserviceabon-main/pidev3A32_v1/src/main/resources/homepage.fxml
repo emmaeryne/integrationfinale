@@ -40,7 +40,7 @@
 
                 <Hyperlink fx:id="abonnementid" text="Abonnements" onAction="#openAbonnementDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />
                 <Hyperlink fx:id="courslab" text="Cours" onAction="#openCoursDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />
-                <Hyperlink fx:id="detaillab" text="Détails" onAction="#openDetailsDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
                 <Hyperlink fx:id="participantlab" text="Participants" onAction="#openParticipantsDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />
                 <Hyperlink fx:id="planninglab" text="Planning" onAction="#openPlanningDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />
                 <Hyperlink fx:id="serviceView" text="Vue Services" onAction="#openServiceDashboard2" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" />

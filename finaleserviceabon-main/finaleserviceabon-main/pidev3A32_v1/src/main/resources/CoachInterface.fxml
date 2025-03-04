@@ -14,48 +14,57 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoachInterfaceController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoachInterfaceController">
     <content>
-        <VBox prefHeight="800.0" prefWidth="900.0" spacing="15" style="-fx-background-color: #2E3440;">
-            <padding>
-                <Insets bottom="15" left="15" right="15" top="15" />
-            </padding>
+        <AnchorPane prefHeight="800.0" prefWidth="900.0">
+            <!-- Image de fond -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="900.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" /> <!-- Image de fond sportif -->
+                    </image>
+                </ImageView>
 
-            <!-- Header -->
-            <AnchorPane prefHeight="100.0" prefWidth="870.0">
-                <children>
-                    <ImageView fitHeight="124.0" fitWidth="220.0" layoutX="329.0" layoutY="10.0">
-                        <image>
-                            <Image url="@Capture-removebg-preview.png" /> <!-- Remplacez par votre logo -->
-                        </image>
-                    </ImageView>
-                </children>
-            </AnchorPane>
-              <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="                                                    Interface Coach" />
+                <!-- Contenu principal -->
+                <VBox prefHeight="800.0" prefWidth="900.0" spacing="15" style="-fx-background-color: rgba(42, 59, 66, 0.8);">
+                    <padding>
+                        <Insets bottom="15" left="15" right="15" top="15" />
+                    </padding>
 
-            <!-- Filters and Actions -->
-            <HBox alignment="CENTER_LEFT" spacing="15">
-                <TextField fx:id="searchField" prefHeight="30.0" prefWidth="250.0" promptText="Rechercher un service..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                <Button onAction="#handleRefresh" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5;" text="Actualiser" />
-                <Region HBox.hgrow="ALWAYS" />
+                    <!-- Header -->
+                    <AnchorPane prefHeight="100.0" prefWidth="870.0">
+                        <children>
+                            <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="335.0" layoutY="10.0">
+                                <image>
+                                    <Image url="@Capture-removebg-preview.png" /> <!-- Votre logo -->
+                                </image>
+                            </ImageView>
+                        </children>
+                    </AnchorPane>
+                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-alignment: CENTER;" text="Interface Coach" />
 
-            </HBox>
+                    <!-- Filters and Actions -->
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <TextField fx:id="searchField" prefHeight="30.0" prefWidth="250.0" promptText="Rechercher un service..." style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Button onAction="#handleRefresh" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Actualiser" />
+                        <Region HBox.hgrow="ALWAYS" />
+                    </HBox>
 
-            <!-- Table -->
-            <TableView fx:id="reservationTable" prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="serviceNameColumn" prefWidth="400.0" style="-fx-text-fill: #f4eeee;" text="Nom du Service" />
-                    <TableColumn fx:id="clientCountColumn" prefWidth="200.0" style="-fx-text-fill: #f4eeee; -fx-alignment: CENTER;" text="Nombre de Clients" />
-                </columns>
-            </TableView>
+                    <!-- Table -->
+                    <TableView fx:id="reservationTable" prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-color: #66C2D9; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="serviceNameColumn" prefWidth="400.0" style="-fx-text-fill: #FFFFFF;" text="Nom du Service" />
+                            <TableColumn fx:id="clientCountColumn" prefWidth="200.0" style="-fx-text-fill: #FFFFFF; -fx-alignment: CENTER;" text="Nombre de Clients" />
+                        </columns>
+                    </TableView>
 
-            <!-- Feedback Area -->
-            <VBox spacing="5" />
+                    <!-- Feedback Area (supprimé car non utilisé dans votre version actuelle, mais peut être réintégré si nécessaire) -->
+                    <!-- <VBox spacing="5" /> -->
 
-
-            <!-- Footer -->
-            <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                                 © HIVE Coaching System" />
-        </VBox>
+                    <!-- Footer -->
+                    <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="                                                                                         © 2025 HIVE Coaching System" />
+                </VBox>
+            </children>
+        </AnchorPane>
     </content>
-
 </ScrollPane>

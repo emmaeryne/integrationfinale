@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -15,67 +14,80 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ClientServiceController">
+<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ClientServiceController">
     <content>
-        <VBox prefHeight="800.0" prefWidth="900.0" spacing="15" style="-fx-background-color: #2E3440;" styleClass="main-container">
-            <stylesheets>
-                <URL value="@styles.css" />
-            </stylesheets>
+        <AnchorPane prefHeight="800.0" prefWidth="900.0">
+            <!-- Image de fond -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="900.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
 
-            <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
-            </padding>
+                <!-- Contenu principal -->
+                <VBox alignment="CENTER" prefHeight="800.0" prefWidth="900.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
 
-            <AnchorPane prefHeight="60.0" prefWidth="900.0">
-                <children>
-                    <ImageView fitHeight="80.0" fitWidth="174.0" layoutX="320.0">
-                        <image>
-                            <Image url="@hjk-removebg-preview.png" />
-                        </image>
-                    </ImageView>
-                </children>
-            </AnchorPane>
+                    <!-- En-tête avec logo -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <ImageView fitHeight="62.0" fitWidth="128.0">
+                            <image>
+                                <Image url="@hjk-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                     <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="HIVE" />
 
-            <VBox alignment="CENTER" spacing="10">
-                <WebView fx:id="gifWebView" prefHeight="226.0" prefWidth="574.0" style="-fx-border-color: #ccc; -fx-border-width: 1px; -fx-border-radius: 5;" />
-            </VBox>
+                    <!-- GIF ou vidéo promotionnelle -->
+                    <VBox alignment="CENTER" spacing="10">
+                        <WebView fx:id="gifWebView" prefHeight="144.0" prefWidth="860.0" style="-fx-border-color: #66C2D9; -fx-border-width: 2px; -fx-border-radius: 5;" />
+                    </VBox>
 
-            <VBox alignment="CENTER" spacing="10">
-                <HBox alignment="CENTER" spacing="10">
-                    <TextField fx:id="cityTextField" prefHeight="26.0" prefWidth="126.0" promptText="Ville" style="-fx-background-radius: 5;" />
-                    <Button mnemonicParsing="false" onAction="#handleGetWeather" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;" text="Météo" />
-                </HBox>
-                <HBox alignment="CENTER" spacing="10">
-                    <Label fx:id="weatherLabel" style="-fx-font-weight: bold;" text="" textFill="#f4eeee" />
-                    <Label fx:id="weatherDescription" style="-fx-font-style: italic;" text="" textFill="#f4eeee" />
-                    <ImageView fx:id="weatherIcon" fitHeight="60.0" fitWidth="60.0" />
-                </HBox>
-            </VBox>
+                    <!-- Section Météo -->
+                    <VBox alignment="CENTER" spacing="15">
+                        <HBox alignment="CENTER" spacing="10">
+                           <HBox alignment="CENTER" spacing="15">
+                               <TextField fx:id="cityTextField" prefHeight="30.0" prefWidth="150.0" promptText="Ville" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                               <Button onAction="#handleGetWeather" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15;" text="Météo" />
+                           </HBox>
+                            <Label fx:id="weatherLabel" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #FFFFFF;" text="" />
+                            <Label fx:id="weatherDescription" style="-fx-font-style: italic; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="" />
+                            <ImageView fx:id="weatherIcon" fitHeight="50.0" fitWidth="50.0" />
+                        </HBox>
+                    </VBox>
 
-            <VBox alignment="CENTER" spacing="10">
-                <ComboBox fx:id="serviceComboBox" onAction="#handleServiceSelection" prefHeight="26.0" prefWidth="293.0" promptText="Choisir un service" style="-fx-background-radius: 5;" />
-            </VBox>
+                    <!-- Sélection du service -->
+                    <VBox alignment="CENTER" spacing="15" />
+                     <ComboBox fx:id="serviceComboBox" onAction="#handleServiceSelection" prefHeight="30.0" prefWidth="300.0" promptText="Choisir un service" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-            <VBox fx:id="serviceDetailsCard" alignment="TOP_LEFT" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 5; -fx-border-color: #ddd; -fx-border-width: 1px; -fx-border-radius: 5;" visible="false">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-                <Label fx:id="serviceName" style="-fx-font-weight: bold; -fx-font-size: 14;" text="Nom du Service" />
-                <Label fx:id="servicePrice" style="-fx-font-size: 12;" text="Prix: " />
-                <Label fx:id="serviceLevel" style="-fx-font-size: 12;" text="Niveau: " />
-                <Label fx:id="serviceDuration" style="-fx-font-size: 12;" text="Durée: " />
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <Label style="-fx-font-size: 12;" text="Note:" />
-                    <Slider fx:id="ratingSlider" prefWidth="250.0" />
-                </HBox>
-                <Label fx:id="reservationCountLabel" style="-fx-font-size: 12;" text="Réservations: 0" />
-            </VBox>
+                    <!-- Carte des détails du service -->
+                    <VBox fx:id="serviceDetailsCard" alignment="TOP_LEFT" spacing="12" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 8; -fx-border-color: #66C2D9; -fx-border-width: 1px; -fx-border-radius: 8;" visible="false">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15" />
+                        </padding>
+                        <Label fx:id="serviceName" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #FFFFFF;" text="Nom du Service" />
+                        <Label fx:id="servicePrice" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Prix: " />
+                        <Label fx:id="serviceLevel" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Niveau: " />
+                        <Label fx:id="serviceDuration" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Durée: " />
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF;" text="Note:" />
+                            <Slider fx:id="ratingSlider" prefWidth="250.0" style="-fx-accent: #FF7043;" />
+                        </HBox>
+                        <Label fx:id="reservationCountLabel" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Réservations: 0" />
+                    </VBox>
 
-            <VBox alignment="CENTER_RIGHT">
-                <Button mnemonicParsing="false" onAction="#handleReserve" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 5;" text="Réserver" />
-            </VBox>
+                    <!-- Bouton Réserver -->
+                    <VBox alignment="CENTER">
+                        <Button onAction="#handleReserve" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Réserver" />
+                    </VBox>
 
-            <Label prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="                                                                                                                                    © 2025 HIVE" />
-        </VBox>
+                    <!-- Pied de page -->
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5;" text="                    © 2025 HIVE- " />
+                </VBox>
+            </children>
+        </AnchorPane>
     </content>
 </ScrollPane>
