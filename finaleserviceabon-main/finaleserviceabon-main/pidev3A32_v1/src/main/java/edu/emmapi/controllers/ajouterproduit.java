@@ -4,7 +4,8 @@ import edu.emmapi.entities.produit;
 import edu.emmapi.services.CategorieService;
 
 import edu.emmapi.services.ProduitService;
-//import edu.emmapi.services.SmsService;
+
+import edu.emmapi.services.SmsService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -177,9 +178,9 @@ public class ajouterproduit {
             produitService.ajouterProduit(produit);
 
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Le produit a été ajouté avec succès !");
-            //    String numeroDestinataire = "+21652108929"; // Remplace par un vrai numéro
-            //    String messageTexte = "✅ Produit ajouté : " + nomProduit + " (" + categorie + ") Prix : " + prix + " TND";
-            //   SmsService.envoyerSms(numeroDestinataire, messageTexte);
+               String numeroDestinataire = "+21652108929"; // Remplace par un vrai numéro
+               String messageTexte = "✅ Produit ajouté : " + nomProduit + " (" + categorie + ") Prix : " + prix + " TND";
+              SmsService.envoyerSms(numeroDestinataire, messageTexte);
 
 
             resetFields();
@@ -577,53 +578,60 @@ public class ajouterproduit {
         return null;
     }
 
-    // Méthode existante pour extraire le prix depuis un texte (doit être adaptée selon vos besoins)
     private double extrairePrixDepuisTexte(String texte) {
-        // Expression régulière plus stricte :
-        // - Cherche un symbole monétaire (€, eur, euro) suivi ou précédé d'un nombre
-        //   avec 1 à 2 décimales.
-        // - Ignore tout ce qui n'est pas dans ce format.
-        Pattern pattern = Pattern.compile(
-                "(?:€|eur|euro)\\s*(\\d+(?:[.,]\\d{1,2}))"  // ex: "€ 4,90" ou "euro 4.90"
-                        + "|(\\d+(?:[.,]\\d{1,2}))\\s*(?:€|eur|euro)", // ex: "4,90€" ou "4.90 euro"
-                Pattern.CASE_INSENSITIVE
-        );
-
-        Matcher matcher = pattern.matcher(texte);
         List<Double> prixTrouves = new ArrayList<>();
 
+        // 1. Extraction avec devise (€ ou eur ou euro)
+        Pattern patternCurrency = Pattern.compile(
+                "(?:€|eur|euro)\\s*(\\d+(?:[.,]\\d+)?)" +        // devise avant le nombre
+                        "|(\\d+(?:[.,]\\d+)?)\\s*(?:€|eur|euro)",         // devise après le nombre
+                Pattern.CASE_INSENSITIVE
+        );
+        Matcher matcher = patternCurrency.matcher(texte);
         while (matcher.find()) {
-            // group(1) = si la devise est avant le prix
-            // group(2) = si la devise est après le prix
-            String g1 = matcher.group(1);
-            String g2 = matcher.group(2);
-
-            // On prend la chaîne non nulle
-            String nombreStr = (g1 != null) ? g1 : g2;
+            String nombreStr = (matcher.group(1) != null) ? matcher.group(1) : matcher.group(2);
             if (nombreStr != null) {
-                // Remplacer la virgule par un point pour le parsing
                 nombreStr = nombreStr.replace(",", ".");
                 try {
                     double prix = Double.parseDouble(nombreStr);
-                    // On ignore tout prix > 50 (par exemple)
-                    if (prix > 0.1 && prix < 50) {
+                    if (prix > 0.1 && prix < 50) { // plage de prix plausible
                         prixTrouves.add(prix);
                     }
                 } catch (NumberFormatException e) {
-                    // On ignore si le parse échoue
+                    // Ignorer en cas d'erreur
+                }
+            }
+        }
+
+        // 2. Si aucune valeur n'est trouvée avec devise, tenter sans symbole,
+        // en excluant les nombres suivis d'unités (l, ml, g, kg)
+        if (prixTrouves.isEmpty()) {
+            Pattern patternNoCurrency = Pattern.compile(
+                    "(\\d+(?:[.,]\\d+)?)(?!\\s*(?:l|ml|g|kg))",
+                    Pattern.CASE_INSENSITIVE
+            );
+            matcher = patternNoCurrency.matcher(texte);
+            while (matcher.find()) {
+                String nombreStr = matcher.group(1);
+                if (nombreStr != null) {
+                    nombreStr = nombreStr.replace(",", ".");
+                    try {
+                        double prix = Double.parseDouble(nombreStr);
+                        if (prix > 0.1 && prix < 50) {
+                            prixTrouves.add(prix);
+                        }
+                    } catch (NumberFormatException e) {
+                        // Ignorer
+                    }
                 }
             }
         }
 
         if (prixTrouves.isEmpty()) {
-            // Si aucun prix réaliste n'est trouvé, on retourne -1 pour indiquer l'absence
             return -1;
         }
-
-        // Pour minimiser le risque de prendre un faux nombre, on prend le plus petit
-        // (Par exemple, 4.90 est souvent plus logique que 396.0 si on en trouve plusieurs)
-        double minPrice = prixTrouves.stream().min(Double::compare).get();
-        return minPrice;
+        // Pour minimiser le risque d'une fausse détection, on retourne le plus petit prix trouvé.
+        return prixTrouves.stream().min(Double::compare).get();
     }
 
 
