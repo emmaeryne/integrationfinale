@@ -1,4 +1,4 @@
-package edu.pidev3a32.interfaces;
+package edu.emmapi.interfaces;
 import java.sql.SQLException;
 import java.util.List;
 public interface Isevice <T>{

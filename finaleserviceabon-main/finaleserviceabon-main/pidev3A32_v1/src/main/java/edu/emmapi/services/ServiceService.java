@@ -237,6 +237,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceService implements IServiceService {
     private final Connection conn;
@@ -488,5 +489,20 @@ public class ServiceService implements IServiceService {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de l'incrémentation du nombre de réservations", e);
         }
+    }
+
+    @Override
+    public Map<String, Integer> getReservationsPerDay() throws SQLException {
+        return Map.of();
+    }
+
+    @Override
+    public Map<String, Double> getRevenuePerDay() throws SQLException {
+        return Map.of();
+    }
+
+    @Override
+    public Map<String, Integer> getActiveServicesPerDay() throws SQLException {
+        return Map.of();
     }
 }

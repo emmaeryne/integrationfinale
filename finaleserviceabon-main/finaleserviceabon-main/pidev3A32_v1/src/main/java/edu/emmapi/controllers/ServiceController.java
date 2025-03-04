@@ -1,4 +1,3 @@
-
 package edu.emmapi.controllers;
 
 import com.itextpdf.text.*;
@@ -6,15 +5,19 @@ import com.itextpdf.text.pdf.PdfPCell;
 import edu.emmapi.entities.Service;
 import edu.emmapi.services.ServiceService;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -24,7 +27,10 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -47,11 +53,15 @@ public class ServiceController {
     @FXML private LineChart<String, Number> statsChart;
     @FXML private VBox notificationPane;
     @FXML private ProgressIndicator loadingIndicator;
+    @FXML private Button toggleStatsButton;
 
     private ServiceService serviceService;
     private ObservableList<Service> services;
     private FilteredList<Service> filteredServices;
     private Timeline autoRefreshTimeline;
+    private Stage statsStage; // Popup window
+    private BarChart<String, Number> categoryChart;
+    private BarChart<String, Number> levelChart;
 
     @FXML
     public void initialize() {
@@ -74,7 +84,6 @@ public class ServiceController {
         loadServices();
         setupValidation();
 
-        // Listener for service name field to automatically generate description
         nomField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.trim().isEmpty()) {
                 String category = categorieCombo.getValue();
@@ -97,48 +106,12 @@ public class ServiceController {
             });
             return row;
         });
-    }
 
-    @FXML
-    private void generateServiceDescription() {
-        String serviceName = nomField.getText().trim();
-        String category = categorieCombo.getValue();
-        String level = niveauCombo.getValue();
-
-        if (serviceName.isEmpty()) {
-            showNotification("Veuillez entrer un nom de service", "error");
-            return;
-        }
-
-        loadingIndicator.setVisible(true);
-
-        new Thread(() -> {
-            try {
-                String description = generateFallbackDescription(serviceName, category, level);
-                javafx.application.Platform.runLater(() -> {
-                    descriptionArea.setText(description);
-                    loadingIndicator.setVisible(false);
-                    showNotification("Description générée avec succès", "success");
-                });
-            } catch (Exception e) {
-                javafx.application.Platform.runLater(() -> {
-                    loadingIndicator.setVisible(false);
-                    showNotification("Erreur lors de la génération: " + e.getMessage(), "error");
-                });
+        services.addListener((ListChangeListener.Change<? extends Service> change) -> {
+            while (change.next()) {
+                updateCharts();
             }
-        }).start();
-    }
-
-    private String generateFallbackDescription(String serviceName, String category, String level) {
-        Map<String, String> templatesByCategory = new HashMap<>();
-        templatesByCategory.put("Fitness", "Notre service de %s est conçu pour améliorer votre condition physique globale. Adapté pour un niveau %s, ce cours vous permettra de développer votre endurance, votre force et votre souplesse dans une ambiance motivante.");
-        templatesByCategory.put("Musculation", "Notre service de %s se concentre sur le renforcement musculaire ciblé. Pour un niveau %s, nos séances sont structurées pour maximiser vos gains musculaires tout en minimisant les risques de blessures.");
-        templatesByCategory.put("Cardio", "Notre entraînement de %s est idéal pour améliorer votre système cardiovasculaire. Adapté aux %s, ce cours dynamique vous aidera à brûler des calories et à améliorer votre endurance dans une atmosphère énergique.");
-        templatesByCategory.put("Yoga", "Notre séance de %s vous invite à trouver l'harmonie entre le corps et l'esprit. Ce cours de niveau %s vous guidera à travers des postures adaptées pour améliorer votre souplesse, votre force et votre concentration.");
-
-        String template = templatesByCategory.getOrDefault(category, "Notre service de %s est spécialement conçu pour répondre à vos besoins. Adapté pour un niveau %s, ce cours vous permettra d'atteindre vos objectifs de manière efficace et agréable.");
-
-        return String.format(template, serviceName, level.toLowerCase());
+        });
     }
 
     private void setupTableColumns() {
@@ -170,7 +143,6 @@ public class ServiceController {
             {
                 editBtn.getStyleClass().add("btn-primary");
                 deleteBtn.getStyleClass().add("btn-danger");
-
                 editBtn.setOnAction(e -> handleEdit(getTableView().getItems().get(getIndex())));
                 deleteBtn.setOnAction(e -> handleDelete(getTableView().getItems().get(getIndex())));
             }
@@ -226,21 +198,6 @@ public class ServiceController {
         });
     }
 
-    private void setupCharts() {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Réservations par jour");
-
-        series.getData().add(new XYChart.Data<>("Lun", 23));
-        series.getData().add(new XYChart.Data<>("Mar", 14));
-        series.getData().add(new XYChart.Data<>("Mer", 15));
-        series.getData().add(new XYChart.Data<>("Jeu", 24));
-        series.getData().add(new XYChart.Data<>("Ven", 34));
-        series.getData().add(new XYChart.Data<>("Sam", 36));
-        series.getData().add(new XYChart.Data<>("Dim", 22));
-
-        statsChart.getData().add(series);
-    }
-
     private void setupAutoRefresh() {
         autoRefreshTimeline = new Timeline(new KeyFrame(Duration.minutes(5), e -> {
             loadServices();
@@ -276,71 +233,113 @@ public class ServiceController {
             }
         });
     }
+
+    private String generateFallbackDescription(String serviceName, String category, String level) {
+        Map<String, String> templatesByCategory = new HashMap<>();
+        templatesByCategory.put("Fitness", "Notre service de %s est conçu pour améliorer votre condition physique globale. Adapté pour un niveau %s, ce cours vous permettra de développer votre endurance, votre force et votre souplesse dans une ambiance motivante.");
+        templatesByCategory.put("Musculation", "Notre service de %s se concentre sur le renforcement musculaire ciblé. Pour un niveau %s, nos séances sont structurées pour maximiser vos gains musculaires tout en minimisant les risques de blessures.");
+        templatesByCategory.put("Cardio", "Notre entraînement de %s est idéal pour améliorer votre système cardiovasculaire. Adapté aux %s, ce cours dynamique vous aidera à brûler des calories et à améliorer votre endurance dans une atmosphère énergique.");
+        templatesByCategory.put("Yoga", "Notre séance de %s vous invite à trouver l'harmonie entre le corps et l'esprit. Ce cours de niveau %s vous guidera à travers des postures adaptées pour améliorer votre souplesse, votre force et votre concentration.");
+
+        String template = templatesByCategory.getOrDefault(category, "Notre service de %s est spécialement conçu pour répondre à vos besoins. Adapté pour un niveau %s, ce cours vous permettra d'atteindre vos objectifs de manière efficace et agréable.");
+        return String.format(template, serviceName, level.toLowerCase());
+    }
+
+    private void setupCharts() {
+        // Main window chart (reservations)
+        XYChart.Series<String, Number> reservationSeries = new XYChart.Series<>();
+        reservationSeries.setName("Réservations par jour");
+        reservationSeries.getData().add(new XYChart.Data<>("Lun", 23));
+        reservationSeries.getData().add(new XYChart.Data<>("Mar", 14));
+        reservationSeries.getData().add(new XYChart.Data<>("Mer", 15));
+        reservationSeries.getData().add(new XYChart.Data<>("Jeu", 24));
+        reservationSeries.getData().add(new XYChart.Data<>("Ven", 34));
+        reservationSeries.getData().add(new XYChart.Data<>("Sam", 36));
+        reservationSeries.getData().add(new XYChart.Data<>("Dim", 22));
+        statsChart.getData().add(reservationSeries);
+
+        // Setup popup charts
+        categoryChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
+        categoryChart.setTitle("Services par Catégorie");
+        categoryChart.getXAxis().setLabel("Catégorie");
+        categoryChart.getYAxis().setLabel("Nombre");
+        ((NumberAxis) categoryChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#f4eeee"));
+        categoryChart.setStyle("-fx-background-color: #3B4252;");
+
+        levelChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
+        levelChart.setTitle("Services par Niveau");
+        levelChart.getXAxis().setLabel("Niveau");
+        levelChart.getYAxis().setLabel("Nombre");
+        ((NumberAxis) levelChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#f4eeee"));
+        levelChart.setStyle("-fx-background-color: #3B4252;");
+
+        updateCharts();
+    }
+
+    private void updateCategoryChart() {
+        categoryChart.getData().clear();
+        XYChart.Series<String, Number> categorySeries = new XYChart.Series<>();
+        categorySeries.setName("Nombre de Services par Catégorie");
+
+        Map<String, Integer> categoryCount = new HashMap<>();
+        for (Service service : services) {
+            categoryCount.put(service.getCategorie(), categoryCount.getOrDefault(service.getCategorie(), 0) + 1);
+        }
+
+        categoryCount.forEach((category, count) ->
+                categorySeries.getData().add(new XYChart.Data<>(category, count))
+        );
+
+        categoryChart.getData().add(categorySeries);
+    }
+
+    private void updateLevelChart() {
+        levelChart.getData().clear();
+        XYChart.Series<String, Number> levelSeries = new XYChart.Series<>();
+        levelSeries.setName("Nombre de Services par Niveau");
+
+        Map<String, Integer> levelCount = new HashMap<>();
+        for (Service service : services) {
+            String level = service.getNiveauDifficulte();
+            levelCount.put(level, levelCount.getOrDefault(level, 0) + 1);
+        }
+
+        levelCount.forEach((level, count) ->
+                levelSeries.getData().add(new XYChart.Data<>(level, count))
+        );
+
+        levelChart.getData().add(levelSeries);
+    }
+
+    private void updateCharts() {
+        updateCategoryChart();
+        updateLevelChart();
+    }
+
     @FXML
+    private void showStatisticsPopup() {
+        if (statsStage == null || !statsStage.isShowing()) {
+            statsStage = new Stage();
+            statsStage.setTitle("Statistiques des Services");
+            VBox statsVBox = new VBox(10, categoryChart, levelChart);
+            statsVBox.setPadding(new Insets(10));
+            statsVBox.setStyle("-fx-background-color: #2E3440;");
 
-    private void exportPDF() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Enregistrer le PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
-        File file = fileChooser.showSaveDialog(serviceTable.getScene().getWindow());
+            Scene scene = new Scene(statsVBox, 600, 500);
+            statsStage.setScene(scene);
+            statsStage.setResizable(false);
+            statsStage.show();
 
-        if (file != null) {
-            try {
-                Document document = new Document();
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
-                document.open();
+            // Update charts when the popup opens
+            updateCharts();
 
-                // Set up a custom font
-                Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-                Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-                Font cellFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
-
-                // Title
-                Paragraph title = new Paragraph("Liste des Services", titleFont);
-                title.setAlignment(Element.ALIGN_CENTER);
-                document.add(title);
-                document.add(new Paragraph("\n")); // Adding space
-
-                // Create a table with custom styles
-                PdfPTable table = new PdfPTable(4);
-                table.setWidthPercentage(100);
-                table.setSpacingBefore(10f);
-                table.setSpacingAfter(10f);
-
-                // Header Row
-                table.addCell(createCell("Nom", headerFont));
-                table.addCell(createCell("Prix", headerFont));
-                table.addCell(createCell("Niveau", headerFont));
-                table.addCell(createCell("Catégorie", headerFont));
-
-                // Adding services to the table
-                for (Service service : services) {
-                    table.addCell(createCell(service.getNom(), cellFont));
-                    table.addCell(createCell(String.format("%.2f €", service.getPrix()), cellFont));
-                    table.addCell(createCell(service.getNiveauDifficulte(), cellFont));
-                    table.addCell(createCell(service.getCategorie(), cellFont));
-                }
-
-                document.add(table);
-                document.close();
-
-                showNotification("PDF exporté avec succès", "success");
-            } catch (DocumentException | IOException e) {
-                showNotification("Erreur lors de l'exportation du PDF: " + e.getMessage(), "error");
-            }
+            // Close the stage cleanly
+            statsStage.setOnCloseRequest(event -> statsStage = null);
+        } else {
+            statsStage.toFront(); // Bring to front if already open
+            updateCharts();
         }
     }
-
-    // Helper method to create a cell with custom font
-    private PdfPCell createCell(String text, Font font) {
-        PdfPCell cell = new PdfPCell(new Phrase(text, font));
-        cell.setPadding(5);
-        cell.setBorderWidth(1);
-        cell.setBorderColor(BaseColor.LIGHT_GRAY);
-        return cell;
-    }
-
-
 
     @FXML
     private void handleAjouterService() {
@@ -379,59 +378,13 @@ public class ServiceController {
                     clearFields();
                     loadingIndicator.setVisible(false);
                     showNotification("Service ajouté avec succès", "success");
+                    updateCharts(); // Update charts in popup if open
                 });
             }).start();
 
         } catch (Exception e) {
             showNotification("Erreur lors de l'ajout: " + e.getMessage(), "error");
         }
-    }
-
-    private void showNotification(String message, String type) {
-        Label notification = new Label(message);
-        notification.getStyleClass().add("notification-" + type);
-        notification.setMaxWidth(Double.MAX_VALUE);
-        notification.setAlignment(javafx.geometry.Pos.CENTER);
-
-        notificationPane.getChildren().add(notification);
-
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(5),
-                evt -> notificationPane.getChildren().remove(notification)
-        ));
-        timeline.play();
-    }
-
-    private boolean validateFields() {
-        boolean isValid = true;
-        StringBuilder errors = new StringBuilder();
-
-        if (nomField.getText().trim().isEmpty() ||
-                !nomField.getText().matches("^[a-zA-Z0-9\\s-]{3,100}$")) {
-            errors.append("Nom invalide\n");
-            isValid = false;
-        }
-
-        try {
-            double prix = Double.parseDouble(prixField.getText());
-            if (prix <= 0 || prix > 1000) {
-                errors.append("Prix invalide (0-1000)\n");
-                isValid = false;
-            }
-        } catch (NumberFormatException e) {
-            errors.append("Prix invalide\n");
-            isValid = false;
-        }
-
-        if (!isValid) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de validation");
-            alert.setHeaderText(null);
-            alert.setContentText(errors.toString());
-            alert.showAndWait();
-        }
-
-        return isValid;
     }
 
     private void handleEdit(Service service) {
@@ -482,6 +435,7 @@ public class ServiceController {
                         clearFields();
                         loadingIndicator.setVisible(false);
                         showNotification("Service mis à jour avec succès", "success");
+                        updateCharts(); // Update charts in popup if open
                     });
                 } catch (SQLException e) {
                     javafx.application.Platform.runLater(() -> {
@@ -508,10 +462,57 @@ public class ServiceController {
                 serviceService.deleteService(service.getId());
                 services.remove(service);
                 showNotification("Service supprimé avec succès", "success");
+                updateCharts(); // Update charts in popup if open
             } catch (Exception e) {
                 showNotification("Erreur lors de la suppression : " + e.getMessage(), "error");
             }
         }
+    }
+
+    private boolean validateFields() {
+        boolean isValid = true;
+        StringBuilder errors = new StringBuilder();
+
+        if (nomField.getText().trim().isEmpty() ||
+                !nomField.getText().matches("^[a-zA-Z0-9\\s-]{3,100}$")) {
+            errors.append("Nom invalide\n");
+            isValid = false;
+        }
+
+        try {
+            double prix = Double.parseDouble(prixField.getText());
+            if (prix <= 0 || prix > 1000) {
+                errors.append("Prix invalide (0-1000)\n");
+                isValid = false;
+            }
+        } catch (NumberFormatException e) {
+            errors.append("Prix invalide\n");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de validation");
+            alert.setHeaderText(null);
+            alert.setContentText(errors.toString());
+            alert.showAndWait();
+        }
+
+        return isValid;
+    }
+
+    private void showNotification(String message, String type) {
+        Label notification = new Label(message);
+        notification.getStyleClass().add("notification-" + type);
+        notification.setMaxWidth(Double.MAX_VALUE);
+        notification.setAlignment(javafx.geometry.Pos.CENTER);
+        notificationPane.getChildren().add(notification);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(5),
+                evt -> notificationPane.getChildren().remove(notification)
+        ));
+        timeline.play();
     }
 
     @FXML
@@ -536,13 +537,74 @@ public class ServiceController {
             javafx.application.Platform.runLater(() -> {
                 services.addAll(loadedServices);
                 loadingIndicator.setVisible(false);
+                updateCharts(); // Update charts in popup if open
             });
         }).start();
+    }
+
+    @FXML
+    private void exportPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        File file = fileChooser.showSaveDialog(serviceTable.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                Document document = new Document();
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
+                document.open();
+
+                Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+                Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+                Font cellFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+
+                Paragraph title = new Paragraph("Liste des Services", titleFont);
+                title.setAlignment(Element.ALIGN_CENTER);
+                document.add(title);
+                document.add(new Paragraph("\n"));
+
+                PdfPTable table = new PdfPTable(4);
+                table.setWidthPercentage(100);
+                table.setSpacingBefore(10f);
+                table.setSpacingAfter(10f);
+
+                table.addCell(createCell("Nom", headerFont));
+                table.addCell(createCell("Prix", headerFont));
+                table.addCell(createCell("Niveau", headerFont));
+                table.addCell(createCell("Catégorie", headerFont));
+
+                for (Service service : services) {
+                    table.addCell(createCell(service.getNom(), cellFont));
+                    table.addCell(createCell(String.format("%.2f €", service.getPrix()), cellFont));
+                    table.addCell(createCell(service.getNiveauDifficulte(), cellFont));
+                    table.addCell(createCell(service.getCategorie(), cellFont));
+                }
+
+                document.add(table);
+                document.close();
+
+                showNotification("PDF exporté avec succès", "success");
+            } catch (DocumentException | IOException e) {
+                showNotification("Erreur lors de l'exportation du PDF: " + e.getMessage(), "error");
+            }
+        }
+    }
+
+    private PdfPCell createCell(String text, Font font) {
+        PdfPCell cell = new PdfPCell(new Phrase(text, font));
+        cell.setPadding(5);
+        cell.setBorderWidth(1);
+        cell.setBorderColor(BaseColor.LIGHT_GRAY);
+        return cell;
     }
 
     public void cleanup() {
         if (autoRefreshTimeline != null) {
             autoRefreshTimeline.stop();
+        }
+        if (statsStage != null) {
+            statsStage.close();
         }
     }
 }

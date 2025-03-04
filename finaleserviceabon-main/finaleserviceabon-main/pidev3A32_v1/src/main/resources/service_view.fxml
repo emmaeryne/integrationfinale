@@ -53,43 +53,46 @@
                 <TextField fx:id="searchField" promptText="Rechercher..." style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS" />
                 <ComboBox fx:id="categorieFilter" promptText="Catégorie" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" />
                 <Label text="Prix max:" textFill="#D8DEE9" />
-                <Slider fx:id="prixFilter" max="1000" min="0" showTickLabels="true" />
+                <Slider fx:id="prixFilter" max="1000" min="0" showTickLabels="true" showTickMarks="true" majorTickUnit="200" minorTickCount="5" />
             </HBox>
 
-            <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+                <!-- Left Section: Table and Buttons -->
                 <VBox spacing="8">
                     <TableView fx:id="serviceTable" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS" />
                     <HBox alignment="CENTER_RIGHT" spacing="8">
                         <Button onAction="#loadServices" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Actualiser" />
                         <Button onAction="#exportPDF" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Exporter" />
+                        <Button fx:id="toggleStatsButton" onAction="#showStatisticsPopup" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Voir Statistiques" />
                     </HBox>
                 </VBox>
 
+                <!-- Right Section: Form -->
                 <VBox spacing="8" styleClass="form-container">
-                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Détails du service" textFill="#2b2a2ac2" />
+                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Détails du service" textFill="#f4eeee" />
 
-                    <Label text="Nom" textFill="#2223247d" />
-                    <TextField fx:id="nomField" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    <Label text="Nom" textFill="#D8DEE9" />
+                    <TextField fx:id="nomField" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-                    <Label text="Description" textFill="#2223247d" />
-                    <TextArea fx:id="descriptionArea" style="-fx-background-color: #2E3440; -fx-text-fill: black; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
+                    <Label text="Description" textFill="#D8DEE9" />
+                    <TextArea fx:id="descriptionArea" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
 
-                    <Label text="Prix" textFill="#2223247d" />
-                    <TextField fx:id="prixField" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    <Label text="Prix" textFill="#D8DEE9" />
+                    <TextField fx:id="prixField" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-                    <Label text="Capacité max" textFill="#2223247d" />
-                    <Spinner fx:id="capaciteSpinner" editable="true" initialValue="1" max="100" min="1" style="-fx-background-color: #2E3440;" />
+                    <Label text="Capacité max" textFill="#D8DEE9" />
+                    <Spinner fx:id="capaciteSpinner" editable="true" initialValue="1" max="100" min="1" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee;" />
 
-                    <Label text="Catégorie" textFill="#2424267d" />
-                    <ComboBox fx:id="categorieCombo" promptText="Sélectionner une catégorie" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    <Label text="Catégorie" textFill="#D8DEE9" />
+                    <ComboBox fx:id="categorieCombo" promptText="Sélectionner une catégorie" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-                    <Label text="Durée (min)" textFill="#2222247d" />
-                    <Spinner fx:id="dureeSpinner" editable="true" initialValue="30" max="240" min="15" style="-fx-background-color: #2E3440;" />
+                    <Label text="Durée (min)" textFill="#D8DEE9" />
+                    <Spinner fx:id="dureeSpinner" editable="true" initialValue="30" max="240" min="15" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee;" />
 
-                    <Label text="Niveau" textFill="#1f20217d" />
-                    <ComboBox fx:id="niveauCombo" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    <Label text="Niveau" textFill="#D8DEE9" />
+                    <ComboBox fx:id="niveauCombo" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-                    <CheckBox fx:id="actifCheck" selected="true" text="Service actif" textFill="#2525267d" />
+                    <CheckBox fx:id="actifCheck" selected="true" text="Service actif" textFill="#D8DEE9" />
 
                     <HBox alignment="CENTER_RIGHT" spacing="8">
                         <Button onAction="#clearFields" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Annuler" />
@@ -98,13 +101,13 @@
                 </VBox>
             </SplitPane>
 
-            <TitledPane expanded="false" text="Statistiques">
-                <LineChart fx:id="statsChart">
+            <TitledPane expanded="false" text="Réservations par Jour" textFill="#f4eeee">
+                <LineChart fx:id="statsChart" style="-fx-background-color: #3B4252;">
                     <xAxis>
                         <CategoryAxis label="Jour" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis label="Nombre de réservations" />
+                        <NumberAxis label="Nombre de réservations" tickLabelFill="#f4eeee" />
                     </yAxis>
                 </LineChart>
             </TitledPane>
