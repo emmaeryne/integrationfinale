@@ -5,7 +5,6 @@ import edu.emmapi.services.CategorieService;
 
 import edu.emmapi.services.ProduitService;
 
-import edu.emmapi.services.SmsService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,7 +179,7 @@ public class ajouterproduit {
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Le produit a été ajouté avec succès !");
                String numeroDestinataire = "+21652108929"; // Remplace par un vrai numéro
                String messageTexte = "✅ Produit ajouté : " + nomProduit + " (" + categorie + ") Prix : " + prix + " TND";
-              SmsService.envoyerSms(numeroDestinataire, messageTexte);
+              //SmsService.envoyerSms(numeroDestinataire, messageTexte);
 
 
             resetFields();
