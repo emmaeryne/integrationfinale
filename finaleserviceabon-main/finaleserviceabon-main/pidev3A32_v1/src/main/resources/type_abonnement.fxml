@@ -112,6 +112,7 @@
                         <Region HBox.hgrow="ALWAYS" />
                     </HBox>
                 </VBox>
+
             </SplitPane>
 
             
