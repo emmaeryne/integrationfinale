@@ -21,8 +21,9 @@ public class mainFx extends Application {
     public void start(Stage primaryStage) {
         try {
             // Charger le fichier FXML de la première page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/type_abonnement.fxml")); // Chemin corrigé
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/service_view.fxml")); // Chemin corrigé
             Parent root = loader.load();
+
 
             // Créer une scène avec le contenu chargé
             Scene scene = new Scene(root);

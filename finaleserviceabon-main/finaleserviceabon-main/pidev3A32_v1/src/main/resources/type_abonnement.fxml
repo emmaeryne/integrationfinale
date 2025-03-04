@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,84 +17,103 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
 
-<VBox prefHeight="777.0" prefWidth="800.0" spacing="10" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.TypeAbonnementController">
-    <padding>
-        <Insets bottom="20" left="20" right="20" top="20" />
-    </padding>
-    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-        <children>
-            <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="326.0">
-                <image>
-                    <Image url="@hjk-removebg-preview.png" />
-                </image>
-            </ImageView>
-            <Label layoutX="300.0" layoutY="89.0" styleClass="title" text="Gestion des Abonnements" textFill="#f4eeee">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
-        </children>
-    </AnchorPane>
+<ScrollPane fx:controller="edu.emmapi.controllers.TypeAbonnementController"
+            xmlns:fx="http://javafx.com/fxml"
+            style="-fx-background-color: #2E3440;" VBox.vgrow="ALWAYS">
+    <content>
+        <VBox maxHeight="1400.0" maxWidth="1600.0" minHeight="700.0" minWidth="1000.0" prefHeight="900.0" prefWidth="1200.0" spacing="20" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
 
-    <!-- Search Bar -->
-    <HBox alignment="CENTER_LEFT" spacing="10">
-        <TextField fx:id="searchField" promptText="Rechercher par nom..." HBox.hgrow="ALWAYS" />
-        <Button onAction="#handleSearch" text="Rechercher" />
-    </HBox>
+            <!-- Header avec logo et titre -->
+            <AnchorPane maxHeight="250.0" minHeight="150.0" prefHeight="200.0" prefWidth="1150.0" VBox.vgrow="NEVER">
+                <children>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="435.0" layoutY="21.0">
+                        <image>
+                            <Image preserveRatio="true" url="@hjk-removebg-preview.png" />
+                        </image>
+                    </ImageView>
+                    <Label layoutX="450.0" layoutY="180.0" style="-fx-font-size: 32px; -fx-font-weight: bold;" text="Gestion des Abonnements" textFill="#f4eeee" />
+                </children>
+            </AnchorPane>
 
-    <!-- Sorting Options and Load Excel -->
-    <HBox alignment="CENTER_LEFT" spacing="10">
-        <Label prefHeight="18.0" prefWidth="104.0" text="Trier par:" />
-        <ComboBox fx:id="sortComboBox" promptText="Sélectionner un critère">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="prix_asc" />
-                    <String fx:value="prix_desc" />
-                </FXCollections>
-            </items>
-        </ComboBox>
-        <Button onAction="#handleSort" prefHeight="26.0" prefWidth="142.0" text="Appliquer" />
-        <Button onAction="#handleAnalyzeTrends" text="Analyser les Tendances" />
-        <Button fx:id="loadExcelButton" onAction="#handleLoadExcel" text="Charger depuis Excel" /> <!-- Nouveau bouton -->
-    </HBox>
-
-    <!-- Main Content -->
-    <SplitPane dividerPositions="0.7" prefHeight="446.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
-        <!-- TableView for subscriptions -->
-        <VBox spacing="10">
-            <TableView fx:id="typeAbonnementTable" prefHeight="434.0" prefWidth="477.0" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="nomColumn" minWidth="150" text="Nom" />
-                    <TableColumn fx:id="descriptionColumn" minWidth="200" text="Description" />
-                    <TableColumn fx:id="prixColumn" minWidth="100" text="Prix" />
-                    <TableColumn fx:id="dureeEnMoisColumn" minWidth="100" text="Durée (mois)" />
-                    <TableColumn fx:id="isPremiumColumn" minWidth="100" text="Premium" />
-                </columns>
-            </TableView>
-        </VBox>
-
-        <!-- Form for adding/editing subscriptions -->
-        <VBox spacing="10" styleClass="form-container">
-            <Label styleClass="section-title" text="Détails de l'abonnement" />
-            <Label text="Nom:" />
-            <TextField fx:id="nomField" />
-            <Label text="Description:" />
-            <TextArea fx:id="descriptionArea" prefWidth="200.0" wrapText="true" editable="false" /> <!-- Rendu non éditable -->
-            <Label text="Prix:" />
-            <TextField fx:id="prixField" />
-            <Label text="Durée (mois):" />
-            <Spinner fx:id="dureeEnMoisSpinner" editable="true" initialValue="1" max="12" min="1" />
-            <CheckBox fx:id="isPremiumCheck" text="Est Premium" />
-            <HBox alignment="CENTER_RIGHT" spacing="10">
-                <Button onAction="#clearFields" text="Annuler" />
-                <Button onAction="#handleAjouterTypeAbonnement" text="Enregistrer" />
-                <Button onAction="#handleUpdateTypeAbonnement" text="Modifier" />
-                <Button onAction="#handleDeleteTypeAbonnement" text="Supprimer" />
+            <!-- Barre de recherche -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS">
+                <TextField fx:id="searchField" maxWidth="700.0" prefWidth="500.0" promptText="Rechercher par nom..." style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleSearch" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Rechercher" />
             </HBox>
-        </VBox>
-    </SplitPane>
 
-    <Label prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                         © 2025 HIVE" />
-</VBox>
+            <!-- Options de tri, chargement, et analyse -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER_LEFT" spacing="10">
+                    <Label prefHeight="30.0" prefWidth="100.0" style="-fx-font-size: 16px;" text="Trier par:" textFill="#D8DEE9" />
+                    <ComboBox fx:id="sortComboBox" maxWidth="300.0" prefWidth="250.0" promptText="Sélectionner un critère" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" />
+                </VBox>
+                <Button onAction="#handleSort" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Appliquer Tri" />
+                <Button onAction="#handleAnalyzeTrends" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Analyser Tendances" />
+                <Button fx:id="loadExcelButton" onAction="#handleLoadExcel" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Charger Excel">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0">
+                            <image>
+                                <Image preserveRatio="true" url="@téléchargement (9).jfif" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <ProgressIndicator fx:id="loadingIndicator" prefHeight="30.0" prefWidth="30.0" style="-fx-progress-color: #5E81AC;" visible="false" />
+            </HBox>
+
+            <!-- Contenu principal avec SplitPane flexible -->
+            <SplitPane dividerPositions="0.7" maxHeight="900.0" maxWidth="1500.0" minHeight="400.0" minWidth="900.0" prefHeight="500.0" prefWidth="1150.0" style="-fx-background-color: #2E3440; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                <!-- TableView pour les abonnements -->
+                <VBox spacing="15" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                    <TableView fx:id="typeAbonnementTable" maxHeight="800.0" maxWidth="1100.0" minHeight="350.0" minWidth="600.0" prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: #2E3440; -fx-table-cell-border-color: #4C566A; -fx-text-fill: black; -fx-selection-bar: #5E81AC; -fx-selection-bar-text: #f4eeee;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="nomColumn" maxWidth="250" minWidth="150" prefWidth="180.0" resizable="true" style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px;" text="Nom" />
+                            <TableColumn fx:id="descriptionColumn" maxWidth="350" minWidth="200" prefWidth="250.0" resizable="true" style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px;" text="Description" />
+                            <TableColumn fx:id="prixColumn" maxWidth="180" minWidth="100" prefWidth="120.0" resizable="true" style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px;" text="Prix (TND)" />
+                            <TableColumn fx:id="dureeEnMoisColumn" maxWidth="180" minWidth="100" prefWidth="120.0" resizable="true" style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px;" text="Durée (mois)" />
+                            <TableColumn fx:id="isPremiumColumn" maxWidth="200" minWidth="100" prefWidth="130.0" resizable="true" style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px;" text="Premium" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- Formulaire pour ajouter/modifier abonnements -->
+                <VBox spacing="20" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-padding: 15;" VBox.vgrow="ALWAYS">
+                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Détails de l'abonnement" textFill="#f4eeee" />
+                    <VBox spacing="15" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label prefWidth="100.0" style="-fx-font-size: 16px;" text="Nom:" textFill="#D8DEE9" />
+                            <TextField fx:id="nomField" maxWidth="400.0" prefWidth="350.0" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label prefWidth="100.0" style="-fx-font-size: 16px;" text="Description:" textFill="#D8DEE9" />
+                            <TextArea fx:id="descriptionArea" editable="false" maxWidth="400.0" prefHeight="120.0" prefWidth="350.0" style="-fx-background-color: #2E3440; -fx-text-fill: black; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" wrapText="true" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label prefWidth="100.0" style="-fx-font-size: 16px;" text="Prix (€):" textFill="#D8DEE9" />
+                            <TextField fx:id="prixField" maxWidth="400.0" prefWidth="350.0" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label prefWidth="100.0" style="-fx-font-size: 16px;" text="Durée (mois):" textFill="#D8DEE9" />
+                            <Spinner fx:id="dureeEnMoisSpinner" editable="true" initialValue="1" max="120" maxWidth="400.0" min="1" prefWidth="350.0" style="-fx-background-color: #2E3440; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                        <CheckBox fx:id="isPremiumCheck" style="-fx-font-size: 16px;" text="Est Premium" textFill="#D8DEE9" />
+                    </VBox>
+                    <HBox alignment="CENTER_RIGHT" spacing="20" style="-fx-padding: 10;" HBox.hgrow="ALWAYS">
+                        <Button onAction="#clearFields" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Annuler" />
+                        <Button onAction="#handleAjouterTypeAbonnement" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Enregistrer" />
+                        <Button onAction="#handleUpdateTypeAbonnement" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Modifier" />
+                        <Button onAction="#handleDeleteTypeAbonnement" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 12 25; -fx-font-size: 16px;" text="Supprimer" />
+                    </HBox>
+                </VBox>
+            </SplitPane>
+
+            <!-- Pied de page -->
+            <Label alignment="CENTER" prefHeight="50.0" style="-fx-font-size: 18px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE - Tous droits réservés" VBox.vgrow="NEVER" />
+        </VBox>
+    </content>
+</ScrollPane>

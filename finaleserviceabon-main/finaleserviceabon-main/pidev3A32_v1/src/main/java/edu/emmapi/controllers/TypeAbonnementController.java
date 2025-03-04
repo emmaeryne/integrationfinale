@@ -227,6 +227,7 @@ package edu.emmapi.controllers;
 
 import edu.emmapi.entities.TypeAbonnement;
 import edu.emmapi.services.TypeAbonnementService;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -264,6 +265,7 @@ public class TypeAbonnementController {
     @FXML private Button analyzeTrendsButton;
     @FXML private TextArea feedbackArea;
     @FXML private Button loadExcelButton;
+    @FXML private ProgressIndicator loadingIndicator;
 
     private TypeAbonnementService typeAbonnementService;
     private ObservableList<TypeAbonnement> typeAbonnements;
@@ -277,9 +279,13 @@ public class TypeAbonnementController {
         loadTypeAbonnements();
         setupSearch();
         setupTableSelectionListener();
+        setupColumnSorting(); // Ajout du tri par colonne
 
         sortComboBox.setItems(FXCollections.observableArrayList("prix_asc", "prix_desc"));
         dureeEnMoisSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 120, 1));
+
+        // Mettre à jour la description en temps réel
+        setupRealTimeDescription();
     }
 
     private void setupTableColumns() {
@@ -290,20 +296,31 @@ public class TypeAbonnementController {
         isPremiumColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().getIsPremium()));
     }
 
+    private void setupColumnSorting() {
+        // Activer le tri par clic sur les en-têtes de colonne
+        nomColumn.setSortable(true);
+        descriptionColumn.setSortable(true);
+        prixColumn.setSortable(true);
+        dureeEnMoisColumn.setSortable(true);
+        isPremiumColumn.setSortable(true);
+    }
+
     private void loadTypeAbonnements() {
         List<TypeAbonnement> loadedTypeAbonnements = typeAbonnementService.getAllTypeAbonnements(null);
         typeAbonnements.clear();
         typeAbonnements.addAll(loadedTypeAbonnements);
+        updateFeedback("Liste des abonnements chargée avec succès.");
     }
 
     private void setupSearch() {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterTypeAbonnements(newValue);
+            updateFeedback("Recherche en cours pour : " + newValue);
         });
     }
 
     private void filterTypeAbonnements(String keyword) {
-        if (keyword.isEmpty()) {
+        if (keyword == null || keyword.trim().isEmpty()) {
             typeAbonnementTable.setItems(typeAbonnements);
         } else {
             List<TypeAbonnement> filteredList = typeAbonnements.stream()
@@ -325,24 +342,28 @@ public class TypeAbonnementController {
         List<TypeAbonnement> sortedTypeAbonnements = typeAbonnementService.getAllTypeAbonnements(selectedSort);
         typeAbonnements.clear();
         typeAbonnements.addAll(sortedTypeAbonnements);
+        updateFeedback("Liste triée par : " + (selectedSort != null ? selectedSort : "défaut"));
     }
 
     @FXML
     private void handleAjouterTypeAbonnement() {
         try {
-            validateInputWithoutDescription(); // Ne valider que les autres champs
+            validateInputWithoutDescription();
             TypeAbonnement typeAbonnement = new TypeAbonnement();
             typeAbonnement.setNom(nomField.getText());
             typeAbonnement.setPrix(Double.parseDouble(prixField.getText()));
             typeAbonnement.setDureeEnMois(dureeEnMoisSpinner.getValue());
             typeAbonnement.setIsPremium(isPremiumCheck.isSelected());
-            typeAbonnement.setDescription(genererDescription(typeAbonnement)); // Génération automatique
+            typeAbonnement.setDescription(genererDescription(typeAbonnement));
 
             typeAbonnementService.ajouterTypeAbonnement(typeAbonnement);
             loadTypeAbonnements();
             clearFields();
+            updateFeedback("Abonnement ajouté avec succès : " + typeAbonnement.getNom());
         } catch (NumberFormatException e) {
-            showAlert("Veuillez entrer un prix valide.");
+            showAlert("Veuillez entrer un prix valide (nombre).");
+        } catch (Exception e) {
+            showAlert("Erreur lors de l’ajout : " + e.getMessage());
         }
     }
 
@@ -356,13 +377,16 @@ public class TypeAbonnementController {
                 selected.setPrix(Double.parseDouble(prixField.getText()));
                 selected.setDureeEnMois(dureeEnMoisSpinner.getValue());
                 selected.setIsPremium(isPremiumCheck.isSelected());
-                selected.setDescription(genererDescription(selected)); // Génération automatique
+                selected.setDescription(genererDescription(selected));
 
                 typeAbonnementService.updateTypeAbonnement(selected);
                 loadTypeAbonnements();
                 clearFields();
+                updateFeedback("Abonnement mis à jour avec succès : " + selected.getNom());
             } catch (NumberFormatException e) {
-                showAlert("Veuillez entrer un prix valide.");
+                showAlert("Veuillez entrer un prix valide (nombre).");
+            } catch (Exception e) {
+                showAlert("Erreur lors de la mise à jour : " + e.getMessage());
             }
         } else {
             showAlert("Veuillez sélectionner un abonnement à mettre à jour.");
@@ -375,11 +399,13 @@ public class TypeAbonnementController {
         if (selected != null) {
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Êtes-vous sûr de vouloir supprimer cet abonnement ?");
             confirmationAlert.setHeaderText(null);
+            //confirmationAlert.setStyle("-fx-background-color: #2E3440; -fx-text-fill: #f4eeee;");
             confirmationAlert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     typeAbonnementService.deleteTypeAbonnement(selected.getId());
                     loadTypeAbonnements();
                     clearFields();
+                    updateFeedback("Abonnement supprimé avec succès : " + selected.getNom());
                 }
             });
         } else {
@@ -391,6 +417,7 @@ public class TypeAbonnementController {
         typeAbonnementTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 displaySelectedTypeAbonnement(newValue);
+                updateFeedback("Abonnement sélectionné : " + newValue.getNom());
             }
         });
     }
@@ -407,38 +434,40 @@ public class TypeAbonnementController {
     private void handleGeneratePriceRecommendations() {
         List<TypeAbonnement> recommendations = typeAbonnementService.genererRecommandationsPrix();
         showRecommendations(recommendations);
+        updateFeedback("Recommandations de prix générées.");
     }
 
     @FXML
     private void handleAnalyzeTrends() {
         String insights = typeAbonnementService.analyserTendances();
         showAlert(insights);
+        updateFeedback("Analyse des tendances effectuée.");
     }
 
     @FXML
     private void handleLoadExcel() {
+        loadingIndicator.setVisible(true); // Afficher l’indicateur de chargement
         try {
-            // Chemin complet vers le fichier sur votre bureau (exemple pour Windows)
             String cheminFichier = "C:\\Users\\MSI\\Downloads\\abonnement.xlsx"; // Chemin exact
             FileInputStream file = new FileInputStream(cheminFichier);
             Workbook workbook = new XSSFWorkbook(file);
             Sheet sheet = workbook.getSheetAt(0);
 
             typeAbonnements.clear();
+            int rowsProcessed = 0;
             for (Row row : sheet) {
-                if (row.getRowNum() == 0) continue; // Ignorer l'en-tête
+                if (row.getRowNum() == 0) continue; // Ignorer l’en-tête
 
-                // Vérifier que la ligne contient au moins la première cellule (Nom)
-                if (row.getCell(0) == null || row.getCell(0).getStringCellValue().trim().isEmpty()) {
+                if (row.getCell(0) == null || (row.getCell(0).getStringCellValue() != null && row.getCell(0).getStringCellValue().trim().isEmpty())) {
                     continue; // Ignorer les lignes vides ou sans nom
                 }
 
                 TypeAbonnement abonnement = new TypeAbonnement();
 
                 // Nom (colonne 0)
-                abonnement.setNom(row.getCell(0).getStringCellValue());
+                abonnement.setNom(row.getCell(0) != null ? row.getCell(0).getStringCellValue() : "");
 
-                // Prix (colonne 1) - Gérer STRING ou NUMERIC
+                // Prix (colonne 1)
                 if (row.getCell(1) != null) {
                     switch (row.getCell(1).getCellType()) {
                         case NUMERIC:
@@ -448,17 +477,18 @@ public class TypeAbonnementController {
                             try {
                                 abonnement.setPrix(Double.parseDouble(row.getCell(1).getStringCellValue().trim()));
                             } catch (NumberFormatException e) {
-                                abonnement.setPrix(0.0); // Valeur par défaut si le texte n’est pas convertible
+                                abonnement.setPrix(0.0);
+                                updateFeedback("Avertissement : Prix non valide pour une ligne, valeur par défaut utilisée (0.0).");
                             }
                             break;
                         default:
-                            abonnement.setPrix(0.0); // Valeur par défaut pour les autres types
+                            abonnement.setPrix(0.0);
                     }
                 } else {
-                    abonnement.setPrix(0.0); // Valeur par défaut si vide
+                    abonnement.setPrix(0.0);
                 }
 
-                // Durée (colonne 2) - Gérer STRING ou NUMERIC
+                // Durée (colonne 2)
                 if (row.getCell(2) != null) {
                     switch (row.getCell(2).getCellType()) {
                         case NUMERIC:
@@ -468,17 +498,18 @@ public class TypeAbonnementController {
                             try {
                                 abonnement.setDureeEnMois(Integer.parseInt(row.getCell(2).getStringCellValue().trim()));
                             } catch (NumberFormatException e) {
-                                abonnement.setDureeEnMois(1); // Valeur par défaut si le texte n’est pas convertible
+                                abonnement.setDureeEnMois(1);
+                                updateFeedback("Avertissement : Durée non valide pour une ligne, valeur par défaut utilisée (1).");
                             }
                             break;
                         default:
-                            abonnement.setDureeEnMois(1); // Valeur par défaut pour les autres types
+                            abonnement.setDureeEnMois(1);
                     }
                 } else {
-                    abonnement.setDureeEnMois(1); // Valeur par défaut si vide
+                    abonnement.setDureeEnMois(1);
                 }
 
-                // Premium (colonne 3) - Gérer STRING ou BOOLEAN
+                // Premium (colonne 3)
                 if (row.getCell(3) != null) {
                     switch (row.getCell(3).getCellType()) {
                         case BOOLEAN:
@@ -488,28 +519,34 @@ public class TypeAbonnementController {
                             try {
                                 abonnement.setIsPremium(Boolean.parseBoolean(row.getCell(3).getStringCellValue().trim()));
                             } catch (Exception e) {
-                                abonnement.setIsPremium(false); // Valeur par défaut si le texte n’est pas convertible
+                                abonnement.setIsPremium(false);
+                                updateFeedback("Avertissement : Valeur Premium non valide pour une ligne, valeur par défaut utilisée (false).");
                             }
                             break;
                         default:
-                            abonnement.setIsPremium(false); // Valeur par défaut pour les autres types
+                            abonnement.setIsPremium(false);
                     }
                 } else {
-                    abonnement.setIsPremium(false); // Valeur par défaut si vide
+                    abonnement.setIsPremium(false);
                 }
 
-                // Générer la description
                 abonnement.setDescription(genererDescription(abonnement));
                 typeAbonnements.add(abonnement);
+                rowsProcessed++;
             }
             workbook.close();
             file.close();
             typeAbonnementTable.refresh();
-            showAlert("Abonnements chargés depuis Excel avec descriptions générées !");
+            updateFeedback(rowsProcessed + " abonnements chargés depuis Excel avec succès.");
+            showAlert("Abonnements chargés avec succès !");
         } catch (IOException e) {
+            updateFeedback("Erreur lors du chargement du fichier Excel : " + e.getMessage());
             showAlert("Erreur lors du chargement du fichier Excel : " + e.getMessage());
+        } finally {
+            loadingIndicator.setVisible(false); // Cacher l’indicateur une fois terminé
         }
     }
+
     // Méthode pour générer une description automatiquement
     private String genererDescription(TypeAbonnement abonnement) {
         String nom = abonnement.getNom();
@@ -522,35 +559,69 @@ public class TypeAbonnementController {
                 isPremium ? "les utilisateurs exigeants" : "un usage quotidien");
     }
 
-    // Validation sans exiger la description (puisqu'elle est générée automatiquement)
+    // Validation sans exiger la description
     private void validateInputWithoutDescription() {
-        if (nomField.getText().isEmpty() || prixField.getText().isEmpty()) {
-            showAlert("Le nom et le prix doivent être remplis.");
-            throw new IllegalArgumentException("Input validation failed");
+        if (nomField.getText().isEmpty()) {
+            showAlert("Le nom doit être rempli.");
+            throw new IllegalArgumentException("Le nom est requis.");
+        }
+        if (prixField.getText().isEmpty() || !prixField.getText().matches("\\d+(\\.\\d+)?")) {
+            showAlert("Veuillez entrer un prix valide (nombre, ex. 15.50).");
+            throw new IllegalArgumentException("Prix invalide.");
+        }
+    }
+
+    private void setupRealTimeDescription() {
+        // Mettre à jour la description en temps réel en fonction des champs
+        ChangeListener<String> textChangeListener = (obs, oldValue, newValue) -> updateDescription();
+        ChangeListener<Number> numberChangeListener = (obs, oldValue, newValue) -> updateDescription();
+        ChangeListener<Boolean> booleanChangeListener = (obs, oldValue, newValue) -> updateDescription();
+
+        nomField.textProperty().addListener(textChangeListener);
+        prixField.textProperty().addListener(textChangeListener);
+        dureeEnMoisSpinner.valueProperty().addListener(numberChangeListener);
+        isPremiumCheck.selectedProperty().addListener(booleanChangeListener);
+    }
+
+    private void updateDescription() {
+        try {
+            TypeAbonnement temp = new TypeAbonnement();
+            temp.setNom(nomField.getText().isEmpty() ? "Abonnement" : nomField.getText());
+            temp.setPrix(prixField.getText().isEmpty() ? 0.0 : Double.parseDouble(prixField.getText()));
+            temp.setDureeEnMois(dureeEnMoisSpinner.getValue());
+            temp.setIsPremium(isPremiumCheck.isSelected());
+            descriptionArea.setText(genererDescription(temp));
+        } catch (NumberFormatException e) {
+            descriptionArea.setText("Veuillez entrer un prix valide.");
         }
     }
 
     @FXML
     private void clearFields() {
         nomField.clear();
-        descriptionArea.clear();
+        descriptionArea.setText(""); // Réinitialiser la description générée
         prixField.clear();
         dureeEnMoisSpinner.getValueFactory().setValue(1);
         isPremiumCheck.setSelected(false);
+        updateFeedback("Champs réinitialisés.");
+    }
+
+    private void updateFeedback(String message) {
+        if (feedbackArea != null) {
+            feedbackArea.setText(message + "\n" + (feedbackArea.getText().length() > 0 ? feedbackArea.getText() : ""));
+        }
     }
 
     private void showRecommendations(List<TypeAbonnement> recommendations) {
         StringBuilder sb = new StringBuilder("Recommandations de prix :\n");
         for (TypeAbonnement type : recommendations) {
-            sb.append("Type: ")
-                    .append(type.getNom())
-                    .append(" - ")
-                    .append("Considérer une réduction de prix.\n");
+            sb.append("Type: ").append(type.getNom()).append(" - Considérer une réduction de prix.\n");
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Recommandations de Prix");
         alert.setHeaderText(null);
         alert.setContentText(sb.toString());
+       // alert.setStyle("-fx-background-color: #2E3440; -fx-text-fill: #f4eeee;");
         alert.showAndWait();
     }
 
@@ -559,6 +630,7 @@ public class TypeAbonnementController {
         alert.setTitle("Avertissement");
         alert.setHeaderText(null);
         alert.setContentText(message);
+       // alert.setStyle("-fx-background-color: #2E3440; -fx-text-fill: #f4eeee;");
         alert.showAndWait();
     }
 }

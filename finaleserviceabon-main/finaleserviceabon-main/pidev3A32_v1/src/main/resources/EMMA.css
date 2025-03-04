@@ -1,0 +1,128 @@
+.root {
+    -fx-background-color: #2E3440;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f4eeee;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #D8DEE9;
+}
+
+.text-field {
+    -fx-background-color: #3B4252;
+    -fx-text-fill: #f4eeee;
+    -fx-border-color: #4C566A;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.text-area {
+    -fx-background-color: #3B4252;
+    -fx-text-fill: #f4eeee;
+    -fx-border-color: #4C566A;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.combo-box {
+    -fx-background-color: #3B4252;
+    -fx-text-fill: #f4eeee;
+    -fx-border-color: #4C566A;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.spinner {
+    -fx-background-color: #3B4252;
+    -fx-text-fill: #f4eeee;
+    -fx-border-color: #4C566A;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.checkbox {
+    -fx-text-fill: #D8DEE9;
+}
+
+.action-button {
+    -fx-background-color: #5E81AC;
+    -fx-text-fill: #f4eeee;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.action-button:hover {
+    -fx-background-color: #81A1C1;
+}
+
+.cancel-button {
+    -fx-background-color: #BF616A;
+    -fx-text-fill: #f4eeee;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.cancel-button:hover {
+    -fx-background-color: #D08770;
+}
+
+.delete-button {
+    -fx-background-color: #BF616A;
+    -fx-text-fill: #f4eeee;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.delete-button:hover {
+    -fx-background-color: #D08770;
+}
+
+.search-bar, .options-bar, .button-bar {
+    -fx-spacing: 15;
+}
+
+.split-pane {
+    -fx-background-color: #2E3440;
+    -fx-border-color: #4C566A;
+    -fx-border-radius: 5;
+}
+
+.table-view {
+    -fx-background-color: #3B4252;
+    -fx-table-cell-border-color: #4C566A;
+    -fx-text-fill: #f4eeee;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+    -fx-text-fill: #f4eeee;
+}
+
+.progress-indicator {
+    -fx-progress-color: #5E81AC;
+}
+
+.footer {
+    -fx-font-size: 14px;
+    -fx-text-fill: #D8DEE9;
+}
