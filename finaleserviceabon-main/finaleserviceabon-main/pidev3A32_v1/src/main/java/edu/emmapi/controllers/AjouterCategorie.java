@@ -64,7 +64,7 @@ public class AjouterCategorie {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images", ".png", ".jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
         selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {

@@ -44,7 +44,6 @@
             <!-- Filters -->
             <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
                 <TextField fx:id="searchField" prefWidth="300.0" promptText="🔍 Rechercher une catégorie..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
-                <Button text="🔄 Réinitialiser" onAction="#resetSearch" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" />
             </HBox>
 
             <!-- Main Content -->
