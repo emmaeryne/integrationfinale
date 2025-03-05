@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Ajouterr_P">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Ajouterr_P">
    <content>
       <VBox prefHeight="800.0" prefWidth="1000.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
          <padding>
@@ -28,51 +34,78 @@
             <children>
                <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="405.0" layoutY="10.0">
                   <image>
-                     <Image url="@hjk-removebg-preview.png" />
+                     <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
                   </image>
                </ImageView>
-               <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Créer Planning" textFill="#f4eeee" />
+               <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Créer un Planning" textFill="#f4eeee" />
             </children>
          </AnchorPane>
 
-         <!-- Main Content -->
-         <VBox spacing="20">
-            <Label layoutX="54.0" layoutY="202.0" prefHeight="35.0" prefWidth="186.0" text="Type_Activite:" textFill="#d4cbb8">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="typeactivitetextfield" layoutX="263.0" layoutY="206.0" prefHeight="26.0" prefWidth="130.0" />
-
-            <Label layoutX="49.0" layoutY="287.0" prefHeight="35.0" prefWidth="196.0" text="Date planning:" textFill="#cfc7b6">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="date_PlanningTextfield" layoutX="263.0" layoutY="291.0" prefHeight="26.0" prefWidth="130.0" />
-
-            <Label layoutX="49.0" layoutY="470.0" prefHeight="26.0" prefWidth="124.0" text="Status:" textFill="#d4ccbd">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_LEFT" spacing="10">
-               <RadioButton fx:id="enattentebutton" mnemonicParsing="false" prefHeight="18.0" prefWidth="95.0" text="En Attente" textFill="#130505" />
-               <RadioButton fx:id="confirmeButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="95.0" text="Confirmé" textFill="#281818" />
-            </HBox>
-
-            <Label layoutX="49.0" layoutY="378.0" prefHeight="26.0" prefWidth="124.0" text="Cours:" textFill="#d7d2c8">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="courstextfield" layoutX="263.0" layoutY="370.0" prefHeight="26.0" prefWidth="130.0" />
-         </VBox>
-
-         <!-- Action Button -->
-         <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 15;">
-            <Button fx:id="ajouter_planning" onAction="#addplanning" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-border-radius: 5; -fx-background-radius: 5;" text="Ajouter" />
+         <!-- Loading Indicator -->
+         <HBox alignment="CENTER_RIGHT" spacing="8">
+            <Region HBox.hgrow="ALWAYS" />
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" />
          </HBox>
+
+         <!-- Notifications -->
+         <VBox fx:id="notificationPane" spacing="5" />
+
+         <!-- Filters -->
+         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+            <TextField fx:id="searchField" prefWidth="300.0" promptText="🔍 Rechercher un planning..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+         </HBox>
+
+         <!-- Main Content -->
+         <SplitPane prefHeight="500.0" VBox.vgrow="ALWAYS">
+
+            <!-- Right Section: Form -->
+            <VBox prefHeight="474.0" prefWidth="852.0" spacing="10" styleClass="form-container">
+               <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Détails du Planning" />
+
+               <!-- Type d'Activité -->
+               <Label style="-fx-font-size: 14px; -fx-text-fill: black;" text="Type d'Activité" textFill="#433838" />
+               <TextField fx:id="typeactivitetextfield" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+
+               <!-- Date du Planning -->
+               <Label style="-fx-font-size: 14px; -fx-text-fill: black;" text="Date du Planning" />
+               <DatePicker fx:id="date_PlanningTextfield" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+               <!-- Cours -->
+               <Label style="-fx-font-size: 14px; -fx-text-fill: black;" text="Cours" />
+               <ComboBox fx:id="courstextfield" prefWidth="400.0" promptText="Sélectionner un cours" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+
+               <!-- Statut -->
+               <Label style="-fx-font-size: 14px; -fx-text-fill: black;" text="Statut" />
+               <HBox spacing="10">
+                  <RadioButton fx:id="enattentebutton" style="-fx-text-fill: black; -fx-font-size: 14px;" text="En Attente">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="statusToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="confirmeButton" style="-fx-text-fill: black; -fx-font-size: 14px;" text="Confirmé" toggleGroup="$statusToggleGroup" />
+               </HBox>
+
+               <!-- Action Buttons -->
+               <HBox alignment="CENTER_RIGHT" spacing="10">
+                  <Button style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Annuler" />
+                  <Button fx:id="ajouter_planning" onAction="#addplanning" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Enregistrer" />
+               </HBox>
+            </VBox>
+         </SplitPane>
+
+         <!-- Planning Chart -->
+         <TitledPane expanded="false" text="Plannings par Jour" textFill="#f4eeee" VBox.vgrow="NEVER">
+            <content>
+               <LineChart fx:id="planningChart" prefHeight="200.0" style="-fx-background-color: #3B4252;">
+                  <xAxis>
+                     <CategoryAxis label="Jour" tickLabelFill="#f4eeee" />
+                  </xAxis>
+                  <yAxis>
+                     <NumberAxis label="Nombre de plannings" tickLabelFill="#f4eeee" />
+                  </yAxis>
+               </LineChart>
+            </content>
+         </TitledPane>
 
          <!-- Footer -->
          <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
