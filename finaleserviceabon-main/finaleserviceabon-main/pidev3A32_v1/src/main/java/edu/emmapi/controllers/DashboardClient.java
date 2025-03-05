@@ -7,11 +7,15 @@ import edu.emmapi.services.ProfileService;
 import edu.emmapi.tools.MyConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -53,7 +57,7 @@ public class DashboardClient {
     }
 
     ProfileService profileService = new ProfileService();
-        user u;
+    user u;
     public void setId(int id) {
         idReived = id;
         loadProfileDetails();
@@ -116,5 +120,18 @@ public class DashboardClient {
     public void supprimerProfile(ActionEvent actionEvent) {
         profileService.deleteEntity(idReived);
 
+    }
+
+    public void nextPage(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage.fxml"));
+        Parent parent = loader.load();
+
+
+        Scene currentScene = firstNameLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.setWidth(850);  // Définir la largeur de la scène
+        currentStage.setHeight(600);  // Définir la hauteur de la scène
+        currentScene.setRoot(parent);
     }
 }

@@ -206,7 +206,7 @@ public class OwnerAddCoach {
 //    }
 
     private void loadSecurityQuestions() {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hive1", "root", "")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hive2", "root", "")) {
             SecurityQuestionDao securityQuestionDao = new SecurityQuestionDao(connection);
             List<security_questions> questions = securityQuestionDao.getAllSecurityQuestions();
 

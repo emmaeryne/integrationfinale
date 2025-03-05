@@ -193,8 +193,6 @@ public class logIn {
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardClient.fxml"));
                     Parent parent = loader.load();
-                    DashboardClient dashboardOwner = loader.getController();
-                    dashboardOwner.setId(id);
 
                     Scene currentScene = TFadresse.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
                     Stage currentStage = (Stage) currentScene.getWindow();

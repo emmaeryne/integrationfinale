@@ -127,6 +127,12 @@ public class HomePageController {
         openDashboard("/page1.fxml", "produit admin");
     }
 
+    @FXML
+    private void openCommandeView(ActionEvent event) {
+        openDashboard("/BackView.fxml", "Commande");
+    }
+
+
     //@FXML
     //private void openDetailsDashboard(ActionEvent event) {
        // openDashboard("/details.fxml", "Détails Dashboard");
