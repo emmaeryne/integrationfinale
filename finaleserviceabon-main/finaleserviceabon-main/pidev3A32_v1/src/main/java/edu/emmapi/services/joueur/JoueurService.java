@@ -1,7 +1,7 @@
 package edu.emmapi.services.joueur;
 
 import edu.emmapi.entities.joueur.Joueur;
-import edu.emmapi.interfaces.IService;
+import edu.emmapi.interfaces.tarek.IService;
 import edu.emmapi.tools.MyConnection;
 
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
 package edu.emmapi.services.tournoi_match;
 
 import edu.emmapi.entities.tournoi_match.Match;
-import edu.emmapi.interfaces.IService;
+import edu.emmapi.interfaces.tarek.IService;
 import edu.emmapi.tools.MyConnection;
 
 import java.sql.PreparedStatement;
