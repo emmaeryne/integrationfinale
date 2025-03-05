@@ -158,27 +158,7 @@ public class createProfileOwner {
     // Adding the profile to the database
     @FXML
     public void AjouterProfile(ActionEvent actionEvent) throws SQLException {
-        if (!validateInputs()) {
-            return; // Return early if validation fails
-        }
 
-        String dateOfBirth = DateOfBirthOwnerTF.getText();
-        String firstName = FirstNameOwnerTF.getText();
-        String lastName = LastNameOwnerTF.getText();
-        String location = LocationOwnerTF.getText();
-        String phone = PhoneOwnerTF.getText();
-        String profilePic = ProfilePicOwnerTF.getText(); // URL de l'image uploadée
-        String website = WebsiteOwnerTF.getText();
-        String bio = bioOwnerTF.getText();
-        String socialMediaLinks = socialMediaLinksOwnerTF.getText();
-
-        profile OwnerProfile = new profile(firstName, lastName, dateOfBirth, profilePic, bio, location, phone, website, socialMediaLinks);
-        profileService.addEntity(OwnerProfile, idRecicved);
-
-        showAlert("Succès", "Le profil a été créé avec succès!");
-
-        Stage currentStage = (Stage) PhoneOwnerTF.getScene().getWindow();
-        currentStage.close();
     }
 
     // Input validation method

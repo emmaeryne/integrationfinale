@@ -48,7 +48,7 @@
 
         <!-- ScrollPane pour rendre la liste des cartes scrollable -->
         <ScrollPane layoutX="228.0" layoutY="51.0" prefHeight="461.0" prefWidth="687.0">
-            <!-- Zone d'affichage des cartes des propriétaires -->
+            <!-- Zone d'affichage des cartes des coachs -->
             <content>
                 <FlowPane fx:id="cardContainer" prefHeight="461.0" prefWidth="687.0" hgap="10" vgap="10">
                     <!-- Les cartes seront ajoutées dynamiquement ici -->
@@ -59,4 +59,5 @@
         <!-- Label pour afficher les erreurs ou les messages de succès -->
         <Label fx:id="errorLabel" layoutX="250.0" layoutY="20.0" prefHeight="30.0" prefWidth="600.0" textFill="RED" />
     </children>
+
 </AnchorPane>
