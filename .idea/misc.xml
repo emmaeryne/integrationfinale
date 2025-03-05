@@ -7,8 +7,13 @@
         <option value="$PROJECT_DIR$/finaleserviceabon-main/finaleserviceabon-main/pidev3A32_v1/pom.xml" />
       </list>
     </option>
+<<<<<<< HEAD
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+=======
+
+
+>>>>>>> e3d055f96de50b049cd731cad788ed883af214a4
   </component>
 </project>
