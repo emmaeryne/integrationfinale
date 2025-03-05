@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -7,42 +8,52 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
 
-<AnchorPane prefHeight="437.0" prefWidth="633.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Cours_Participant">
-   <children>
-      <Label layoutX="130.0" layoutY="111.0" prefHeight="54.0" prefWidth="398.0" text="Cours et Participants" textFill="#c1bab1">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font></Label>
-      <Accordion layoutX="-11.0" layoutY="111.0" />
-      <Accordion layoutX="167.0" layoutY="111.0" />
-      <ListView fx:id="listdetail" layoutX="110.0" layoutY="197.0" prefHeight="200.0" prefWidth="411.0" />
-      <Button fx:id="button_supp" layoutX="537.0" layoutY="397.0" mnemonicParsing="false" onAction="#deleteSelectedParticipant" style="-fx-background-color: white;" text="Supprimer" />
-      <Label layoutX="35.0" layoutY="31.0" text="Detail" textFill="#c9c4b5">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="150.0" layoutY="31.0" text="Planning" textFill="#bfbbb0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="430.0" layoutY="31.0" text="Cours" textFill="#d1cdc2">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="528.0" layoutY="31.0" text="Participant" textFill="#bfbbb3">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="89.0" fitWidth="134.0" layoutX="255.0" layoutY="24.0">
-         <image>
-            <Image url="@hjk-removebg-preview.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Cours_Participant">
+   <content>
+      <VBox prefHeight="800.0" prefWidth="1000.0" spacing="10" style="-fx-background-color: #2E3440; -fx-padding: 15;" styleClass="main-container">
+         <padding>
+            <Insets bottom="15" left="15" right="15" top="15" />
+         </padding>
+
+         <!-- Header -->
+         <AnchorPane prefHeight="100.0" prefWidth="970.0" style="-fx-background-color: #3B4252;">
+            <children>
+               <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="405.0" layoutY="10.0">
+                  <image>
+                     <Image url="@hjk-removebg-preview.png" />
+                  </image>
+               </ImageView>
+               <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Cours et Participants" />
+            </children>
+         </AnchorPane>
+
+         <!-- Main Content -->
+         <VBox spacing="10">
+            <!-- Detail Labels -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+               <Label layoutX="22.0" layoutY="28.0" text="Detail" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d4cfc4;" />
+               <Label layoutX="119.0" layoutY="28.0" text="Planning" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #c9c4b7;" />
+               <Label layoutX="401.0" layoutY="28.0" text="Cours" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #cfcabf;" />
+               <Label layoutX="488.0" layoutY="28.0" text="Participant" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d1cab9;" />
+            </HBox>
+
+            <!-- Accordion Section -->
+            <Accordion layoutX="-11.0" layoutY="111.0" />
+
+            <!-- ListView Section -->
+            <ListView fx:id="listdetail" layoutX="110.0" layoutY="197.0" prefHeight="200.0" prefWidth="411.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" />
+
+            <!-- Delete Button -->
+            <Button fx:id="button_supp" layoutX="537.0" layoutY="397.0" mnemonicParsing="false" onAction="#deleteSelectedParticipant" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20;" text="Supprimer" />
+         </VBox>
+
+         <!-- Footer -->
+         <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
+      </VBox>
+   </content>
+</ScrollPane>

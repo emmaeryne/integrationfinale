@@ -1,77 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3440; -fx-padding: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Ajouter_Cours">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Ajouter_Cours">
    <children>
-      <!-- Les labels du menu -->
-      <Label fx:id="deatillabel" layoutX="28.0" layoutY="66.0" onMouseClicked="#handleLabeldetailClick" prefHeight="22.0" prefWidth="80.0" text="Detail" textFill="#dfdedb">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelplanning" layoutX="148.0" layoutY="66.0" onMouseClicked="#handleLabelPlanningClick" prefHeight="22.0" prefWidth="80.0" text="Planning" textFill="#dcdad3">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelcours" layoutX="445.0" layoutY="66.0" onMouseClicked="#handleLabelCoursClick" prefHeight="22.0" prefWidth="80.0" text="Cours" textFill="#dcdad2">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelparticipant" layoutX="594.0" layoutY="66.0" onMouseClicked="#handleLabelParticipantClick" prefHeight="22.0" prefWidth="80.0" text="Participant" textFill="#e4e0d5">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <!-- Conteneur principal -->
+      <VBox prefHeight="600.0" prefWidth="800.0" spacing="20" style="-fx-background-color: #2E3440;">
+         <padding>
+            <Insets bottom="30" left="30" right="30" top="30" />
+         </padding>
 
-      <!-- Le titre du formulaire -->
-      <Label layoutX="228.0" layoutY="175.0" prefHeight="54.0" prefWidth="250.0" text="Ajouter Cours" textFill="#dcd8ce">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
+         <!-- Header avec logo et titre -->
+         <AnchorPane prefHeight="100.0" prefWidth="740.0">
+            <children>
+               <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="290.0" layoutY="10.0">
+                  <image>
+                     <Image url="@hjk-removebg-preview.png" />
+                  </image>
+               </ImageView>
+               <Label layoutX="240.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Ajouter Cours" textFill="#f4eeee" />
+            </children>
+         </AnchorPane>
 
-      <!-- Les labels et champs pour le nom du cours, la durée et l'état -->
-      <Label layoutX="156.0" layoutY="274.0" prefHeight="35.0" prefWidth="144.0" text="Nom_Cours:" textFill="#d4d2ce">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nomcourstextfield" layoutX="335.0" layoutY="277.0" prefHeight="26.0" prefWidth="174.0" />
+         <!-- Menu (Labels cliquables) -->
+         <AnchorPane prefHeight="40.0" prefWidth="740.0">
+            <children>
+               <Label fx:id="deatillabel" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleLabeldetailClick" prefHeight="30.0" prefWidth="100.0" text="Détail" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 5;" />
+               <Label fx:id="labelplanning" layoutX="120.0" layoutY="0.0" onMouseClicked="#handleLabelPlanningClick" prefHeight="30.0" prefWidth="100.0" text="Planning" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 5;" />
+               <Label fx:id="labelcours" layoutX="240.0" layoutY="0.0" onMouseClicked="#handleLabelCoursClick" prefHeight="30.0" prefWidth="100.0" text="Cours" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 5;" />
+               <Label fx:id="labelparticipant" layoutX="360.0" layoutY="0.0" onMouseClicked="#handleLabelParticipantClick" prefHeight="30.0" prefWidth="100.0" text="Participant" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 5;" />
+            </children>
+         </AnchorPane>
 
-      <Label layoutX="156.0" layoutY="344.0" prefHeight="27.0" prefWidth="113.0" text="Durée:" textFill="#dfdad0">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="dureecourstextfield" layoutX="335.0" layoutY="352.0" prefHeight="26.0" prefWidth="174.0" />
+         <!-- Formulaire -->
+         <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;">
+            <!-- Nom du cours -->
+            <Label text="Nom du Cours" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <TextField fx:id="nomcourstextfield" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
 
-      <Label layoutX="156.0" layoutY="406.0" prefHeight="27.0" prefWidth="113.0" text="Etat:" textFill="#c7c2b9">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="etatcourstextfield" layoutX="335.0" layoutY="411.0" prefHeight="26.0" prefWidth="174.0" />
+            <!-- Durée -->
+            <Label text="Durée" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <TextField fx:id="dureecourstextfield" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
 
-      <!-- Bouton pour ajouter le cours -->
-      <Button fx:id="buttonajoutercours" layoutX="572.0" layoutY="465.0" mnemonicParsing="false" onAction="#addcours" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: WHITE;" text="Ajouter" />
+            <!-- État -->
+            <Label text="État" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <TextField fx:id="etatcourstextfield" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
 
-      <!-- Copyright -->
-      <Label layoutX="307.0" layoutY="539.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" />
+            <!-- Bouton Ajouter -->
+            <Button fx:id="buttonajoutercours" onAction="#addcours" prefHeight="40.0" prefWidth="120.0" text="Ajouter" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" />
+         </VBox>
 
-      <!-- Logo ou image en haut -->
-      <ImageView fitHeight="104.0" fitWidth="160.0" layoutX="254.0" layoutY="25.0">
-         <image>
-            <Image url="@hjk-removebg-preview.png" />
-         </image>
-      </ImageView>
+         <!-- Footer -->
+         <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
+      </VBox>
    </children>
 </AnchorPane>

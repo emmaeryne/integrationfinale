@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.DatePicker?>
+<?import java.lang.String?>
+<?import javafx.scene.control.TextField?>
+<AnchorPane prefHeight="670.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutCommande">
+    <Button layoutY="13.0" onAction="#goBack" style="-fx-background-color: #6A1B9A; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8px 15px;" text="⬅ Retour" />
+
+    <VBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50">
+        <Label text="Ajouter Commande" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+        <TextField fx:id="commandeUtilisateur" promptText="ID Utilisateur" />
+        <DatePicker fx:id="commandeDate" promptText="Date Commande" />
+        <ComboBox fx:id="commandeStatus">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Pending" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Liste des Produits" style="-fx-font-weight: bold;" />
+        <TableView fx:id="tableProduit">
+            <columns>
+                <TableColumn fx:id="colNom" text="Nom" />
+                <TableColumn fx:id="colCategorie" text="Catégorie" />
+                <TableColumn fx:id="colPrix" text="Prix" />
+                <TableColumn fx:id="colDate" text="Date" />
+                <TableColumn fx:id="colFournisseur" text="Fournisseur" />
+            </columns>
+        </TableView>
+
+        <Button text="Ajouter Commande" onAction="#createCommande" />
+    </VBox>
+
+</AnchorPane>
