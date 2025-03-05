@@ -233,4 +233,12 @@ public class HomePageController {
         openDashboard("/planninguser.fxml", "planning" );
 
     }
+    public void openinscriptionDashboard(ActionEvent actionEvent) {
+        openDashboard("/pages/joueur/AjoutProfilJoueur.fxml", "inscription" );
+
+    }
+    public void opentournois(ActionEvent actionEvent) {
+        openDashboard("/pages/tournoi_match/AfficheTournois.fxml", "Tournois" );
+
+    }
 }
