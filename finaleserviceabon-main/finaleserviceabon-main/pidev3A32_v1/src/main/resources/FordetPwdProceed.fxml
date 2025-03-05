@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="719.0" prefWidth="457.0" style="-fx-background-color: fbb611;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ForgotPwd">
+<AnchorPane prefHeight="719.0" prefWidth="457.0" style="-fx-background-color: #fbb611;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.FordetPwdProceed">
    <children>
       <ImageView fitHeight="93.0" fitWidth="146.0" layoutX="153.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,19 +17,24 @@
          </image>
       </ImageView>
 
-      <Label layoutX="119.0" layoutY="142.0" text="mot de passe oublié">
+      <Label layoutX="119.0" layoutY="142.0" text="Mot de passe oublié">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="Back" layoutX="104.0" layoutY="638.0" mnemonicParsing="false" onAction="#BackOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="retour" />
+      <Button fx:id="Back" layoutX="104.0" layoutY="638.0" mnemonicParsing="false" onAction="#BackOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="Retour" />
       <VBox alignment="CENTER" layoutX="104.0" layoutY="236.0" prefHeight="272.0" prefWidth="250.0" spacing="25.0">
          <children>
-            <TextField fx:id="email" prefHeight="35.0" prefWidth="250.0" promptText="email" />
-            <ComboBox fx:id="SelectQ" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" promptText="selectionner une question" />
-            <TextField fx:id="Answer" prefHeight="35.0" prefWidth="250.0" promptText="reponse " />
-            <Button fx:id="Procceed" mnemonicParsing="false" onAction="#ProcceedOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="avancée" />
+            <TextField fx:id="pwd" prefHeight="35.0" prefWidth="250.0" promptText="Nouveau mot de passe" />
+            <TextField fx:id="pwdConfirm" prefHeight="35.0" prefWidth="250.0" promptText="Confirmer le mot de passe" />
+            <Button fx:id="Procceed" mnemonicParsing="false" onAction="#ProcceedOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="Avancée" />
          </children>
       </VBox>
+      <!-- Label pour afficher les erreurs -->
+      <Label fx:id="errorLabel" layoutX="101.0" layoutY="200.0" prefHeight="50.0" prefWidth="250.0" textFill="RED">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

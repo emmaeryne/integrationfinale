@@ -67,34 +67,19 @@ public class DashboardClient {
 
 
     @FXML
-    void GoToGestionCoach(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepagecoach.fxml"));
-        Parent parent = loader.load();
+    void GoToGestionCoach(ActionEvent event) {
 
+    }
 
-        Scene currentScene = bioLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
-        Stage currentStage = (Stage) currentScene.getWindow();
-        currentStage.setWidth(850);  // Définir la largeur de la scène
-        currentStage.setHeight(600);  // Définir la hauteur de la scène
-        currentScene.setRoot(parent);
+    @FXML
+    void GoToGestionOwner(ActionEvent event) {
+
     }
 
 
-
-
-
     @FXML
-    void nextPageUser(ActionEvent event) throws IOException {
+    void nextPageUser(ActionEvent event) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepageclient.fxml"));
-        Parent parent = loader.load();
-
-
-        Scene currentScene = bioLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
-        Stage currentStage = (Stage) currentScene.getWindow();
-        currentStage.setWidth(850);  // Définir la largeur de la scène
-        currentStage.setHeight(600);  // Définir la hauteur de la scène
-        currentScene.setRoot(parent);
 
     }
 

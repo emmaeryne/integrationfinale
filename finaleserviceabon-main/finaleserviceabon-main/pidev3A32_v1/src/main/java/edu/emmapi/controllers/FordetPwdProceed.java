@@ -87,7 +87,7 @@ public class FordetPwdProceed {
         } else {
             String hashedPassword = hashPassword(pwdText);
             userService.updatePwd(email, hashedPassword); // Mettre à jour le mot de passe dans la base de données
-           // errorLabel.setText("Mot de passe mis à jour avec succès !");
+            // errorLabel.setText("Mot de passe mis à jour avec succès !");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
