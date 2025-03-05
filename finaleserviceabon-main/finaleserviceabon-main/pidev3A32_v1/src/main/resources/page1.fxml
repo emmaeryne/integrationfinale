@@ -113,14 +113,7 @@
             </SplitPane>
 
             <!-- Statistics Chart -->
-            <BarChart fx:id="statsChart" prefHeight="100.0" prefWidth="870.0" style="-fx-background-color: #3B4252;">
-                <xAxis>
-                    <CategoryAxis label="Produit" tickLabelFill="#f4eeee" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis label="Valeur" tickLabelFill="#f4eeee" />
-                </yAxis>
-            </BarChart>
+
 
             <!-- Footer -->
             <HBox alignment="CENTER" spacing="10">
