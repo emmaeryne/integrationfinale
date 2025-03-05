@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -136,7 +135,7 @@ public class CommandeController {
     public void gotomodif(ActionEvent event) {
         try {
             // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/modifierCommande.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierCommande.fxml"));
             Parent root = loader.load();
 
             // Récupérer le contrôleur

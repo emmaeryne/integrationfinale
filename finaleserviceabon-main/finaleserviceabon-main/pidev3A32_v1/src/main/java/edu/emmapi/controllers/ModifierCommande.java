@@ -11,19 +11,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
-
-
 import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 public class ModifierCommande {
-    //    @FXML private ListView<String> produitListView;
-    @FXML private ListView<String> commandeList;
+    @FXML private TableView<Commande> commandeTable; // Remplacez ListView par TableView
+    @FXML private TableColumn<Commande, Integer> colId;
+    @FXML private TableColumn<Commande, Integer> colUtilisateur;
+    @FXML private TableColumn<Commande, LocalDate> colDate;
+    @FXML private TableColumn<Commande, String> colStatut;
+
     @FXML private TextField commandeUtilisateur;
     @FXML private DatePicker commandeDate;
     @FXML private ComboBox<String> commandeStatus;
@@ -33,80 +35,48 @@ public class ModifierCommande {
 
     @FXML
     public void initialize() {
-        // loadProduits();
+        // Configurer les colonnes
+        colId.setCellValueFactory(cellData -> cellData.getValue().idCommandeProperty().asObject());
+        colUtilisateur.setCellValueFactory(cellData -> cellData.getValue().idUtilisateurProperty().asObject());
+        colDate.setCellValueFactory(cellData -> cellData.getValue().dateDeCommandeProperty());
+        colStatut.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+
+        // Charger les commandes
         loadCommandes();
 
-
-        // Add listener to populate fields when selecting a commande
-        commandeList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        // Ajouter un écouteur pour remplir les champs lors de la sélection d'une commande
+        commandeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 populateCommandeFields(newSelection);
             }
         });
     }
 
-    private void populateCommandeFields(String selectedCommande) {
-        try {
-            // Extracting the ID from the string "Commande #12 - Validated"
-            int idCommande = Integer.parseInt(selectedCommande.split("#")[1].split(" - ")[0].trim());
-
-            // Fetch the full commande details
-            Commande commande = commandeService.getCommandeById(idCommande);
-            if (commande != null) {
-                commandeUtilisateur.setText(String.valueOf(commande.getIdUtilisateur())); // Set user ID
-                commandeDate.setValue(commande.getDateDeCommande()); // Set date
-                commandeStatus.setValue(commande.getStatus()); // Set status
-            }
-        } catch (Exception e) {
-            showAlert("Erreur", "Impossible de charger les détails de la commande.");
-        }
+    private void populateCommandeFields(Commande selectedCommande) {
+        commandeUtilisateur.setText(String.valueOf(selectedCommande.getIdUtilisateur()));
+        commandeDate.setValue(selectedCommande.getDateDeCommande());
+        commandeStatus.setValue(selectedCommande.getStatus());
     }
 
-
-    /*
-            private void loadProduits() {
-                produitListView.getItems().clear();
-                List<Produit> produits = produitService.getAllProduits();
-                for (Produit produit : produits) {
-                    produitListView.getItems().add(produit.getNomProduit() + " (ID: " + produit.getIdProduit() + ")");
-                }
-            }
-    */
     private void loadCommandes() {
-        commandeList.getItems().clear();
         List<Commande> commandes = commandeService.getAllCommandes();
-        for (Commande commande : commandes) {
-            commandeList.getItems().add("Commande #" + commande.getIdCommande() + " - " + commande.getStatus());
-        }
+        ObservableList<Commande> commandeObservableList = FXCollections.observableArrayList(commandes);
+        commandeTable.setItems(commandeObservableList);
     }
 
     @FXML
     private void modifierCommande() {
-        String selectedCommande = commandeList.getSelectionModel().getSelectedItem();
+        Commande selectedCommande = commandeTable.getSelectionModel().getSelectedItem();
         if (selectedCommande == null) {
             showAlert("Erreur", "Veuillez sélectionner une commande à modifier.");
             return;
         }
 
-        int idCommande = Integer.parseInt(selectedCommande.split("#")[1].split(" - ")[0].trim());
-
-        String newStatus = commandeStatus.getValue();
-
-
-        Commande commande = commandeService.getCommandeById(idCommande);
-        if (commande != null) {
-            commande.setStatus("Pending");
-            commandeService.modifierCommande(commande);
-            showAlert("Succès", "Commande mise à jour avec succès.");
-            loadCommandes();  // Refresh the list
-        } else {
-            showAlert("Erreur", "Commande non trouvée.");
-        }
+        selectedCommande.setStatus(commandeStatus.getValue());
+        commandeService.modifierCommande(selectedCommande);
+        showAlert("Succès", "Commande mise à jour avec succès.");
+        loadCommandes(); // Rafraîchir la table
     }
-
-
-
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -116,9 +86,7 @@ public class ModifierCommande {
         alert.showAndWait();
     }
 
-
     public void goBack(ActionEvent event) {
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage.fxml"));
             Parent root = loader.load();
@@ -127,5 +95,6 @@ public class ModifierCommande {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }  }
+        }
+    }
 }

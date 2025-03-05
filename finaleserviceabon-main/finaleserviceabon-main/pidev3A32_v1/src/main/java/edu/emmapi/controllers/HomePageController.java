@@ -199,4 +199,14 @@ public class HomePageController {
         // Logique pour rafraîchir le tableau de bord principal si nécessaire
         System.out.println("Tableau de bord principal rafraîchi.");
     }
+
+    public void openCommande(ActionEvent actionEvent) {
+        openDashboard("/CommandeView .fxml", "commandeview");
+
+    }
+
+    public void openPaiement(ActionEvent actionEvent) {
+        openDashboard("/PaiementView.fxml", "paiement" );
+
+    }
 }
