@@ -94,7 +94,8 @@ public class ModifierCommande {
 
     public void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CommandeView .fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 800, 500));

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="688.0" prefWidth="792.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ModifierCommande">
+<AnchorPane prefHeight="688.0" prefWidth="792.0" style="-fx-background-color: rgba(42, 59, 66, 0.8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ModifierCommande">
 
     <Button fx:id="test" layoutX="20" layoutY="20" onAction="#goBack" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #e1a12f; -fx-text-fill: white; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Back" />
 
@@ -27,10 +27,10 @@
                 <TextField fx:id="commandeUtilisateur" promptText="Entrez l'ID de l'utilisateur" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
                 <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Date Commande:" />
-                <DatePicker fx:id="commandeDate" promptText="Sélectionnez la date de commande" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
+                <DatePicker fx:id="commandeDate" prefHeight="28.0" prefWidth="230.0" promptText="Sélectionnez la date de commande" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
                 <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Statut:" />
-                <ComboBox fx:id="commandeStatus" prefHeight="28.0" prefWidth="194.0" promptText="Sélectionnez le statut" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;">
+                <ComboBox fx:id="commandeStatus" disable="true" prefHeight="40.0" prefWidth="236.0" promptText="Sélectionnez le statut" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Pending" />

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -15,8 +17,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <ScrollPane fitToWidth="true" prefHeight="670.0" prefWidth="857.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutCommande">
     <content>
@@ -52,37 +52,36 @@
                         <items>
                             <FXCollections fx:factory="observableArrayList">
                                 <String fx:value="Pending" />
-                                <String fx:value="Completed" />
-                                <String fx:value="Cancelled" />
+
                             </FXCollections>
                         </items>
                     </ComboBox>
 
                     <!-- Liste des Produits -->
-                    <Label text="Liste des Produits" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;" />
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;" text="Liste des Produits" />
                     <TableView fx:id="tableProduit" prefHeight="250.0" prefWidth="750.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #66C2D9; -fx-border-width: 1px; -fx-border-radius: 8; -fx-background-radius: 8;">
                         <columns>
-                            <TableColumn fx:id="colNom" text="Nom" prefWidth="150.0">
+                            <TableColumn fx:id="colNom" prefWidth="150.0" text="Nom">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="nom" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="colCategorie" text="Catégorie" prefWidth="150.0">
+                            <TableColumn fx:id="colCategorie" prefWidth="150.0" text="Catégorie">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="categorie" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="colPrix" text="Prix" prefWidth="100.0">
+                            <TableColumn fx:id="colPrix" prefWidth="100.0" text="Prix">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="prix" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="colDate" text="Date" prefWidth="150.0">
+                            <TableColumn fx:id="colDate" prefWidth="150.0" text="Date">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="date" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="colFournisseur" text="Fournisseur" prefWidth="200.0">
+                            <TableColumn fx:id="colFournisseur" prefWidth="200.0" text="Fournisseur">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="fournisseur" />
                                 </cellValueFactory>
@@ -92,7 +91,7 @@
 
                     <!-- Boutons -->
                     <HBox alignment="CENTER" spacing="20">
-                        <Button onAction="#goBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #6A1B9A; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="⬅ Retour" />
+                        <Button fx:id="retour" onAction="#goBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #6A1B9A; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="⬅ Retour" />
                         <Button onAction="#createCommande" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Ajouter Commande" />
                     </HBox>
 
