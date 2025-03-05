@@ -46,6 +46,8 @@
                 <Hyperlink fx:id="planninglab" onAction="#openPlanningDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Planning" />
                 <Hyperlink fx:id="serviceView" onAction="#openServiceDashboard2" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Vue Services" />
                 <Hyperlink fx:id="abonnementView" onAction="#openTypeDashboard2" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Vue Abonnements" />
+            <Hyperlink fx:id="abonnementid1" onAction="#openAbonnementDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="commande" />
+            <Hyperlink fx:id="abonnementid11" onAction="#openAbonnementDashboard" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Paiement" />
 
             </VBox>
 

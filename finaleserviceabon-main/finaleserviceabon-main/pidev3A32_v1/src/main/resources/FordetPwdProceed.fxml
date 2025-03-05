@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="719.0" prefWidth="457.0" style="-fx-background-color: fbb611;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ForgotPwd">
+   <children>
+      <ImageView fitHeight="93.0" fitWidth="146.0" layoutX="153.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/67c63149b70ee60009745eef.png" />
+         </image>
+      </ImageView>
+
+      <Label layoutX="119.0" layoutY="142.0" text="mot de passe oublié">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="Back" layoutX="104.0" layoutY="638.0" mnemonicParsing="false" onAction="#BackOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="retour" />
+      <VBox alignment="CENTER" layoutX="104.0" layoutY="236.0" prefHeight="272.0" prefWidth="250.0" spacing="25.0">
+         <children>
+            <TextField fx:id="email" prefHeight="35.0" prefWidth="250.0" promptText="email" />
+            <ComboBox fx:id="SelectQ" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="250.0" promptText="selectionner une question" />
+            <TextField fx:id="Answer" prefHeight="35.0" prefWidth="250.0" promptText="reponse " />
+            <Button fx:id="Procceed" mnemonicParsing="false" onAction="#ProcceedOnClick" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: grey;" text="avancée" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

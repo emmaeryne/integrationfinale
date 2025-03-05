@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AfficherClients">
+    <children>
+        <!-- Image de fond -->
+        <ImageView fitHeight="532.0" fitWidth="915.0" layoutX="-15.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/interface-user.png" />
+            </image>
+        </ImageView>
+
+        <!-- Titre -->
+        <Text layoutX="88.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBOARD ADMIN">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Text>
+        <Button layoutX="60.0" layoutY="208.0" mnemonicParsing="false" onAction="#toListeProprietaire" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: fbb116;" text="LISTE DES PROPRIETAIRE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+
+        <!-- Barre de recherche -->
+        <HBox layoutX="228.0" layoutY="10.0" spacing="10.0">
+            <TextField fx:id="searchField" prefWidth="200.0" promptText="Rechercher par nom..." />
+            <Button graphicTextGap="116.0" onAction="#handleSearch" style="-fx-background-color: fbb116;" text="Rechercher" />
+        </HBox>
+
+        <!-- ScrollPane pour rendre la liste des cartes scrollable -->
+        <ScrollPane layoutX="228.0" layoutY="51.0" prefHeight="461.0" prefWidth="687.0">
+            <!-- Zone d'affichage des cartes des utilisateurs -->
+            <content>
+                <FlowPane fx:id="cardContainer" hgap="10" prefHeight="571.0" prefWidth="898.0" style="-fx-background-color: fbb116;" vgap="10">
+                    <!-- Les cartes seront ajoutées dynamiquement ici -->
+                </FlowPane>
+            </content>
+        </ScrollPane>
+      <Button layoutX="60.0" layoutY="261.0" mnemonicParsing="false" onAction="#ToListCoach" prefHeight="41.0" prefWidth="173.0" style="-fx-background-color: fbb116;" text="LISTE DES COACH" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="61.0" layoutY="154.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="180.0" style="-fx-background-color: fbb116;" text="LISTE DES CLIENTS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label contentDisplay="CENTER" layoutX="3.0" layoutY="109.0" onMouseClicked="#GoToHomePage" text="page d acceuil" textFill="WHITE">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="1.0" layoutY="163.0" prefHeight="12.0" prefWidth="90.0" text="gestion d utilisateur" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="227.0" text="gestion des tournois" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+      <Label layoutX="3.0" layoutY="285.0" text="gestion des produits" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+      <Label layoutY="350.0" text="gestion des planning" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+      <Label layoutY="413.0" text="gestion des services" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+      <Label layoutY="489.0" text="gestion des commandes" textFill="WHITE">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

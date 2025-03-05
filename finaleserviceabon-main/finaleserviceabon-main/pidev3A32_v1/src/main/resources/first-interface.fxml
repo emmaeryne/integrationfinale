@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="485.0"  xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.firstInterface">
+
+
+    <!-- Logo en haut à gauche -->
+    <ImageView fitHeight="162.0" fitWidth="168.0" layoutX="162.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@assets/logo.png" />
+        </image>
+    </ImageView>
+
+    <!-- Titre principal -->
+    <Text fx:id="title" fill="#fbb117" layoutX="164.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur HIVE">
+        <font>
+            <Font name="Calibri" size="20.0" />
+        </font>
+    </Text>
+    <Button fx:id="ClientButton" layoutX="123.0" layoutY="471.0" mnemonicParsing="false" onAction="#sinscrireUser" prefHeight="41.0" prefWidth="240.0" style="-fx-background-color: FBB117;" styleClass="button" text="S'inscrire en tant que Client">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+    <Button fx:id="adminButton" layoutX="764.0" layoutY="625.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: GREY;" styleClass="button" text="Login " textFill="#ffeeb6" />
+    <Button fx:id="ownerButton" layoutX="123.0" layoutY="558.0" mnemonicParsing="false" onAction="#sinscrireOwner" prefHeight="41.0" prefWidth="240.0" style="-fx-background-color: FBB117;" styleClass="button" text="S'inscrire en tant que Propriétaire">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+    <Button fx:id="ClientButton1" layoutX="123.0" layoutY="386.0" mnemonicParsing="false" onAction="#sinscrireCoach" prefHeight="41.0" prefWidth="240.0" style="-fx-background-color: FBB117;" styleClass="button" text="S'inscrire en tant que coach">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+</AnchorPane>
