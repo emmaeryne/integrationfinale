@@ -72,10 +72,16 @@ public class ModifierCommande {
             return;
         }
 
-        selectedCommande.setStatus(commandeStatus.getValue());
-        commandeService.modifierCommande(selectedCommande);
-        showAlert("Succès", "Commande mise à jour avec succès.");
-        loadCommandes(); // Rafraîchir la table
+        // Mettre à jour uniquement la date de la commande
+        LocalDate nouvelleDate = commandeDate.getValue();
+        if (nouvelleDate != null) {
+            selectedCommande.setDateDeCommande(nouvelleDate);
+            commandeService.modifierCommande(selectedCommande); // Sauvegarder les modifications
+            showAlert("Succès", "Date de la commande mise à jour avec succès.");
+            loadCommandes(); // Rafraîchir la table
+        } else {
+            showAlert("Erreur", "Veuillez sélectionner une date valide.");
+        }
     }
 
     private void showAlert(String title, String message) {

@@ -45,7 +45,27 @@ public class CommandeService {
         }
         return generatedId;
     }
+    public void modifierCommande(Commande commande) {
+        String query = "UPDATE commande SET dateDeCommande = ?, idUtilisateur = ?, status = ? WHERE idCommande = ?";
 
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setDate(1, java.sql.Date.valueOf(commande.getDateDeCommande())); // Mettre à jour la date de commande
+            pstmt.setInt(2, commande.getIdUtilisateur()); // Mettre à jour l'ID de l'utilisateur
+            pstmt.setString(3, commande.getStatus()); // Mettre à jour le statut de la commande
+            pstmt.setInt(4, commande.getIdCommande()); // Identifier la commande à mettre à jour
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Commande mise à jour avec succès.");
+            } else {
+                System.out.println("Échec de la mise à jour de la commande. Aucune commande trouvée avec l'ID spécifié.");
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ SQL Error in modifierCommande: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     public void ajouterProduitACommande(int idCommande, int idProduit, int quantite, double prixUnitaire) {
         String query = "INSERT INTO commande_produits (idCommande, idProduit, quantite, prixUnitaire) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -77,22 +97,7 @@ public class CommandeService {
         return commandes;
     }
 
-    public void modifierCommande(Commande commande) {
-        String query = "UPDATE commande SET status = ? WHERE idCommande = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setString(1, commande.getStatus());
-            pstmt.setInt(2, commande.getIdCommande());
-            int rowsUpdated = pstmt.executeUpdate();
 
-            if (rowsUpdated > 0) {
-                System.out.println("Commande mise à jour avec succès.");
-            } else {
-                System.out.println("Échec de la mise à jour de la commande.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void supprimerCommande(int idCommande) {
         String deleteCommandeProduitsQuery = "DELETE FROM commande_produits WHERE idCommande = ?";

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.DashboardClient">
+<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.DashboardClient">
     <children>
         <ImageView fitHeight="532.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -70,8 +70,9 @@
                     <Button layoutX="102.0" layoutY="450.0" onAction="#supprimerProfile" style="-fx-background-color: fbb116; -fx-text-fill: white;" text="supprimer" />
                 </children>
             </AnchorPane>
-            <Button fx:id="ReserverB" layoutX="73.0" layoutY="-1.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="55.0" prefWidth="152.0" text="reserver" />
-            <Button fx:id="planningB" layoutX="73.0" layoutY="54.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="152.0" text="planning " />
+            <Button fx:id="GestionUser" layoutX="-6.0" layoutY="51.0" mnemonicParsing="false" onAction="#nextPageUser" prefHeight="516.0" prefWidth="231.0" text="gestion utlisateur" />
+            <Button fx:id="GestionCoach" layoutX="-1.0" layoutY="343.0" mnemonicParsing="false" onAction="#GoToGestionCoach" prefHeight="239.0" prefWidth="226.0" text="gestion Coach" />
+            <Button fx:id="gestionOwnerB" layoutX="-5.0" layoutY="490.0" mnemonicParsing="false" onAction="#GoToGestionOwner" prefHeight="90.0" prefWidth="231.0" text="gestion propriétaire" />
         </AnchorPane>
     </children>
 </AnchorPane>

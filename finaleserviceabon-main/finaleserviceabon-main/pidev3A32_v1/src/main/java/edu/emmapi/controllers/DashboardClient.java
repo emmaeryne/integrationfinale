@@ -25,28 +25,80 @@ public class DashboardClient {
     @FXML
     private Button ReserverB;
     @FXML
+    private Button GestionCoach;
+    @FXML
+    private Button GestionUser;
+    @FXML
+    private Label bioLabel;
+
+    @FXML
+    private Label dateOfBirthLabel;
+
+    @FXML
+    private Label firstNameLabel;
+
+    @FXML
+    private Button gestionOwnerB;
+
+    @FXML
+    private Label lastNameLabel;
+
+    @FXML
+    private Label locationLabel;
+
+    @FXML
+    private Label phoneNumberLabel;
+
+    @FXML
     private Button planningB;
 
     @FXML
-    private Label bioLabel;
-    @FXML
-    private Label dateOfBirthLabel;
-    @FXML
-    private Label firstNameLabel;
-    @FXML
-    private Label lastNameLabel;
-    @FXML
-    private Label locationLabel;
-    @FXML
-    private Label phoneNumberLabel;
-    @FXML
     private AnchorPane profileDetailsPane;
+
     @FXML
     private ImageView profilePictureView;
+
     @FXML
     private Label socialMediaLinksLabel;
+
     @FXML
     private Label websiteLabel;
+
+
+
+    @FXML
+    void GoToGestionCoach(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepagecoach.fxml"));
+        Parent parent = loader.load();
+
+
+        Scene currentScene = bioLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.setWidth(850);  // Définir la largeur de la scène
+        currentStage.setHeight(600);  // Définir la hauteur de la scène
+        currentScene.setRoot(parent);
+    }
+
+
+
+
+
+    @FXML
+    void nextPageUser(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepageclient.fxml"));
+        Parent parent = loader.load();
+
+
+        Scene currentScene = bioLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.setWidth(850);  // Définir la largeur de la scène
+        currentStage.setHeight(600);  // Définir la hauteur de la scène
+        currentScene.setRoot(parent);
+
+    }
+
+
 
 
     private int idReived;
@@ -103,12 +155,20 @@ public class DashboardClient {
             }
         }
         if(u.getRole().equals("COACH")) {
-            ReserverB.setVisible(false);
+            GestionUser.setVisible(false);
+            gestionOwnerB.setVisible(false);
+
+
 
 
         }else if (u.getRole().equals("USER"))
         {
-            planningB.setVisible(false);
+            gestionOwnerB.setVisible(false);
+            GestionCoach.setVisible(false);
+        } else if (u.getRole().equals("OWNER")) {
+            GestionCoach.setVisible(false);
+            GestionUser.setVisible(true);
+
         }
     }
 
