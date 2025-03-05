@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import okhttp3.*;
@@ -293,5 +294,17 @@ public class createProfileOwner {
     @FXML
     public void initialize() {
         setupValidationListeners();  // Set up listeners for validation
+    }
+
+    public void toListeProprietaire(ActionEvent actionEvent) {
+    }
+
+    public void handleSearch(ActionEvent actionEvent) {
+    }
+
+    public void ToListCoach(ActionEvent actionEvent) {
+    }
+
+    public void GoToHomePage(MouseEvent mouseEvent) {
     }
 }
