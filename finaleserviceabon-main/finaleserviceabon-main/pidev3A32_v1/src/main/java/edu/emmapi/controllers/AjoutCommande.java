@@ -127,16 +127,20 @@ public class AjoutCommande implements Initializable {
                 // Envoyer un e-mail avec le code QR
                 String toEmail = "salmahaouari6@gmail.com";
                 String subject = "Nouvelle Commande Ajoutée";
-                String body = "Bonjour,\n\n"
-                        + "Nous sommes ravis de vous informer qu'une nouvelle commande a été passée avec succès ! 🎉\n\n"
+                String body = "Bonjour ,\n\n"
+                        + "Une nouvelle commande a été enregistrée dans le système. Voici les détails de cette commande :\n\n"
                         + "📅 **Date de la commande :** " + dateDeCommande + "\n"
-                        + "👤 **ID Utilisateur :** " + idUtilisateur + "\n\n"
-                        + "Cette commande marque une nouvelle étape dans notre collaboration. Nous nous engageons à vous fournir un service de qualité et à répondre à vos attentes avec professionnalisme.\n\n"
-                        + "Merci de votre confiance et de votre soutien continu. Nous restons à votre disposition pour toute question ou information supplémentaire.\n\n"
+                        + "👤 **ID Utilisateur :** " + idUtilisateur + "\n"
+                        + "🛒 **ID Commande :** " + idCommande + "\n\n"
+                        + "**Actions requises :**\n"
+                        + "1. Vérifiez les détails de la commande dans le système.\n"
+                        + "2. Assurez-vous que le stock est disponible pour les articles commandés.\n"
+                        + "3. Confirmez la commande et planifiez l'expédition.\n\n"
+                        + "Nous vous remercions pour votre vigilance et votre professionnalisme dans le traitement des commandes.\n\n"
                         + "Cordialement,\n"
                         + "L'équipe de Hive  🌟\n\n"
                         + "---\n"
-                        + "💡 **Conseil du jour :** Profitez de nos offres spéciales et restez connecté pour ne rien manquer de nos nouveautés !";
+                        + "💡 **Rappel :** N'oubliez pas de mettre à jour le statut de la commande une fois les étapes validées.";
 
                 EmailServiceCommande emailService = new EmailServiceCommande();
                 emailService.sendEmail(toEmail, subject, body, qrText, dateDeCommande, idUtilisateur);

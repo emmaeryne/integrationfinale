@@ -1,84 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="468.0" prefWidth="691.0" style="-fx-background-color: #2e3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Detail_P">
-   <children>
-      <TextArea layoutX="147.0" layoutY="171.0" prefHeight="227.0" prefWidth="408.0" />
-      <Label layoutX="35.0" layoutY="29.0" prefHeight="25.0" prefWidth="66.0" text="Detail" textFill="#d1cec5">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="196.0" layoutY="212.0" prefHeight="32.0" prefWidth="231.0" text="Type_Activite : " textFill="#201f1d">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="tyepeactlabel" layoutX="375.0" layoutY="218.0" prefHeight="18.0" prefWidth="154.0" text="-">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="292.0" layoutY="210.0" prefHeight="18.0" prefWidth="84.0" />
-      <Label layoutX="196.0" layoutY="269.0" prefHeight="32.0" prefWidth="231.0" text="la Date : " textFill="#33312c">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="datelabel" layoutX="370.0" layoutY="275.0" prefHeight="18.0" prefWidth="94.0" text="-">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="329.0" layoutY="134.0" prefHeight="35.0" prefWidth="185.0" text="Detail">
-         <font>
-            <Font name="System Bold Italic" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="196.0" layoutY="321.0" text="Cours:" textFill="#282621">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="courslabel" layoutX="366.0" layoutY="325.0" prefHeight="20.0" prefWidth="78.0" text="-">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="modifierbuttonplanning" layoutX="498.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleModifierButton" style="-fx-background-color: white;" text="Modifier" />
-      <Button fx:id="suppplanningbutton" layoutX="605.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleSuppressionButton" style="-fx-background-color: white;" text="Supprimer" />
-      <Label layoutX="163.0" layoutY="29.0" prefHeight="25.0" prefWidth="66.0" text="Planning" textFill="#d9d6cf">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="432.0" layoutY="29.0" prefHeight="25.0" prefWidth="66.0" text="Cours" textFill="#dcd7ca">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="540.0" layoutY="24.0" prefHeight="35.0" prefWidth="84.0" text="Participant" textFill="#c9c5bb">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="243.0" layoutY="107.0" text="Consulter" textFill="#d7cec2">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="258.0" layoutY="29.0">
-         <image>
-            <Image url="@hjk-removebg-preview.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="notif" layoutX="401.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleNotifButton" text="sms" />
-   </children>
-</AnchorPane>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="468.0" prefWidth="691.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Detail_P">
+   <content>
+      <VBox prefHeight="468.0" prefWidth="691.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+         <padding>
+            <Insets bottom="15" left="15" right="15" top="15" />
+         </padding>
+
+         <!-- Header -->
+         <AnchorPane prefHeight="100.0" prefWidth="661.0">
+            <children>
+               <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="260.0" layoutY="10.0">
+                  <image>
+                     <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
+                  </image>
+               </ImageView>
+               <Label layoutX="220.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Détails du Planning" textFill="#f4eeee" />
+            </children>
+         </AnchorPane>
+
+         <!-- Loading Indicator -->
+         <HBox alignment="CENTER_RIGHT" spacing="8">
+            <Region HBox.hgrow="ALWAYS" />
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+         </HBox>
+
+         <!-- Navigation Links -->
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label text="Détail" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Planning" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Cours" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label text="Participant" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+         </HBox>
+
+         <!-- Main Content -->
+         <VBox spacing="15" style="-fx-background-color: #3B4252; -fx-padding: 15; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Consulter les Détails" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <Label text="Type d'Activité :" style="-fx-text-fill: #D8DEE9; -fx-font-size: 16px; -fx-font-weight: bold;" />
+               <Label fx:id="tyepeactlabel" prefWidth="154.0" text="-" style="-fx-text-fill: #f4eeee; -fx-font-size: 14px;" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <Label text="Date :" style="-fx-text-fill: #D8DEE9; -fx-font-size: 16px; -fx-font-weight: bold;" />
+               <Label fx:id="datelabel" prefWidth="94.0" text="-" style="-fx-text-fill: #f4eeee; -fx-font-size: 14px;" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <Label text="Cours :" style="-fx-text-fill: #D8DEE9; -fx-font-size: 16px; -fx-font-weight: bold;" />
+               <Label fx:id="courslabel" prefWidth="78.0" text="-" style="-fx-text-fill: #f4eeee; -fx-font-size: 14px;" />
+            </HBox>
+
+            <!-- Placeholder for TextArea if additional details are needed -->
+            <!-- <TextArea prefHeight="100.0" prefWidth="408.0" style="-fx-background-color: #4C566A; -fx-text-fill: #f4eeee; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5;" /> -->
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+               <Button fx:id="notif" onAction="#handleNotifButton" style="-fx-background-color: #D08770; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="📩 SMS" />
+               <Button fx:id="modifierbuttonplanning" onAction="#handleModifierButton" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="✏ Modifier" />
+               <Button fx:id="suppplanningbutton" onAction="#handleSuppressionButton" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="🗑 Supprimer" />
+            </HBox>
+         </VBox>
+
+         <!-- Footer -->
+         <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
+      </VBox>
+   </content>
+</ScrollPane>

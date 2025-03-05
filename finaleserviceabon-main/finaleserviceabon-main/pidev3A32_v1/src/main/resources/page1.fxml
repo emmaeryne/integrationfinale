@@ -1,85 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 
-<?import javafx.util.Callback?>
-<?import edu.emmapi.controllers.QRCodeCellFactory?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.CategoryAxis?>
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #1e1e1e, #2e2e2e);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.produitpage1">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.produitpage1">
+    <content>
+        <VBox prefHeight="600.0" prefWidth="900.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
 
-    <!-- Titre de la page -->
-    <Label layoutX="20.0" layoutY="10.0" style="-fx-font-size: 24px; -fx-text-fill: #FFC107; -fx-font-weight: bold;" text="Gestion des Produits" />
+            <!-- Header -->
+            <AnchorPane prefHeight="100.0" prefWidth="870.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="355.0" layoutY="10.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
+                        </image>
+                    </ImageView>
+                    <Label layoutX="320.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Gestion des Produits" textFill="#f4eeee" />
+                </children>
+            </AnchorPane>
 
-    <!-- 📌 HBox contenant la barre de recherche et le bouton Réinitialiser -->
-    <HBox layoutX="20.0" layoutY="50.0" spacing="10.0">
-        <TextField fx:id="searchField" promptText="🔍 Rechercher un produit..."
-                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-font-size: 14px; -fx-prompt-text-fill: gray;"
-                   prefWidth="300.0"/>
-        <Button text="🔄 Réinitialiser" onAction="#resetSearch"
-                style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
-    </HBox>
+            <!-- Loading Indicator -->
+            <HBox alignment="CENTER_RIGHT" spacing="8">
+                <Region HBox.hgrow="ALWAYS" />
+                <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+            </HBox>
 
-    <!-- TableView pour afficher les produits -->
-    <TableView fx:id="tableProduit" layoutX="20.0" layoutY="100.0" prefWidth="600.0" prefHeight="350.0">
-        <columns>
-            <TableColumn fx:id="colNom" text="Nom Produit" prefWidth="150"/>
-            <TableColumn fx:id="colCategorie" text="Catégorie" prefWidth="120"/>
-            <TableColumn fx:id="colPrix" text="Prix (TND)" prefWidth="80"/>
-            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
-            <TableColumn fx:id="colFournisseur" text="Fournisseur" prefWidth="150"/>
-            <TableColumn fx:id="colQRCode" text="QR Code" prefWidth="100">
-                <cellFactory>
+            <!-- Filters -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+                <TextField fx:id="searchField" prefWidth="300.0" promptText="🔍 Rechercher un produit..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                <Button text="🔄 Réinitialiser" onAction="#resetSearch" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" />
+            </HBox>
 
-                </cellFactory>
-            </TableColumn>
-        </columns>
-    </TableView>
+            <!-- Main Content -->
+            <SplitPane dividerPositions="0.7" prefHeight="350.0" VBox.vgrow="ALWAYS">
+                <!-- Left Section: Table and Buttons -->
+                <VBox spacing="10">
+                    <TableView fx:id="tableProduit" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colNom" text="Nom Produit" prefWidth="150.0">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="nom" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="colCategorie" text="Catégorie" prefWidth="120.0">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="categorie" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="colPrix" text="Prix (TND)" prefWidth="80.0">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="prix" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="colDate" text="Date" prefWidth="100.0">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="date" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="colFournisseur" text="Fournisseur" prefWidth="150.0">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="fournisseur" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="colQRCode" text="QR Code" prefWidth="100.0">
+                                <!-- Add your custom QRCodeCellFactory if needed -->
+                                <!-- <cellFactory><QRCodeCellFactory /></cellFactory> -->
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Button fx:id="btnAjouter" onAction="#ouvrirAjouterProduit" style="-fx-background-color: #A3BE8C; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="➕ Ajouter Produit" />
+                        <Button fx:id="btnExportExcel" onAction="#exportToExcel" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="📄 Exporter en Excel" />
+                        <Button fx:id="btnExportPDF" onAction="#exportToPDF" style="-fx-background-color: #D08770; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="📄 Exporter en PDF" />
+                    </HBox>
+                </VBox>
 
-    <!-- 📌 VBox pour les boutons sur le côté droit -->
-    <VBox layoutX="640.0" layoutY="100.0" spacing="15.0">
-        <Button fx:id="btnAjouter" onAction="#ouvrirAjouterProduit" prefWidth="200.0"
-                style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-font-weight: bold;" text="➕ Ajouter Produit" />
-        <Button fx:id="btnModifier" onAction="#modifierProduit" prefWidth="200.0"
-                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" text="✏ Modifier Produit" />
-        <Button fx:id="btnSupprimer" onAction="#supprimerProduit" prefWidth="200.0"
-                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-weight: bold;" text="🗑 Supprimer Produit" />
-        <Button fx:id="naviguerverscategorie" onAction="#ouvrirpage2" prefWidth="200.0"
-                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="📂 Liste Catégories" />
-        <Button fx:id="btnExportExcel" onAction="#exportToExcel" prefWidth="200.0"
-                style="-fx-background-color: #2ECC71; -fx-text-fill: white; -fx-font-weight: bold;" text="📄 Exporter en Excel" />
-        <Button fx:id="btnExportPDF" onAction="#exportToPDF" prefWidth="200.0"
-                style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-font-weight: bold;" text="📄 Exporter en PDF" />
-    </VBox>
+                <!-- Right Section: Form and Buttons -->
+                <VBox prefWidth="250.0" spacing="10" styleClass="form-container">
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="✏ Modifier le Produit" />
+                    <TextField fx:id="nomProduitField" promptText="Nom du produit" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8; -fx-font-size: 14px;" />
+                    <TextField fx:id="prixField" promptText="Prix (TND)" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8; -fx-font-size: 14px;" />
+                    <DatePicker fx:id="dateField" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;" />
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Button fx:id="btnModifier" onAction="#modifierProduit" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="✏ Modifier" />
+                        <Button fx:id="btnSupprimer" onAction="#supprimerProduit" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="🗑 Supprimer" />
+                    </HBox>
+                    <Button fx:id="btnEnregistrer" onAction="#enregistrerModification" style="-fx-background-color: #A3BE8C; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="💾 Enregistrer" />
+                    <Button fx:id="naviguerverscategorie" onAction="#ouvrirpage2" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="📂 Liste Catégories" />
+                </VBox>
+            </SplitPane>
 
-    <VBox layoutX="20.0" layoutY="470.0" spacing="10.0" prefWidth="400.0"
-          style="-fx-background-color: #2e2e2e; -fx-padding: 20; -fx-background-radius: 10;">
-        <Label style="-fx-font-size: 18px; -fx-text-fill: #FFC107; -fx-font-weight: bold;" text="✏ Modifier le produit" />
+            <!-- Statistics Chart -->
+            <BarChart fx:id="statsChart" prefHeight="100.0" prefWidth="870.0" style="-fx-background-color: #3B4252;">
+                <xAxis>
+                    <CategoryAxis label="Produit" tickLabelFill="#f4eeee" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Valeur" tickLabelFill="#f4eeee" />
+                </yAxis>
+            </BarChart>
 
-        <TextField fx:id="nomProduitField" promptText="Nom du produit"
-                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-prompt-text-fill: gray; -fx-font-size: 14px;" />
+            <!-- Footer -->
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="btnStatistiques" onAction="#afficherStatistiques" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="📊 Afficher Statistiques" />
+                <Label style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" HBox.hgrow="ALWAYS" alignment="CENTER" />
+            </HBox>
 
-        <Label text="Prix en Tunisie :" />
-
-
-        <TextField fx:id="prixField" promptText="Prix (TND)"
-                   style="-fx-background-color: #424242; -fx-text-fill: white; -fx-prompt-text-fill: gray; -fx-font-size: 14px;" />
-        <DatePicker fx:id="dateField"
-                    style="-fx-background-color: #424242; -fx-text-fill: white; -fx-font-size: 14px;" />
-        <Button fx:id="btnEnregistrer" onAction="#enregistrerModification"
-                style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5;"
-                text="💾 Enregistrer" /><Button fx:id="btnStatistiques" layoutX="100.0" layoutY="520.0"
-                                               onAction="#afficherStatistiques" prefWidth="200.0"
-                                               style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px;"
-                                               text="📊 Afficher Statistiques"/>
-    </VBox>
-
-    <!-- 📌 Lien vers les styles CSS externes -->
-    <stylesheets>
-        <URL value="@stylem.css" />
-    </stylesheets>
-
-</AnchorPane>
+            <!-- Stylesheets -->
+            <stylesheets>
+                <URL value="@stylem.css" />
+            </stylesheets>
+        </VBox>
+    </content>
+</ScrollPane>

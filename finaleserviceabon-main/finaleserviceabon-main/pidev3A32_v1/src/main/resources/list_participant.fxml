@@ -1,53 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Liste_Participant">
-   <children>
-      <Label layoutX="233.0" layoutY="128.0" prefHeight="47.0" prefWidth="222.0" text="Liste_Participant" textFill="#c9c3b8">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="planninglabel" layoutX="25.0" layoutY="31.0" prefHeight="20.0" prefWidth="70.0" text="Planning" textAlignment="CENTER" textFill="#d4cdbf">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="courslabel" layoutX="441.0" layoutY="31.0" prefHeight="20.0" prefWidth="62.0" text="Cours" textFill="#dcd7cd">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="participantlabel" layoutX="129.0" layoutY="31.0" prefHeight="20.0" prefWidth="78.0" text="Participants" textFill="#c9c4b8">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="detaillabel" layoutX="568.0" layoutY="17.0" prefHeight="47.0" prefWidth="124.0" text="Detail" textAlignment="CENTER" textFill="#d4d0c8">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TableView fx:id="listpart" layoutX="102.0" layoutY="195.0" prefHeight="200.0" prefWidth="450.0">
-        <columns>
-          <TableColumn fx:id="nomp" prefWidth="75.0" text="nom" />
-          <TableColumn fx:id="prenomp" prefWidth="75.0" text="prenom" />
-            <TableColumn fx:id="agep" prefWidth="75.0" text="age" />
-            <TableColumn fx:id="adresep" prefWidth="75.0" text="adresse" />
-            <TableColumn fx:id="telp" prefWidth="148.80002441406248" text="tel" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="251.0" layoutY="31.0">
-         <image>
-            <Image url="@hjk-removebg-preview.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.Liste_Participant">
+   <content>
+      <VBox prefHeight="429.0" prefWidth="706.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+         <padding>
+            <Insets bottom="15" left="15" right="15" top="15" />
+         </padding>
+
+         <!-- Header -->
+         <AnchorPane prefHeight="100.0" prefWidth="676.0">
+            <children>
+               <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="267.5" layoutY="10.0">
+                  <image>
+                     <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
+                  </image>
+               </ImageView>
+               <Label layoutX="230.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Liste des Participants" textFill="#f4eeee" />
+            </children>
+         </AnchorPane>
+
+         <!-- Loading Indicator -->
+         <HBox alignment="CENTER_RIGHT" spacing="8">
+            <Region HBox.hgrow="ALWAYS" />
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+         </HBox>
+
+         <!-- Navigation Links -->
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label fx:id="detaillabel" text="Détail" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label fx:id="planninglabel" text="Planning" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label fx:id="courslabel" text="Cours" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            <Label fx:id="participantlabel" text="Participants" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+         </HBox>
+
+         <!-- Filters -->
+         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+            <TextField fx:id="searchField" prefWidth="300.0" promptText="🔍 Rechercher un participant..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+         </HBox>
+
+         <!-- Main Content -->
+         <TableView fx:id="listpart" prefHeight="200.0" prefWidth="676.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+            <columns>
+               <TableColumn fx:id="nomp" text="Nom" prefWidth="135.0">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="nom" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="prenomp" text="Prénom" prefWidth="135.0">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="prenom" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="agep" text="Âge" prefWidth="100.0">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="age" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="adresep" text="Adresse" prefWidth="150.0">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="adresse" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="telp" text="Téléphone" prefWidth="155.0">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="tel" />
+                  </cellValueFactory>
+               </TableColumn>
+            </columns>
+         </TableView>
+
+         <!-- Footer -->
+         <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
+      </VBox>
+   </content>
+</ScrollPane>

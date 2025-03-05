@@ -36,7 +36,7 @@ public class ExportPDFService {
 
             // Load images from the resources folder
             URL logoLeftUrl = getClass().getClassLoader().getResource("hjk-removebg-preview.png");
-            URL logoRightUrl = getClass().getClassLoader().getResource("243925.png");
+            URL logoRightUrl = getClass().getClassLoader().getResource("483165138_626143020271030_5870063055723595698_n.png");
 
             if (logoLeftUrl == null || logoRightUrl == null) {
                 throw new IOException("One or both images could not be found in the resources folder.");

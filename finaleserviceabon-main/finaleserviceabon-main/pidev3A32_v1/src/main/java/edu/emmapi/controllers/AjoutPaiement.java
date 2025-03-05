@@ -4,7 +4,7 @@ import edu.emmapi.entities.Commande;
 import edu.emmapi.entities.Paiement;
 import edu.emmapi.services.CommandeService;
 import edu.emmapi.services.PaiementService;
-import edu.pidev3a32.tools.MyConnection;
+import edu.emmapi.tools.MyConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.itextpdf.text.Image; // Mauvaise importation pour JavaFX
+import javafx.scene.image.ImageView; // Correct pour JavaFX
 import java.sql.*;
 
 import java.util.HashMap;
@@ -81,9 +82,7 @@ public class AjoutPaiement {
     public void initialize() {
         paiementMode.getItems().addAll("Cash", "Carte bancaire", "Virement");
         paiementMode.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if ("Carte bancaire".equals(newVal)) {
-                handlePaymentModeChange(null);
-            }
+
         });
         if (commandeListView == null) {
             System.out.println("❌ commandeListView is null! Check fx:id in FXML.");
@@ -270,6 +269,7 @@ public class AjoutPaiement {
         }
     }
 
+
     @FXML
     private void effectuerPaiement(ActionEvent actionEvent) {
         // Valider les champs obligatoires
@@ -285,6 +285,7 @@ public class AjoutPaiement {
         }
 
         try {
+            // Récupérer les valeurs des champs
             int idCommande = Integer.parseInt(paiementCommandeId.getText().trim());
             int idUtilisateur = Integer.parseInt(paiementUtilisateurId.getText().trim());
             double montant = Double.parseDouble(paiementMontant.getText().trim());
@@ -297,7 +298,42 @@ public class AjoutPaiement {
             if (count == 2) {
                 // Appliquer une réduction de 10% pour le 3ème paiement
                 montant = montant * 0.90;
-                showAlert("Réduction", "Une réduction de 10% a été appliquée pour votre 3ème paiement.");
+
+                // Afficher une boîte de dialogue personnalisée pour la réduction
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Réduction Appliquée");
+                alert.setHeaderText("Félicitations !");
+
+                // Créer un contenu personnalisé
+                Label contentLabel = new Label("Une réduction de 10% a été appliquée pour votre 3ème paiement.");
+                contentLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #2E8B57;");
+
+                // Ajouter une icône (optionnel)
+                try {
+                    // Charger l'image avec JavaFX
+                    javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResourceAsStream("/404070770_2091685387832685_273154292922322738_n.png"));
+                    ImageView icon = new ImageView(image);
+                    icon.setFitWidth(50);
+                    icon.setFitHeight(50);
+                    alert.setGraphic(icon);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showAlert("Erreur", "Impossible de charger l'icône.");
+                }
+
+                // Appliquer un style à la boîte de dialogue
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.setStyle("-fx-background-color: linear-gradient(to bottom, #F0FFF0, #E0FFFF);");
+                dialogPane.getStylesheets().add(getClass().getResource("/dialog.css").toExternalForm());
+
+                // Ajouter le contenu à la boîte de dialogue
+                dialogPane.setContent(contentLabel);
+
+                // Afficher la boîte de dialogue
+                alert.showAndWait();
+
+                // Mettre à jour le montant dans le champ de texte
+                paiementMontant.setText(String.valueOf(montant));
             }
 
             // Convertir le mode de paiement en valeurs compatibles avec la base de données
@@ -361,9 +397,6 @@ public class AjoutPaiement {
                     // Mettre à jour le compteur de paiements pour l'utilisateur
                     userPaymentCount.put(idUtilisateur, count + 1);
 
-                    // Afficher le montant réduit dans le champ de texte
-                    paiementMontant.setText(String.valueOf(montant));
-
                     // Rafraîchir la liste des paiements
                     loadPaiements();
 
@@ -377,30 +410,6 @@ public class AjoutPaiement {
             }
         } catch (NumberFormatException e) {
             showAlert("Erreur", "ID et Montant doivent être des nombres valides.");
-        }
-    }
-    @FXML
-    private void handlePaymentModeChange(ActionEvent event) {
-        if ("Carte bancaire".equals(paiementMode.getValue())) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/StripePayment.fxml"));
-                Parent root = loader.load();
-
-                StripePaymentController controller = loader.getController();
-                controller.initializeData(
-                        Double.parseDouble(paiementMontant.getText()),
-                        Integer.parseInt(paiementCommandeId.getText()),
-                        this
-                );
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert("Erreur", "Impossible d'ouvrir l'interface de paiement.");
-            }
         }
     }
 

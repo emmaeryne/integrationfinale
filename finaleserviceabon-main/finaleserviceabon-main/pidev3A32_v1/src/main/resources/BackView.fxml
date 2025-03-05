@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.BackController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <!-- Titre de la page -->
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-padding: 0 0 20 0;" text="Gestion des Paiements et Commandes" />
+
+    <!-- SplitPane pour séparer les sections des commandes et des paiements -->
+    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0">
+        <items>
+            <!-- Section des commandes -->
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="800.0">
+                <children>
+                    <!-- Titre des commandes -->
+                    <Label layoutX="20.0" layoutY="10.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Commandes" />
+
+                    <!-- TableView pour afficher les commandes -->
+                    <TableView fx:id="commandeTableView" layoutX="20.0" layoutY="40.0" prefHeight="150.0" prefWidth="760.0">
+                        <columns>
+                            <TableColumn fx:id="idCommandeColumn" text="ID Commande" />
+                            <TableColumn fx:id="utilisateurCommandeColumn" text="Utilisateur ID" />
+                            <TableColumn fx:id="dateCommandeColumn" text="Date de Commande" />
+                            <TableColumn fx:id="statusCommandeColumn" text="Statut" />
+                        </columns>
+                    </TableView>
+
+                    <!-- Boutons pour les commandes -->
+                    <HBox layoutX="20.0" layoutY="200.0" spacing="10">
+                        <Button onAction="#validerCommande" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Valider Commande" />
+                        <Button onAction="#rejeterCommande" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Rejeter Commande" />
+                    </HBox>
+                </children>
+            </AnchorPane>
+
+            <!-- Section des paiements -->
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="800.0">
+                <children>
+                    <!-- Titre des paiements -->
+                    <Label layoutX="20.0" layoutY="10.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Paiements" />
+
+                    <!-- TableView pour afficher les paiements -->
+                    <TableView fx:id="paiementTableView" layoutX="20.0" layoutY="40.0" prefHeight="150.0" prefWidth="760.0">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" />
+                            <TableColumn fx:id="utilisateurColumn" text="Utilisateur ID" />
+                            <TableColumn fx:id="montantColumn" text="Montant" />
+                            <TableColumn fx:id="modeColumn" text="Mode de Paiement" />
+                            <TableColumn fx:id="dateColumn" text="Date de Paiement" />
+                            <TableColumn fx:id="statusColumn" text="Statut" />
+                        </columns>
+                    </TableView>
+
+                    <!-- Boutons pour les paiements -->
+                    <HBox layoutX="20.0" layoutY="200.0" spacing="10">
+                        <Button onAction="#validerPaiement" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Valider Paiement" />
+                        <Button onAction="#rejeterPaiement" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Rejeter Paiement" />
+                    </HBox>
+                </children>
+            </AnchorPane>
+        </items>
+    </SplitPane>
+
+    <!-- Boutons généraux -->
+    <HBox alignment="CENTER" spacing="20">
+        <Button onAction="#refreshTable" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Rafraîchir" />
+        <Button onAction="#goToBackInterface" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Retour" />
+        <Button onAction="#gotoHistorique" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Historique" />
+        <Button onAction="#goToAdminC" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Back Commande" />
+        <Button onAction="#gotoPai" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-cursor: hand;" text="Back Paiement" />
+    </HBox>
+</VBox>

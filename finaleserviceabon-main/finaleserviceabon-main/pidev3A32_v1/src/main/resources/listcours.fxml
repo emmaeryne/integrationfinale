@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ListCours">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="444.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ListCours">
+    <content>
+        <VBox prefHeight="444.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
 
-    <!-- Image en arrière-plan -->
-    <ImageView fitHeight="444.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@interface-services.png" />
-        </image>
-    </ImageView>
+            <!-- Header -->
+            <AnchorPane prefHeight="100.0" prefWidth="570.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="126.0" layoutX="222.0" layoutY="10.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
+                        </image>
+                    </ImageView>
+                    <Text layoutX="180.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Liste des Cours" fill="#f4eeee" />
+                </children>
+            </AnchorPane>
 
-    <!-- Conteneur principal pour centrer le titre et le contenu -->
-    <VBox alignment="CENTER" layoutX="160.8" layoutY="26.0" prefHeight="147.0" prefWidth="431.0" spacing="20" style="-fx-padding: 50;" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="26.0">
-        <!-- Titre centré -->
-        <Text style="-fx-font-size: 30; -fx-font-weight: bold;" text="Liste des Cours" />
+            <!-- Background Image -->
+            <ImageView fitHeight="444.0" fitWidth="600.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@interface-services.png" />
+                </image>
+            </ImageView>
 
-        <!-- VBox pour afficher les informations des cours -->
-        <VBox fx:id="coursVBox" spacing="20" style="-fx-alignment: top-center;">
-            <!-- Les cartes de cours seront ajoutées ici dynamiquement -->
+            <!-- Loading Indicator -->
+            <HBox alignment="CENTER_RIGHT" spacing="8">
+                <Region HBox.hgrow="ALWAYS" />
+                <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+            </HBox>
+
+            <!-- Navigation Links -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label fx:id="Detaillabel" text="Détail" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label fx:id="planninglabel" text="Planning" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label fx:id="courslabel" text="Cours" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label fx:id="participantlabel" text="Participant" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+            </HBox>
+
+            <!-- Filters -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+                <TextField fx:id="searchField" prefWidth="300.0" promptText="🔍 Rechercher un cours..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <!-- Main Content -->
+            <VBox fx:id="coursVBox" spacing="20" style="-fx-background-color: #3B4252; -fx-padding: 15; -fx-border-radius: 5; -fx-background-radius: 5; -fx-alignment: top-center;" VBox.vgrow="ALWAYS">
+                <!-- Les cartes de cours seront ajoutées ici dynamiquement -->
+            </VBox>
+
+            <!-- Footer -->
+            <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
         </VBox>
-    </VBox>
-   <Label fx:id="planninglabel" layoutX="74.0" layoutY="137.0" text="planning" textFill="#c79520">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font>
-   </Label>
-   <Label fx:id="courslabel" layoutX="72.0" layoutY="178.0" text="cours" textFill="#c79520">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font>
-   </Label>
-   <Label fx:id="participantlabel" layoutX="68.0" layoutY="226.0" text="Participant" textFill="#c79520">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font>
-   </Label>
-   <Label fx:id="Detaillabel" layoutX="71.0" layoutY="278.0" text="Detail" textFill="#c79520">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font>
-   </Label>
-   <Label layoutX="72.0" layoutY="48.0" text="Gestion " textFill="#5b410c">
-      <font>
-         <Font name="System Bold" size="14.0" />
-      </font>
-   </Label>
-   <Label layoutX="74.0" layoutY="80.0" text="Planning" textFill="#5b410c">
-      <font>
-         <Font name="System Bold" size="14.0" />
-      </font>
-   </Label>
-</AnchorPane>
+    </content>
+</ScrollPane>

@@ -1,9 +1,9 @@
-package edu.pidev3a32.controllers;
+package edu.emmapi.controllers;
 
-import edu.pidev3a32.entities.Commande;
-import edu.pidev3a32.entities.Paiement;
-import edu.pidev3a32.services.CommandeService;
-import edu.pidev3a32.services.PaiementService;
+import edu.emmapi.entities.Commande;
+import edu.emmapi.entities.Paiement;
+import edu.emmapi.services.CommandeService;
+import edu.emmapi.services.PaiementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

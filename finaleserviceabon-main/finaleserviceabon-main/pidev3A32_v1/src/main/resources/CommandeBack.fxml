@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CommandeBackController">
+    <content>
+        <VBox prefHeight="600.0" prefWidth="900.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+
+            <!-- Header -->
+            <AnchorPane prefHeight="100.0" prefWidth="870.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="355.0" layoutY="10.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
+                        </image>
+                    </ImageView>
+                    <Label layoutX="320.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Gestion des Commandes" textFill="#f4eeee" />
+                </children>
+            </AnchorPane>
+
+            <!-- Loading Indicator -->
+            <HBox alignment="CENTER_RIGHT" spacing="8">
+                <Region HBox.hgrow="ALWAYS" />
+                <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+            </HBox>
+
+            <!-- Filters and Actions -->
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #3B4252; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="filters-container">
+                <TextField fx:id="searchField" prefWidth="200.0" promptText="🔍 Rechercher..." style="-fx-background-color: #4C566A; -fx-text-fill: #f4eeee; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="filterStatus" prefWidth="150.0" promptText="Filtrer par statut" style="-fx-background-color: #4C566A; -fx-text-fill: #f4eeee; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+                <DatePicker fx:id="filterDate" prefWidth="150.0" promptText="Filtrer par date" style="-fx-background-color: #4C566A; -fx-text-fill: #f4eeee; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                <Button onAction="#onSearch" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="Rechercher" />
+                <Button onAction="#refreshCommandes" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="Rafraîchir" />
+                <Button onAction="#exportToPDF" style="-fx-background-color: #D08770; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 15; -fx-font-size: 14px;" text="Exporter PDF" />
+            </HBox>
+
+            <!-- Main Content -->
+            <SplitPane dividerPositions="0.7" prefHeight="350.0" VBox.vgrow="ALWAYS">
+                <!-- Left Section: Table and Pagination -->
+                <VBox spacing="10">
+                    <TableView fx:id="commandeTable" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="idCommandeColumn" text="ID Commande" prefWidth="100.0" style="-fx-alignment: CENTER; -fx-font-weight: bold;">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="idCommande" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="dateDeCommandeColumn" text="Date de Commande" prefWidth="150.0" style="-fx-alignment: CENTER;">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="dateDeCommande" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="statusColumn" text="Statut" prefWidth="120.0" style="-fx-alignment: CENTER;">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="status" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="idUtilisateurColumn" text="ID Utilisateur" prefWidth="100.0" style="-fx-alignment: CENTER;">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="idUtilisateur" />
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                    <Pagination fx:id="pagination" pageCount="5" style="-fx-background-color: #3B4252; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                </VBox>
+
+                <!-- Right Section: Action Buttons -->
+                <VBox prefWidth="250.0" spacing="15" styleClass="form-container" alignment="CENTER">
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Actions sur la Commande" />
+                    <Button onAction="#validerCommande" prefWidth="200.0" style="-fx-background-color: #A3BE8C; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px; -fx-cursor: hand;" text="✅ Valider Commande" />
+                    <Button onAction="#rejeterCommande" prefWidth="200.0" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px; -fx-cursor: hand;" text="❌ Rejeter Commande" />
+                </VBox>
+            </SplitPane>
+
+            <!-- Commande Chart -->
+            <LineChart fx:id="commandeChart" prefHeight="100.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5; -fx-background-radius: 5;">
+                <xAxis>
+                    <CategoryAxis label="Date" tickLabelFill="#f4eeee" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Nombre de Commandes" tickLabelFill="#f4eeee" />
+                </yAxis>
+            </LineChart>
+
+            <!-- Footer -->
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#retour" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="⬅ Retour" />
+                <Label style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" HBox.hgrow="ALWAYS" alignment="CENTER" />
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

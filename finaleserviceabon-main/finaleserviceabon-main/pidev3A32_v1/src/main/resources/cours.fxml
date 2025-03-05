@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoursC">
     <content>
@@ -19,7 +21,7 @@
                 <Insets bottom="15" left="15" right="15" top="15" />
             </padding>
 
-            <!-- Header Section -->
+            <!-- Header -->
             <AnchorPane prefHeight="100.0" prefWidth="970.0">
                 <children>
                     <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="405.0" layoutY="10.0">
@@ -27,55 +29,40 @@
                             <Image url="@hjk-removebg-preview.png" />
                         </image>
                     </ImageView>
-                    <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="LES COURS DISPONIBLES" textFill="#f4eeee" />
-                    <Label layoutX="44.0" layoutY="36.0" text="Detail" textFill="#d4cfc4">
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font>
-                    </Label>
-
-                    <Label fx:id="planninglabel" layoutX="160.0" layoutY="34.0" text="Planning" textFill="#c9c4b7">
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font>
-                    </Label>
-
-                    <Label layoutX="633.0" layoutY="43.0" text="Cours" textFill="#cfcabf">
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font>
-                    </Label>
-
-                    <Label fx:id="participantlabel" layoutX="791.0" layoutY="46.0" text="Participant" textFill="#d1cab9">
-                        <font>
-                            <Font name="System Bold" size="14.0" />
-                        </font>
-                    </Label>
+                    <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Les Cours Disponibles" textFill="#f4eeee" />
                 </children>
             </AnchorPane>
 
-            <!-- Table Section -->
-            <TableView fx:id="tablec" layoutX="100.0" layoutY="173.0" onMouseClicked="#show" prefHeight="242.0" prefWidth="850.0">
-                <columns>
-                    <TableColumn fx:id="courc" prefWidth="143.199951171875" text="Nom_cours" />
-                    <TableColumn fx:id="dureec" prefWidth="283.2000427246094" text="Duree_cours" />
-                    <TableColumn fx:id="etatc" prefWidth="502.3999328613281" text="Etat_cours" />
-                </columns>
-            </TableView>
+            <!-- Filters -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+                <TextField fx:id="searchField" prefWidth="300.0" promptText="Rechercher un cours..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="etatFilter" prefWidth="150.0" promptText="État du cours" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+            </HBox>
 
-            <!-- Cours Detail Section -->
-            <VBox spacing="10">
-                <Label layoutX="128.0" layoutY="100.0" textAlignment="CENTER" textFill="#e4e0dc">
-                    <font>
-                        <Font name="System Bold" size="36.0" />
-                    </font>
-                </Label>
-   
-               <!-- Footer Section -->
-               <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="                                                                                                                           © 2025 HIVE" VBox.vgrow="NEVER" />
+            <!-- Main Content -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <!-- Navigation Links -->
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label text="Détail" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                    <Label fx:id="planninglabel" text="Planning" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                    <Label text="Cours" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                    <Label fx:id="participantlabel" text="Participant" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10" />
+                <!-- Table Section -->
+                <TableView fx:id="tablec" onMouseClicked="#show" prefHeight="400.0" prefWidth="850.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5; -fx-border-color: #4C566A;" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="courc" prefWidth="200.0" text="Nom du Cours" style="-fx-text-fill: #D8DEE9; -fx-font-size: 14px;" />
+                        <TableColumn fx:id="dureec" prefWidth="300.0" text="Durée du Cours" style="-fx-text-fill: #D8DEE9; -fx-font-size: 14px;" />
+                        <TableColumn fx:id="etatc" prefWidth="350.0" text="État du Cours" style="-fx-text-fill: #D8DEE9; -fx-font-size: 14px;" />
+                    </columns>
+                </TableView>
+
+
             </VBox>
+
+            <!-- Footer -->
+            <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
         </VBox>
     </content>
 </ScrollPane>
