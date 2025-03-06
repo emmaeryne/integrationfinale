@@ -21,7 +21,7 @@ public class mainFx extends Application {
     public void start(Stage primaryStage) {
         try {
             // Charger le fichier FXML de la première page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepagecoach.fxml")); // Chemin corrigé
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/logIn.fxml")); // Chemin corrigé
             Parent root = loader.load();
 
 

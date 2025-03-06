@@ -71,7 +71,7 @@
                 </children>
             </AnchorPane>
             <Button fx:id="GestionUser" layoutX="-12.0" layoutY="46.0" mnemonicParsing="false" onAction="#nextPageUser" prefHeight="510.0" prefWidth="231.0" text="gestion utlisateur" />
-            <Button fx:id="GestionCoach" layoutY="47.0" mnemonicParsing="false" onAction="#GoToGestionCoach" prefHeight="523.0" prefWidth="226.0" text="gestion Coach" />
+            <Button fx:id="GestionCoach" layoutX="-10.0" layoutY="58.0" mnemonicParsing="false" onAction="#GoToGestionCoach" prefHeight="523.0" prefWidth="226.0" text="gestion Coach" />
         </AnchorPane>
     </children>
 </AnchorPane>

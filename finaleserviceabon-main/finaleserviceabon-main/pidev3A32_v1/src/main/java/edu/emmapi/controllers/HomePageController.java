@@ -129,7 +129,7 @@ public class HomePageController {
 
     @FXML
     private void openCommandeView(ActionEvent event) {
-        openDashboard("/CommandeBack.fxml", "Commande");
+        openDashboard("/CommandeView .fxml", "Commande");
     }
 
 
@@ -159,7 +159,7 @@ public class HomePageController {
     }
     @FXML
     private void openpaiement(ActionEvent event) {
-        openDashboard("/BackPaiement.fxml", "Paiement");
+        openDashboard("/PaiementView.fxml", "Paiement");
     }
 
     // Méthode générique pour ouvrir un dashboard

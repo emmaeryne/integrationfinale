@@ -1,7 +1,11 @@
 package edu.emmapi.controllers;
-import edu.emmapi.entities.*;
 
-import edu.emmapi.services.*;
+import edu.emmapi.entities.*;
+import edu.emmapi.services.CommandeProduitsService;
+import edu.emmapi.services.CommandeService;
+import edu.emmapi.services.EmailServiceCommande;
+import edu.emmapi.services.ProduitService;
+import edu.emmapi.tools.MyConnection;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -44,8 +49,10 @@ public class AjoutCommande implements Initializable {
     private HBox buttonContainer;
     @FXML
     private ListView<String> commandeList;
-    private userService userservice;
+    private Connection cnx;
+    user u;
 
+    public AjoutCommande() {cnx= MyConnection.getInstance().getCnx();}
     private final ProduitService produitService = new ProduitService();
     private final CommandeService commandeService = new CommandeService();
     private ObservableList<produit> produitsObservableList = FXCollections.observableArrayList();
@@ -89,14 +96,15 @@ public class AjoutCommande implements Initializable {
 
     @FXML
     private void createCommande() {
-        if (commandeUtilisateur.getText().isEmpty() || commandeDate.getValue() == null || commandeStatus.getValue() == null) {
+        if ( commandeDate.getValue() == null || commandeStatus.getValue() == null) {
             showAlert("Erreur", "Veuillez remplir tous les champs obligatoires.");
             return;
         }
 
         try {
+            u= SessionManager.getInstance().getUser();
             LocalDate dateDeCommande = commandeDate.getValue();
-            int idUtilisateur = Integer.parseInt(commandeUtilisateur.getText().trim());
+            int idUtilisateur = SessionManager.getInstance().getUser().getId();
             String status = commandeStatus.getValue();
 
             Commande commande = new Commande(dateDeCommande, idUtilisateur, status);

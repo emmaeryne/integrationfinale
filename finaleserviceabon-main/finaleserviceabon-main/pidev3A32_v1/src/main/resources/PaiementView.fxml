@@ -44,11 +44,7 @@
                                     <PropertyValueFactory property="idCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="idUtilisateurColumn" text="ID Utilisateur" prefWidth="100">
-                                <cellValueFactory>
-                                    <PropertyValueFactory property="idUtilisateur" />
-                                </cellValueFactory>
-                            </TableColumn>
+
                             <TableColumn fx:id="montantColumn" text="Montant" prefWidth="100">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="montant" />

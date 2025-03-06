@@ -2,6 +2,8 @@ package edu.emmapi.controllers;
 
 import edu.emmapi.entities.Commande;
 import edu.emmapi.entities.Paiement;
+import edu.emmapi.entities.SessionManager;
+import edu.emmapi.entities.user;
 import edu.emmapi.services.CommandeService;
 import edu.emmapi.services.PaiementService;
 import edu.emmapi.tools.MyConnection;
@@ -59,7 +61,10 @@ public class AjoutPaiement {
     private final CommandeService commandeService = new CommandeService();
     private final Map<Integer, Integer> userPaymentCount = new HashMap<>();
     private ObservableList<Commande> commandesObservableList = FXCollections.observableArrayList();
+user u;
+    private Connection cnx;
 
+    public AjoutPaiement(){cnx= MyConnection.getInstance().getCnx();}
     @FXML
     private void goBack(ActionEvent event) {
         try {
@@ -140,8 +145,9 @@ public class AjoutPaiement {
         }
 
         try {
+            u= SessionManager.getInstance().getUser();
             int idCommande = Integer.parseInt(paiementCommandeId.getText().trim());
-            int idUtilisateur = Integer.parseInt(paiementUtilisateurId.getText().trim());
+            int idUtilisateur =u.getId();
             double montant = Double.parseDouble(paiementMontant.getText().trim());
             String modeDePaiement = paiementMode.getValue();
             String status = paiementStatus.getValue();

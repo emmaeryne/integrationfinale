@@ -1,8 +1,11 @@
 package edu.emmapi.controllers;
 
 import edu.emmapi.entities.Commande;
+import edu.emmapi.entities.SessionManager;
+import edu.emmapi.entities.user;
 import edu.emmapi.services.CommandeService;
 import edu.emmapi.services.ProduitService;
+import edu.emmapi.tools.MyConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,14 +34,18 @@ public class ModifierCommande {
     @FXML private DatePicker commandeDate;
     @FXML private ComboBox<String> commandeStatus;
 
+    user u;
+    private Connection cnx;
+
     private final ProduitService produitService = new ProduitService();
     private final CommandeService commandeService = new CommandeService();
+public ModifierCommande(){cnx= MyConnection.getInstance().getCnx();}
 
     @FXML
     public void initialize() {
         // Configurer les colonnes
         colId.setCellValueFactory(cellData -> cellData.getValue().idCommandeProperty().asObject());
-        colUtilisateur.setCellValueFactory(cellData -> cellData.getValue().idUtilisateurProperty().asObject());
+      //  colUtilisateur.setCellValueFactory(cellData -> cellData.getValue().idUtilisateurProperty().asObject());
         colDate.setCellValueFactory(cellData -> cellData.getValue().dateDeCommandeProperty());
         colStatut.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 
@@ -67,6 +75,8 @@ public class ModifierCommande {
     @FXML
     private void modifierCommande() {
         Commande selectedCommande = commandeTable.getSelectionModel().getSelectedItem();
+        u= SessionManager.getInstance().getUser();
+
         if (selectedCommande == null) {
             showAlert("Erreur", "Veuillez sélectionner une commande à modifier.");
             return;
