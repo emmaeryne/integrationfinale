@@ -228,7 +228,7 @@ public class HomePageController {
     }
 
     public void openCommande(ActionEvent actionEvent) {
-        openDashboard("/CommandeView .fxml", "commandeview");
+        openDashboard("/CommandeBack.fxml", "commandeview");
 
     }
 
@@ -246,6 +246,12 @@ public class HomePageController {
     }
     public void opentournois(ActionEvent actionEvent) {
         openDashboard("/pages/tournoi_match/AfficheTournois.fxml", "Tournois" );
+
+    }
+
+    public void openp(ActionEvent actionEvent) {
+
+        openDashboard("/BackPaiement.fxml", "paiment" );
 
     }
 }

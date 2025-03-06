@@ -48,6 +48,7 @@
                 <Hyperlink fx:id="abonnementView" onAction="#openTypeDashboard2" prefHeight="35.0" prefWidth="681.0" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Vue Abonnements" />
             <Hyperlink fx:id="commandeid" onAction="#openCommandeView" prefHeight="35.0" prefWidth="603.0" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="commande" />
             <Hyperlink fx:id="tournoiid" onAction="#opentournois" prefHeight="35.0" prefWidth="603.0" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Tournois" />
+            <Hyperlink fx:id="paiment" onAction="#openp" prefHeight="35.0" prefWidth="603.0" style="-fx-text-fill: #66C2D9; -fx-font-size: 18px; -fx-font-weight: bold;" text="Paiement" />
 
             </VBox>
 
