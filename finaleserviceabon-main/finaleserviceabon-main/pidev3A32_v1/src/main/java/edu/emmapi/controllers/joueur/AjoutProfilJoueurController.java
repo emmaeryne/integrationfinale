@@ -1,10 +1,13 @@
 package edu.emmapi.controllers.joueur;
 
+import edu.emmapi.entities.SessionManager;
 import edu.emmapi.entities.joueur.Joueur;
+import edu.emmapi.entities.user;
 import edu.emmapi.services.joueur.JoueurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,14 +21,18 @@ public class AjoutProfilJoueurController {
     @FXML
     private TextField cin;
 
-
     @FXML
     private TextField lien_photo;
 
     @FXML
     private ImageView photo_view;
 
+    @FXML
+    private Label titre;
+
     JoueurService joueurService = new JoueurService();
+
+    user user = SessionManager.getInstance().getUser();
 
 
     @FXML
@@ -53,8 +60,7 @@ public class AjoutProfilJoueurController {
                 showAlert("Erreur", "Donner votre cin");
             }
             else {
-                System.out.println(hasFace);
-                joueurService.ajoutJoueurClient(new Joueur(Integer.parseInt(cin.getText()), lien_photo.getText()));
+                joueurService.ajoutJoueurClient(new Joueur(user.getUsername(), 0, Integer.parseInt(cin.getText()), imagePath));
             }
         } else {
             showAlert("Error", "No face detected! Please upload a clear photo of a person.");
@@ -82,6 +88,11 @@ public class AjoutProfilJoueurController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.show();
+    }
+
+    public void initialize(){
+        System.out.println(user);
+        titre.setText("Bienvenue " + user.getUsername());
     }
 }
 
