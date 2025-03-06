@@ -266,3 +266,291 @@
 2025-03-06 03:44:13 DEBUG PoolingHttpClientConnectionManager:344 - Connection [id: 0][route: {s}->https://api.twilio.com:443] can be kept alive indefinitely
 2025-03-06 03:44:13 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 0
 2025-03-06 03:44:13 DEBUG PoolingHttpClientConnectionManager:351 - Connection released: [id: 0][route: {s}->https://api.twilio.com:443][total available: 1; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:40:25 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2025-03-06 05:40:25 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2025-03-06 05:40:25 DEBUG PoolingHttpClientConnectionManager:267 - Connection request: [route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 0 of 10; total allocated: 0 of 20]
+2025-03-06 05:40:25 DEBUG PoolingHttpClientConnectionManager:312 - Connection leased: [id: 0][route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:40:25 DEBUG MainClientExec:234 - Opening connection {s}->https://api.twilio.com:443
+2025-03-06 05:40:25 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to api.twilio.com/108.138.230.69:443
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:366 - Connecting socket to api.twilio.com/108.138.230.69:443 with timeout 10000
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:430 - Enabled protocols: [TLSv1.3, TLSv1.2]
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:431 - Enabled cipher suites:[TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_EMPTY_RENEGOTIATION_INFO_SCSV]
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:435 - Starting handshake
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:465 - Secure session established
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:466 -  negotiated protocol: TLSv1.3
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:467 -  negotiated cipher suite: TLS_AES_128_GCM_SHA256
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:475 -  peer principal: CN=*.twilio.com, O=Twilio Inc., L=San Francisco, ST=California, C=US
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:484 -  peer alternative names: [*.twilio.com, *.ashburn.us1.twilio.com, *.sydney.us1.twilio.com, *.dublin.us1.twilio.com, *.frankfurt.us1.twilio.com, *.tokyo.us1.twilio.com, *.osaka.us1.twilio.com, *.singapore.us1.twilio.com, *.umatilla.us1.twilio.com, *.sao-paulo.us1.twilio.com, *.ashburn.au1.twilio.com, *.sydney.au1.twilio.com, *.dublin.au1.twilio.com, *.frankfurt.au1.twilio.com, *.tokyo.au1.twilio.com, *.osaka.au1.twilio.com, *.singapore.au1.twilio.com, *.umatilla.au1.twilio.com, *.sao-paulo.au1.twilio.com, *.ashburn.ie1.twilio.com, *.sydney.ie1.twilio.com, *.dublin.ie1.twilio.com, *.frankfurt.ie1.twilio.com, *.tokyo.ie1.twilio.com, *.osaka.ie1.twilio.com, *.singapore.ie1.twilio.com, *.umatilla.ie1.twilio.com, *.sao-paulo.ie1.twilio.com, *.ashburn-ix.us1.twilio.com, *.sydney-ix.us1.twilio.com, *.london-ix.us1.twilio.com, *.frankfurt-ix.us1.twilio.com, *.tokyo-ix.us1.twilio.com, *.singapore-ix.us1.twilio.com, *.san-jose-ix.us1.twilio.com, *.osaka-ix.us1.twilio.com, *.ashburn-ix.au1.twilio.com, *.sydney-ix.au1.twilio.com, *.london-ix.au1.twilio.com, *.frankfurt-ix.au1.twilio.com, *.tokyo-ix.au1.twilio.com, *.singapore-ix.au1.twilio.com, *.san-jose-ix.au1.twilio.com, *.osaka-ix.au1.twilio.com, *.ashburn-ix.ie1.twilio.com, *.sydney-ix.ie1.twilio.com, *.london-ix.ie1.twilio.com, *.frankfurt-ix.ie1.twilio.com, *.tokyo-ix.ie1.twilio.com, *.singapore-ix.ie1.twilio.com, *.san-jose-ix.ie1.twilio.com, *.osaka-ix.ie1.twilio.com, *.us1.twilio.com, *.au1.twilio.com, *.ie1.twilio.com, *.de1.twilio.com, *.jp1.twilio.com, *.jp2.twilio.com, *.sg1.twilio.com, *.us2.twilio.com, *.br1.twilio.com, *.ing-test.ie1.twilio.com, *.ing-test.us1.twilio.com, *.ie1-ix.ie1.twilio.com, *.ie1-ix.us1.twilio.com, *.ireland.ie1.twilio.com, twilio.com, ashburn.us1.twilio.com, sydney.us1.twilio.com, dublin.us1.twilio.com, frankfurt.us1.twilio.com, tokyo.us1.twilio.com, osaka.us1.twilio.com, singapore.us1.twilio.com, umatilla.us1.twilio.com, sao-paulo.us1.twilio.com, ashburn.au1.twilio.com, sydney.au1.twilio.com, dublin.au1.twilio.com, frankfurt.au1.twilio.com, tokyo.au1.twilio.com, osaka.au1.twilio.com, singapore.au1.twilio.com, umatilla.au1.twilio.com, sao-paulo.au1.twilio.com, ashburn.ie1.twilio.com, sydney.ie1.twilio.com, dublin.ie1.twilio.com, frankfurt.ie1.twilio.com, tokyo.ie1.twilio.com, osaka.ie1.twilio.com, singapore.ie1.twilio.com, umatilla.ie1.twilio.com, sao-paulo.ie1.twilio.com, ashburn-ix.us1.twilio.com, sydney-ix.us1.twilio.com, london-ix.us1.twilio.com, frankfurt-ix.us1.twilio.com, tokyo-ix.us1.twilio.com, singapore-ix.us1.twilio.com, san-jose-ix.us1.twilio.com, osaka-ix.us1.twilio.com, ashburn-ix.au1.twilio.com, sydney-ix.au1.twilio.com, london-ix.au1.twilio.com, frankfurt-ix.au1.twilio.com, tokyo-ix.au1.twilio.com, singapore-ix.au1.twilio.com, san-jose-ix.au1.twilio.com, osaka-ix.au1.twilio.com, ashburn-ix.ie1.twilio.com, sydney-ix.ie1.twilio.com, london-ix.ie1.twilio.com, frankfurt-ix.ie1.twilio.com, tokyo-ix.ie1.twilio.com, singapore-ix.ie1.twilio.com, san-jose-ix.ie1.twilio.com, osaka-ix.ie1.twilio.com, us1.twilio.com, au1.twilio.com, ie1.twilio.com, de1.twilio.com, jp1.twilio.com, jp2.twilio.com, sg1.twilio.com, us2.twilio.com, br1.twilio.com, ing-test.ie1.twilio.com, ing-test.us1.twilio.com, ie1-ix.ie1.twilio.com, ie1-ix.us1.twilio.com, ireland.ie1.twilio.com]
+2025-03-06 05:40:25 DEBUG SSLConnectionSocketFactory:488 -  issuer principal: CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US
+2025-03-06 05:40:25 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 172.16.2.15:51866<->108.138.230.69:443
+2025-03-06 05:40:25 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 30500
+2025-03-06 05:40:25 DEBUG MainClientExec:255 - Executing request POST /2010-04-01/Accounts/AC72a56f6ddc07c2a3c71a36fe465d8748/Messages.json HTTP/1.1
+2025-03-06 05:40:25 DEBUG MainClientExec:266 - Proxy auth state: UNCHALLENGED
+2025-03-06 05:40:25 DEBUG headers:133 - http-outgoing-0 >> POST /2010-04-01/Accounts/AC72a56f6ddc07c2a3c71a36fe465d8748/Messages.json HTTP/1.1
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Authorization: Basic QUM3MmE1NmY2ZGRjMDdjMmEzYzcxYTM2ZmU0NjVkODc0ODo2NzQxYjM2ZjFiOWMyYjVlODdmMGQyMzE1YzlmZDE0ZQ==
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Content-Type: application/x-www-form-urlencoded
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> X-Twilio-Client: java-8.34.1
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Accept: application/json
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Accept-Encoding: utf-8
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Content-Length: 110
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Host: api.twilio.com
+2025-03-06 05:40:25 DEBUG headers:136 - http-outgoing-0 >> Connection: Keep-Alive
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "POST /2010-04-01/Accounts/AC72a56f6ddc07c2a3c71a36fe465d8748/Messages.json HTTP/1.1[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Authorization: Basic QUM3MmE1NmY2ZGRjMDdjMmEzYzcxYTM2ZmU0NjVkODc0ODo2NzQxYjM2ZjFiOWMyYjVlODdmMGQyMzE1YzlmZDE0ZQ==[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "X-Twilio-Client: java-8.34.1[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Accept: application/json[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Accept-Encoding: utf-8[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Content-Length: 110[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Host: api.twilio.com[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 >> "[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:87 - http-outgoing-0 >> "To=%2B21622820210&From=%2B15102889830&Body=Votre+r%C3%A9servation+pour+pilate+a+%C3%A9t%C3%A9+confirm%C3%A9e.+"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "HTTP/1.1 401 Unauthorized[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Content-Type: application/json[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Content-Length: 107[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Date: Thu, 06 Mar 2025 04:40:25 GMT[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Powered-By: AT-5000[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Twilio-Error-Code: 20003[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Id: RQcc2f574c3aed62f5482042734e83446b[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Duration: 0.022[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Home-Region: us1[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Api-Domain: api.twilio.com[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Www-Authenticate: Basic realm="Twilio API"[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Origin: *[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Expose-Headers: ETag, Twilio-Request-Id[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Credentials: true[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Shenanigans: none[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Cache: Error from cloudfront[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "Via: 1.1 7a75fb682b615437ad3681fe1db7cc60.cloudfront.net (CloudFront)[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Pop: LHR61-P4[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Id: 8X2PmeLSu30u_BSXQPdZYsaYKM8mqmgFmakxcU0iCcVoeiHWBJekcw==[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2025-03-06 05:40:25 DEBUG wire:87 - http-outgoing-0 << "{"code":20003,"message":"Authenticate","more_info":"https://www.twilio.com/docs/errors/20003","status":401}"
+2025-03-06 05:40:25 DEBUG headers:122 - http-outgoing-0 << HTTP/1.1 401 Unauthorized
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Content-Type: application/json
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Content-Length: 107
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Connection: keep-alive
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Date: Thu, 06 Mar 2025 04:40:25 GMT
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Powered-By: AT-5000
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Twilio-Error-Code: 20003
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Id: RQcc2f574c3aed62f5482042734e83446b
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Duration: 0.022
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Home-Region: us1
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Api-Domain: api.twilio.com
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Strict-Transport-Security: max-age=31536000
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Www-Authenticate: Basic realm="Twilio API"
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Origin: *
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Access-Control-Expose-Headers: ETag, Twilio-Request-Id
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Credentials: true
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Shenanigans: none
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Cache: Error from cloudfront
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << Via: 1.1 7a75fb682b615437ad3681fe1db7cc60.cloudfront.net (CloudFront)
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Pop: LHR61-P4
+2025-03-06 05:40:25 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Id: 8X2PmeLSu30u_BSXQPdZYsaYKM8mqmgFmakxcU0iCcVoeiHWBJekcw==
+2025-03-06 05:40:25 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2025-03-06 05:40:25 DEBUG HttpAuthenticator:77 - Authentication required
+2025-03-06 05:40:25 DEBUG HttpAuthenticator:106 - api.twilio.com:443 requested authentication
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:175 - Authentication schemes in the order of preference: [Negotiate, Kerberos, NTLM, CredSSP, Digest, Basic]
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:203 - Challenge for Negotiate authentication scheme not available
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:203 - Challenge for Kerberos authentication scheme not available
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:203 - Challenge for NTLM authentication scheme not available
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:203 - Challenge for CredSSP authentication scheme not available
+2025-03-06 05:40:25 DEBUG TargetAuthenticationStrategy:203 - Challenge for Digest authentication scheme not available
+2025-03-06 05:40:25 DEBUG PoolingHttpClientConnectionManager:344 - Connection [id: 0][route: {s}->https://api.twilio.com:443] can be kept alive indefinitely
+2025-03-06 05:40:25 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 0
+2025-03-06 05:40:25 DEBUG PoolingHttpClientConnectionManager:351 - Connection released: [id: 0][route: {s}->https://api.twilio.com:443][total available: 1; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:48:44 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2025-03-06 05:48:44 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2025-03-06 05:48:44 DEBUG PoolingHttpClientConnectionManager:267 - Connection request: [route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 0 of 10; total allocated: 0 of 20]
+2025-03-06 05:48:44 DEBUG PoolingHttpClientConnectionManager:312 - Connection leased: [id: 0][route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:48:44 DEBUG MainClientExec:234 - Opening connection {s}->https://api.twilio.com:443
+2025-03-06 05:48:44 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to api.twilio.com/108.138.230.69:443
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:366 - Connecting socket to api.twilio.com/108.138.230.69:443 with timeout 10000
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:430 - Enabled protocols: [TLSv1.3, TLSv1.2]
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:431 - Enabled cipher suites:[TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_EMPTY_RENEGOTIATION_INFO_SCSV]
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:435 - Starting handshake
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:465 - Secure session established
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:466 -  negotiated protocol: TLSv1.3
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:467 -  negotiated cipher suite: TLS_AES_128_GCM_SHA256
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:475 -  peer principal: CN=*.twilio.com, O=Twilio Inc., L=San Francisco, ST=California, C=US
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:484 -  peer alternative names: [*.twilio.com, *.ashburn.us1.twilio.com, *.sydney.us1.twilio.com, *.dublin.us1.twilio.com, *.frankfurt.us1.twilio.com, *.tokyo.us1.twilio.com, *.osaka.us1.twilio.com, *.singapore.us1.twilio.com, *.umatilla.us1.twilio.com, *.sao-paulo.us1.twilio.com, *.ashburn.au1.twilio.com, *.sydney.au1.twilio.com, *.dublin.au1.twilio.com, *.frankfurt.au1.twilio.com, *.tokyo.au1.twilio.com, *.osaka.au1.twilio.com, *.singapore.au1.twilio.com, *.umatilla.au1.twilio.com, *.sao-paulo.au1.twilio.com, *.ashburn.ie1.twilio.com, *.sydney.ie1.twilio.com, *.dublin.ie1.twilio.com, *.frankfurt.ie1.twilio.com, *.tokyo.ie1.twilio.com, *.osaka.ie1.twilio.com, *.singapore.ie1.twilio.com, *.umatilla.ie1.twilio.com, *.sao-paulo.ie1.twilio.com, *.ashburn-ix.us1.twilio.com, *.sydney-ix.us1.twilio.com, *.london-ix.us1.twilio.com, *.frankfurt-ix.us1.twilio.com, *.tokyo-ix.us1.twilio.com, *.singapore-ix.us1.twilio.com, *.san-jose-ix.us1.twilio.com, *.osaka-ix.us1.twilio.com, *.ashburn-ix.au1.twilio.com, *.sydney-ix.au1.twilio.com, *.london-ix.au1.twilio.com, *.frankfurt-ix.au1.twilio.com, *.tokyo-ix.au1.twilio.com, *.singapore-ix.au1.twilio.com, *.san-jose-ix.au1.twilio.com, *.osaka-ix.au1.twilio.com, *.ashburn-ix.ie1.twilio.com, *.sydney-ix.ie1.twilio.com, *.london-ix.ie1.twilio.com, *.frankfurt-ix.ie1.twilio.com, *.tokyo-ix.ie1.twilio.com, *.singapore-ix.ie1.twilio.com, *.san-jose-ix.ie1.twilio.com, *.osaka-ix.ie1.twilio.com, *.us1.twilio.com, *.au1.twilio.com, *.ie1.twilio.com, *.de1.twilio.com, *.jp1.twilio.com, *.jp2.twilio.com, *.sg1.twilio.com, *.us2.twilio.com, *.br1.twilio.com, *.ing-test.ie1.twilio.com, *.ing-test.us1.twilio.com, *.ie1-ix.ie1.twilio.com, *.ie1-ix.us1.twilio.com, *.ireland.ie1.twilio.com, twilio.com, ashburn.us1.twilio.com, sydney.us1.twilio.com, dublin.us1.twilio.com, frankfurt.us1.twilio.com, tokyo.us1.twilio.com, osaka.us1.twilio.com, singapore.us1.twilio.com, umatilla.us1.twilio.com, sao-paulo.us1.twilio.com, ashburn.au1.twilio.com, sydney.au1.twilio.com, dublin.au1.twilio.com, frankfurt.au1.twilio.com, tokyo.au1.twilio.com, osaka.au1.twilio.com, singapore.au1.twilio.com, umatilla.au1.twilio.com, sao-paulo.au1.twilio.com, ashburn.ie1.twilio.com, sydney.ie1.twilio.com, dublin.ie1.twilio.com, frankfurt.ie1.twilio.com, tokyo.ie1.twilio.com, osaka.ie1.twilio.com, singapore.ie1.twilio.com, umatilla.ie1.twilio.com, sao-paulo.ie1.twilio.com, ashburn-ix.us1.twilio.com, sydney-ix.us1.twilio.com, london-ix.us1.twilio.com, frankfurt-ix.us1.twilio.com, tokyo-ix.us1.twilio.com, singapore-ix.us1.twilio.com, san-jose-ix.us1.twilio.com, osaka-ix.us1.twilio.com, ashburn-ix.au1.twilio.com, sydney-ix.au1.twilio.com, london-ix.au1.twilio.com, frankfurt-ix.au1.twilio.com, tokyo-ix.au1.twilio.com, singapore-ix.au1.twilio.com, san-jose-ix.au1.twilio.com, osaka-ix.au1.twilio.com, ashburn-ix.ie1.twilio.com, sydney-ix.ie1.twilio.com, london-ix.ie1.twilio.com, frankfurt-ix.ie1.twilio.com, tokyo-ix.ie1.twilio.com, singapore-ix.ie1.twilio.com, san-jose-ix.ie1.twilio.com, osaka-ix.ie1.twilio.com, us1.twilio.com, au1.twilio.com, ie1.twilio.com, de1.twilio.com, jp1.twilio.com, jp2.twilio.com, sg1.twilio.com, us2.twilio.com, br1.twilio.com, ing-test.ie1.twilio.com, ing-test.us1.twilio.com, ie1-ix.ie1.twilio.com, ie1-ix.us1.twilio.com, ireland.ie1.twilio.com]
+2025-03-06 05:48:44 DEBUG SSLConnectionSocketFactory:488 -  issuer principal: CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US
+2025-03-06 05:48:44 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 172.16.2.15:52715<->108.138.230.69:443
+2025-03-06 05:48:44 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 30500
+2025-03-06 05:48:44 DEBUG MainClientExec:255 - Executing request POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1
+2025-03-06 05:48:44 DEBUG MainClientExec:266 - Proxy auth state: UNCHALLENGED
+2025-03-06 05:48:44 DEBUG headers:133 - http-outgoing-0 >> POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Authorization: Basic QUM5ZWU0YWM4ZTEzOWJmMmVlYmUyODg0MjhlNzhhZDk2NzozYmYyODVkZTE5Y2ViODhiMTAyMThkZTgyZGE3YmU0ZQ==
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Content-Type: application/x-www-form-urlencoded
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> X-Twilio-Client: java-8.34.1
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Accept: application/json
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Accept-Encoding: utf-8
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Content-Length: 108
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Host: api.twilio.com
+2025-03-06 05:48:44 DEBUG headers:136 - http-outgoing-0 >> Connection: Keep-Alive
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Authorization: Basic QUM5ZWU0YWM4ZTEzOWJmMmVlYmUyODg0MjhlNzhhZDk2NzozYmYyODVkZTE5Y2ViODhiMTAyMThkZTgyZGE3YmU0ZQ==[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "X-Twilio-Client: java-8.34.1[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Accept: application/json[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Accept-Encoding: utf-8[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Content-Length: 108[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Host: api.twilio.com[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 >> "[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:87 - http-outgoing-0 >> "To=%2B21622820210&From=%2B17403325976&Body=Votre+r%C3%A9servation+pour+yoga+a+%C3%A9t%C3%A9+confirm%C3%A9e.+"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "HTTP/1.1 400 Bad Request[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Content-Type: application/json[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Content-Length: 330[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Date: Thu, 06 Mar 2025 04:48:44 GMT[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Powered-By: AT-5000[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Twilio-Error-Code: 21608[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Twilio-Concurrent-Requests: 1[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Id: RQ80a31bd6f75b329f47c92370408810e3[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Duration: 0.091[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Home-Region: us1[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Api-Domain: api.twilio.com[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Origin: *[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Expose-Headers: ETag, Twilio-Request-Id[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Credentials: true[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Shenanigans: none[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Cache: Error from cloudfront[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "Via: 1.1 37dd9491a0cb26be067945407bb303bc.cloudfront.net (CloudFront)[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Pop: LHR61-P4[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Id: tE8qs-PZOHx3uUFy7f31H0PD6KOmVS-a6vVVb_K86J0h-sDuBdYFDw==[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2025-03-06 05:48:44 DEBUG wire:87 - http-outgoing-0 << "{"code":21608,"message":"The number +2162282XXXX is unverified. Trial accounts cannot send messages to unverified numbers; verify +2162282XXXX at twilio.com/user/account/phone-numbers/verified, or purchase a Twilio number to send messages to unverified numbers","more_info":"https://www.twilio.com/docs/errors/21608","status":400}"
+2025-03-06 05:48:44 DEBUG headers:122 - http-outgoing-0 << HTTP/1.1 400 Bad Request
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Content-Type: application/json
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Content-Length: 330
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Connection: keep-alive
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Date: Thu, 06 Mar 2025 04:48:44 GMT
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Powered-By: AT-5000
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Twilio-Error-Code: 21608
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Twilio-Concurrent-Requests: 1
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Id: RQ80a31bd6f75b329f47c92370408810e3
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Duration: 0.091
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Home-Region: us1
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Api-Domain: api.twilio.com
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Strict-Transport-Security: max-age=31536000
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Origin: *
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Access-Control-Expose-Headers: ETag, Twilio-Request-Id
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Credentials: true
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Shenanigans: none
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Cache: Error from cloudfront
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << Via: 1.1 37dd9491a0cb26be067945407bb303bc.cloudfront.net (CloudFront)
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Pop: LHR61-P4
+2025-03-06 05:48:44 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Id: tE8qs-PZOHx3uUFy7f31H0PD6KOmVS-a6vVVb_K86J0h-sDuBdYFDw==
+2025-03-06 05:48:44 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2025-03-06 05:48:44 DEBUG PoolingHttpClientConnectionManager:344 - Connection [id: 0][route: {s}->https://api.twilio.com:443] can be kept alive indefinitely
+2025-03-06 05:48:44 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 0
+2025-03-06 05:48:44 DEBUG PoolingHttpClientConnectionManager:351 - Connection released: [id: 0][route: {s}->https://api.twilio.com:443][total available: 1; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:50:14 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2025-03-06 05:50:14 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2025-03-06 05:50:14 DEBUG PoolingHttpClientConnectionManager:267 - Connection request: [route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 0 of 10; total allocated: 0 of 20]
+2025-03-06 05:50:14 DEBUG PoolingHttpClientConnectionManager:312 - Connection leased: [id: 0][route: {s}->https://api.twilio.com:443][total available: 0; route allocated: 1 of 10; total allocated: 1 of 20]
+2025-03-06 05:50:14 DEBUG MainClientExec:234 - Opening connection {s}->https://api.twilio.com:443
+2025-03-06 05:50:14 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to api.twilio.com/108.138.230.69:443
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:366 - Connecting socket to api.twilio.com/108.138.230.69:443 with timeout 10000
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:430 - Enabled protocols: [TLSv1.3, TLSv1.2]
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:431 - Enabled cipher suites:[TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_EMPTY_RENEGOTIATION_INFO_SCSV]
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:435 - Starting handshake
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:465 - Secure session established
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:466 -  negotiated protocol: TLSv1.3
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:467 -  negotiated cipher suite: TLS_AES_128_GCM_SHA256
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:475 -  peer principal: CN=*.twilio.com, O=Twilio Inc., L=San Francisco, ST=California, C=US
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:484 -  peer alternative names: [*.twilio.com, *.ashburn.us1.twilio.com, *.sydney.us1.twilio.com, *.dublin.us1.twilio.com, *.frankfurt.us1.twilio.com, *.tokyo.us1.twilio.com, *.osaka.us1.twilio.com, *.singapore.us1.twilio.com, *.umatilla.us1.twilio.com, *.sao-paulo.us1.twilio.com, *.ashburn.au1.twilio.com, *.sydney.au1.twilio.com, *.dublin.au1.twilio.com, *.frankfurt.au1.twilio.com, *.tokyo.au1.twilio.com, *.osaka.au1.twilio.com, *.singapore.au1.twilio.com, *.umatilla.au1.twilio.com, *.sao-paulo.au1.twilio.com, *.ashburn.ie1.twilio.com, *.sydney.ie1.twilio.com, *.dublin.ie1.twilio.com, *.frankfurt.ie1.twilio.com, *.tokyo.ie1.twilio.com, *.osaka.ie1.twilio.com, *.singapore.ie1.twilio.com, *.umatilla.ie1.twilio.com, *.sao-paulo.ie1.twilio.com, *.ashburn-ix.us1.twilio.com, *.sydney-ix.us1.twilio.com, *.london-ix.us1.twilio.com, *.frankfurt-ix.us1.twilio.com, *.tokyo-ix.us1.twilio.com, *.singapore-ix.us1.twilio.com, *.san-jose-ix.us1.twilio.com, *.osaka-ix.us1.twilio.com, *.ashburn-ix.au1.twilio.com, *.sydney-ix.au1.twilio.com, *.london-ix.au1.twilio.com, *.frankfurt-ix.au1.twilio.com, *.tokyo-ix.au1.twilio.com, *.singapore-ix.au1.twilio.com, *.san-jose-ix.au1.twilio.com, *.osaka-ix.au1.twilio.com, *.ashburn-ix.ie1.twilio.com, *.sydney-ix.ie1.twilio.com, *.london-ix.ie1.twilio.com, *.frankfurt-ix.ie1.twilio.com, *.tokyo-ix.ie1.twilio.com, *.singapore-ix.ie1.twilio.com, *.san-jose-ix.ie1.twilio.com, *.osaka-ix.ie1.twilio.com, *.us1.twilio.com, *.au1.twilio.com, *.ie1.twilio.com, *.de1.twilio.com, *.jp1.twilio.com, *.jp2.twilio.com, *.sg1.twilio.com, *.us2.twilio.com, *.br1.twilio.com, *.ing-test.ie1.twilio.com, *.ing-test.us1.twilio.com, *.ie1-ix.ie1.twilio.com, *.ie1-ix.us1.twilio.com, *.ireland.ie1.twilio.com, twilio.com, ashburn.us1.twilio.com, sydney.us1.twilio.com, dublin.us1.twilio.com, frankfurt.us1.twilio.com, tokyo.us1.twilio.com, osaka.us1.twilio.com, singapore.us1.twilio.com, umatilla.us1.twilio.com, sao-paulo.us1.twilio.com, ashburn.au1.twilio.com, sydney.au1.twilio.com, dublin.au1.twilio.com, frankfurt.au1.twilio.com, tokyo.au1.twilio.com, osaka.au1.twilio.com, singapore.au1.twilio.com, umatilla.au1.twilio.com, sao-paulo.au1.twilio.com, ashburn.ie1.twilio.com, sydney.ie1.twilio.com, dublin.ie1.twilio.com, frankfurt.ie1.twilio.com, tokyo.ie1.twilio.com, osaka.ie1.twilio.com, singapore.ie1.twilio.com, umatilla.ie1.twilio.com, sao-paulo.ie1.twilio.com, ashburn-ix.us1.twilio.com, sydney-ix.us1.twilio.com, london-ix.us1.twilio.com, frankfurt-ix.us1.twilio.com, tokyo-ix.us1.twilio.com, singapore-ix.us1.twilio.com, san-jose-ix.us1.twilio.com, osaka-ix.us1.twilio.com, ashburn-ix.au1.twilio.com, sydney-ix.au1.twilio.com, london-ix.au1.twilio.com, frankfurt-ix.au1.twilio.com, tokyo-ix.au1.twilio.com, singapore-ix.au1.twilio.com, san-jose-ix.au1.twilio.com, osaka-ix.au1.twilio.com, ashburn-ix.ie1.twilio.com, sydney-ix.ie1.twilio.com, london-ix.ie1.twilio.com, frankfurt-ix.ie1.twilio.com, tokyo-ix.ie1.twilio.com, singapore-ix.ie1.twilio.com, san-jose-ix.ie1.twilio.com, osaka-ix.ie1.twilio.com, us1.twilio.com, au1.twilio.com, ie1.twilio.com, de1.twilio.com, jp1.twilio.com, jp2.twilio.com, sg1.twilio.com, us2.twilio.com, br1.twilio.com, ing-test.ie1.twilio.com, ing-test.us1.twilio.com, ie1-ix.ie1.twilio.com, ie1-ix.us1.twilio.com, ireland.ie1.twilio.com]
+2025-03-06 05:50:14 DEBUG SSLConnectionSocketFactory:488 -  issuer principal: CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1, O=DigiCert Inc, C=US
+2025-03-06 05:50:14 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 172.16.2.15:52922<->108.138.230.69:443
+2025-03-06 05:50:14 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 30500
+2025-03-06 05:50:14 DEBUG MainClientExec:255 - Executing request POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1
+2025-03-06 05:50:14 DEBUG MainClientExec:266 - Proxy auth state: UNCHALLENGED
+2025-03-06 05:50:14 DEBUG headers:133 - http-outgoing-0 >> POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Authorization: Basic QUM5ZWU0YWM4ZTEzOWJmMmVlYmUyODg0MjhlNzhhZDk2NzozYmYyODVkZTE5Y2ViODhiMTAyMThkZTgyZGE3YmU0ZQ==
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Content-Type: application/x-www-form-urlencoded
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> X-Twilio-Client: java-8.34.1
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Accept: application/json
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Accept-Encoding: utf-8
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Content-Length: 119
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Host: api.twilio.com
+2025-03-06 05:50:14 DEBUG headers:136 - http-outgoing-0 >> Connection: Keep-Alive
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "POST /2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages.json HTTP/1.1[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Authorization: Basic QUM5ZWU0YWM4ZTEzOWJmMmVlYmUyODg0MjhlNzhhZDk2NzozYmYyODVkZTE5Y2ViODhiMTAyMThkZTgyZGE3YmU0ZQ==[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "User-Agent: twilio-java/8.34.1 (Windows 10 amd64) java/17[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "X-Twilio-Client: java-8.34.1[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Accept: application/json[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Accept-Encoding: utf-8[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Content-Length: 119[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Host: api.twilio.com[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 >> "[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:87 - http-outgoing-0 >> "To=%2B21627417033&From=%2B17403325976&Body=Votre+r%C3%A9servation+pour+musculationplus+a+%C3%A9t%C3%A9+confirm%C3%A9e.+"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "HTTP/1.1 201 Created[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Content-Type: application/json;charset=utf-8[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Content-Length: 877[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Date: Thu, 06 Mar 2025 04:50:14 GMT[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Powered-By: AT-5000[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Twilio-Concurrent-Requests: 1[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Id: RQ69208557609a7d560fe58d163841448a[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Twilio-Request-Duration: 0.140[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Home-Region: us1[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Api-Domain: api.twilio.com[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Origin: *[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Expose-Headers: ETag, Twilio-Request-Id[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Access-Control-Allow-Credentials: true[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Shenanigans: none[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Cache: Miss from cloudfront[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "Via: 1.1 9b249fb2a14bbbac52daf4c17e7d5f9a.cloudfront.net (CloudFront)[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Pop: LHR61-P4[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "X-Amz-Cf-Id: -8-qflw66e8FaL8VCNr8YuBmgqJ90GqlWE9uYjg49I_gpQAmKfEy2Q==[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2025-03-06 05:50:14 DEBUG wire:87 - http-outgoing-0 << "{"account_sid": "AC9ee4ac8e139bf2eebe288428e78ad967", "api_version": "2010-04-01", "body": "Sent from your Twilio trial account - Votre r\u00e9servation pour musculationplus a \u00e9t\u00e9 confirm\u00e9e.", "date_created": "Thu, 06 Mar 2025 04:50:14 +0000", "date_sent": null, "date_updated": "Thu, 06 Mar 2025 04:50:14 +0000", "direction": "outbound-api", "error_code": null, "error_message": null, "from": "+17403325976", "messaging_service_sid": null, "num_media": "0", "num_segments": "1", "price": null, "price_unit": "USD", "sid": "SM69208557609a7d560fe58d163841448a", "status": "queued", "subresource_uris": {"media": "/2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages/SM69208557609a7d560fe58d163841448a/Media.json"}, "to": "+21627417033", "uri": "/2010-04-01/Accounts/AC9ee4ac8e139bf2eebe288428e78ad967/Messages/SM69208557609a7d560fe58d163841448a.json"}"
+2025-03-06 05:50:14 DEBUG headers:122 - http-outgoing-0 << HTTP/1.1 201 Created
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Content-Type: application/json;charset=utf-8
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Content-Length: 877
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Connection: keep-alive
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Date: Thu, 06 Mar 2025 04:50:14 GMT
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Powered-By: AT-5000
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Twilio-Concurrent-Requests: 1
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Id: RQ69208557609a7d560fe58d163841448a
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Twilio-Request-Duration: 0.140
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Home-Region: us1
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Api-Domain: api.twilio.com
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Strict-Transport-Security: max-age=31536000
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Origin: *
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Access-Control-Expose-Headers: ETag, Twilio-Request-Id
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Access-Control-Allow-Credentials: true
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Shenanigans: none
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Cache: Miss from cloudfront
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << Via: 1.1 9b249fb2a14bbbac52daf4c17e7d5f9a.cloudfront.net (CloudFront)
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Pop: LHR61-P4
+2025-03-06 05:50:14 DEBUG headers:125 - http-outgoing-0 << X-Amz-Cf-Id: -8-qflw66e8FaL8VCNr8YuBmgqJ90GqlWE9uYjg49I_gpQAmKfEy2Q==
+2025-03-06 05:50:14 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2025-03-06 05:50:14 DEBUG PoolingHttpClientConnectionManager:344 - Connection [id: 0][route: {s}->https://api.twilio.com:443] can be kept alive indefinitely
+2025-03-06 05:50:14 DEBUG DefaultManagedHttpClientConnection:88 - http-outgoing-0: set socket timeout to 0
+2025-03-06 05:50:14 DEBUG PoolingHttpClientConnectionManager:351 - Connection released: [id: 0][route: {s}->https://api.twilio.com:443][total available: 1; route allocated: 1 of 10; total allocated: 1 of 20]

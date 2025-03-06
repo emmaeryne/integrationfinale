@@ -224,7 +224,7 @@ public class TypeAbonnementController {
     private void handleLoadExcel() {
         loadingIndicator.setVisible(true); // Afficher l’indicateur de chargement
         try {
-            String cheminFichier = "C:\\Users\\MSI\\Downloads\\abonnement.xlsx"; // Chemin exact
+            String cheminFichier = "src\\main\\resources\\excel\\abonnement.xlsx"; // Chemin exact
             FileInputStream file = new FileInputStream(cheminFichier);
             Workbook workbook = new XSSFWorkbook(file);
             Sheet sheet = workbook.getSheetAt(0);

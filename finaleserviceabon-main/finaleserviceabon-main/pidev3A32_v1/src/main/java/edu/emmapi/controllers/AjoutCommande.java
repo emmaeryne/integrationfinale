@@ -1,12 +1,7 @@
 package edu.emmapi.controllers;
+import edu.emmapi.entities.*;
 
-import edu.emmapi.entities.Commande;
-import edu.emmapi.entities.CommandeProduits;
-import edu.emmapi.entities.produit;
-import edu.emmapi.services.CommandeProduitsService;
-import edu.emmapi.services.CommandeService;
-import edu.emmapi.services.EmailServiceCommande;
-import edu.emmapi.services.ProduitService;
+import edu.emmapi.services.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -49,6 +44,7 @@ public class AjoutCommande implements Initializable {
     private HBox buttonContainer;
     @FXML
     private ListView<String> commandeList;
+    private userService userservice;
 
     private final ProduitService produitService = new ProduitService();
     private final CommandeService commandeService = new CommandeService();

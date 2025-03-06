@@ -53,9 +53,9 @@ public class ClientServiceController {
     private ServiceService serviceService;
     private WeatherService weatherService;
     private int reservationCount = 0;
-    private static final String ACCOUNT_SID = "AC72a56f6ddc07c2a3c71a36fe465d8748";
-    private static final String AUTH_TOKEN = "6741b36f1b9c2b5e87f0d2315c9fd14e";
-    private static final String TWILIO_NUMBER = "+15102889830";
+    private static final String ACCOUNT_SID = "AC9ee4ac8e139bf2eebe288428e78ad967";
+    private static final String AUTH_TOKEN = "3bf285de19ceb88b10218de82da7be4e";
+    private static final String TWILIO_NUMBER = "+17403325976";
     private GiphyApi giphyApi;
 
     @FXML
@@ -195,7 +195,7 @@ public class ClientServiceController {
     }
 
     private void sendConfirmationSMS(Service service, double rating) {
-        String clientNumber = "+21622820210";
+        String clientNumber = "+21627417033";
         String message = "Votre réservation pour " + service.getNom() + " a été confirmée. ";
 
         try {
