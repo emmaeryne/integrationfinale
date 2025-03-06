@@ -7,6 +7,7 @@ import edu.emmapi.services.tournoi_match.TournoiService;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -60,6 +62,11 @@ public class AfficheTournoisController {
 
     @FXML
     private VBox error;
+
+    @FXML
+    private TextField filterField;
+
+    private FilteredList<Tournoi> filteredData;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
@@ -167,18 +174,39 @@ public class AfficheTournoisController {
         }
     }
 
+    @FXML
+    void filter(KeyEvent event) {
+        String filterText = filterField.getText().trim().toLowerCase();
+        filteredData.setPredicate(tournoi -> {
+            if (filterText.isEmpty()) {
+                return true;
+            }
+            return String.valueOf(tournoi.getId_tournoi()).contains(filterText) ||
+                    tournoi.getNom_tournoi().toLowerCase().contains(filterText) ||
+                    tournoi.getType_tournoi().toLowerCase().contains(filterText) ||
+                    tournoi.getDate_tournoi().toString().toLowerCase().contains(filterText) ||
+                    tournoi.getDescription_tournoi().toLowerCase().contains(filterText);
+        });
+    }
+
 
     public void refreshTableviewTournoi(){
         ObservableList<Tournoi> tournoiObservableList = FXCollections.observableArrayList(
                 tournoiService.getAllData()
         );
 
+        filteredData = new FilteredList<>(tournoiObservableList, p -> true);
+
         tableview_tournoi_id.setCellValueFactory(new PropertyValueFactory<Tournoi, Integer>("id_tournoi"));
         tableview_tournoi_nom.setCellValueFactory(new PropertyValueFactory<Tournoi, String>("nom_tournoi"));
         tableview_tournoi_type.setCellValueFactory(new PropertyValueFactory<Tournoi, String>("type_tournoi"));
         tableview_tournoi_date.setCellValueFactory(new PropertyValueFactory<Tournoi, Date>("date_tournoi"));
         tableview_tournoi_description.setCellValueFactory(new PropertyValueFactory<Tournoi, String>("description_tournoi"));
-        tableview_tournoi.setItems(tournoiObservableList);
+        tableview_tournoi.setItems(filteredData);
+
+        if (filterField != null) {
+            filterField.setText("");
+        }
     }
 
     public void initialize() {
