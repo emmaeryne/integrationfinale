@@ -83,6 +83,7 @@ public class AjoutCommande implements Initializable {
 
     @FXML
     private void goBack(ActionEvent event) {
+        loadScene(event, "/CommandeView .fxml");
 
     }
 
@@ -129,9 +130,9 @@ public class AjoutCommande implements Initializable {
                 String subject = "Nouvelle Commande Ajoutée";
                 String body = "Bonjour ,\n\n"
                         + "Une nouvelle commande a été enregistrée dans le système. Voici les détails de cette commande :\n\n"
-                        + "📅 **Date de la commande :** " + dateDeCommande + "\n"
-                        + "👤 **ID Utilisateur :** " + idUtilisateur + "\n"
-                        + "🛒 **ID Commande :** " + idCommande + "\n\n"
+                        + "📅 *Date de la commande :* " + dateDeCommande + "\n"
+                        + "👤 *ID Utilisateur :* " + idUtilisateur + "\n"
+                        + "🛒 *ID Commande :* " + idCommande + "\n\n"
                         + "**Actions requises :**\n"
                         + "1. Vérifiez les détails de la commande dans le système.\n"
                         + "2. Assurez-vous que le stock est disponible pour les articles commandés.\n"
@@ -140,7 +141,7 @@ public class AjoutCommande implements Initializable {
                         + "Cordialement,\n"
                         + "L'équipe de Hive  🌟\n\n"
                         + "---\n"
-                        + "💡 **Rappel :** N'oubliez pas de mettre à jour le statut de la commande une fois les étapes validées.";
+                        + "💡 *Rappel :* N'oubliez pas de mettre à jour le statut de la commande une fois les étapes validées.";
 
                 EmailServiceCommande emailService = new EmailServiceCommande();
                 emailService.sendEmail(toEmail, subject, body, qrText, dateDeCommande, idUtilisateur);

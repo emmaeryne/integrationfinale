@@ -120,12 +120,18 @@ public class HomePageController {
 
     @FXML
     private void openCoursDashboard(ActionEvent event) {
-        openDashboard("/Ajouter_Cours.fxml", "Cours Dashboard");
+        openDashboard("/listcours.fxml", "Cours Dashboard");
     }
     @FXML
     private void openProduit(ActionEvent event) {
         openDashboard("/page1.fxml", "produit admin");
     }
+
+    @FXML
+    private void openCommandeView(ActionEvent event) {
+        openDashboard("/BackView.fxml", "Commande");
+    }
+
 
     //@FXML
     //private void openDetailsDashboard(ActionEvent event) {
@@ -136,10 +142,24 @@ public class HomePageController {
     private void openParticipantsDashboard(ActionEvent event) {
         openDashboard("/Ajouter_Cours_Participant.fxml", "Participants Dashboard");
     }
+    @FXML
+    private void opencoachDashboard(ActionEvent event) {
+        openDashboard("/CoachInterface.fxml", "Coach Dashboard");
+    }
 
     @FXML
     private void openPlanningDashboard(ActionEvent event) {
         openDashboard("/Ajouter_Planning.fxml", "Planning Dashboard");
+    }
+
+
+    @FXML
+    private void openclient1Dashboard(ActionEvent event) {
+        openDashboard("/client1.fxml", "Services");
+    }
+    @FXML
+    private void openpaiement(ActionEvent event) {
+        openDashboard("/PaiementView.fxml", "Paiement");
     }
 
     // Méthode générique pour ouvrir un dashboard
@@ -198,5 +218,27 @@ public class HomePageController {
     private void refreshDashboard(ActionEvent event) {
         // Logique pour rafraîchir le tableau de bord principal si nécessaire
         System.out.println("Tableau de bord principal rafraîchi.");
+    }
+
+    public void openCommande(ActionEvent actionEvent) {
+        openDashboard("/CommandeView .fxml", "commandeview");
+
+    }
+
+    public void openPaiement(ActionEvent actionEvent) {
+        openDashboard("/PaiementView.fxml", "paiement" );
+
+    }
+    public void openPLANNINGUSER(ActionEvent actionEvent) {
+        openDashboard("/planninguser.fxml", "planning" );
+
+    }
+    public void openinscriptionDashboard(ActionEvent actionEvent) {
+        openDashboard("/pages/joueur/AjoutProfilJoueur.fxml", "inscription" );
+
+    }
+    public void opentournois(ActionEvent actionEvent) {
+        openDashboard("/pages/tournoi_match/AfficheTournois.fxml", "Tournois" );
+
     }
 }

@@ -54,9 +54,9 @@ public class AbonnementController {
         setupTableColumns();
 
         try {
-            mqttClient = new MqttClient("tcp://192.168.1.5:1883", MqttClient.generateClientId(), null);
+            mqttClient = new MqttClient("tcp://172.20.10.8:1883", MqttClient.generateClientId(), null);
             mqttClient.connect();
-            logToIoT("Connecté au broker MQTT local sur 192.168.1.5:1883");
+            logToIoT("Connecté au broker MQTT local sur 172.20.10.8:1883");
         } catch (MqttException e) {
             logToIoT("Erreur connexion MQTT: " + e.getMessage());
             mqttClient = null;

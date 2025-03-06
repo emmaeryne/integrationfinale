@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.createProfileOwner">
+    <children>
+        <ImageView fitHeight="532.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/interface-user.png" />
+            </image>
+        </ImageView>
+        <Text layoutX="88.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBORAD COACH" />
+        <Button fx:id="reloadCreateOwner" blendMode="DARKEN" layoutX="75.0" layoutY="130.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="CREER PROFILE" />
+        <Button fx:id="addCoach" layoutX="75.0" layoutY="180.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="AJOUTER COACH" />
+        <Button layoutX="76.0" layoutY="325.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="CONSULTER PROFILE" />
+        <Button fx:id="updateCoach" layoutX="76.0" layoutY="229.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="MODIFIER COACH" />
+        <Button fx:id="deletecoach" layoutX="76.0" layoutY="277.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="SUPPRIMER COACH" />
+        <VBox layoutX="238.0" layoutY="113.0" spacing="20" style="-fx-padding: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+            <GridPane hgap="10" vgap="10">
+                <!-- Première colonne -->
+                <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="FirstNameOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="LastNameOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="DateOfBirthOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Profile Picture" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="ProfilePicOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <!-- Deuxième colonne -->
+                <Label text="Location" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="LocationOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                <Label text="Phone Number" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="PhoneOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label text="Website" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="WebsiteOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                <Label text="Bio" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <TextField fx:id="bioOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+
+            <!-- Liens des réseaux sociaux -->
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Social Media Links" />
+            <TextField fx:id="socialMediaLinksOwnerTF" prefWidth="400" />
+        </VBox>
+        <Button layoutX="76.0" layoutY="373.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="LISTE COACH" />
+        <Text layoutX="381.0" layoutY="92.0" style="-fx-font-size: 27px; -fx-fill: #333; -fx-font-weight: bold;" text="CREER VOTRE PROFILE" />
+
+        <!-- Bouton de soumission -->
+        <Button layoutX="458.0" layoutY="379.0" prefWidth="150" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;" text="SAUVEGARDER" />
+    </children>
+</AnchorPane>
