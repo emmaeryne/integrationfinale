@@ -46,19 +46,31 @@ public class userService implements IUserService<user> {
     }
 
     public void addEntityCoach(Coach coach) throws SQLException {
-        String requete = "INSERT INTO users (username, email, password_hash, is_active, role,specialty,experience_years,certifications, security_question_id, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String requete = "INSERT INTO users (username, email, password_hash, is_active, role, specialty, experience_years, certifications, security_question_id, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete)) {
+            // Set the parameters for each placeholder
             pst.setString(1, coach.getUsername());
             pst.setString(2, coach.getEmail());
             pst.setString(3, coach.getPasswordHash());
             pst.setBoolean(4, coach.isActive());
             pst.setString(5, coach.getRole());
             pst.setString(6, coach.getSpecialty());
-            pst.setInt(7, coach.getExperienceYears());
-            pst.setString(8, coach.getCertifications());
+
+            // Set the missing parameters (7 and 8)
+            pst.setInt(7, coach.getExperienceYears());  // Experience years
+            pst.setString(8, coach.getCertifications());  // Certifications
+
+            // Set the final parameters (9 and 10)
+            pst.setInt(9, coach.getSecurityQuestionId());  // Security question ID
+            pst.setString(10, coach.getSecurityAnswer());  // Security answer
+
+            // Execute the query
             pst.executeUpdate();
         }
     }
+
+
 
     @Override
     public void deleteEntity(user user) {

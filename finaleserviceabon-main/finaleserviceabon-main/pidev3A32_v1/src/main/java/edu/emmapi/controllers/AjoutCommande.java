@@ -85,6 +85,7 @@ public class AjoutCommande implements Initializable {
     private void goBack(ActionEvent event) {
         loadScene(event, "/CommandeView .fxml");
 
+
     }
 
     private void loadScene(ActionEvent event, String s) {

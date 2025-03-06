@@ -88,7 +88,23 @@ public class firstInterface {
             System.out.println(e.getMessage());
         }
     }
-}
+
+    public void back(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/logIn.fxml"));
+
+            Scene currentScene = title.getScene();
+
+            currentScene.setRoot(root);
+
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setResizable(false);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    }
 
 
 

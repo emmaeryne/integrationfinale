@@ -120,7 +120,7 @@ public class HomePageController {
 
     @FXML
     private void openCoursDashboard(ActionEvent event) {
-        openDashboard("/listcours.fxml", "Cours Dashboard");
+        openDashboard("/Ajouter_Cours.fxml", "Cours Dashboard");
     }
     @FXML
     private void openProduit(ActionEvent event) {
@@ -129,7 +129,7 @@ public class HomePageController {
 
     @FXML
     private void openCommandeView(ActionEvent event) {
-        openDashboard("/BackView.fxml", "Commande");
+        openDashboard("/CommandeBack.fxml", "Commande");
     }
 
 
@@ -140,7 +140,7 @@ public class HomePageController {
 
     @FXML
     private void openParticipantsDashboard(ActionEvent event) {
-        openDashboard("/Ajouter_Cours_Participant.fxml", "Participants Dashboard");
+        openDashboard("/Ajouter_Participant.fxml", "Participants Dashboard");
     }
     @FXML
     private void opencoachDashboard(ActionEvent event) {
@@ -159,7 +159,7 @@ public class HomePageController {
     }
     @FXML
     private void openpaiement(ActionEvent event) {
-        openDashboard("/PaiementView.fxml", "Paiement");
+        openDashboard("/BackPaiement.fxml", "Paiement");
     }
 
     // Méthode générique pour ouvrir un dashboard

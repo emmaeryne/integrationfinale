@@ -102,6 +102,7 @@ public class DashboardClient {
 
     @FXML
     void initialize() {
+
     }
 
     private void loadProfileDetails() {
@@ -111,7 +112,14 @@ public class DashboardClient {
 
         //appelle session dans une classe
         u= SessionManager.getInstance().getUser();
-
+        if(u.getRole().equals("COACH"))
+        {
+            GestionCoach.setVisible(true);
+            GestionUser.setVisible(false);
+        } else if (u.getRole().equals("USER")) {
+            GestionCoach.setVisible(false);
+            GestionUser.setVisible(true);
+        }
 
 
         if (!profiles.isEmpty()) {
@@ -147,8 +155,19 @@ public class DashboardClient {
 //profileService.deleteEntity(idReived);
     }
 
-    public void supprimerProfile(ActionEvent actionEvent) {
-        profileService.deleteEntity(idReived);
+
+    public void supprimerProfile(ActionEvent actionEvent) throws IOException {
+        profileService.deleteEntity(u.getId());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/logIn.fxml"));
+        Parent parent = loader.load();
+
+
+        Scene currentScene = firstNameLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.setWidth(850);  // Définir la largeur de la scène
+        currentStage.setHeight(600);  // Définir la hauteur de la scène
+        currentScene.setRoot(parent);
+
 
     }
 

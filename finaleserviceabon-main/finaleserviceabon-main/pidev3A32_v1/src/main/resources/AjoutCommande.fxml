@@ -92,7 +92,7 @@
                     <!-- Boutons -->
                     <HBox alignment="CENTER" spacing="20">
                         <Button fx:id="retour" onAction="#goBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #6A1B9A; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="⬅ Retour" />
-                        <Button onAction="#createCommande" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Ajouter Commande" />
+                        <Button onAction="#createCommande" prefHeight="41.0" prefWidth="218.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Ajouter Commande" />
                     </HBox>
 
                     <!-- Pied de page -->

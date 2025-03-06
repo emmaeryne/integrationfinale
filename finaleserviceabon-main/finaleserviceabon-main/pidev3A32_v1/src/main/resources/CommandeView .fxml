@@ -16,7 +16,7 @@
         <AnchorPane prefHeight="670.0" prefWidth="857.0">
             <children>
                 <!-- Contenu principal -->
-                <VBox alignment="CENTER" prefHeight="670.0" prefWidth="857.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
+                <VBox alignment="CENTER" layoutY="-15.0" prefHeight="670.0" prefWidth="857.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
                     <padding>
                         <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
@@ -30,22 +30,22 @@
                     <!-- TableView -->
                     <TableView fx:id="commandeTable" prefHeight="282.0" prefWidth="626.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-font-family: 'Segoe UI'; -fx-border-color: #66C2D9; -fx-border-width: 1px; -fx-border-radius: 8; -fx-background-radius: 8;">
                         <columns>
-                            <TableColumn fx:id="idCommandeColumn" text="ID Commande" prefWidth="100">
+                            <TableColumn fx:id="idCommandeColumn" prefWidth="100" text="ID Commande">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="idCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="dateCommandeColumn" text="Date Commande" prefWidth="150">
+                            <TableColumn fx:id="dateCommandeColumn" prefWidth="150" text="Date Commande">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="dateDeCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="idUtilisateurColumn" text="ID Utilisateur" prefWidth="100">
+                            <TableColumn fx:id="idUtilisateurColumn" prefWidth="100" text="ID Utilisateur">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="idUtilisateur" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="statusColumn" text="Statut" prefWidth="100">
+                            <TableColumn fx:id="statusColumn" prefWidth="100" text="Statut">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="status" />
                                 </cellValueFactory>
@@ -58,7 +58,7 @@
                         <Button fx:id="AjC" mnemonicParsing="false" onAction="#gotoAj" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Ajouter" />
                         <Button fx:id="modiff" mnemonicParsing="false" onAction="#gotomodif" style="-fx-background-color: #e1a12f; -fx-text-fill: #FFFFFF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Modifier" />
                         <Button onAction="#supprimerCommande" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Supprimer" />
-                        <Button onAction="#refreshCommandes" prefHeight="28.0" prefWidth="93.0" style="-fx-background-color: #e1a12f; -fx-text-fill: #FFFFFF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Rafraîchir" />
+                        <Button onAction="#refreshCommandes" prefHeight="34.0" prefWidth="114.0" style="-fx-background-color: #e1a12f; -fx-text-fill: #FFFFFF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Rafraîchir" />
                         <Button fx:id="test" onAction="#goBack" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: #000000; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 15;" text="Retour" />
                     </HBox>
 

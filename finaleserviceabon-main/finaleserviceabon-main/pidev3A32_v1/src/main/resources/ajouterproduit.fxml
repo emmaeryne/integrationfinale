@@ -50,7 +50,12 @@
 
                     <!-- Catégorie -->
                     <Label style="-fx-font-size: 16px; -fx-text-fill: #333333; -fx-font-family: 'Arial';" text="Categorie" />
-                    <ComboBox fx:id="CategorieComboBox" prefWidth="300.0" promptText="Sélectionnez une catégorie" style="-fx-background-color: #3B4252; -fx-text-fill: white; -fx-prompt-text-fill: white; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10; -fx-font-size: 14px;" />
+                    <ComboBox fx:id="CategorieComboBox" prefWidth="300.0" promptText="Sélectionnez une catégorie"
+                              style="
+              -fx-text-fill: white; /* Couleur du texte dans la ComboBox */
+              -fx-prompt-text-fill: white; /* Couleur du texte du prompt */
+          ">
+                    </ComboBox>
 
                     <!-- Nom Produit -->
                     <Label style="-fx-font-size: 16px; -fx-text-fill: #333333; -fx-font-family: 'Arial';" text="Nom Produit" />

@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
@@ -94,6 +95,8 @@ public class FordetPwdProceed {
             alert.setContentText("Mot de passe mis à jour avec succès !");
             errorLabel.setTextFill(javafx.scene.paint.Color.GREEN); // Changer la couleur du texte en vert
             System.out.println("Mot de passe haché : " + hashedPassword);
+            Stage currentStage =(Stage) errorLabel.getScene().getWindow();
+            currentStage.close();
         }
     }
 
