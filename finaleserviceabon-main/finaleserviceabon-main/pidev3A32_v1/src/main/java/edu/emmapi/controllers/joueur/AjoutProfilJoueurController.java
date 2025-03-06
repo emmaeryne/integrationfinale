@@ -91,7 +91,6 @@ public class AjoutProfilJoueurController {
     }
 
     public void initialize(){
-        System.out.println(user);
         titre.setText("Bienvenue " + user.getUsername());
     }
 }
