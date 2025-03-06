@@ -45,7 +45,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nom_equipe" />
+                              <TextField fx:id="nom_equipe" style="-fx-background-radius: 0;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="20.0" prefWidth="260.0" spacing="10.0">

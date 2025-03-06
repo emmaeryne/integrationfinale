@@ -1,6 +1,7 @@
 package edu.emmapi.controllers.equipe;
 
 import edu.emmapi.controllers.components.MusicPlayer;
+import edu.emmapi.controllers.joueur.ModifierJoueurController;
 import edu.emmapi.entities.equipe.Equipe;
 import edu.emmapi.services.equipe.EquipeService;
 import edu.emmapi.services.navigation.NavigationService;
@@ -8,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,6 +19,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 
 public class AfficheEquipeController {
@@ -118,7 +123,21 @@ public class AfficheEquipeController {
 
     @FXML
     void modifierEquipe(ActionEvent event) {
+        int selected_equipe_id = tableview_equipes.getSelectionModel().getSelectedItem().getId_equipe();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/equipe/ModifierEquipe.fxml"));
+        Parent parent = null;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ModifierEquipeController modifierEquipeController = loader.getController();
+        modifierEquipeController.setIdEquipe(selected_equipe_id);
+        Equipe equipe = equipeService.getEquipeById(selected_equipe_id);
+        System.out.println(equipe.toString());
+        modifierEquipeController.setEquipe(equipe);
 
+        tableview_equipes.getScene().setRoot(parent);
     }
 
     @FXML

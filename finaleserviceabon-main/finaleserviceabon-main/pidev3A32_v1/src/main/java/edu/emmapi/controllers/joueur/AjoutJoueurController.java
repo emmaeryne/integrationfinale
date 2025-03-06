@@ -4,14 +4,17 @@ import edu.emmapi.controllers.components.MusicPlayer;
 import edu.emmapi.entities.joueur.Joueur;
 import edu.emmapi.services.joueur.JoueurService;
 import edu.emmapi.services.navigation.NavigationService;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.sql.SQLException;
 
@@ -41,6 +44,12 @@ public class AjoutJoueurController {
     @FXML
     private ImageView toggler;
 
+    @FXML
+    private TextField photo_joueur;
+
+    @FXML
+    private ImageView view_photo;
+
     public boolean isPlaying = false;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
@@ -52,6 +61,21 @@ public class AjoutJoueurController {
     NavigationService navigationService = new NavigationService();
     JoueurService joueurService = new JoueurService();
 
+    public void showError(String message, String color){
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        this.message.setText(message);
+        error.setStyle("-fx-background-color: " + color);
+        error.setVisible(true);
+        pause.setOnFinished(event -> {
+            error.setVisible(false);
+            if (color.equals("#66ffcc")) {
+                annulerAjout(new ActionEvent());
+            }
+        });
+
+        pause.play();
+    }
+
 
     @FXML
     void annulerAjout(ActionEvent event) {
@@ -60,12 +84,32 @@ public class AjoutJoueurController {
 
     @FXML
     void confirmerAjout(ActionEvent event) {
-        Joueur joueur = new Joueur(nom_joueur.getText(), Integer.parseInt(cin_joueur.getText()));
-        try {
-            joueurService.addEntity(joueur);
-            navigationService.goToPage("/pages/joueur/AfficheJoueurs.fxml",message);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (nom_joueur.getText().isEmpty()){
+            showError("Donner un nom pour votre joueur svp", "#F05A5A");
+        }
+        else if (!nom_joueur.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$")){
+            showError("Donner un nom valide svp", "#F05A5A");
+        }
+        else if (cin_joueur.getText().isEmpty()){
+            showError("Donner un cin pour votre joueur svp", "#F05A5A");
+        }
+        else if (!cin_joueur.getText().matches("^[0-9]{8}$")) {
+            showError("Donner un cin valide svp", "#F05A5A");
+        }
+        else {
+        Joueur joueur = new Joueur(nom_joueur.getText(), Integer.parseInt(cin_joueur.getText()), photo_joueur.getText());
+        if (joueurService.joueurExiste(joueur)){
+            showError("Ce joueur existe déja", "#F05A5A");
+        }
+        else {
+            try {
+                joueurService.addEntity(joueur);
+                showError("Joueur modifiée avec succès", "#66ffcc");
+                navigationService.goToPage("/pages/joueur/AfficheJoueurs.fxml",message);
+            } catch (SQLException e) {
+                showError(e.getMessage(), "#F05A5A");
+            }
+        }
         }
     }
 
@@ -103,6 +147,11 @@ public class AjoutJoueurController {
             MusicPlayer.getInstance().getMediaPlayer().pause();
         }
         isPlaying = !isPlaying;
+    }
+
+    @FXML
+    void updatePhoto(KeyEvent event) {
+        view_photo.setImage(new Image(photo_joueur.getText()));
     }
 
     public void initialize(){

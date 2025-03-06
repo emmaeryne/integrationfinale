@@ -26,6 +26,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -66,7 +67,7 @@ public class AjoutMatchController {
     private ComboBox<Integer> liste_terrain;
 
     @FXML
-    private ComboBox<Integer> liste_tournoi;
+    private ComboBox<String> liste_tournoi;
 
     @FXML
     private TextField score1;
@@ -171,7 +172,7 @@ public class AjoutMatchController {
             if (liste_tournoi.getValue()==null){
                 showError("Choisir un tournoi", "#F05A5A");
             }
-            else if((date_match.getValue()==null)||(tournoiService.getTournoiById(liste_tournoi.getValue()).getDate_tournoi().compareTo(Date.valueOf(date_match.getValue()))>0)) {
+            else if((date_match.getValue()==null)||(tournoiService.getTournoiByNom(liste_tournoi.getValue()).getDate_tournoi().compareTo(Date.valueOf(date_match.getValue()))>0)) {
                 showError("Choisir une date valide", "#F05A5A");
             }
             else if(liste_terrain.getValue()==null){
@@ -190,7 +191,7 @@ public class AjoutMatchController {
                 showError("Le score doit être un entier positive", "#F05A5A");
             }
             else {
-                Match match = new Match(liste_tournoi.getValue(), Integer.parseInt(equipe1.getText()), Integer.parseInt(equipe2.getText()), Date.valueOf(date_match.getValue()), liste_terrain.getValue(), Integer.parseInt(score1.getText()), Integer.parseInt(score2.getText()), liste_statut.getValue());
+                Match match = new Match(tournoiService.getTournoiByNom(liste_tournoi.getValue()).getId_tournoi(), Integer.parseInt(equipe1.getText()), Integer.parseInt(equipe2.getText()), Date.valueOf(date_match.getValue()), liste_terrain.getValue(), Integer.parseInt(score1.getText()), Integer.parseInt(score2.getText()), liste_statut.getValue());
                 if (!matchService.checkIfMatchExist(match)){
                     matchService.addEntity(match);
                     showError("Match ajoutée avec succès", "#66ffcc");
@@ -224,14 +225,14 @@ public class AjoutMatchController {
     @FXML
     public void refreshImageTerrain(ActionEvent event){
         try {
-            Tournoi tournoi = tournoiService.getTournoiById(liste_tournoi.getValue());
+            Tournoi tournoi = tournoiService.getTournoiByNom(liste_tournoi.getValue());
             Image image = new Image(getClass().getResource("/images/backgrounds/" + tournoi.getType_tournoi() + ".png").toExternalForm());
             terrain_bg.setImage(image);
         }catch (Exception e) {
             Image image = new Image(getClass().getResource("/images/backgrounds/Placeholder.png").toExternalForm());
             terrain_bg.setImage(image);
         }
-        date_match.setValue(tournoiService.getTournoiById(liste_tournoi.getValue()).getDate_tournoi().toLocalDate());
+        date_match.setValue(tournoiService.getTournoiByNom(liste_tournoi.getValue()).getDate_tournoi().toLocalDate());
         liste_equipe1.setVisible(false);
         liste_equipe2.setVisible(false);
         terrain_bg.setVisible(true);
@@ -239,10 +240,10 @@ public class AjoutMatchController {
 
     public void initialize(){
 //tournoi
-        List<Integer> tournoiList = new ArrayList<>();
+        List<String> tournoiList = new ArrayList<>();
 
         for(Tournoi tournoi : tournoiService.getAllData()){
-            tournoiList.add(tournoi.getId_tournoi());
+            tournoiList.add(tournoi.getNom_tournoi());
         }
 
         liste_tournoi.setItems(FXCollections.observableArrayList(tournoiList));
@@ -265,6 +266,8 @@ public class AjoutMatchController {
 
         //liste_equipe2.getItems().addAll(FXCollections.observableArrayList(equipeService.getAllData()));
 
+        //date
+        date_match.setValue(LocalDate.now());
         //score
         score1.setText("0");
         score2.setText("0");
@@ -293,7 +296,7 @@ public class AjoutMatchController {
         List<Equipe> equipeList = new ArrayList<>();
 
         for(Equipe equipe : equipeService.getAllData()){
-            if (Objects.equals(equipe.getType_equipe(), tournoiService.getTournoiById(liste_tournoi.getValue()).getType_tournoi())){
+            if (Objects.equals(equipe.getType_equipe(), tournoiService.getTournoiByNom(liste_tournoi.getValue()).getType_tournoi())){
             equipeList.add(equipe);}
         }
 
@@ -316,7 +319,7 @@ public class AjoutMatchController {
         List<Equipe> equipeList = new ArrayList<>();
 
         for(Equipe equipe : equipeService.getAllData()){
-            if (Objects.equals(equipe.getType_equipe(), tournoiService.getTournoiById(liste_tournoi.getValue()).getType_tournoi())){
+            if (Objects.equals(equipe.getType_equipe(), tournoiService.getTournoiByNom(liste_tournoi.getValue()).getType_tournoi())){
                 equipeList.add(equipe);}
         }
 

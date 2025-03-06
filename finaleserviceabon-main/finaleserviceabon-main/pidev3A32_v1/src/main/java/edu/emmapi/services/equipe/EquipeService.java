@@ -84,4 +84,24 @@ public class EquipeService implements IService<Equipe> {
         }
         return 0;
     }
+
+    public Equipe getEquipeById(int id){
+        String query = "SELECT * FROM EQUIPE WHERE id_equipe=?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new Equipe(
+                        rs.getInt("id_equipe"),
+                        rs.getString("nom_equipe"),
+                        rs.getString("type_equipe")
+                );
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

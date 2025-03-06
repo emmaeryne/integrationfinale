@@ -31,6 +31,14 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
+                        <Label fx:id="id" style="-fx-font-weight: 900;" text="0" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
                      </children>
                      <VBox.margin>
                         <Insets top="12.0" />
