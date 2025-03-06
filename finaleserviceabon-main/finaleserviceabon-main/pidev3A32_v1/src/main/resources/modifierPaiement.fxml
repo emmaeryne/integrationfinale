@@ -34,11 +34,7 @@
                         <PropertyValueFactory property="idCommande" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="idUtilisateurColumn" prefWidth="100" text="ID Utilisateur">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="idUtilisateur" />
-                    </cellValueFactory>
-                </TableColumn>
+
                 <TableColumn fx:id="montantColumn" prefWidth="100" text="Montant">
                     <cellValueFactory>
                         <PropertyValueFactory property="montant" />
@@ -66,8 +62,7 @@
             <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="ID Commande:" />
             <TextField fx:id="paiementCommandeId" promptText="Entrez l'ID de la commande" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
-            <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="ID Utilisateur:" />
-            <TextField fx:id="paiementUtilisateurId" promptText="Entrez l'ID de l'utilisateur" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
+
 
             <Label style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Montant:" />
             <TextField fx:id="paiementMontant" prefHeight="34.0" prefWidth="338.0" promptText="Entrez le montant du paiement" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />

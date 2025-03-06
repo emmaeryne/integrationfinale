@@ -40,22 +40,32 @@ import java.util.stream.Collectors;
 
 public class CommandeBackController implements Initializable {
 
-    @FXML private TableView<Commande> commandeTable;
-    @FXML private TextField searchField;
-    @FXML private ComboBox<String> filterStatus;
-    @FXML private DatePicker filterDate;
-    @FXML private Pagination pagination;
-    @FXML private LineChart<String, Number> commandeChart;
+    @FXML
+    private TableView<Commande> commandeTable;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private ComboBox<String> filterStatus;
+    @FXML
+    private DatePicker filterDate;
+    @FXML
+    private Pagination pagination;
+    @FXML
+    private LineChart<String, Number> commandeChart;
 
     private final CommandeService commandeService = new CommandeService();
     private final ExportPDFService exportPDFService = new ExportPDFService();
     private ObservableList<Commande> commandes;
     private FilteredList<Commande> filteredCommandes;
 
-    @FXML private TableColumn<Commande, Integer> idCommandeColumn;
-    @FXML private TableColumn<Commande, String> dateDeCommandeColumn;
-    @FXML private TableColumn<Commande, String> statusColumn;
-    @FXML private TableColumn<Commande, Integer> idUtilisateurColumn;
+    @FXML
+    private TableColumn<Commande, Integer> idCommandeColumn;
+    @FXML
+    private TableColumn<Commande, String> dateDeCommandeColumn;
+    @FXML
+    private TableColumn<Commande, String> statusColumn;
+    @FXML
+    private TableColumn<Commande, Integer> idUtilisateurColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -147,7 +157,7 @@ public class CommandeBackController implements Initializable {
 
     private void setupFilters() {
         // Ajouter les statuts possibles au ComboBox
-        filterStatus.getItems().addAll("Canceled", "Validated");
+        filterStatus.getItems().addAll("Canceled", "Validated" , "failed");
         filterStatus.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> applyFilters());
         filterDate.valueProperty().addListener((obs, oldVal, newVal) -> applyFilters());
     }
@@ -233,26 +243,14 @@ public class CommandeBackController implements Initializable {
         }
     }
 
-    private void updateCommandes(List<Commande> newCommandes) {
-        commandes.setAll(newCommandes);
-    }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    // Méthodes pour valider et rejeter les commandes
     private void updateCommandeStatus(Commande commande, String newStatus) {
         try {
-            String query = "UPDATE commande SET status = ? WHERE idUtilisateur = ?";
+            String query = "UPDATE commande SET status = ? WHERE idCommande = ?"; // Utiliser idCommande
             Connection connection = MyConnection.getInstance().getCnx();
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, newStatus);
-            pstmt.setInt(2, commande.getIdUtilisateur()); // Utiliser idUtilisateur
+            pstmt.setInt(2, commande.getIdCommande()); // Utiliser idCommande
             pstmt.executeUpdate();
             loadCommandes(); // Recharger les commandes après la mise à jour
             showAlert("Succès", "La commande a été mise à jour avec succès!");
@@ -280,4 +278,17 @@ public class CommandeBackController implements Initializable {
             showAlert("Erreur", "Veuillez sélectionner une commande à rejeter.");
         }
     }
+
+
+
+
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

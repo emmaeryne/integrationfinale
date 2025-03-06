@@ -50,7 +50,7 @@ public class ModifierPaiement {
 
     @FXML
     public void initialize() {
-        // Lier les colonnes aux propriétés de la classe Paiement
+        // Initialisation des colonnes du TableView
         idCommandeColumn.setCellValueFactory(new PropertyValueFactory<>("idCommande"));
         idUtilisateurColumn.setCellValueFactory(new PropertyValueFactory<>("idUtilisateur"));
         montantColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
@@ -58,8 +58,12 @@ public class ModifierPaiement {
         dateDePaiementColumn.setCellValueFactory(new PropertyValueFactory<>("dateDePaiement"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Charger les données
+        // Charger les paiements dans le TableView
         loadPaiements();
+
+        // Initialisation des ComboBox
+        paiementMode.getItems().addAll("Cash", "Carte bancaire", "Virement");
+        paiementStatus.getItems().addAll("Pending"); // Seulement "Pending" est disponible
 
         // Ajouter un écouteur pour remplir les champs lors de la sélection d'une ligne
         paiementTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -98,15 +102,16 @@ public class ModifierPaiement {
             commandeListView.getItems().add("Commande #" + commande.getIdCommande());
         }
     }
-
     @FXML
     private void modifierPaiement() {
+        // Valider les champs obligatoires
         if (paiementCommandeId.getText().isEmpty() || paiementUtilisateurId.getText().isEmpty() ||
                 paiementMontant.getText().isEmpty() || paiementMode.getValue() == null || paiementDate.getValue() == null) {
             showAlert("Erreur", "Veuillez remplir tous les champs.");
             return;
         }
 
+        // Récupérer les valeurs des champs
         int idCommande, idUtilisateur;
         double montant;
         try {
@@ -120,21 +125,27 @@ public class ModifierPaiement {
 
         LocalDate dateDePaiement = paiementDate.getValue();
         String modeDePaiement = paiementMode.getValue();
-        String status = paiementStatus.getValue();
+        String status = "Pending"; // Forcer le statut à "Pending"
 
+        // Vérifier si le paiement existe
         Paiement existingPaiement = paiementService.getPaiementById(idCommande);
         if (existingPaiement == null) {
             showAlert("Erreur", "Le paiement sélectionné n'existe pas.");
             return;
         }
 
+        // Créer un objet Paiement mis à jour
         Paiement updatedPaiement = new Paiement(idCommande, idUtilisateur, montant, modeDePaiement, dateDePaiement, status);
+
+        // Appeler le service pour mettre à jour le paiement
         paiementService.modifierPaiement(updatedPaiement);
 
+        // Rafraîchir la liste des paiements
         loadPaiements();
+
+        // Afficher un message de succès
         showAlert("Succès", "Paiement modifié avec succès !");
     }
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -145,7 +156,7 @@ public class ModifierPaiement {
 
     @FXML
     public void goBack(ActionEvent event) {
-        switchScene(event, "/views/PaiementView.fxml");
+        switchScene(event, "/PaiementView.fxml");
     }
 
     @FXML

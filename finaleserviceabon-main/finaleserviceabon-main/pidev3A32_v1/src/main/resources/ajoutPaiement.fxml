@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.text.Font?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import java.net.URL?>
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="866.0" prefWidth="832.0" style="-fx-background-color: #E6F7FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutPaiement">
 
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="715.0" style="-fx-background-color: #E6F7FF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutPaiement">
 
     <!-- VBox for Payment Form -->
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="797.0" spacing="20" style="-fx-background-color: #3B4252;">
+    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="715.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8);">
 
         <!-- Back Button -->
-        <Button onAction="#goBack" prefHeight="22.0" prefWidth="55.0" style="-fx-background-color: #e1a12f; -fx-text-fill: white; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-border-radius: 5px; -fx-font-weight: bold;" text="Back" />
-        <Label prefHeight="39.0" prefWidth="508.0" text="                            Ajouter Paiement " textFill="WHITE">
+        <Button onAction="#goBack" prefHeight="22.0" prefWidth="55.0" style="-fx-background-color: #e1a12f; -fx-text-fill: white; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-border-radius: 5px; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Back" />
+        <Label prefHeight="39.0" prefWidth="508.0" text="                            Ajouter Paiement " textFill="#d7d3cd">
             <font>
                 <Font size="27.0" />
             </font>
@@ -32,13 +29,17 @@
 
         <Label prefHeight="20.0" prefWidth="531.0" style="-fx-font-size: 14px; -fx-text-fill: #ffffff;" text="     Liste des Commandes:" />
 
-        <!-- List of Orders -->
-        <ListView fx:id="commandeListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="600.0" style="-fx-font-family: 'Segoe UI'; -fx-border-color: #999; -fx-border-radius: 5px;" />
+        <!-- TableView pour afficher les commandes -->
+        <TableView fx:id="commandeTable" prefHeight="110.0" prefWidth="600.0" style="-fx-font-family: 'Segoe UI'; -fx-border-color: #999; -fx-border-radius: 5px;">
+            <columns>
+                <TableColumn fx:id="colId" text="ID Commande" />
+                <TableColumn fx:id="colDate" text="Date Commande" />
+                <TableColumn fx:id="colStatut" text="Statut" />
+            </columns>
+        </TableView>
 
         <!-- Payment Fields -->
         <TextField fx:id="paiementCommandeId" maxWidth="-Infinity" prefHeight="28.0" prefWidth="342.0" promptText="Commande ID" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
-
-        <TextField fx:id="paiementUtilisateurId" maxWidth="-Infinity" prefHeight="28.0" prefWidth="342.0" promptText="Utilisateur ID" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
         <TextField fx:id="paiementMontant" maxWidth="-Infinity" prefHeight="28.0" prefWidth="341.0" promptText="Montant (TND)" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
@@ -57,10 +58,11 @@
         <ComboBox fx:id="paiementStatus" prefHeight="28.0" prefWidth="342.0" promptText="Sélectionnez le statut du paiement" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
         <!-- Button to Process Payment -->
-        <Button onAction="#effectuerPaiement" prefHeight="0.0" prefWidth="152.0" style="-fx-background-color: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold;" text="Effectuer Paiement" />
-
+        <Button onAction="#effectuerPaiement" prefHeight="36.0" prefWidth="205.0" style="-fx-background-color: #e1a12f; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8px 15px; -fx-text-fill: white;" text="Effectuer Paiement" />
+        <stylesheets>
+            <URL value="@stylem.css" />
+        </stylesheets>
 
     </VBox>
-
 
 </AnchorPane>

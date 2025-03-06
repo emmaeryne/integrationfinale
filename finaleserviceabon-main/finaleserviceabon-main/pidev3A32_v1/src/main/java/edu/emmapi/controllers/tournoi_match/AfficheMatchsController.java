@@ -7,6 +7,7 @@ import edu.emmapi.services.tournoi_match.MatchService;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -70,6 +72,11 @@ public class AfficheMatchsController {
     @FXML
     private ImageView play_button;
 
+    @FXML
+    private TextField filterField;
+
+    private FilteredList<Match> filteredData;
+
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
     private final Image play = new Image(getClass().getResource("/images/icons/play.png").toExternalForm());
@@ -81,6 +88,24 @@ public class AfficheMatchsController {
 
     public boolean playerVisible = true;
     public boolean isPlaying = false;
+
+    @FXML
+    void filter(KeyEvent event) {
+        String filterText = filterField.getText().trim().toLowerCase();
+        filteredData.setPredicate(match -> {
+            if (filterText.isEmpty()) {
+                return true;
+            }
+            return String.valueOf(match.getId_match()).contains(filterText) ||
+                    String.valueOf(match.getId_tournoi()).contains(filterText) ||
+                    String.valueOf(match.getId_equipe1()).contains(filterText) ||
+                    String.valueOf(match.getId_equipe2()).contains(filterText) ||
+                    match.getDate_match().toString().toLowerCase().contains(filterText) ||
+                    match.getStatut_match().toLowerCase().contains(filterText) ||
+                    String.valueOf(match.getScore_equipe1()).contains(filterText) ||
+                    String.valueOf(match.getScore_equipe2()).contains(filterText);
+        });
+    }
 
 
     @FXML

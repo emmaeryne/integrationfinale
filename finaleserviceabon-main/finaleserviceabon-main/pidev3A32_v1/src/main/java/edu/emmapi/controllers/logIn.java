@@ -158,7 +158,7 @@ public class logIn {
                     Stage newStage = new Stage();
                     newStage.setScene(scene);
                     newStage.setTitle("");
-                    newStage.setWidth(800);
+                    newStage.setWidth(950);
                     newStage.setHeight(607);
                     newStage.setResizable(false);
                     newStage.show();
@@ -189,7 +189,7 @@ public class logIn {
                     Stage newStage = new Stage();
                     newStage.setScene(scene);
                     newStage.setTitle("");
-                    newStage.setWidth(800);
+                    newStage.setWidth(950);
                     newStage.setHeight(607);
                     newStage.setResizable(false);
                     newStage.show();

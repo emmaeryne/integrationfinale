@@ -265,9 +265,9 @@ public class OwnerAddCoach {
                 String securityAnswer = Answer.getText();
                 String mdpHache= BCrypt.hashpw(password, BCrypt.gensalt());
 
-                boolean is_Active = true;
+                boolean is_Active = false;
                 String role = "COACH";
-                Coach coach = new Coach(username, email, mdpHache, is_Active, role, securityQuestionId, securityAnswer, speciality, yearOfExperience, certification);
+                Coach coach = new Coach(username, mdpHache,email, is_Active, role, securityQuestionId, securityAnswer, speciality, yearOfExperience, certification);
                 userservice.addEntityCoach(coach);
 
                 showAlert(Alert.AlertType.INFORMATION, "Succès", "Coach ajouté avec succès.");

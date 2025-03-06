@@ -49,10 +49,11 @@ public class AjoutProfilJoueurController {
 
         boolean hasFace = detectFaceWithPython(imagePath);
         if (hasFace) {
-if(cin.getText().isEmpty()){
+            if(cin.getText().isEmpty()){
                 showAlert("Erreur", "Donner votre cin");
             }
             else {
+                System.out.println(hasFace);
                 joueurService.ajoutJoueurClient(new Joueur(Integer.parseInt(cin.getText()), lien_photo.getText()));
             }
         } else {
@@ -68,7 +69,6 @@ if(cin.getText().isEmpty()){
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String output = reader.readLine();
-
             return "1".equals(output);
         } catch (Exception e) {
             e.printStackTrace();

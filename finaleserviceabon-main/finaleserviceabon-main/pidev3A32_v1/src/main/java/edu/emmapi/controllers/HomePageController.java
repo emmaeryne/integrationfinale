@@ -129,7 +129,7 @@ public class HomePageController {
 
     @FXML
     private void openCommandeView(ActionEvent event) {
-        openDashboard("/BackView.fxml", "Commande");
+        openDashboard("/CommandeView .fxml", "Commande");
     }
 
 
@@ -140,7 +140,7 @@ public class HomePageController {
 
     @FXML
     private void openParticipantsDashboard(ActionEvent event) {
-        openDashboard("/Ajouter_Cours_Participant.fxml", "Participants Dashboard");
+        openDashboard("/Ajouter_Participant.fxml", "Participants Dashboard");
     }
     @FXML
     private void opencoachDashboard(ActionEvent event) {

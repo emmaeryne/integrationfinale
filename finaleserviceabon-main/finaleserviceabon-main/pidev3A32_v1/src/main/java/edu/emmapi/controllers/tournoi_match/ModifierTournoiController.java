@@ -3,6 +3,7 @@ package edu.emmapi.controllers.tournoi_match;
 import edu.emmapi.controllers.components.MusicPlayer;
 import edu.emmapi.entities.tournoi_match.Tournoi;
 import edu.emmapi.services.tournoi_match.TournoiService;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -45,6 +47,12 @@ public class ModifierTournoiController {
 
     @FXML
     private ImageView play_button;
+
+    @FXML
+    private Label message;
+
+    @FXML
+    private VBox error;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
@@ -94,6 +102,20 @@ public class ModifierTournoiController {
         MusicPlayer.getInstance().previousSong();
     }
 
+    public void showError(String message, String color){
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        this.message.setText(message);
+        error.setStyle("-fx-background-color: " + color);
+        error.setVisible(true);
+        pause.setOnFinished(event -> {
+            error.setVisible(false);
+            if (color.equals("#66ffcc")) {
+                annulerAjout(new ActionEvent());
+            }
+        });
+        pause.play();
+    }
+
     @FXML
     void annulerAjout(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/tournoi_match/AfficheTournois.fxml"));
@@ -101,10 +123,7 @@ public class ModifierTournoiController {
             Parent parent = loader.load();
             date_tournoi.getScene().setRoot(parent);
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Echec de navigation");
-            alert.setContentText(e.getMessage());
-            alert.show();
+            showError("Echec de navigation", "#F05A5A");
         }
     }
 
@@ -113,16 +132,9 @@ public class ModifierTournoiController {
         try {
             Tournoi tournoi = new Tournoi(nom_tournoi.getText(), liste_type.getValue(), Date.valueOf(date_tournoi.getValue()), trounoi_description.getText());
             tournoiService.updateEntity(id_tournoi, tournoi);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Tournoi modifiée avec succès");
-            alert.setContentText(tournoi.toString());
-            alert.show();
-            annulerAjout(event);
+            showError("Tournoi modifiée avec succès", "#66ffcc");
         }catch ( Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Veuillez remplir correctement le formulaire");
-            alert.setContentText(e.getMessage());
-            alert.show();
+            showError("Veuillez remplir correctement le formulaire", "#F05A5A");
         }
     }
 

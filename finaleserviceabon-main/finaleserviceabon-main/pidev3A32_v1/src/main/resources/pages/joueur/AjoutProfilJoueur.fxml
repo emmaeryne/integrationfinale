@@ -11,44 +11,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.joueur.AjoutProfilJoueurController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.joueur.AjoutProfilJoueurController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
-            <Label text="Bienvenue nouveau joueur" textAlignment="CENTER" textFill="WHITE">
+            <Label text="Bienvenue nouveau joueur" textAlignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ImageView fx:id="photo_view" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="photo_view" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #66C2D9; -fx-border-width: 2px; -fx-border-radius: 5;">
                <image>
                   <Image url="@../../images/backgrounds/EmptyPfp.jpg" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="15.0">
                <children>
-                  <Label text="Lien photo profil:" textFill="#f2d33a">
+                  <Label text="Lien photo profil:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="lien_photo" onKeyTyped="#updatePhoto" prefHeight="25.0" prefWidth="216.0" style="-fx-background-radius: 0;" />
+                  <TextField fx:id="lien_photo" onKeyTyped="#updatePhoto" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="15.0">
                <children>
-                  <Label prefHeight="20.0" prefWidth="117.0" text="Cin" textFill="#f2d33a">
+                  <Label prefHeight="20.0" prefWidth="117.0" text="Cin" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="cin" prefHeight="25.0" prefWidth="216.0" style="-fx-background-radius: 0;" />
+                  <TextField fx:id="cin" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="560.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Inscrire" style="-fx-background-radius: 0; -fx-background-color: #F2D33A;" text="S'inscrire" />
-                  <Button mnemonicParsing="false" onAction="#Annuler" style="-fx-background-radius: 0; -fx-background-color: #F05A5A;" text="Annuler" />
+                  <Button mnemonicParsing="false" onAction="#Inscrire" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="S'inscrire" />
+                  <Button mnemonicParsing="false" onAction="#Annuler" style="-fx-background-color: #F05A5A; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Annuler" />
                </children>
             </HBox>
          </children>

@@ -5,7 +5,7 @@ public class Joueur {
     String nom_joueur;
     int id_equipe;
     int cin;
-    String url_image;
+    String url_image="";
 
     public String getUrl_image() {
         return url_image;
@@ -21,11 +21,25 @@ public class Joueur {
         this.url_image = url_image;
     }
 
+    public Joueur(String nom, int cin, String url_image) {
+        this.cin = cin;
+        this.url_image = url_image;
+        this.nom_joueur = nom;
+    }
+
     public Joueur(int id_joueur, String nom_joueur, int id_equipe, int cin) {
         this.id_joueur = id_joueur;
         this.nom_joueur = nom_joueur;
         this.id_equipe = id_equipe;
         this.cin = cin;
+    }
+
+    public Joueur(int id_joueur, String nom_joueur, int id_equipe, int cin, String url_image) {
+        this.id_joueur = id_joueur;
+        this.nom_joueur = nom_joueur;
+        this.id_equipe = id_equipe;
+        this.cin = cin;
+        this.url_image = url_image;
     }
 
     public int getId_joueur() {
@@ -67,6 +81,7 @@ public class Joueur {
                 ", nom_joueur='" + nom_joueur + '\'' +
                 ", id_equipe=" + id_equipe +
                 ", cin=" + cin +
+                ", url_image='" + url_image + '\'' +
                 '}';
     }
 }

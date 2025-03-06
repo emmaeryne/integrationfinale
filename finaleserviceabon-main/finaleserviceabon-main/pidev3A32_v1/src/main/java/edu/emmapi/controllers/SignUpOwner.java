@@ -237,7 +237,7 @@ public class SignUpOwner {
             showAlert(Alert.AlertType.ERROR, "Error", SECURITY_ANSWER_ERROR);
             return;
         }
-boolean check=true;
+        boolean check=true;
         if (check) {
             showAlert(Alert.AlertType.ERROR, "Error", "The email is not valid according to Hunter.");
             return;

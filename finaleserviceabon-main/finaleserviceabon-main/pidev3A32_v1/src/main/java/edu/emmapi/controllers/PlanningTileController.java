@@ -286,18 +286,18 @@ public class PlanningTileController {
             }
 
             // Ajouter des événements pour chaque label
-            setupLabelNavigation();
+//            setupLabelNavigation();
         } catch (SQLException e) {
             showErrorDialog("Erreur de base de données", "Impossible de charger les plannings.", e);
         }
     }
 
     // Méthode pour configurer les événements de navigation pour les labels
-    private void setupLabelNavigation() {
-        courslabel.setOnMouseClicked(event -> navigateToPage("/listcours.fxml"));
-        participantlabel.setOnMouseClicked(event -> navigateToPage("/paticipantt.fxml"));
-        detaillabel.setOnMouseClicked(event -> navigateToPage("/planningdetails.fxml"));
-    }
+//    private void setupLabelNavigation() {
+//        courslabel.setOnMouseClicked(event -> navigateToPage("/listcours.fxml"));
+//        participantlabel.setOnMouseClicked(event -> navigateToPage("/paticipantt.fxml"));
+//        detaillabel.setOnMouseClicked(event -> navigateToPage("/planningdetails.fxml"));
+//    }
 
     // Méthode pour créer une tuile pour chaque planning
     private StackPane createPlanningTile(Planning planning) {

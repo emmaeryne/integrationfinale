@@ -95,4 +95,38 @@ public class TournoiService implements IService<Tournoi> {
         }
         return null;
     }
+
+    public Tournoi getTournoiByNom(String nom){
+        String query = "SELECT * FROM TOURNOI WHERE nom_tournoi=?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setString(1, nom);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                return new Tournoi(
+                        rs.getInt("id_tournoi"),
+                        rs.getString("nom_tournoi"),
+                        rs.getString("type_tournoi"),
+                        rs.getDate("date_tournoi"),
+                        rs.getString("description_tournoi")
+                );
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean tournoiExiste(String nom){
+        String query = "SELECT * FROM TOURNOI WHERE nom_tournoi=?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setString(1, nom);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }

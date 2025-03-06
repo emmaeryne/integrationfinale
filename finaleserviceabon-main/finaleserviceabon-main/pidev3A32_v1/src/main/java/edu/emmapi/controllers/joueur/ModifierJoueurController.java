@@ -4,14 +4,17 @@ import edu.emmapi.controllers.components.MusicPlayer;
 import edu.emmapi.entities.joueur.Joueur;
 import edu.emmapi.services.joueur.JoueurService;
 import edu.emmapi.services.navigation.NavigationService;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class ModifierJoueurController {
 
@@ -42,7 +45,15 @@ public class ModifierJoueurController {
     @FXML
     private Label id;
 
+    @FXML
+    private ImageView view_photo;
+
+    @FXML
+    private TextField photo_joueur;
+
     public boolean isPlaying = false;
+
+    public Joueur joueur;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
@@ -53,11 +64,38 @@ public class ModifierJoueurController {
     NavigationService navigationService = new NavigationService();
     JoueurService joueurService = new JoueurService();
 
+    public void showError(String message, String color){
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        this.message.setText(message);
+        error.setStyle("-fx-background-color: " + color);
+        error.setVisible(true);
+        pause.setOnFinished(event -> {
+            error.setVisible(false);
+            if (color.equals("#66ffcc")) {
+                annuler(new ActionEvent());
+            }
+        });
+
+        pause.play();
+    }
 
     @FXML
     void ModifierJouer(ActionEvent event) {
+        if (nom_joueur.getText().isEmpty()){
+            showError("Donner un nom pour votre joueur svp", "#F05A5A");
+        }
+        else if (!nom_joueur.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$")){
+            showError("Donner un nom valide svp", "#F05A5A");
+        }
+        else if (cin_joueur.getText().isEmpty()){
+            showError("Donner un cin pour votre joueur svp", "#F05A5A");
+        }
+        else if (!cin_joueur.getText().matches("^[0-9]{8}$")) {
+            showError("Donner un cin valide svp", "#F05A5A");
+        }
         Joueur joueur = new Joueur(nom_joueur.getText(), Integer.parseInt(cin_joueur.getText()));
         joueurService.updateEntity(Integer.parseInt(id.getText()), joueur);
+        showError("Joueur ajoutée avec succès", "#66ffcc");
     }
 
     @FXML
@@ -105,6 +143,11 @@ public class ModifierJoueurController {
         this.id.setText(String.valueOf(id));
     }
 
+    @FXML
+    void updatePhoto(KeyEvent event) {
+        view_photo.setImage(new Image(photo_joueur.getText()));
+    }
+
     public void initialize(){
         if(MusicPlayer.getInstance().isPlaying()){
             play_button.setImage(pause);
@@ -120,4 +163,10 @@ public class ModifierJoueurController {
         }
     }
 
+    public void setJoueur(){
+        this.joueur = joueurService.getJoueurById(Integer.parseInt(id.getText()));
+        nom_joueur.setText(joueur.getNom_joueur());
+        cin_joueur.setText(String.valueOf(joueur.getCin()));
+        photo_joueur.setText(joueur.getUrl_image());
+    }
 }

@@ -6,21 +6,22 @@ import edu.emmapi.services.joueur.JoueurService;
 import edu.emmapi.services.navigation.NavigationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class AfficheJoueursController {
 
@@ -63,6 +64,12 @@ public class AfficheJoueursController {
     @FXML
     private HBox wrapper;
 
+    @FXML
+    private TextField filterField;
+
+    private FilteredList<Joueur> filteredData;
+
+
     public boolean isPlaying = false;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
@@ -75,6 +82,19 @@ public class AfficheJoueursController {
     JoueurService joueurService = new JoueurService();
 
 
+    @FXML
+    void filter(KeyEvent event) {
+        String filterText = filterField.getText().trim().toLowerCase();
+        filteredData.setPredicate(joueur -> {
+            if (filterText.isEmpty()) {
+                return true;
+            }
+            return String.valueOf(joueur.getId_joueur()).contains(filterText) ||
+                    joueur.getNom_joueur().toLowerCase().contains(filterText) ||
+                    String.valueOf(joueur.getId_equipe()).contains(filterText) ||
+                    String.valueOf(joueur.getCin()).contains(filterText);
+        });
+    }
 
     @FXML
     void goToAfficheEquipes(MouseEvent event) {
@@ -113,14 +133,22 @@ public class AfficheJoueursController {
         }
         ModifierJoueurController modifierJoueurController = loader.getController();
         modifierJoueurController.setIdJoueur(selected_joueur_id);
+        modifierJoueurController.setJoueur();
         tableview_joueur.getScene().setRoot(parent);
     }
 
     @FXML
     void supprimerJoueur(ActionEvent event) {
-        joueurService.deleteEntity(tableview_joueur.getSelectionModel().getSelectedItem().getId_joueur());
-        tableview_joueur.getItems().clear();
-        refreshTableviewJoueur();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce joueur ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            joueurService.deleteEntity(tableview_joueur.getSelectionModel().getSelectedItem().getId_joueur());
+            tableview_joueur.getItems().clear();
+            refreshTableviewJoueur();
+        }
     }
 
     @FXML
@@ -164,11 +192,17 @@ public class AfficheJoueursController {
                 joueurService.getAllData()
         );
 
+        filteredData = new FilteredList<>(joueurObservableList, p -> true);
+
         tableview_joueur_id.setCellValueFactory(new PropertyValueFactory<Joueur, Integer>("id_joueur"));
         tableview_joueur_nom.setCellValueFactory(new PropertyValueFactory<Joueur, String>("nom_joueur"));
         tableview_joueur_equipe.setCellValueFactory(new PropertyValueFactory<Joueur, Integer>("id_equipe"));
         tableview_joueur_cin.setCellValueFactory(new PropertyValueFactory<Joueur, Integer>("cin"));
-        tableview_joueur.setItems(joueurObservableList);
+        tableview_joueur.setItems(filteredData);
+
+        if (filterField != null) {
+            filterField.setText("");
+        }
     }
 
     public void initialize(){

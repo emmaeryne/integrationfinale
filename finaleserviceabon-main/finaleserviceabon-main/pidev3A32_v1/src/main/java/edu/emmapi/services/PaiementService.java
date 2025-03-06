@@ -91,6 +91,7 @@ public class PaiementService {
         return paiements;
     }
 
+
     public void modifierPaiement(Paiement paiement) {
         String query = "UPDATE paiement SET idUtilisateur = ?, montant = ?, modeDePaiement = ?, dateDePaiement = ?, status = ? WHERE idCommande = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -108,7 +109,6 @@ public class PaiementService {
             } else {
                 System.out.println("❌ No rows updated. Check if idCommande exists.");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

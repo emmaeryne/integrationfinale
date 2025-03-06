@@ -14,6 +14,7 @@
 <AnchorPane minWidth="-Infinity" prefHeight="667.0" prefWidth="511.0" style="-fx-background-color: FBB116;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.SignUpOwner">
 
     <!-- Titre de la page -->
+    <!-- Titre de la page -->
     <Label layoutX="28.0" layoutY="30.0" text="Inscription Propriétaire de Service Sportif" textFill="GREY">
         <font>
             <Font name="System Bold" size="24.0" />
@@ -50,5 +51,4 @@
     </Button>
     <ComboBox fx:id="SelectQ" layoutX="139.0" layoutY="516.0" prefHeight="35.0" prefWidth="234.0" promptText="selectionner une question" />
     <TextField fx:id="Answer" layoutX="139.0" layoutY="569.0" prefHeight="35.0" prefWidth="234.0" promptText="reponse" />
-
 </AnchorPane>

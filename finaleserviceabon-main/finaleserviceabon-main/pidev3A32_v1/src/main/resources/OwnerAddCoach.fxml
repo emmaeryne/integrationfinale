@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <?import javafx.scene.control.Button?>
-        <?import javafx.scene.control.ComboBox?>
-        <?import javafx.scene.control.Label?>
-        <?import javafx.scene.control.TextField?>
-        <?import javafx.scene.image.Image?>
-        <?import javafx.scene.image.ImageView?>
-        <?import javafx.scene.layout.AnchorPane?>
-        <?import javafx.scene.layout.VBox?>
-        <?import javafx.scene.text.Font?>
-        <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="520.0" style="-fx-background-color: Fbb611;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.OwnerAddCoach">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="520.0" style="-fx-background-color: Fbb611;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.OwnerAddCoach">
     <children>
         <Text fill="GREY" layoutX="140.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="inscription coach " wrappingWidth="257.13671875">
             <font>
                 <Font size="32.0" />
             </font>
         </Text>
-        <VBox layoutX="110.0" layoutY="197.0" minWidth="-Infinity" prefHeight="659.0" prefWidth="289.0" spacing="10">
-            <TextField fx:id="usernameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="username" />
-            <Label fx:id="usernameErrorLabel" textFill="RED" />
+        <ScrollPane layoutX="110.0" layoutY="66.0" prefHeight="675.0" prefWidth="298.0">
+            <content>
+                <VBox minWidth="-Infinity" prefHeight="659.0" prefWidth="289.0" spacing="10">
+                    <TextField fx:id="usernameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="username" />
+                    <Label fx:id="usernameErrorLabel" textFill="RED" />
 
-            <TextField fx:id="emailField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="email" />
-            <Label fx:id="emailErrorLabel" textFill="RED" />
+                    <TextField fx:id="emailField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="email" />
+                    <Label fx:id="emailErrorLabel" textFill="RED" />
 
-            <TextField fx:id="passwordField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="289.0" promptText="mot de passe" />
-            <Label fx:id="passwordErrorLabel" textFill="RED" />
+                    <TextField fx:id="passwordField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="289.0" promptText="mot de passe" />
+                    <Label fx:id="passwordErrorLabel" textFill="RED" />
 
-            <TextField fx:id="password2Field" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0" promptText="Confirmer mot de passe" />
-            <Label fx:id="password2ErrorLabel" textFill="RED" />
+                    <TextField fx:id="password2Field" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0" promptText="Confirmer mot de passe" />
+                    <Label fx:id="password2ErrorLabel" textFill="RED" />
 
-            <TextField fx:id="phoneNumberField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="Numéro de téléphone" />
-            <Label fx:id="phoneNumberErrorLabel" textFill="RED" />
-            <TextField fx:id="specialityField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="specialite" />
-            <Label fx:id="specialityErrorLabel" textFill="RED" />
+                    <TextField fx:id="phoneNumberField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="Numéro de téléphone" />
+                    <Label fx:id="phoneNumberErrorLabel" textFill="RED" />
+                    <TextField fx:id="specialityField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="specialite" />
+                    <Label fx:id="specialityErrorLabel" textFill="RED" />
 
-            <TextField fx:id="yearOfExperienceField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="annes d experience" />
-            <Label fx:id="yearOfExperienceErrorLabel" textFill="RED" />
+                    <TextField fx:id="yearOfExperienceField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="annes d experience" />
+                    <Label fx:id="yearOfExperienceErrorLabel" textFill="RED" />
 
-            <TextField fx:id="CertificationField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="certification" />
-            <Label fx:id="certificationErrorLabel" textFill="RED" />
-            <ComboBox fx:id="SelectQ" prefHeight="32.0" prefWidth="294.0" promptText="selectionner une question" />
-            <TextField fx:id="Answer" prefHeight="35.0" prefWidth="292.0" promptText="reponse" />
-        </VBox>
-        <Button layoutX="470.0" layoutY="852.0" mnemonicParsing="false" onAction="#loginBack" text="logIn" />
+                    <TextField fx:id="CertificationField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="certification" />
+                    <Label fx:id="certificationErrorLabel" textFill="RED" />
+                    <ComboBox fx:id="SelectQ" prefHeight="32.0" prefWidth="294.0" promptText="selectionner une question" />
+                    <TextField fx:id="Answer" prefHeight="35.0" prefWidth="292.0" promptText="reponse" />
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#loginBack" text="logIn" />
 
-        <Button fx:id="ajouterCoach" layoutX="110.0" layoutY="860.0" mnemonicParsing="false" onAction="#ajouterCoach" prefHeight="35.0" prefWidth="290.0" style="-fx-background-color: grey;" text="ajouter" />
-        <ImageView fitHeight="137.0" fitWidth="167.0" layoutX="192.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@assets/logo.png" />
-            </image>
-        </ImageView>
+        <Button fx:id="ajouterCoach" layoutX="106.0" layoutY="741.0" mnemonicParsing="false" onAction="#ajouterCoach" prefHeight="35.0" prefWidth="290.0" style="-fx-background-color: grey;" text="ajouter" />
     </children>
+
+
 </AnchorPane>

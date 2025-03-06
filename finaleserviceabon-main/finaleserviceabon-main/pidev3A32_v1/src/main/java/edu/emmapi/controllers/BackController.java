@@ -164,9 +164,6 @@ public class BackController implements Initializable {
     }
 
     @FXML
-    private void gotoHistorique(ActionEvent event) {
-        loadScene(event, "/HistoriqueTransactions.fxml");
-    }
 
     public void goToAdminC(ActionEvent actionEvent) {
         loadScene(actionEvent, "/CommandeBack.fxml");
@@ -181,7 +178,7 @@ public class BackController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 500));
+            stage.setScene(new Scene(root, 800, 800));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -118,6 +118,20 @@ public class AfficherClients {
     public void GoToHomePage(MouseEvent mouseEvent) {
     }
 
+    public void toGestionAdmin(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
+
+        Scene currentScene = searchField.getScene();
+
+        currentScene.setRoot(root);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setWidth(1000);
+        stage.setHeight(1000);  //
+        stage.setResizable(false);
+
+    }
+
     private class UserCard extends VBox {
 
         private final user user;

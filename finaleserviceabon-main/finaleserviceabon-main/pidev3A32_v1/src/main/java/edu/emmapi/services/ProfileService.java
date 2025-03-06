@@ -44,7 +44,7 @@ public class ProfileService implements IService<profile> {
     @Override
     public void deleteEntity(int id) {
         String requete = "DELETE FROM profile WHERE user_id = ?";
-        try (PreparedStatement pst = cnx.prepareStatement(requete)) {
+        try (PreparedStatement pst =MyConnection.getInstance().getCnx().prepareStatement(requete)) {
             pst.setInt(1, id); // Définir l'id pour la suppression
             int rowsAffected = pst.executeUpdate(); // Exécuter la suppression
             if (rowsAffected > 0) {

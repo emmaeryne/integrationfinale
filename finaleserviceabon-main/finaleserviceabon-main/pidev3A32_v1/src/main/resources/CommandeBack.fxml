@@ -23,9 +23,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CommandeBackController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="893.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CommandeBackController">
     <content>
-        <VBox prefHeight="600.0" prefWidth="900.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+        <VBox prefHeight="647.0" prefWidth="928.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
             <padding>
                 <Insets bottom="15" left="15" right="15" top="15" />
             </padding>
@@ -33,12 +33,12 @@
             <!-- Header -->
             <AnchorPane prefHeight="100.0" prefWidth="870.0">
                 <children>
-                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="355.0" layoutY="10.0">
+                    <ImageView fitHeight="76.0" fitWidth="78.0" layoutX="355.0" layoutY="10.0">
                         <image>
                             <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
                         </image>
                     </ImageView>
-                    <Label layoutX="320.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Gestion des Commandes" textFill="#f4eeee" />
+                    <Label layoutX="320.0" layoutY="80.0" prefHeight="14.0" prefWidth="343.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Gestion des Commandes" textFill="#f4eeee" />
                 </children>
             </AnchorPane>
 
@@ -64,33 +64,33 @@
                 <VBox spacing="10">
                     <TableView fx:id="commandeTable" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="idCommandeColumn" text="ID Commande" prefWidth="100.0" style="-fx-alignment: CENTER; -fx-font-weight: bold;">
+                            <TableColumn fx:id="idCommandeColumn" prefWidth="100.0" style="-fx-alignment: CENTER; -fx-font-weight: bold;" text="ID Commande">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="idCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="dateDeCommandeColumn" text="Date de Commande" prefWidth="150.0" style="-fx-alignment: CENTER;">
+                            <TableColumn fx:id="dateDeCommandeColumn" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Date de Commande">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="dateDeCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="statusColumn" text="Statut" prefWidth="120.0" style="-fx-alignment: CENTER;">
+                            <TableColumn fx:id="statusColumn" prefWidth="120.0" style="-fx-alignment: CENTER;" text="Statut">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="status" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="idUtilisateurColumn" text="ID Utilisateur" prefWidth="100.0" style="-fx-alignment: CENTER;">
+                            <TableColumn fx:id="idUtilisateurColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="ID Utilisateur">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="idUtilisateur" />
                                 </cellValueFactory>
                             </TableColumn>
                         </columns>
                     </TableView>
-                    <Pagination fx:id="pagination" pageCount="5" style="-fx-background-color: #3B4252; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    <Pagination fx:id="pagination" pageCount="5" prefHeight="78.0" prefWidth="638.0" style="-fx-background-color: #3B4252; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" />
                 </VBox>
 
                 <!-- Right Section: Action Buttons -->
-                <VBox prefWidth="250.0" spacing="15" styleClass="form-container" alignment="CENTER">
+                <VBox alignment="CENTER" prefHeight="263.0" prefWidth="255.0" spacing="15" styleClass="form-container">
                     <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Actions sur la Commande" />
                     <Button onAction="#validerCommande" prefWidth="200.0" style="-fx-background-color: #A3BE8C; -fx-text-fill: #2E3440; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px; -fx-cursor: hand;" text="✅ Valider Commande" />
                     <Button onAction="#rejeterCommande" prefWidth="200.0" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px; -fx-cursor: hand;" text="❌ Rejeter Commande" />
@@ -98,7 +98,7 @@
             </SplitPane>
 
             <!-- Commande Chart -->
-            <LineChart fx:id="commandeChart" prefHeight="100.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5; -fx-background-radius: 5;">
+            <LineChart fx:id="commandeChart" prefHeight="270.0" prefWidth="870.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5; -fx-background-radius: 5;">
                 <xAxis>
                     <CategoryAxis label="Date" tickLabelFill="#f4eeee" />
                 </xAxis>
@@ -109,8 +109,7 @@
 
             <!-- Footer -->
             <HBox alignment="CENTER" spacing="10">
-                <Button onAction="#retour" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="⬅ Retour" />
-                <Label style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" HBox.hgrow="ALWAYS" alignment="CENTER" />
+                <Label alignment="CENTER" style="-fx-font-size: 12px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" HBox.hgrow="ALWAYS" />
             </HBox>
         </VBox>
     </content>
