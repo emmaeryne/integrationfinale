@@ -105,7 +105,6 @@ public class AjoutJoueurController {
             try {
                 joueurService.addEntity(joueur);
                 showError("Joueur modifiée avec succès", "#66ffcc");
-                navigationService.goToPage("/pages/joueur/AfficheJoueurs.fxml",message);
             } catch (SQLException e) {
                 showError(e.getMessage(), "#F05A5A");
             }

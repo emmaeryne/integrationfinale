@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -59,6 +60,16 @@
                 <VBox fx:id="beacon" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="554.0" spacing="20.0" style="-fx-background-color: #2E3440;">
                     <children>
                         <Label fx:id="titre_liste_equipes" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Liste des Équipes" />
+                  <HBox alignment="TOP_CENTER" prefHeight="58.0" prefWidth="518.0" spacing="10.0">
+                     <children>
+                        <Label text="Filter" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="filterField" onKeyTyped="#filter" prefHeight="25.0" prefWidth="458.0" />
+                     </children>
+                  </HBox>
                         <TableView fx:id="tableview_equipes" prefHeight="200.0" prefWidth="504.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;">
                             <columns>
                                 <TableColumn fx:id="tableview_equipe_id" prefWidth="43.0" text="Id" />

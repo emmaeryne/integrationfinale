@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -66,6 +67,16 @@
                     <children>
                         <!-- Header -->
                         <Label fx:id="titre_liste_tournois" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Liste Tournois" textFill="#f4eeee" />
+                  <HBox alignment="TOP_CENTER" prefHeight="58.0" prefWidth="518.0" spacing="10.0">
+                     <children>
+                        <Label text="Filter" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="filterField" onKeyTyped="#filter" prefHeight="25.0" prefWidth="455.0" />
+                     </children>
+                  </HBox>
 
                         <!-- Table -->
                         <TableView fx:id="tableview_tournoi" prefHeight="200.0" prefWidth="514.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;">
