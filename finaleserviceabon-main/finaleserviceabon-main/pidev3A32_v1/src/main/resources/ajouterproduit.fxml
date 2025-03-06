@@ -49,6 +49,7 @@
                     <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333; -fx-font-family: 'Arial';" text="Détails du Produit" />
 
                     <!-- Catégorie -->
+<<<<<<< Updated upstream
                     <Label style="-fx-font-size: 16px; -fx-text-fill: #333333; -fx-font-family: 'Arial';" text="Categorie" />
                     <ComboBox fx:id="CategorieComboBox" prefWidth="300.0" promptText="Sélectionnez une catégorie"
                               style="
@@ -56,6 +57,10 @@
               -fx-prompt-text-fill: white; /* Couleur du texte du prompt */
           ">
                     </ComboBox>
+=======
+                    <Label style="-fx-font-size: 16px; -fx-text-fill: white; -fx-font-family: 'Arial';" text="Categorie" />
+                    <ComboBox fx:id="CategorieComboBox" prefWidth="300.0" promptText="Sélectionnez une catégorie" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-family: 'Arial';" />
+>>>>>>> Stashed changes
 
                     <!-- Nom Produit -->
                     <Label style="-fx-font-size: 16px; -fx-text-fill: #333333; -fx-font-family: 'Arial';" text="Nom Produit" />
