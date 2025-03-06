@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="444.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ListCours">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="444.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ListCours">
     <content>
         <VBox prefHeight="444.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
             <padding>
@@ -28,15 +28,13 @@
                             <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo -->
                         </image>
                     </ImageView>
-                    <Text layoutX="180.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Liste des Cours" fill="#f4eeee" />
+                    <Text fill="#f4eeee" layoutX="180.0" layoutY="101.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Liste des Cours" />
                 </children>
             </AnchorPane>
 
             <!-- Background Image -->
             <ImageView fitHeight="444.0" fitWidth="600.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@interface-services.png" />
-                </image>
+
             </ImageView>
 
             <!-- Loading Indicator -->
@@ -47,10 +45,10 @@
 
             <!-- Navigation Links -->
             <HBox alignment="CENTER_LEFT" spacing="20">
-                <Label fx:id="Detaillabel" text="Détail" textFill="#D8DEE9" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
-                <Label fx:id="planninglabel" text="Planning" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
-                <Label fx:id="courslabel" text="Cours" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
-                <Label fx:id="participantlabel" text="Participant" textFill="#D8DEE9"  style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" />
+                <Label fx:id="Detaillabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Détail" textFill="#D8DEE9" />
+                <Label fx:id="planninglabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Planning" textFill="#D8DEE9" />
+                <Label fx:id="courslabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Cours" textFill="#D8DEE9" />
+                <Label fx:id="participantlabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Participant" textFill="#D8DEE9" />
             </HBox>
 
             <!-- Filters -->
