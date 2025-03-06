@@ -40,7 +40,11 @@
                                     <PropertyValueFactory property="dateDeCommande" />
                                 </cellValueFactory>
                             </TableColumn>
-
+                            <TableColumn fx:id="idUtilisateurColumn" prefWidth="100" text="ID Utilisateur">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="idUtilisateur" />
+                                </cellValueFactory>
+                            </TableColumn>
                             <TableColumn fx:id="statusColumn" prefWidth="100" text="Statut">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="status" />

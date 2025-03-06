@@ -1,77 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.DashboardClient">
-    <children>
-        <ImageView fitHeight="532.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@assets/interface-user.png" />
-            </image>
-        </ImageView>
-        <AnchorPane>
-            <AnchorPane fx:id="profileDetailsPane" layoutX="220.0" layoutY="50.0" prefHeight="515.0" prefWidth="689.0" style="-fx-background-color: white; -fx-padding: 20;">
-                <children>
-                    <!-- Titre -->
-                    <Text layoutX="20.0" layoutY="30.0" style="-fx-font: 18px Arial Bold;" text="Profile Details" />
+<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.DashboardClient">
+    <content>
+        <AnchorPane prefHeight="800.0" prefWidth="900.0">
+            <!-- Image de fond -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="900.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
 
-                    <!-- Carte pour les informations du profil -->
-                    <VBox layoutX="14.0" layoutY="57.0" spacing="10">
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="First Name:" />
-                            <Label fx:id="firstNameLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="John" />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Last Name:" />
-                            <Label fx:id="lastNameLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="Doe" />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Date of Birth:" />
-                            <Label fx:id="dateOfBirthLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="01/01/1990" />
-                        </HBox>
-                        <HBox spacing="10" />
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Bio:" />
-                            <Label fx:id="bioLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="This is a sample bio." />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Location:" />
-                            <Label fx:id="locationLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="New York, USA" />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Phone Number:" />
-                            <Label fx:id="phoneNumberLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="+1234567890" />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Website:" />
-                            <Label fx:id="websiteLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="www.example.com" />
-                        </HBox>
-                        <HBox spacing="10">
-                            <Label style="-fx-font-weight: bold;" text="Social Media Links:" />
-                            <Label fx:id="socialMediaLinksLabel" style="-fx-background-color: #f0f0f0; -fx-padding: 5; -fx-background-radius: 5;" text="twitter.com/johndoe" />
-                        </HBox>
+                <!-- Contenu principal -->
+                <HBox prefHeight="800.0" prefWidth="900.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
+
+                    <!-- Menu latéral -->
+                    <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="10">
+                        <Button fx:id="GestionUser" onAction="#nextPageUser" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Gestion Utilisateur" />
+                        <Button fx:id="GestionCoach" onAction="#GoToGestionCoach" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Gestion Coach" />
                     </VBox>
 
-                    <!-- Bouton Modifier -->
-                    <Button layoutX="20.0" layoutY="450.0" onAction="#editProfile" style="-fx-background-color: fbb116; -fx-text-fill: white;" text="Modifier" />
-                    <Label layoutX="469.0" layoutY="45.0" prefHeight="63.0" prefWidth="152.0" style="-fx-font-weight: bold;" text="Profile Picture:" />
-                    <ImageView fx:id="profilePictureView" fitHeight="231.0" fitWidth="256.0" layoutX="410.0" layoutY="90.0" preserveRatio="true">
-                        <image>
-                            <Image url="@assets/logo.png" />
-                        </image>
-                    </ImageView>
-                    <Button layoutX="102.0" layoutY="450.0" onAction="#supprimerProfile" style="-fx-background-color: fbb116; -fx-text-fill: white;" text="supprimer" />
-                </children>
-            </AnchorPane>
-            <Button fx:id="GestionUser" layoutX="-12.0" layoutY="46.0" mnemonicParsing="false" onAction="#nextPageUser" prefHeight="510.0" prefWidth="231.0" text="gestion utlisateur" />
-            <Button fx:id="GestionCoach" layoutX="-10.0" layoutY="58.0" mnemonicParsing="false" onAction="#GoToGestionCoach" prefHeight="523.0" prefWidth="226.0" text="gestion Coach" />
+                    <!-- Contenu principal -->
+                    <VBox alignment="CENTER" spacing="20" prefWidth="700.0">
+                        <!-- En-tête avec logo -->
+                        <HBox alignment="CENTER" spacing="10">
+                            <ImageView fitHeight="62.0" fitWidth="128.0">
+                                <image>
+                                    <Image url="@assets/interface-user.png" />
+                                </image>
+                            </ImageView>
+                        </HBox>
+                        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Détails du Profil" />
+
+                        <!-- Carte des détails du profil -->
+                        <VBox fx:id="" alignment="TOP_LEFT" spacing="15" prefWidth="600.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 8; -fx-border-color: #66C2D9; -fx-border-width: 1px; -fx-border-radius: 8;">
+                            <padding>
+                                <Insets bottom="15" left="15" right="15" top="15" />
+                            </padding>
+
+                            <!-- Image de profil -->
+                            <HBox alignment="CENTER" spacing="20">
+                                <ImageView fx:id="profilePictureView" fitHeight="200.0" fitWidth="200.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/logo.png" />
+                                    </image>
+                                </ImageView>
+                            </HBox>
+
+                            <!-- Informations du profil -->
+                            <VBox spacing="10">
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Prénom :" />
+                                    <Label fx:id="firstNameLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="John" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Nom :" />
+                                    <Label fx:id="lastNameLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="Doe" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Date de naissance :" />
+                                    <Label fx:id="dateOfBirthLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="01/01/1990" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Bio :" />
+                                    <Label fx:id="bioLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="This is a sample bio." />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Localisation :" />
+                                    <Label fx:id="locationLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="New York, USA" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Numéro de téléphone :" />
+                                    <Label fx:id="phoneNumberLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="+1234567890" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Site Web :" />
+                                    <Label fx:id="websiteLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="www.example.com" />
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-size: 14px;" text="Liens réseaux sociaux :" />
+                                    <Label fx:id="socialMediaLinksLabel" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-padding: 5; -fx-background-radius: 5;" text="twitter.com/johndoe" />
+                                </HBox>
+                            </VBox>
+
+                            <!-- Boutons -->
+                            <HBox alignment="CENTER" spacing="20">
+                                <Button onAction="#editProfile" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Modifier">
+                                    <padding>
+                                        <Insets bottom="10" left="20" right="20" top="10" />
+                                    </padding>
+                                </Button>
+                                <Button onAction="#supprimerProfile" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Supprimer">
+                                    <padding>
+                                        <Insets bottom="10" left="20" right="20" top="10" />
+                                    </padding>
+                                </Button>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Pied de page -->
+                        <Label style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5;" text="© 2025 - Tableau de Bord Client" />
+                    </VBox>
+                </HBox>
+            </children>
         </AnchorPane>
-    </children>
-</AnchorPane>
+    </content>
+</ScrollPane>

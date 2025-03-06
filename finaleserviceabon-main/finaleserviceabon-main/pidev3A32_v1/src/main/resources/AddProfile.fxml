@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,108 +8,109 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.createProfileOwner">
-    <children>
-        <VBox layoutX="214.0" layoutY="79.0" prefHeight="274.0" prefWidth="643.0" spacing="20" style="-fx-padding: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+<?import javafx.scene.layout.VBox?>
 
-            <GridPane hgap="10" vgap="10">
-                <!-- Première colonne -->
-                <Label text="nom" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="FirstNameOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label fx:id="errorFirstName" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.createProfileOwner">
+    <content>
+        <AnchorPane prefHeight="800.0" prefWidth="900.0">
+            <!-- Image de fond -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="900.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
 
-                <Label text="prénom" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="LastNameOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="errorLastName" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <!-- Contenu principal -->
+                <VBox alignment="CENTER" prefHeight="800.0" prefWidth="900.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
 
-                <Label text="date de naissance" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="DateOfBirthOwnerTF" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="errorDateOfBirth" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <!-- En-tête avec logo -->
+                    <HBox alignment="CENTER" spacing="10" />
+                    <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Créer Votre Profil" />
 
-                <!-- Deuxième colonne -->
-                <Label text="Location" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="LocationOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                <Label fx:id="errorLocation" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <!-- Formulaire -->
+                    <VBox alignment="CENTER" prefWidth="600.0" spacing="15">
+                        <GridPane hgap="15" style="-fx-padding: 10;" vgap="10">
+                            <!-- Première colonne -->
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Nom" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <TextField fx:id="FirstNameOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Label fx:id="errorFirstName" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="numéro de telephone" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="PhoneOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <Label fx:id="errorPhone" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Prénom" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <TextField fx:id="LastNameOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <Label fx:id="errorLastName" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Website" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="WebsiteOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <Label fx:id="errorWebsite" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Date de naissance" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                            <TextField fx:id="DateOfBirthOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                            <Label fx:id="errorDateOfBirth" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                <Label text="Bio" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="bioOwnerTF" prefWidth="200" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <Label fx:id="errorBio" style="-fx-text-fill: red; visibility: hidden;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                            <!-- Deuxième colonne -->
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Localisation" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                            <TextField fx:id="LocationOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                            <Label fx:id="errorLocation" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
-                <ImageView fx:id="selectedImageView" fitHeight="93.0" fitWidth="115.0" preserveRatio="true" GridPane.rowIndex="3" />
-                <Button fx:id="selectImageButton" onAction="#handleSelectImage" prefHeight="25.0" prefWidth="204.0" style="-fx-background-color: grey;" text="Choisir une photo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Numéro de téléphone" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                            <TextField fx:id="PhoneOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                            <Label fx:id="errorPhone" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
 
-                <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
-                </rowConstraints>
-            </GridPane>
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Site Web" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                            <TextField fx:id="WebsiteOwnerTF" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                            <Label fx:id="errorWebsite" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
 
-            <!-- Liens des réseaux sociaux -->
-            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Social Media Links" />
-            <TextField fx:id="socialMediaLinksOwnerTF" prefWidth="400" />
-            <Label fx:id="errorSocialLinks" style="-fx-text-fill: red; visibility: hidden;" />
-        </VBox>
-        <Text layoutX="377.0" layoutY="59.0" style="-fx-font-size: 27px; -fx-fill: #333; -fx-font-weight: bold;" text="CREER VOTRE PROFILE" />
-        <ImageView fitHeight="491.0" fitWidth="287.0" layoutX="-47.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@assets/basketball.jpg" />
-            </image>
-        </ImageView>
-        <TextField fx:id="ProfilePicOwnerTF" visible="false" /> <!-- Champ caché pour stocker l'URL de l'image -->
-        <!-- Bouton de soumission -->
-        <Button layoutX="461.0" layoutY="442.0" onAction="#AjouterProfile" prefWidth="150" style="-fx-background-color: grey; -fx-text-fill: white; -fx-font-size: 16px;" text="SAUVEGARDER" />
-    </children>
-</AnchorPane>
+                            <!-- Section Image -->
+                            <ImageView fx:id="selectedImageView" fitHeight="93.0" fitWidth="115.0" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                            <Button fx:id="selectImageButton" onAction="#handleSelectImage" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5;" text="Choisir une photo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                            <TextField fx:id="ProfilePicOwnerTF" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="100.0" />
+                                <ColumnConstraints minWidth="200.0" />
+                                <ColumnConstraints halignment="RIGHT" minWidth="100.0" />
+                                <ColumnConstraints minWidth="200.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
+                        </GridPane>
+
+                        <!-- Bio et Liens sociaux -->
+                        <VBox alignment="CENTER" prefWidth="600.0" spacing="10">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Bio" />
+                            <TextField fx:id="bioOwnerTF" prefHeight="35.0" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                            <Label fx:id="errorBio" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Liens réseaux sociaux" />
+                            <TextField fx:id="socialMediaLinksOwnerTF" prefHeight="35.0" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                            <Label fx:id="errorSocialLinks" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Bouton Sauvegarder -->
+                    <HBox alignment="CENTER" spacing="20">
+                        <Button onAction="#AjouterProfile" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sauvegarder">
+                            <padding>
+                                <Insets bottom="10" left="20" right="20" top="10" />
+                            </padding>
+                        </Button>
+                    </HBox>
+
+                    <!-- Pied de page -->
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5;" text="© 2025 - Création de Profil" />
+                </VBox>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>

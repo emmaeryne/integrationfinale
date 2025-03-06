@@ -1,56 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="520.0" style="-fx-background-color: Fbb611;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.OwnerAddCoach">
-    <children>
-        <Text fill="GREY" layoutX="140.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="inscription coach " wrappingWidth="257.13671875">
-            <font>
-                <Font size="32.0" />
-            </font>
-        </Text>
-        <ScrollPane layoutX="110.0" layoutY="66.0" prefHeight="675.0" prefWidth="298.0">
-            <content>
-                <VBox minWidth="-Infinity" prefHeight="659.0" prefWidth="289.0" spacing="10">
-                    <TextField fx:id="usernameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="username" />
-                    <Label fx:id="usernameErrorLabel" textFill="RED" />
+<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.OwnerAddCoach">
+    <content>
+        <AnchorPane prefHeight="800.0" prefWidth="600.0">
+            <!-- Image de fond -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="600.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
 
-                    <TextField fx:id="emailField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="email" />
-                    <Label fx:id="emailErrorLabel" textFill="RED" />
+                <!-- Contenu principal -->
+                <VBox alignment="CENTER" layoutY="86.0" prefHeight="800.0" prefWidth="600.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
 
-                    <TextField fx:id="passwordField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="289.0" promptText="mot de passe" />
-                    <Label fx:id="passwordErrorLabel" textFill="RED" />
+                    <!-- En-tête avec logo -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <ImageView fitHeight="62.0" fitWidth="128.0">
+                            <image>
+                                <Image url="@hjk-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                    <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Ajout d'un Coach" />
 
-                    <TextField fx:id="password2Field" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0" promptText="Confirmer mot de passe" />
-                    <Label fx:id="password2ErrorLabel" textFill="RED" />
+                    <!-- Formulaire -->
+                    <VBox alignment="CENTER" prefWidth="400.0" spacing="15">
+                        <TextField fx:id="usernameField" prefHeight="35.0" prefWidth="400.0" promptText="Nom d'utilisateur" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="usernameErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
 
-                    <TextField fx:id="phoneNumberField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0" promptText="Numéro de téléphone" />
-                    <Label fx:id="phoneNumberErrorLabel" textFill="RED" />
-                    <TextField fx:id="specialityField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="specialite" />
-                    <Label fx:id="specialityErrorLabel" textFill="RED" />
+                        <TextField fx:id="emailField" prefHeight="35.0" prefWidth="400.0" promptText="Email" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="emailErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
 
-                    <TextField fx:id="yearOfExperienceField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="annes d experience" />
-                    <Label fx:id="yearOfExperienceErrorLabel" textFill="RED" />
+                        <TextField fx:id="passwordField" prefHeight="35.0" prefWidth="400.0" promptText="Mot de passe" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="passwordErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
 
-                    <TextField fx:id="CertificationField" minHeight="-Infinity" prefHeight="35.0" prefWidth="401.0" promptText="certification" />
-                    <Label fx:id="certificationErrorLabel" textFill="RED" />
-                    <ComboBox fx:id="SelectQ" prefHeight="32.0" prefWidth="294.0" promptText="selectionner une question" />
-                    <TextField fx:id="Answer" prefHeight="35.0" prefWidth="292.0" promptText="reponse" />
+                        <TextField fx:id="password2Field" prefHeight="35.0" prefWidth="400.0" promptText="Confirmer mot de passe" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="password2ErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                        <TextField fx:id="phoneNumberField" prefHeight="35.0" prefWidth="400.0" promptText="Numéro de téléphone" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="phoneNumberErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                        <TextField fx:id="specialityField" prefHeight="35.0" prefWidth="400.0" promptText="Spécialité" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="specialityErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                        <TextField fx:id="yearOfExperienceField" prefHeight="35.0" prefWidth="400.0" promptText="Années d'expérience" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="yearOfExperienceErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                        <TextField fx:id="CertificationField" prefHeight="35.0" prefWidth="400.0" promptText="Certification" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <Label fx:id="certificationErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
+
+                        <ComboBox fx:id="SelectQ" prefHeight="35.0" prefWidth="400.0" promptText="Sélectionner une question" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <TextField fx:id="Answer" prefHeight="35.0" prefWidth="400.0" promptText="Réponse" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                    </VBox>
+
+                    <!-- Boutons -->
+                    <HBox alignment="CENTER" spacing="20">
+                        <Button fx:id="ajouterCoach" onAction="#ajouterCoach" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Ajouter">
+                            <padding>
+                                <Insets bottom="10" left="20" right="20" top="10" />
+                            </padding>
+                        </Button>
+                        <Button onAction="#loginBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Connexion">
+                            <padding>
+                                <Insets bottom="10" left="20" right="20" top="10" />
+                            </padding>
+                        </Button>
+                    </HBox>
+
+                    <!-- Pied de page -->
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5;" text="© 2025 - Ajout de Coach" />
                 </VBox>
-            </content>
-        </ScrollPane>
-        <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#loginBack" text="logIn" />
-
-        <Button fx:id="ajouterCoach" layoutX="106.0" layoutY="741.0" mnemonicParsing="false" onAction="#ajouterCoach" prefHeight="35.0" prefWidth="290.0" style="-fx-background-color: grey;" text="ajouter" />
-    </children>
-
-
-</AnchorPane>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>
