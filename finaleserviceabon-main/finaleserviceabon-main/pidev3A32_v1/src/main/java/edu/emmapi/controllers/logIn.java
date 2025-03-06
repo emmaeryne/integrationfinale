@@ -1,6 +1,8 @@
 package edu.emmapi.controllers;
 
 import edu.emmapi.entities.SessionManager;
+import edu.emmapi.entities.SessionProfile;
+import edu.emmapi.entities.profile;
 import edu.emmapi.entities.user;
 import edu.emmapi.services.OwnerService;
 import edu.emmapi.services.ProfileService;
@@ -98,9 +100,10 @@ public class logIn {
         boolean status=true;
 
 
-        //System.out.println(isvalide);
+        System.out.println(isvalide);
 
         if(isvalide){
+
             SessionManager.getInstance().setUser(u);
             if(role.equals("OWNER")){
 
@@ -120,7 +123,7 @@ public class logIn {
                     newStage.show();
                 }else  {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashbordClient.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardClient.fxml"));
                     Parent parent = loader.load();
                     DashboardClient dashboardClient = loader.getController();
                     dashboardClient.setId(id);
@@ -161,7 +164,8 @@ public class logIn {
                     newStage.show();
                 }else  {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashbordClient.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardClient.fxml"));
+
                     Parent parent = loader.load();
                     DashboardClient dashboardClient = loader.getController();
                     dashboardClient.setId(id);
@@ -190,15 +194,18 @@ public class logIn {
                     newStage.setResizable(false);
                     newStage.show();
                 }else  {
-
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardClient.fxml"));
+
                     Parent parent = loader.load();
+                    DashboardClient dashboardClient = loader.getController();
+                    dashboardClient.setId(id);
 
                     Scene currentScene = TFadresse.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
                     Stage currentStage = (Stage) currentScene.getWindow();
                     currentStage.setWidth(850);  // Définir la largeur de la scène
                     currentStage.setHeight(600);  // Définir la hauteur de la scène
                     currentScene.setRoot(parent);
+
                 }
 
             }

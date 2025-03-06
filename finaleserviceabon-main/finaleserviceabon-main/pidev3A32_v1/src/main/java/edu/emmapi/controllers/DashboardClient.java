@@ -139,22 +139,7 @@ public class DashboardClient {
                 System.out.println("Aucune image trouvée pour ce profil.");
             }
         }
-        if(u.getRole().equals("COACH")) {
-            GestionUser.setVisible(false);
-            gestionOwnerB.setVisible(false);
 
-
-
-
-        }else if (u.getRole().equals("USER"))
-        {
-            gestionOwnerB.setVisible(false);
-            GestionCoach.setVisible(false);
-        } else if (u.getRole().equals("OWNER")) {
-            GestionCoach.setVisible(false);
-            GestionUser.setVisible(true);
-
-        }
     }
 
     // Méthode pour éditer le profil

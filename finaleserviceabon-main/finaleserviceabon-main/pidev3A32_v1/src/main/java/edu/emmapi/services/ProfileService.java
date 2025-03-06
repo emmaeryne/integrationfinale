@@ -1,5 +1,6 @@
 package edu.emmapi.services;
 
+import com.google.api.services.gmail.model.Profile;
 import edu.emmapi.entities.profile;
 import edu.emmapi.interfaces.IService;
 import edu.emmapi.tools.MyConnection;
@@ -119,6 +120,44 @@ public class ProfileService implements IService<profile> {
 
         return Collections.unmodifiableList(results);
     }
+
+
+    public profile dataProfile(int id) {
+        String requete = "SELECT id, user_id, first_name, last_name, date_of_birth, profile_picture, bio, location, phone_number, website, social_media_links FROM profile WHERE user_id = ?";
+
+        profile profile = null; // Profil par défaut est null
+
+        try (Connection conn = MyConnection.getInstance().getCnx();
+             PreparedStatement pst = conn.prepareStatement(requete)) {
+
+            // Remplir le paramètre ? dans la requête
+            pst.setInt(1, id);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    profile = new profile(
+                            rs.getInt("id"),
+                            rs.getString("first_name"),
+                            rs.getInt("user_id"),
+                            rs.getString("last_name"),
+                            rs.getString("date_of_birth"),
+                            rs.getString("profile_picture"),
+                            rs.getString("bio"),
+                            rs.getString("location"),
+                            rs.getString("phone_number"),
+                            rs.getString("website"),
+                            rs.getString("social_media_links")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des données : " + e.getMessage());
+        }
+
+        return profile; // Retourne null si aucun profil n'a été trouvé
+    }
+
     public void updateEntity(profile profile) {
         String query = "UPDATE profile SET firstName=?, lastName=?, dateOfBirth=?, bio=?, location=?, phoneNumber=?, website=?, socialMediaLink=? WHERE id=?";
         try (PreparedStatement pst = cnx.prepareStatement(query)) {

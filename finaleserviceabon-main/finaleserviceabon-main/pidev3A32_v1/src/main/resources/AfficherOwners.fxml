@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AIController">
-    <Label fx:id="predictionLabel" text="Prédiction en cours..."/>
-    <Button text="Prédire" onAction="#initialize"/>
-</VBox>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.layout.HBox?>
+<AnchorPane prefHeight="514.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.afficherOwners">
+    <children>
+        <!-- Image de fond -->
+        <ImageView fitHeight="532.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/interface-user.png" />
+            </image>
+        </ImageView>
+
+        <!-- Titre -->
+        <Text layoutX="88.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBOARD ADMIN">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+
+        <!-- Boutons de navigation -->
+        <Button blendMode="DARKEN" layoutX="75.0" layoutY="130.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="CONSULTER LISTE CLIENTS">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Button>
+        <Button layoutX="75.0" layoutY="180.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="CONSULTER LISTE PROPRIETAIRE">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Button>
+
+        <!-- Barre de recherche -->
+        <HBox layoutX="228.0" layoutY="10.0" spacing="10.0">
+            <TextField fx:id="searchField" prefWidth="200.0" promptText="Rechercher par nom..." />
+            <Button text="Rechercher" onAction="#handleSearch" />
+        </HBox>
+
+        <!-- ScrollPane pour rendre la liste des cartes scrollable -->
+        <ScrollPane layoutX="228.0" layoutY="51.0" prefHeight="461.0" prefWidth="687.0">
+            <!-- Zone d'affichage des cartes des propriétaires -->
+            <content>
+                <FlowPane fx:id="cardContainer" prefHeight="461.0" prefWidth="687.0" hgap="10" vgap="10">
+                    <!-- Les cartes seront ajoutées dynamiquement ici -->
+                </FlowPane>
+            </content>
+        </ScrollPane>
+
+        <!-- Label pour afficher les erreurs ou les messages de succès -->
+        <Label fx:id="errorLabel" layoutX="250.0" layoutY="20.0" prefHeight="30.0" prefWidth="600.0" textFill="RED" />
+    </children>
+
+</AnchorPane>
