@@ -46,7 +46,7 @@ public class AfficherClients {
         cardContainer.setStyle("-fx-padding: 10px;");
 
         loadClients();
-        setupSearch();
+
     }
 
     private void loadClients() {

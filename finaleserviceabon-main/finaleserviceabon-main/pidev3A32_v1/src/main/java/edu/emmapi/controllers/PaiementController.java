@@ -37,7 +37,7 @@ public class PaiementController {
     public void initialize() {
         // Lier les colonnes aux propriétés de la classe Paiement
         idCommandeColumn.setCellValueFactory(new PropertyValueFactory<>("idCommande"));
-        idUtilisateurColumn.setCellValueFactory(new PropertyValueFactory<>("idUtilisateur"));
+        //idUtilisateurColumn.setCellValueFactory(new PropertyValueFactory<>("idUtilisateur"));
         montantColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
         modeDePaiementColumn.setCellValueFactory(new PropertyValueFactory<>("modeDePaiement"));
         dateDePaiementColumn.setCellValueFactory(new PropertyValueFactory<>("dateDePaiement"));
