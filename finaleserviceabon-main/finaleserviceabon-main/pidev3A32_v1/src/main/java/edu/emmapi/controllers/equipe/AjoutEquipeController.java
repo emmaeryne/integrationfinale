@@ -6,6 +6,7 @@ import edu.emmapi.entities.joueur.Joueur;
 import edu.emmapi.services.equipe.EquipeService;
 import edu.emmapi.services.joueur.JoueurService;
 import edu.emmapi.services.navigation.NavigationService;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.sql.SQLException;
 
@@ -125,23 +127,32 @@ public class AjoutEquipeController {
 
     @FXML
     void annulerAjout(ActionEvent event) {
-        navigationService.goToPage("/pages/joueur/AfficheJoueurs.fxml", message);
+        navigationService.goToPage("/pages/equipe/AfficheEquipes.fxml", message);
     }
 
     @FXML
     void confirmerAjout(ActionEvent event) {
-        Equipe equipe = new Equipe(nom_equipe.getText(), type_equipe.getValue());
-        try {
-            equipeService.addEntity(equipe);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(nom_equipe.getText().isEmpty()){
+            showError("Donner un nom valide svp", "#F05A5A");
         }
-        int id_equipe = equipeService.idEquipeFromNomType(equipe.getNom_equipe(), equipe.getType_equipe());
-        for (Joueur joueur : joueursSelectionnesList){
-            joueur.setId_equipe(id_equipe);
-            joueurService.updateJoueurEquipe(joueur.getId_joueur(), joueur.getId_equipe());
+        else if (type_equipe.getValue()==null){
+            showError("Choisir une type svp", "#F05A5A");
+        } else if (equipeService.idEquipeFromNomType(nom_equipe.getText(), type_equipe.getValue())!=0 ) {
+            showError("Cette equipe existe déja", "#F05A5A");
+        } else {
+            Equipe equipe = new Equipe(nom_equipe.getText(), type_equipe.getValue());
+            try {
+                equipeService.addEntity(equipe);
+            } catch (SQLException e) {
+                showError(e.getMessage(), "#F05A5A");
+            }
+            int id_equipe = equipeService.idEquipeFromNomType(equipe.getNom_equipe(), equipe.getType_equipe());
+            for (Joueur joueur : joueursSelectionnesList) {
+                joueur.setId_equipe(id_equipe);
+                joueurService.updateJoueurEquipe(joueur.getId_joueur(), joueur.getId_equipe());
+            }
+            showError("Equipe ajoutée avec succès", "#66ffcc");
         }
-        navigationService.goToPage("/pages/joueur/AfficheJoueurs.fxml",message);
     }
 
     public void refreshTableviewJoueur(){
@@ -263,6 +274,21 @@ public class AjoutEquipeController {
             event.setDropCompleted(success);
             event.consume();
         });
+    }
+
+    public void showError(String message, String color){
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        this.message.setText(message);
+        error.setStyle("-fx-background-color: " + color);
+        error.setVisible(true);
+        pause.setOnFinished(event -> {
+            error.setVisible(false);
+            if (color.equals("#66ffcc")) {
+                annulerAjout(new ActionEvent());
+            }
+        });
+
+        pause.play();
     }
 
 

@@ -4,24 +4,24 @@ import edu.emmapi.controllers.components.MusicPlayer;
 import edu.emmapi.entities.tournoi_match.Tournoi;
 import edu.emmapi.services.navigation.NavigationService;
 import edu.emmapi.services.tournoi_match.TournoiService;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Optional;
 
 public class AfficheTournoisController {
 
@@ -55,6 +55,12 @@ public class AfficheTournoisController {
     @FXML
     private ImageView play_button;
 
+    @FXML
+    private Label message;
+
+    @FXML
+    private VBox error;
+
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
     private final Image play = new Image(getClass().getResource("/images/icons/play.png").toExternalForm());
@@ -65,6 +71,17 @@ public class AfficheTournoisController {
 
     TournoiService tournoiService = new TournoiService();
     NavigationService navigationService = new NavigationService();
+
+    public void showError(String message, String color){
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        this.message.setText(message);
+        error.setStyle("-fx-background-color: " + color);
+        error.setVisible(true);
+        pause.setOnFinished(event -> {
+            error.setVisible(false);
+        });
+        pause.play();
+    }
 
     @FXML
     void togglePlayer(MouseEvent event) {
@@ -118,33 +135,38 @@ public class AfficheTournoisController {
                 modifierTournoiController.setId_tournoi(selected_tournoi_id);
                 tableview_tournoi.getScene().setRoot(parent);
             } catch (IOException e){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Echec de navigation");
-                alert.setContentText(e.getMessage());
-                alert.show();
+                showError("Echec de navigation", "#F05A5A");
             }
         }catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Slectionner une tournoi");
-            alert.setContentText("Vous devez sélectionner une tournoi pour la modifier");
-            alert.show();
+            showError("Vous devez sélectionner une tournoi pour la modifier", "#F05A5A");
+
         }
     }
 
     @FXML
     void supprimerTournoi(ActionEvent event) {
-        try{
-            tournoiService.deleteEntity(tableview_tournoi.getSelectionModel().getSelectedItem().getId_tournoi());
-            tableview_tournoi.getItems().clear();
-            refreshTableviewTournoi();
+        if (tableview_tournoi.getSelectionModel().getSelectedItem() == null) {
+            showError("Sélectionnez un tournoi", "#F05A5A");
+            return;
         }
-        catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Slectionner une tournoi");
-            alert.setContentText("Vous devez sélectionner une tournoi pour la supprimer");
-            alert.show();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce tournoi ?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                tournoiService.deleteEntity(tableview_tournoi.getSelectionModel().getSelectedItem().getId_tournoi());
+                tableview_tournoi.getItems().clear();
+                refreshTableviewTournoi();
+            } catch (Exception e) {
+                showError("Erreur lors de la suppression du tournoi", "#F05A5A");
+            }
         }
     }
+
 
     public void refreshTableviewTournoi(){
         ObservableList<Tournoi> tournoiObservableList = FXCollections.observableArrayList(

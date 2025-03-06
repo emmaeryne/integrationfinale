@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -14,171 +13,120 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.tournoi_match.AjoutTournoiController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.tournoi_match.AjoutTournoiController">
     <children>
-        <HBox prefHeight="400.0" prefWidth="600.0">
+        <HBox prefHeight="400.0" prefWidth="600.0" spacing="10">
             <children>
-                <VBox prefHeight="400.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                <!-- Left Section: Form -->
+                <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="300.0" spacing="15" style="-fx-background-color: #2E3440;" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
                     <children>
-                        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="200.0">
+                        <!-- Header -->
+                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Ajouter Tournoi" textFill="#f4eeee" />
+
+                        <!-- Form Fields -->
+                        <HBox alignment="CENTER_LEFT" spacing="10">
                             <children>
-                                <Label style="-fx-font-weight: 900;" text="AJOUTER TOURNOI" textAlignment="CENTER">
-                                    <font>
-                                        <Font name="System Bold" size="18.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </Label>
-                            </children>
-                            <VBox.margin>
-                                <Insets top="12.0" />
-                            </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="200.0" spacing="10.0">
-                            <VBox.margin>
-                                <Insets top="12.0" />
-                            </VBox.margin>
-                     <children>
-                        <Label text="Nom" textFill="#f2d33a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="nom_tournoi" prefHeight="25.0" prefWidth="175.0" style="-fx-background-radius: 0;" />
-                     </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="300.0" spacing="10.0">
-                            <children>
-                                <Label prefHeight="17.0" text="Date" textFill="#f2d33a">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <DatePicker fx:id="date_tournoi" style="-fx-background-radius: 0;" />
-                            </children>
-                            <VBox.margin>
-                                <Insets top="12.0" />
-                            </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="260.0" spacing="10.0">
-                            <children>
-                        <Label prefHeight="17.0" text="Type" textFill="#f2d33a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                                <ComboBox fx:id="liste_type" onAction="#refreshImageTerrain" prefWidth="150.0" promptText="Type" style="-fx-background-color: #F2D33A; -fx-background-radius: 0;">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </ComboBox>
+                                <Label prefWidth="50.0" style="-fx-font-size: 14px;" text="Nom" textFill="#D8DEE9" />
+                                <TextField fx:id="nom_tournoi" prefWidth="175.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
                             </children>
                         </HBox>
-                  <VBox prefHeight="55.0" prefWidth="260.0">
-                     <children>
-                        <Label prefHeight="17.0" text="Description" textFill="#f2d33a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="trounoi_description" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="260.0" spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#confirmerAjout" style="-fx-background-color: #F2D33A; -fx-background-radius: 0;" text="Ajouter">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#annulerAjout" style="-fx-background-color: black; -fx-background-radius: 0;" text="Annuler" textFill="WHITE">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
+                                <Label prefWidth="50.0" style="-fx-font-size: 14px;" text="Date" textFill="#D8DEE9" />
+                                <DatePicker fx:id="date_tournoi" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
                             </children>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <children>
+                                <Label prefWidth="50.0" style="-fx-font-size: 14px;" text="Type" textFill="#D8DEE9" />
+                                <ComboBox fx:id="liste_type" onAction="#refreshImageTerrain" prefWidth="150.0" promptText="Type" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+                            </children>
+                        </HBox>
+                        <VBox spacing="5">
+                            <children>
+                                <Label style="-fx-font-size: 14px;" text="Description" textFill="#D8DEE9" />
+                                <TextField fx:id="trounoi_description" prefWidth="260.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" VBox.vgrow="ALWAYS" />
+                            </children>
+                        </VBox>
+
+                        <!-- Buttons -->
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#annulerAjout" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Annuler" />
+                                <Button mnemonicParsing="false" onAction="#confirmerAjout" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Ajouter" />
+                            </children>
                         </HBox>
                     </children>
-                    <padding>
-                        <Insets left="20.0" right="20.0" />
-                    </padding>
                 </VBox>
-                <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" style="-fx-border-color: transparent transparent transparent #F2D33A;" HBox.hgrow="ALWAYS">
+
+                <!-- Right Section: Image Preview -->
+                <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
                     <children>
-                        <ImageView fx:id="terrain_bg" fitHeight="393.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="terrain_bg" fitHeight="350.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../../../../../../../Downloads/basketballcouroutline.png" />
                             </image>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
                         </ImageView>
                     </children>
                 </VBox>
             </children>
         </HBox>
-      <VBox fx:id="error" layoutY="363.0" prefHeight="37.0" prefWidth="600.0" style="-fx-background-color: #F05A5A;" visible="false">
-         <children>
-            <Label fx:id="message" prefHeight="27.0" prefWidth="580.0" text="Error" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-      <VBox fx:id="music_player" alignment="CENTER" layoutX="40.0" prefHeight="45.0" prefWidth="109.0" style="-fx-background-color: #F2D33A;">
-         <children>
-            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="136.0" spacing="10.0">
-               <children>
-                  <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toPreviousSong" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/previous.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fx:id="play_button" fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toggle_player_state" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/play.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toNextSong" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/next.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" onMouseClicked="#togglePlayer" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="toggler" fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/up.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </HBox>
-         </children>
-         <padding>
-            <Insets top="5.0" />
-         </padding>
-      </VBox>
+
+        <!-- Error Notification -->
+        <VBox fx:id="error" layoutY="360.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #BF616A;" visible="false">
+            <children>
+                <Label fx:id="message" prefHeight="27.0" prefWidth="580.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Error" textFill="#f4eeee">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </VBox>
+
+        <!-- Music Player -->
+        <VBox fx:id="music_player" alignment="CENTER" layoutX="43.0" prefHeight="45.0" prefWidth="109.0" style="-fx-background-color: #5E81AC; -fx-border-radius: 5;">
+            <children>
+                <HBox alignment="CENTER" prefHeight="25.0" prefWidth="109.0" spacing="10.0">
+                    <children>
+                        <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toPreviousSong" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/icons/previous.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="play_button" fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toggle_player_state" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/icons/play.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toNextSong" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/icons/next.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" onMouseClicked="#togglePlayer" prefHeight="20.0" prefWidth="109.0">
+                    <children>
+                        <ImageView fx:id="toggler" fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/icons/up.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="5.0" />
+            </padding>
+        </VBox>
     </children>
 </AnchorPane>

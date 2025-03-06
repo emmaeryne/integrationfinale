@@ -10,9 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class AfficheJoueursController {
 
@@ -113,14 +112,22 @@ public class AfficheJoueursController {
         }
         ModifierJoueurController modifierJoueurController = loader.getController();
         modifierJoueurController.setIdJoueur(selected_joueur_id);
+        modifierJoueurController.setJoueur();
         tableview_joueur.getScene().setRoot(parent);
     }
 
     @FXML
     void supprimerJoueur(ActionEvent event) {
-        joueurService.deleteEntity(tableview_joueur.getSelectionModel().getSelectedItem().getId_joueur());
-        tableview_joueur.getItems().clear();
-        refreshTableviewJoueur();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce joueur ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            joueurService.deleteEntity(tableview_joueur.getSelectionModel().getSelectedItem().getId_joueur());
+            tableview_joueur.getItems().clear();
+            refreshTableviewJoueur();
+        }
     }
 
     @FXML

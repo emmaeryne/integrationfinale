@@ -15,9 +15,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.tournoi_match.AfficheMatchsController">
    <children>
-      <HBox fx:id="wrapper" prefHeight="400.0" prefWidth="600.0">
+      <HBox fx:id="wrapper" prefHeight="400.0" prefWidth="600.0" spacing="10">
          <children>
-            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="46.0" spacing="20.0" style="-fx-background-color: #2A3040;">
+            <!-- Sidebar -->
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="46.0" spacing="20.0" style="-fx-background-color: #2A3040; -fx-border-color: #4C566A; -fx-border-radius: 5;">
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+               </padding>
                <children>
                   <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#goToAfficheTournois" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -53,54 +57,56 @@
                   </ImageView>
                </children>
             </VBox>
-            <VBox fx:id="beacon" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="559.0" spacing="50.0">
+
+            <!-- Main Content -->
+            <VBox fx:id="beacon" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="544.0" spacing="15" style="-fx-background-color: #2E3440;">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
                <children>
-                  <Label fx:id="titre_liste_matchs" text="Liste Matchs" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="tableview_match" prefHeight="160.0" prefWidth="516.0">
-                    <columns>
-                      <TableColumn fx:id="tableview_match_id" prefWidth="43.0" text="Id" />
-                      <TableColumn fx:id="tableview_match_tournoi" prefWidth="59.0" text="Tournoi" />
+                  <!-- Header -->
+                  <Label fx:id="titre_liste_matchs" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Liste Matchs" textFill="#f4eeee" />
+
+                  <!-- Table -->
+                  <TableView fx:id="tableview_match" prefHeight="200.0" prefWidth="514.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;">
+                     <columns>
+                        <TableColumn fx:id="tableview_match_id" prefWidth="43.0" text="Id" />
+                        <TableColumn fx:id="tableview_match_tournoi" prefWidth="59.0" text="Tournoi" />
                         <TableColumn fx:id="tableview_match_equipe1" prefWidth="64.0" text="Equipe 1" />
                         <TableColumn fx:id="tableview_match_equipe2" prefWidth="65.0" text="Equipe 2" />
                         <TableColumn fx:id="tableview_match_date" prefWidth="75.0" text="Date" />
-                        <TableColumn fx:id="tableview_match_score1" prefWidth="53.0" text="Score  1" />
+                        <TableColumn fx:id="tableview_match_score1" prefWidth="53.0" text="Score 1" />
                         <TableColumn fx:id="tableview_match_score2" prefWidth="56.0" text="Score 2" />
                         <TableColumn fx:id="tableview_match_statut" prefWidth="109.0" text="Statut" />
-                    </columns>
+                     </columns>
                   </TableView>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+
+                  <!-- Buttons -->
+                  <HBox alignment="CENTER_RIGHT" spacing="10">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#goToAjout" style="-fx-background-radius: 0; -fx-background-color: #F2D33A;" text="Ajouter">
+                        <Button mnemonicParsing="false" onAction="#goToAjout" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Ajouter">
                            <cursor>
                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#modifierMatch" style="-fx-background-radius: 0; -fx-background-color: #F2D33A;" text="Modifier">
+                           </cursor></Button>
+                        <Button mnemonicParsing="false" onAction="#modifierMatch" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Modifier">
                            <cursor>
                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#supprimerMatch" style="-fx-background-radius: 0; -fx-background-color: #F05A5A;" text="Supprimer">
+                           </cursor></Button>
+                        <Button mnemonicParsing="false" onAction="#supprimerMatch" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Supprimer">
                            <cursor>
                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+                           </cursor></Button>
                      </children>
                   </HBox>
                </children>
-               <padding>
-                  <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
-               </padding>
             </VBox>
          </children>
       </HBox>
-      <VBox fx:id="error" layoutY="360.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #F05A5A;" visible="false">
+
+      <!-- Error Notification -->
+      <VBox fx:id="error" layoutY="360.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #BF616A;" visible="false">
          <children>
-            <Label fx:id="message" prefHeight="27.0" prefWidth="580.0" text="Error" textFill="WHITE">
+            <Label fx:id="message" prefHeight="27.0" prefWidth="580.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Error" textFill="#f4eeee">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -110,37 +116,30 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
-      <VBox fx:id="music_player" alignment="CENTER" layoutX="43.0" prefHeight="45.0" prefWidth="109.0" style="-fx-background-color: #F2D33A;">
+
+      <!-- Music Player -->
+      <VBox fx:id="music_player" alignment="CENTER" layoutX="43.0" prefHeight="45.0" prefWidth="109.0" style="-fx-background-color: #5E81AC; -fx-border-radius: 5;">
          <children>
-            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="136.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="109.0" spacing="10.0">
                <children>
                   <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toPreviousSong" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons/previous.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                   </ImageView>
                   <ImageView fx:id="play_button" fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toggle_player_state" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons/play.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="23.0" fitWidth="26.0" onMouseClicked="#toNextSong" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons/next.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER" onMouseClicked="#togglePlayer" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" onMouseClicked="#togglePlayer" prefHeight="20.0" prefWidth="109.0">
                <children>
                   <ImageView fx:id="toggler" fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -148,9 +147,6 @@
                      </image>
                   </ImageView>
                </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </HBox>
          </children>
          <padding>

@@ -21,6 +21,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class AjoutTournoiController {
 
@@ -130,7 +131,9 @@ public class AjoutTournoiController {
         try {
             if(nom_tournoi.getText().isEmpty()){
                 showError("Le nom ne peut pas être vide", "#F05A5A");
-            } else if (date_tournoi.getValue()==null) {
+            } else if (tournoiService.tournoiExiste(nom_tournoi.getText())){
+                showError("Le nom est déja utilisé", "#F05A5A");
+            }else if (date_tournoi.getValue()==null) {
                 showError("Veuillez choisir une date", "#F05A5A");
             } else if (liste_type.getValue()==null) {
                 showError("Veuillez choisir une type de tournoi", "#F05A5A");
@@ -157,6 +160,7 @@ public class AjoutTournoiController {
 
     public void initialize(){
         liste_type.setItems(FXCollections.observableArrayList("Football", "Basketball", "Volley-ball", "Baseball", "Rugby", "Handball","Tennis", "Badminton", "Tennis de table", "Squash","Golf", "Bowling", "Bocce", "Croquet","Water-polo", "Dodgeball", "Sepak Takraw", "Lacrosse"));
+        date_tournoi.setValue(LocalDate.now());
         if(MusicPlayer.getInstance().isPlaying()){
             play_button.setImage(pause);
         }

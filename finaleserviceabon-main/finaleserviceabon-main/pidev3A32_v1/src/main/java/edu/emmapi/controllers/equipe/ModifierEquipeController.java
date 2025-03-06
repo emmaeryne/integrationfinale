@@ -65,7 +65,7 @@ public class ModifierEquipeController {
     NavigationService navigationService = new NavigationService();
 
     private ObservableList<Joueur> joueursList = FXCollections.observableArrayList(joueurService.getAllData());
-    private ObservableList<Joueur> joueursSelectionnesList = FXCollections.observableArrayList();
+    private ObservableList<Joueur> joueursSelectionnesList;
 
     @FXML
     private VBox music_player;
@@ -75,6 +75,9 @@ public class ModifierEquipeController {
 
     @FXML
     private ImageView play_button;
+
+    @FXML
+    private Label id;
 
     private final Image toggle_down = new Image(getClass().getResource("/images/icons/down.png").toExternalForm());
     private final Image toggle_up = new Image(getClass().getResource("/images/icons/up.png").toExternalForm());
@@ -132,11 +135,12 @@ public class ModifierEquipeController {
     void confirmerAjout(ActionEvent event) {
         Equipe equipe = new Equipe(nom_equipe.getText(), type_equipe.getValue());
         try {
-            equipeService.addEntity(equipe);
-        } catch (SQLException e) {
+            equipeService.updateEntity(Integer.parseInt(id.getText()), equipe);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         int id_equipe = equipeService.idEquipeFromNomType(equipe.getNom_equipe(), equipe.getType_equipe());
+        joueurService.unlinkJoueurEquipe(id_equipe);
         for (Joueur joueur : joueursSelectionnesList){
             joueur.setId_equipe(id_equipe);
             joueurService.updateJoueurEquipe(joueur.getId_joueur(), joueur.getId_equipe());
@@ -152,6 +156,13 @@ public class ModifierEquipeController {
         tableview_joueur_selectionne_id.setCellValueFactory(new PropertyValueFactory<Joueur, Integer>("id_joueur"));
         tableview_joueur_selectionne_nom.setCellValueFactory(new PropertyValueFactory<Joueur, String>("nom_joueur"));
         tableview_joueur_selectionne_equipe.setCellValueFactory(new PropertyValueFactory<Joueur, Integer>("id_equipe"));
+        tableview_joueur_selectionne.setItems(joueursSelectionnesList);
+    }
+
+    public void setEquipe(Equipe equipe){
+        nom_equipe.setText(equipe.getNom_equipe());
+        type_equipe.setValue(equipe.getType_equipe());
+        joueursSelectionnesList = FXCollections.observableArrayList(joueurService.getJoueurByIdEquipe(Integer.parseInt(id.getText())));
         tableview_joueur_selectionne.setItems(joueursSelectionnesList);
     }
 
@@ -265,5 +276,8 @@ public class ModifierEquipeController {
         });
     }
 
+    public void setIdEquipe(int id){
+        this.id.setText(String.valueOf(id));
+    }
 
 }
