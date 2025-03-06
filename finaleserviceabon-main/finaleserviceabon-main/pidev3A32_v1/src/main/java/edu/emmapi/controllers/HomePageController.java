@@ -131,6 +131,10 @@ public class HomePageController {
     private void openCommandeView(ActionEvent event) {
         openDashboard("/CommandeView .fxml", "Commande");
     }
+    @FXML
+    private void openPlanningDashboaard(ActionEvent event) {
+        openDashboard("/Ajouter_Cours_Participant .fxml", "Commande");
+    }
 
 
     //@FXML
