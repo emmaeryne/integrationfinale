@@ -6,6 +6,19 @@ public class Joueur {
     int id_equipe;
     int cin;
     String url_image="";
+    int id_user;
+
+    public void setUrl_image(String url_image) {
+        this.url_image = url_image;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
 
     public String getUrl_image() {
         return url_image;
@@ -40,6 +53,22 @@ public class Joueur {
         this.id_equipe = id_equipe;
         this.cin = cin;
         this.url_image = url_image;
+    }
+
+    public Joueur(String nom_joueur, int id_equipe, int cin, String url_image) {
+        this.nom_joueur = nom_joueur;
+        this.id_equipe = id_equipe;
+        this.cin = cin;
+        this.url_image = url_image;
+    }
+
+    public Joueur(int id_joueur, int id_user, String nom_joueur, int id_equipe, int cin, String url_image) {
+        this.id_joueur = id_joueur;
+        this.nom_joueur = nom_joueur;
+        this.id_equipe = id_equipe;
+        this.cin = cin;
+        this.url_image = url_image;
+        this.id_user = id_user;
     }
 
     public int getId_joueur() {

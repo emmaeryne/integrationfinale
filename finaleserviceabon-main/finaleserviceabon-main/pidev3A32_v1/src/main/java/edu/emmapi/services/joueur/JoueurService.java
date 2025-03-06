@@ -86,11 +86,13 @@ public class JoueurService implements IService<Joueur> {
     }
 
     public void ajoutJoueurClient(Joueur joueur){
-        String query = "INSERT INTO JOUEUR(cin, url_photo) VALUES (?, ?)";
+        String query = "INSERT INTO JOUEUR(cin, url_photo, id_user, nom_joueur) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query);
             pst.setInt(1, joueur.getCin());
             pst.setString(2, joueur.getUrl_image());
+            pst.setInt(3, joueur.getId_user());
+            pst.setString(4, joueur.getNom_joueur());
             pst.executeUpdate();
         }
         catch (Exception e) {

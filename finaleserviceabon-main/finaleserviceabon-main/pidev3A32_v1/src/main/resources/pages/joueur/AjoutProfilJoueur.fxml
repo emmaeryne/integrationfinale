@@ -15,7 +15,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
-            <Label text="Bienvenue nouveau joueur" textAlignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';">
+            <Label fx:id="titre" style="-fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Bienvenue" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -27,7 +27,7 @@
             </ImageView>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="15.0">
                <children>
-                  <Label text="Lien photo profil:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;">
+                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;" text="Lien photo profil:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -37,7 +37,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="560.0" spacing="15.0">
                <children>
-                  <Label prefHeight="20.0" prefWidth="117.0" text="Cin" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;">
+                  <Label prefHeight="20.0" prefWidth="117.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;" text="Cin">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
