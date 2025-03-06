@@ -134,23 +134,36 @@ public class JoueurService implements IService<Joueur> {
         return null;
     }
 
-    public Joueur getJoueurByIdEquipe(int id){
+    public List<Joueur> getJoueurByIdEquipe(int id){
+        List<Joueur> joueurList = new ArrayList<>();
         String query = "SELECT * FROM JOUEUR WHERE id_equipe=?";
         try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-                return new Joueur(
+            while(rs.next()){
+                Joueur joueur = new Joueur(
                         rs.getInt("id_joueur"),
                         rs.getString("nom_joueur"),
                         rs.getInt("id_equipe"),
                         rs.getInt("cin"),
                         rs.getString("url_photo")
                 );
+                joueurList.add(joueur);
             }
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return joueurList;
+    }
+
+    public void unlinkJoueurEquipe(int id_equipe){
+        String query = "UPDATE JOUEUR SET id_equipe = null WHERE id_equipe = ?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setInt(1, id_equipe);
+            pst.executeUpdate();
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

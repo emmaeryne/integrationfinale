@@ -135,11 +135,12 @@ public class ModifierEquipeController {
     void confirmerAjout(ActionEvent event) {
         Equipe equipe = new Equipe(nom_equipe.getText(), type_equipe.getValue());
         try {
-            equipeService.addEntity(equipe);
-        } catch (SQLException e) {
+            equipeService.updateEntity(Integer.parseInt(id.getText()), equipe);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         int id_equipe = equipeService.idEquipeFromNomType(equipe.getNom_equipe(), equipe.getType_equipe());
+        joueurService.unlinkJoueurEquipe(id_equipe);
         for (Joueur joueur : joueursSelectionnesList){
             joueur.setId_equipe(id_equipe);
             joueurService.updateJoueurEquipe(joueur.getId_joueur(), joueur.getId_equipe());
