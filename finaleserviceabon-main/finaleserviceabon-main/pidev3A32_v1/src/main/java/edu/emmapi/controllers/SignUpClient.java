@@ -1,7 +1,5 @@
 package edu.emmapi.controllers;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import edu.emmapi.entities.security_questions;
 import edu.emmapi.entities.user;
 import edu.emmapi.services.SecurityQuestionDao;
@@ -13,10 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -105,36 +99,36 @@ public class SignUpClient {
         }
     }
 
-        private boolean verifyEmailWithHunter(String email) {
-        OkHttpClient client = new OkHttpClient();
-        String apiKey = "51ebed6f136f3456dc8bb794c07d8270788706fa"; // Your API key
-
-        String url = "https://api.hunter.io/v2/email-verifier";
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        urlBuilder.addQueryParameter("email", email);
-        urlBuilder.addQueryParameter("api_key", apiKey);
-        String finalUrl = urlBuilder.build().toString();
-
-        Request request = new Request.Builder().url(finalUrl).build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                System.out.println("Réponse de l'API : " + responseBody); // For debugging
-
-                JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
-                String status = jsonResponse.getAsJsonObject("data").get("status").getAsString();
-
-                return "valid".equals(status) && "deliverable".equals(jsonResponse.getAsJsonObject("data").get("result").getAsString());
-            } else {
-                System.out.println("Erreur de l'API : " + response.code() + " - " + response.message());
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    //    private boolean verifyEmailWithHunter(String email) {
+//        OkHttpClient client = new OkHttpClient();
+//        String apiKey = "51ebed6f136f3456dc8bb794c07d8270788706fa"; // Your API key
+//
+//        String url = "https://api.hunter.io/v2/email-verifier";
+//        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+//        urlBuilder.addQueryParameter("email", email);
+//        urlBuilder.addQueryParameter("api_key", apiKey);
+//        String finalUrl = urlBuilder.build().toString();
+//
+//        Request request = new Request.Builder().url(finalUrl).build();
+//
+//        try (Response response = client.newCall(request).execute()) {
+//            if (response.isSuccessful()) {
+//                String responseBody = response.body().string();
+//                System.out.println("Réponse de l'API : " + responseBody); // For debugging
+//
+//                JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+//                String status = jsonResponse.getAsJsonObject("data").get("status").getAsString();
+//
+//                return "valid".equals(status) && "deliverable".equals(jsonResponse.getAsJsonObject("data").get("result").getAsString());
+//            } else {
+//                System.out.println("Erreur de l'API : " + response.code() + " - " + response.message());
+//                return false;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
@@ -222,9 +216,10 @@ public class SignUpClient {
 
             boolean active = false;
             String role = "USER";
-boolean x=verifyEmailWithHunter(email);
+            boolean passage=true;
+
             // Check email validity via Hunter API
-            if (x) {
+            if (passage) {
                 // If passwords match, proceed with registration
                 if (motDePasse.equals(MotDePasse2Client.getText())) {
                     String mdpHache= BCrypt.hashpw(motDePasse, BCrypt.gensalt());

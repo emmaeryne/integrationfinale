@@ -67,7 +67,17 @@ public class DashboardClient {
 
 
     @FXML
-    void GoToGestionCoach(ActionEvent event) {
+    void GoToGestionCoach(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepagecoach.fxml"));
+        Parent parent = loader.load();
+
+
+        Scene currentScene = firstNameLabel.getScene();  // Supposons que TFadresse est un TextField dans l'ancienne scène
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.setWidth(800);  // Définir la largeur de la scène
+        currentStage.setHeight(800);  // Définir la hauteur de la scène
+        currentScene.setRoot(parent);
+
 
     }
 

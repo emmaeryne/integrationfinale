@@ -1,7 +1,5 @@
 package edu.emmapi.controllers;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import edu.emmapi.entities.Coach;
 import edu.emmapi.entities.security_questions;
 import edu.emmapi.services.SecurityQuestionDao;
@@ -13,10 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -180,36 +174,36 @@ public class OwnerAddCoach {
         label.setStyle("-fx-text-fill: green");
     }
 
-    private boolean verifyEmailWithHunter(String email) {
-        OkHttpClient client = new OkHttpClient();
-        String apiKey = "51ebed6f136f3456dc8bb794c07d8270788706fa"; // Replace with environment variable
-
-        String url = "https://api.hunter.io/v2/email-verifier";
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        urlBuilder.addQueryParameter("email", email);
-        urlBuilder.addQueryParameter("api_key", apiKey);
-        String finalUrl = urlBuilder.build().toString();
-
-        Request request = new Request.Builder().url(finalUrl).build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                System.out.println("Réponse de l'API : " + responseBody);
-
-                JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
-                String status = jsonResponse.getAsJsonObject("data").get("status").getAsString();
-
-                return "valid".equals(status) && "deliverable".equals(jsonResponse.getAsJsonObject("data").get("result").getAsString());
-            } else {
-                System.out.println("Erreur de l'API : " + response.code() + " - " + response.message());
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    private boolean verifyEmailWithHunter(String email) {
+//        OkHttpClient client = new OkHttpClient();
+//        String apiKey = "51ebed6f136f3456dc8bb794c07d8270788706fa"; // Replace with environment variable
+//
+//        String url = "https://api.hunter.io/v2/email-verifier";
+//        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+//        urlBuilder.addQueryParameter("email", email);
+//        urlBuilder.addQueryParameter("api_key", apiKey);
+//        String finalUrl = urlBuilder.build().toString();
+//
+//        Request request = new Request.Builder().url(finalUrl).build();
+//
+//        try (Response response = client.newCall(request).execute()) {
+//            if (response.isSuccessful()) {
+//                String responseBody = response.body().string();
+//                System.out.println("Réponse de l'API : " + responseBody);
+//
+//                JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+//                String status = jsonResponse.getAsJsonObject("data").get("status").getAsString();
+//
+//                return "valid".equals(status) && "deliverable".equals(jsonResponse.getAsJsonObject("data").get("result").getAsString());
+//            } else {
+//                System.out.println("Erreur de l'API : " + response.code() + " - " + response.message());
+//                return false;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
     private void loadSecurityQuestions() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hive2", "root", "")) {
@@ -251,15 +245,15 @@ public class OwnerAddCoach {
                 specialityErrorLabel.getStyle().equals("-fx-text-fill: green") &&
                 yearOfExperienceErrorLabel.getStyle().equals("-fx-text-fill: green") &&
                 certificationErrorLabel.getStyle().equals("-fx-text-fill: green")) {
-            String email = emailField.getText();
-            String password = passwordField.getText();
-            String speciality = specialityField.getText();
-            String username = usernameField.getText();
-            int yearOfExperience = Integer.parseInt(yearOfExperienceField.getText());
-            String certification = CertificationField.getText();
-boolean x=verifyEmailWithHunter(email);
-            if (x) {
+            boolean passage=true;
 
+            if (passage) {
+                String email = emailField.getText();
+                String password = passwordField.getText();
+                String speciality = specialityField.getText();
+                String username = usernameField.getText();
+                int yearOfExperience = Integer.parseInt(yearOfExperienceField.getText());
+                String certification = CertificationField.getText();
 
                 // Récupérer la question de sécurité et la réponse
                 String selectedQuestion = (String) SelectQ.getValue();

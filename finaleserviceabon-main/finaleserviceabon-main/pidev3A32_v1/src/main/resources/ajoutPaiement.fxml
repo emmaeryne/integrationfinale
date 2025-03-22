@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="715.0" style="-fx-background-color: #E6F7FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutPaiement">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="715.0" style="-fx-background-color: #E6F7FF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AjoutPaiement">
 
     <!-- VBox for Payment Form -->
     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="715.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8);">
@@ -33,7 +33,6 @@
         <TableView fx:id="commandeTable" prefHeight="110.0" prefWidth="600.0" style="-fx-font-family: 'Segoe UI'; -fx-border-color: #999; -fx-border-radius: 5px;">
             <columns>
                 <TableColumn fx:id="colId" text="ID Commande" />
-                <TableColumn fx:id="colUtilisateur" text="ID Utilisateur" />
                 <TableColumn fx:id="colDate" text="Date Commande" />
                 <TableColumn fx:id="colStatut" text="Statut" />
             </columns>
@@ -41,8 +40,6 @@
 
         <!-- Payment Fields -->
         <TextField fx:id="paiementCommandeId" maxWidth="-Infinity" prefHeight="28.0" prefWidth="342.0" promptText="Commande ID" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
-
-        <TextField fx:id="paiementUtilisateurId" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="342.0" promptText="Utilisateur ID" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 
         <TextField fx:id="paiementMontant" maxWidth="-Infinity" prefHeight="28.0" prefWidth="341.0" promptText="Montant (TND)" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px;" />
 

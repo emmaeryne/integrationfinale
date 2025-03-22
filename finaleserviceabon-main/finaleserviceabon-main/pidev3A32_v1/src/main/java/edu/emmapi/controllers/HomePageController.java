@@ -120,7 +120,7 @@ public class HomePageController {
 
     @FXML
     private void openCoursDashboard(ActionEvent event) {
-        openDashboard("/listcours.fxml", "Cours Dashboard");
+        openDashboard("/Ajouter_Cours.fxml", "Cours Dashboard");
     }
     @FXML
     private void openProduit(ActionEvent event) {
@@ -131,15 +131,12 @@ public class HomePageController {
     private void openCommandeView(ActionEvent event) {
         openDashboard("/CommandeView .fxml", "Commande");
     }
+    @FXML
+    private void openPlanningDashboaard(ActionEvent event) {
+        openDashboard("/Ajouter_Cours_Participant .fxml", "Commande");
+    }
 
-    @FXML
-    private void openCoursDashboardd(ActionEvent event) {
-        openDashboard("/Ajouter_Cours.fxml", "Cours Dashboard");
-    }
-    @FXML
-    private void openCoursDashboaardd(ActionEvent event) {
-        openDashboard("/Ajouter_Cours_Participant.fxml", "Cours Dashboard");
-    }
+
     //@FXML
     //private void openDetailsDashboard(ActionEvent event) {
        // openDashboard("/details.fxml", "Détails Dashboard");

@@ -1,89 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+        <?import java.net.URL?>
+        <?import javafx.geometry.Insets?>
+        <?import javafx.scene.control.Button?>
+        <?import javafx.scene.control.ComboBox?>
+        <?import javafx.scene.control.Label?>
+        <?import javafx.scene.control.PasswordField?>
+        <?import javafx.scene.control.TextField?>
+        <?import javafx.scene.image.Image?>
+        <?import javafx.scene.image.ImageView?>
+        <?import javafx.scene.layout.AnchorPane?>
+        <?import javafx.scene.layout.VBox?>
+        <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.SignUpClient">
-    <content>
-        <AnchorPane prefHeight="800.0" prefWidth="600.0">
-            <!-- Image de fond -->
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.SignUpClient">
+
+    <!-- Titre de la page -->
+    <!-- Titre de la page -->
+    <Label layoutX="153.0" layoutY="14.0" text="Inscription Client " textFill="GREY">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font>
+    </Label>
+
+    <!-- Conteneur principal pour le formulaire -->
+    <VBox layoutX="86.0" layoutY="49.0" minWidth="-Infinity" prefHeight="605.0" prefWidth="321.0" spacing="10">
+
+        <!-- Image et titre du formulaire -->
+        <AnchorPane prefHeight="148.0" prefWidth="321.0">
             <children>
-                <ImageView fitHeight="800.0" fitWidth="600.0" opacity="0.2">
+                <ImageView fitHeight="164.0" fitWidth="177.0" layoutX="79.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                        <Image url="@assets/logo.png" />
                     </image>
                 </ImageView>
-
-                <!-- Contenu principal -->
-                <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0" spacing="20" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-border-radius: 10; -fx-background-radius: 10;">
-                    <padding>
-                        <Insets bottom="20" left="20" right="20" top="20" />
-                    </padding>
-
-                    <!-- En-tête avec logo -->
-                    <HBox alignment="CENTER" spacing="10">
-                        <ImageView fitHeight="88.0" fitWidth="128.0">
-                            <image>
-                                <Image url="@assets/logo.png" />
-                            </image>
-                        </ImageView>
-                    </HBox>
-                    <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Inscription Client" />
-
-                    <!-- Formulaire -->
-                    <VBox alignment="CENTER" prefWidth="400.0" spacing="15">
-                        <!-- Champ Prénom -->
-                        <TextField fx:id="userNameClient" prefHeight="35.0" prefWidth="400.0" promptText="Nom d'utilisateur" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                        <Label fx:id="userNameErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
-
-                        <!-- Champ Email -->
-                        <TextField fx:id="emailClient" prefHeight="35.0" prefWidth="400.0" promptText="Email" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                        <Label fx:id="EmailErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
-
-                        <!-- Champ Mot de passe -->
-                        <PasswordField fx:id="MotDePasseClient" prefHeight="35.0" prefWidth="400.0" promptText="Mot de passe" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                        <Label fx:id="MotdepasseErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
-
-                        <!-- Confirmation Mot de passe -->
-                        <PasswordField fx:id="MotDePasse2Client" prefHeight="35.0" prefWidth="400.0" promptText="Répéter mot de passe" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                        <Label fx:id="passwordErrorLabel" style="-fx-text-fill: #FF7043; -fx-font-size: 12px;" />
-
-                        <!-- Question de sécurité -->
-                        <ComboBox fx:id="SelectQ" prefHeight="35.0" prefWidth="400.0" promptText="Sélectionner une question" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                        <TextField fx:id="Answer" prefHeight="35.0" prefWidth="400.0" promptText="Réponse" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
-
-                        <!-- Message d'erreur global -->
-                        <Label fx:id="errorLabel" style="-fx-text-fill: #FF7043; -fx-font-weight: bold; -fx-font-size: 14px;" />
-                    </VBox>
-
-                    <!-- Boutons -->
-                    <HBox alignment="CENTER" spacing="20">
-                        <Button fx:id="sinscrireClientButton" onAction="#handleSignUp" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="S'inscrire">
-                            <padding>
-                                <Insets bottom="10" left="20" right="20" top="10" />
-                            </padding>
-                        </Button>
-                        <Button onAction="#logInBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3B4252; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8;" text="Connexion">
-                            <padding>
-                                <Insets bottom="10" left="20" right="20" top="10" />
-                            </padding>
-                        </Button>
-                    </HBox>
-
-                    <!-- Pied de page -->
-                    <Label style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5;" text="© 2025 - Inscription Client" />
-                </VBox>
             </children>
         </AnchorPane>
-    </content>
-</ScrollPane>
+
+        <!-- Champ Prénom -->
+        <TextField fx:id="userNameClient" prefHeight="35.0" prefWidth="321.0" promptText="nom d utilisateur" />
+        <Label fx:id="userNameErrorLabel" style="-fx-text-fill: red;" />
+
+        <!-- Champ Nom de famille -->
+        <TextField fx:id="emailClient" prefHeight="35.0" prefWidth="321.0" promptText="email" />
+        <Label fx:id="EmailErrorLabel" style="-fx-text-fill: red;" />
+        <PasswordField fx:id="MotDePasseClient" prefHeight="35.0" prefWidth="321.0" promptText="Mot de passe" />
+        <Label fx:id="MotdepasseErrorLabel" style="-fx-text-fill: red;" />
+        <PasswordField fx:id="MotDePasse2Client" prefHeight="35.0" prefWidth="321.0" promptText="Repeter Mot de Passe" />
+        <Label fx:id="passwordErrorLabel" prefHeight="17.0" prefWidth="356.0" style="-fx-text-fill: red;" />
+        <ComboBox fx:id="SelectQ" prefHeight="35.0" prefWidth="321.0" promptText="selectionner une question " />
+        <TextField fx:id="Answer" prefHeight="35.0" prefWidth="321.0" promptText="reponse" />
+
+    </VBox>
+
+    <!-- Bouton Soumettre -->
+    <AnchorPane layoutX="329.0" layoutY="654.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="164.0">
+        <children>
+
+            <!-- Message d'erreur global -->
+            <Label fx:id="errorLabel" layoutX="-7.0" layoutY="6.0" prefHeight="17.0" prefWidth="412.0" style="-fx-text-fill: red; -fx-font-weight: bold;" />
+            <Button layoutX="59.0" layoutY="11.0" mnemonicParsing="false" onAction="#logInBack" text="logIn" />
+        </children>
+    </AnchorPane>
+    <Button fx:id="sinscrireClientButton" layoutX="186.0" layoutY="666.0" onAction="#handleSignUp" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: grey; -fx-text-fill: white; -fx-font-weight: bold;" text="S'inscrire">
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </Button>
+</AnchorPane>

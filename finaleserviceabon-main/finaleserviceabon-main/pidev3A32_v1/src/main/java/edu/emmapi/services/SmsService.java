@@ -4,9 +4,9 @@ import com.twilio.rest.api.v2010.account.Message;
 
 public class SmsService {
     // ✅ REMPLACE AVEC TES PROPRES IDENTIFIANTS TWILIO
-    public static final String ACCOUNT_SID = "\"TWILIO_ACCOUNT_SID\"";
-    public static final String AUTH_TOKEN = "3826e38e706a07d51324db794e6c0dc8";
-    public static final String TWILIO_PHONE_NUMBER = "+15513822584";
+    public static final String ACCOUNT_SID = "ACf0dbef4a3f2b361c55dd2194424a7513";
+    public static final String AUTH_TOKEN = "bbe1c2b686cc1d5bcb798a852dc0fcbc";
+    public static final String TWILIO_PHONE_NUMBER = "+18056784109";
 
     static {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
