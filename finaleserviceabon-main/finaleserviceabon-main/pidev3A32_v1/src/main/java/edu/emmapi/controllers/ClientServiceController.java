@@ -1,7 +1,5 @@
 package edu.emmapi.controllers;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -18,41 +16,27 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.util.StringConverter;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
 public class ClientServiceController {
-    @FXML
-    private ComboBox<Service> serviceComboBox;
-    @FXML
-    private VBox serviceDetailsCard;
-    @FXML
-    private Label serviceName;
-    @FXML
-    private Label servicePrice;
-    @FXML
-    private Label serviceLevel;
-    @FXML
-    private Label serviceDuration;
-    @FXML
-    private Slider ratingSlider;
-    @FXML
-    private Label reservationCountLabel;
-    @FXML
-    private Label weatherLabel;
-    @FXML
-    private ImageView weatherIcon;
-    @FXML
-    private WebView gifWebView; // WebView pour afficher le GIF
+    @FXML private ComboBox<Service> serviceComboBox;
+    @FXML private VBox serviceDetailsCard;
+    @FXML private Label serviceName;
+    @FXML private Label servicePrice;
+    @FXML private Label serviceLevel;
+    @FXML private Label serviceDuration;
+    @FXML private Slider ratingSlider;
+    @FXML private Label reservationCountLabel;
+    @FXML private Label weatherLabel;
+    @FXML private ImageView weatherIcon;
+    @FXML private WebView gifWebView;
+    @FXML private Label serviceImageLabel; // New label for image URL/path
 
     private ServiceService serviceService;
     private WeatherService weatherService;
-    private int reservationCount = 0;
     private static final String ACCOUNT_SID = "AC9ee4ac8e139bf2eebe288428e78ad967";
     private static final String AUTH_TOKEN = "3bf285de19ceb88b10218de82da7be4e";
     private static final String TWILIO_NUMBER = "+17403325976";
@@ -67,14 +51,13 @@ public class ClientServiceController {
         configureComboBox();
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-        // Configurer les logs du WebView pour le débogage
-        gifWebView.getEngine().setOnError(event -> {
-            System.err.println("Erreur lors du chargement du GIF dans le WebView: " + event.getMessage());
-        });
+        gifWebView.getEngine().setOnError(event ->
+                System.err.println("Erreur lors du chargement du GIF dans le WebView: " + event.getMessage()));
 
-        gifWebView.getEngine().setOnAlert(event -> {
-            System.out.println("Alerte du WebView: " + event.getData());
-        });
+        gifWebView.getEngine().setOnAlert(event ->
+                System.out.println("Alerte du WebView: " + event.getData()));
+
+        serviceDetailsCard.setVisible(false);
     }
 
     private void loadServices() {
@@ -86,11 +69,7 @@ public class ClientServiceController {
         serviceComboBox.setConverter(new StringConverter<Service>() {
             @Override
             public String toString(Service service) {
-                if (service == null) {
-                    return null;
-                } else {
-                    return service.getNom();
-                }
+                return service != null ? service.getNom() : null;
             }
 
             @Override
@@ -98,6 +77,9 @@ public class ClientServiceController {
                 return null;
             }
         });
+
+        serviceComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) ->
+                handleServiceSelection());
     }
 
     @FXML
@@ -106,9 +88,10 @@ public class ClientServiceController {
         if (selectedService != null) {
             displayServiceDetails(selectedService);
             serviceDetailsCard.setVisible(true);
-            loadGifForService(selectedService.getNom()); // Charge le GIF correspondant au service
+            loadGifForService(selectedService.getNom());
         } else {
             serviceDetailsCard.setVisible(false);
+            gifWebView.getEngine().load(null);
         }
     }
 
@@ -117,20 +100,14 @@ public class ClientServiceController {
             try {
                 String gifUrl = giphyApi.searchGif(serviceName.toLowerCase().trim());
                 Platform.runLater(() -> {
-                    System.out.println("GIF URL: " + gifUrl); // Affiche l'URL du GIF dans la console
-                    if (gifUrl != null && !gifUrl.isEmpty()) {
-                        gifWebView.getEngine().load(gifUrl); // Charge l'URL dans le WebView
-                    } else {
-                        // Charger un GIF par défaut si l'URL est vide ou null
-                        gifWebView.getEngine().load("https://media.giphy.com/media/xT9DPFwYqUqK02v7hC/giphy.gif");
-                        System.out.println("GIF par défaut chargé.");
-                    }
+                    System.out.println("GIF URL: " + gifUrl);
+                    gifWebView.getEngine().load(gifUrl != null && !gifUrl.isEmpty() ?
+                            gifUrl : "https://media.giphy.com/media/xT9DPFwYqUqK02v7hC/giphy.gif");
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> {
-                    // En cas d'erreur, charger un GIF par défaut
                     gifWebView.getEngine().load("https://media.giphy.com/media/xT9DPFwYqUqK02v7hC/giphy.gif");
-                    System.err.println("Erreur lors du chargement du GIF: " + e.getMessage());
+                    showNotification("Erreur lors du chargement du GIF: " + e.getMessage(), "error");
                 });
                 e.printStackTrace();
             }
@@ -138,22 +115,30 @@ public class ClientServiceController {
     }
 
     private void displayServiceDetails(Service service) {
-        serviceName.setText(service.getNom());
-        servicePrice.setText("Prix: " + service.getPrix());
+        serviceName.setText(service.getNom() != null ? service.getNom() : "N/A");
+        servicePrice.setText(String.format("Prix: %.2f €", service.getPrix()));
         serviceLevel.setText("Niveau: " + service.getNiveauDifficulte());
-        serviceDuration.setText("Durée: " + service.getdureeMinutes() + " minutes");
+        serviceDuration.setText("Durée: " + service.getDureeMinutes() + " minutes");
+        reservationCountLabel.setText("Réservations: " + service.getNombreReservations());
+        serviceImageLabel.setText("Image: " + (service.getImage() != null ? service.getImage() : "Aucune"));
     }
 
     @FXML
     private void handleReserve() {
         Service selectedService = serviceComboBox.getValue();
         if (selectedService != null) {
-            reservationCount++;
-            reservationCountLabel.setText("Réservations: " + reservationCount);
             double rating = ratingSlider.getValue();
-            showNotification("Service réservé avec succès! Note: " + rating, "success");
-            sendConfirmationSMS(selectedService, rating);
-
+            try {
+                serviceService.incrementReservationCount(selectedService.getId());
+                serviceService.updateServiceNote(selectedService.getId(), rating);
+                selectedService.setNombreReservations(selectedService.getNombreReservations() + 1);
+                reservationCountLabel.setText("Réservations: " + selectedService.getNombreReservations());
+                showNotification("Service réservé avec succès! Note: " + String.format("%.1f", rating), "success");
+                sendConfirmationSMS(selectedService, rating);
+            } catch (Exception e) {
+                showNotification("Erreur lors de la réservation: " + e.getMessage(), "error");
+                e.printStackTrace();
+            }
         } else {
             showNotification("Veuillez sélectionner un service.", "error");
         }
@@ -161,42 +146,58 @@ public class ClientServiceController {
 
     @FXML
     private void handleGetWeather() {
-        try {
-            JSONObject weatherData = weatherService.getWeatherData("Tunis");
-            if (weatherData != null) {
-                processWeatherData(weatherData);
-            } else {
-                showNotification("Impossible d'obtenir les données météorologiques.", "error");
+        new Thread(() -> {
+            try {
+                JSONObject weatherData = weatherService.getWeatherData("Tunis");
+                Platform.runLater(() -> {
+                    if (weatherData != null) {
+                        try {
+                            processWeatherData(weatherData);
+                        } catch (JSONException e) {
+                            showNotification("Erreur lors du traitement des données météorologiques: " + e.getMessage(), "error");
+                            e.printStackTrace();
+                        }
+                    } else {
+                        showNotification("Impossible d'obtenir les données météorologiques.", "error");
+                    }
+                });
+            } catch (IOException | JSONException e) {
+                Platform.runLater(() ->
+                        showNotification("Erreur lors de la récupération des données météorologiques: " + e.getMessage(), "error"));
+                e.printStackTrace();
             }
-        } catch (IOException | JSONException e) {
-            showNotification("Erreur lors de la récupération des données météorologiques: " + e.getMessage(), "error");
-            e.printStackTrace();
-        }
+        }).start();
     }
 
     private void processWeatherData(JSONObject weatherData) throws JSONException {
+        if (!weatherData.has("main") || !weatherData.has("weather")) {
+            throw new JSONException("Données météorologiques incomplètes.");
+        }
+
         double temperature = weatherData.getJSONObject("main").getDouble("temp");
         String conditions = weatherData.getJSONArray("weather").getJSONObject(0).getString("description");
         String iconCode = weatherData.getJSONArray("weather").getJSONObject(0).getString("icon");
 
-        weatherLabel.setText("Température: " + temperature + "°C, Conditions: " + conditions);
+        weatherLabel.setText(String.format("Température: %.1f°C, Conditions: %s", temperature, conditions));
         loadWeatherIcon(iconCode);
     }
 
     private void loadWeatherIcon(String iconCode) {
-        String iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        String iconUrl = "http://openweathermap.org/img/wn/" + iconCode + ".png";
         try {
-            Image image = new Image(iconUrl);
+            Image image = new Image(iconUrl, true);
             weatherIcon.setImage(image);
         } catch (Exception e) {
             weatherIcon.setImage(null);
-            System.err.println("Erreur sur le chargement de l'icône météo : " + e.getMessage());
+            showNotification("Erreur lors du chargement de l'icône météo: " + e.getMessage(), "error");
+            e.printStackTrace();
         }
     }
 
     private void sendConfirmationSMS(Service service, double rating) {
         String clientNumber = "+21627417033";
-        String message = "Votre réservation pour " + service.getNom() + " a été confirmée. ";
+        String message = String.format("Votre réservation pour %s a été confirmée. Note attribuée: %.1f/5. Merci!",
+                service.getNom(), rating);
 
         try {
             Message twilioMessage = Message.creator(
@@ -205,17 +206,19 @@ public class ClientServiceController {
                             message)
                     .create();
 
-            System.out.println("SMS envoyé avec succès (Twilio SID: " + twilioMessage.getSid() + ")");
-            showNotification("SMS de confirmation envoyé.", "info");
-
+            showNotification("SMS de confirmation envoyé (SID: " + twilioMessage.getSid() + ").", "info");
         } catch (Exception e) {
-            System.err.println("Erreur lors de l'envoi du SMS (Twilio) : " + e.getMessage());
-            showNotification("Erreur lors de l'envoi du SMS.", "error");
+            showNotification("Erreur lors de l'envoi du SMS: " + e.getMessage(), "error");
             e.printStackTrace();
         }
     }
 
     private void showNotification(String message, String type) {
-        System.out.println(message);
+        Alert alert = new Alert(type.equals("error") ? Alert.AlertType.ERROR :
+                type.equals("info") ? Alert.AlertType.INFORMATION : Alert.AlertType.INFORMATION);
+        alert.setTitle(type.equals("error") ? "Erreur" : "Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

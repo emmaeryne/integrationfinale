@@ -12,24 +12,27 @@ public class Service {
     private int capaciteMax;
     private String categorie;
     private int dureeMinutes;
-    private int niveau; // 1: Débutant, 2: Intermédiaire, 3: Avancé
+    private int niveau;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private double note; // Note moyenne du service
+    private Double note;
     private int nombreReservations;
+    private String image;
 
     // Constructeur par défaut
     public Service() {
         this.created_at = LocalDateTime.now();
         this.updated_at = LocalDateTime.now();
+        this.estActif = true;
+        this.nombreReservations = 0;
     }
 
     // Validation métier
     public boolean estValide() {
         return validateNom() &&
-                // validatePrix() &&
+                validatePrix() &&
                 validateDuree() &&
-                //validateCapacite() &&
+                validateCapacite() &&
                 validateCategorie() &&
                 validateNiveau() &&
                 validateNote() &&
@@ -40,23 +43,23 @@ public class Service {
         return nom != null &&
                 nom.length() >= 3 &&
                 nom.length() <= 100 &&
-                nom.matches("^[a-zA-Z0-9\\s-]+$");
+                nom.matches("^[a-zA-ZÀ-ÿ0-9\\s-]+$");
     }
 
-    /*private boolean validatePrix() {
-        return prix > 0 && prix <= 1000;
-    }*/
+    private boolean validatePrix() {
+        return prix > 0;
+    }
 
     private boolean validateDuree() {
         return dureeMinutes >= 15 && dureeMinutes <= 240;
     }
 
-    /*private boolean validateCapacite() {
-        return capaciteMax > 0 && capaciteMax <= 100;
-    }*/
+    private boolean validateCapacite() {
+        return capaciteMax > 0;
+    }
 
     private boolean validateCategorie() {
-        return categorie != null && !categorie.trim().isEmpty();
+        return categorie != null && !categorie.trim().isEmpty() && categorie.length() <= 50;
     }
 
     private boolean validateNiveau() {
@@ -64,7 +67,7 @@ public class Service {
     }
 
     private boolean validateNote() {
-        return note >= 0 && note <= 5;
+        return note == null || (note >= 0 && note <= 5);
     }
 
     private boolean validateNombreReservations() {
@@ -89,12 +92,9 @@ public class Service {
         };
     }
 
-    public boolean estPopulaire() {
-        return nombreReservations > 30 && note >= 4.0;
-    }
 
     // Getters et Setters avec validation
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -129,9 +129,9 @@ public class Service {
     }
 
     public void setPrix(double prix) {
-        //if (!validatePrix()) {
-        //throw new IllegalArgumentException("Le prix doit être compris entre 0 et 1000");
-        //  }
+        if (prix <= 0) {
+            throw new IllegalArgumentException("Le prix doit être positif");
+        }
         this.prix = prix;
     }
 
@@ -143,14 +143,14 @@ public class Service {
         this.estActif = estActif;
     }
 
-    public int getcapaciteMax() {
+    public int getCapaciteMax() {
         return capaciteMax;
     }
 
-    public void setcapaciteMax(int capaciteMax) {
-        // if (!validateCapacite()) {
-        //throw new IllegalArgumentException("La capacité maximale doit être comprise entre 1 et 100");
-        // }
+    public void setCapaciteMax(int capaciteMax) {
+        if (capaciteMax <= 0) {
+            throw new IllegalArgumentException("La capacité maximale doit être positive");
+        }
         this.capaciteMax = capaciteMax;
     }
 
@@ -159,20 +159,20 @@ public class Service {
     }
 
     public void setCategorie(String categorie) {
-        //if (!validateCategorie()) {
-        // throw new IllegalArgumentException("La catégorie ne peut pas être vide");
-        // }
+        if (categorie == null || categorie.trim().isEmpty()) {
+            throw new IllegalArgumentException("La catégorie ne peut pas être vide");
+        }
         this.categorie = categorie;
     }
 
-    public int getdureeMinutes() {
+    public int getDureeMinutes() {
         return dureeMinutes;
     }
 
-    public void setdureeMinutes(int dureeMinutes) {
-        //if (!validateDuree()) {
-        //throw new IllegalArgumentException("La durée doit être comprise entre 15 et 240 minutes");
-        //}
+    public void setDureeMinutes(int dureeMinutes) {
+        if (dureeMinutes < 15 || dureeMinutes > 240) {
+            throw new IllegalArgumentException("La durée doit être comprise entre 15 et 240 minutes");
+        }
         this.dureeMinutes = dureeMinutes;
     }
 
@@ -181,9 +181,9 @@ public class Service {
     }
 
     public void setNiveau(int niveau) {
-        //if (!validateNiveau()) {
-        // throw new IllegalArgumentException("Le niveau doit être compris entre 1 et 3");
-        // }
+        if (niveau < 1 || niveau > 3) {
+            throw new IllegalArgumentException("Le niveau doit être compris entre 1 et 3");
+        }
         this.niveau = niveau;
     }
 
@@ -192,6 +192,9 @@ public class Service {
     }
 
     public void setCreated_at(LocalDateTime created_at) {
+        if (created_at == null) {
+            throw new IllegalArgumentException("La date de création ne peut pas être nulle");
+        }
         this.created_at = created_at;
     }
 
@@ -200,17 +203,20 @@ public class Service {
     }
 
     public void setUpdated_at(LocalDateTime updated_at) {
+        if (updated_at == null) {
+            throw new IllegalArgumentException("La date de mise à jour ne peut pas être nulle");
+        }
         this.updated_at = updated_at;
     }
 
-    public double getNote() {
+    public Double getNote() {
         return note;
     }
 
-    public void setNote(double note) {
-        //if (!validateNote()) {
-        //throw new IllegalArgumentException("La note doit être comprise entre 0 et 5");
-        //}
+    public void setNote(Double note) {
+        if (note != null && (note < 0 || note > 5)) {
+            throw new IllegalArgumentException("La note doit être comprise entre 0 et 5");
+        }
         this.note = note;
     }
 
@@ -219,10 +225,21 @@ public class Service {
     }
 
     public void setNombreReservations(int nombreReservations) {
-        //if (!validateNombreReservations()) {
-        // throw new IllegalArgumentException("Le nombre de réservations ne peut pas être négatif");
-        // }
+        if (nombreReservations < 0) {
+            throw new IllegalArgumentException("Le nombre de réservations ne peut pas être négatif");
+        }
         this.nombreReservations = nombreReservations;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        if (image != null && image.length() > 255) {
+            throw new IllegalArgumentException("L'image ne peut pas dépasser 255 caractères");
+        }
+        this.image = image;
     }
 
     // Méthodes equals, hashCode et toString

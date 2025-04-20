@@ -2,6 +2,8 @@ package edu.emmapi.controllers;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.emmapi.entities.Service;
 import edu.emmapi.services.ServiceService;
 import javafx.fxml.FXML;
@@ -9,7 +11,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -19,14 +22,6 @@ import javafx.animation.KeyFrame;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.*;
-import java.util.List;
-
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -34,8 +29,13 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.beans.property.SimpleStringProperty;
 
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ServiceController {
     @FXML private TableView<Service> serviceTable;
@@ -50,6 +50,7 @@ public class ServiceController {
     @FXML private Spinner<Integer> dureeSpinner;
     @FXML private ComboBox<String> niveauCombo;
     @FXML private CheckBox actifCheck;
+    @FXML private TextField imageField;
     @FXML private LineChart<String, Number> statsChart;
     @FXML private VBox notificationPane;
     @FXML private ProgressIndicator loadingIndicator;
@@ -59,7 +60,7 @@ public class ServiceController {
     private ObservableList<Service> services;
     private FilteredList<Service> filteredServices;
     private Timeline autoRefreshTimeline;
-    private Stage statsStage; // Popup window
+    private Stage statsStage;
     private BarChart<String, Number> categoryChart;
     private BarChart<String, Number> levelChart;
 
@@ -81,11 +82,10 @@ public class ServiceController {
         setupFilters();
         setupCharts();
         setupAutoRefresh();
-        loadServices();
         setupValidation();
 
         nomField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.trim().isEmpty()) {
+            if (newValue != null && !newValue.trim().isEmpty()) {
                 String category = categorieCombo.getValue();
                 String level = niveauCombo.getValue();
                 String description = generateFallbackDescription(newValue.trim(), category, level);
@@ -124,16 +124,18 @@ public class ServiceController {
             @Override
             protected void updateItem(Double prix, boolean empty) {
                 super.updateItem(prix, empty);
-                if (empty || prix == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f €", prix));
-                }
+                setText(empty || prix == null ? null : String.format("%.2f €", prix));
             }
         });
 
         TableColumn<Service, String> niveauCol = new TableColumn<>("Niveau de Difficulté");
         niveauCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNiveauDifficulte()));
+
+        TableColumn<Service, String> categorieCol = new TableColumn<>("Catégorie");
+        categorieCol.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+
+        TableColumn<Service, String> imageCol = new TableColumn<>("Image");
+        imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
 
         TableColumn<Service, String> actionCol = new TableColumn<>("Actions");
         actionCol.setCellFactory(col -> new TableCell<>() {
@@ -150,29 +152,22 @@ public class ServiceController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    HBox buttons = new HBox(5, editBtn, deleteBtn);
-                    setGraphic(buttons);
-                }
+                setGraphic(empty ? null : new HBox(5, editBtn, deleteBtn));
             }
         });
 
-        serviceTable.getColumns().addAll(nomCol, prixCol, niveauCol, actionCol);
+        serviceTable.getColumns().setAll(nomCol, prixCol, niveauCol, categorieCol, imageCol, actionCol);
     }
 
     private void setupFilters() {
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredServices.setPredicate(service -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
+                    if (newValue == null || newValue.isEmpty()) return true;
                     String lowerCaseFilter = newValue.toLowerCase();
-                    return service.getNom().toLowerCase().contains(lowerCaseFilter) ||
-                            service.getDescription().toLowerCase().contains(lowerCaseFilter);
-                })
-        );
+                    return (service.getNom() != null && service.getNom().toLowerCase().contains(lowerCaseFilter)) ||
+                            (service.getDescription() != null && service.getDescription().toLowerCase().contains(lowerCaseFilter)) ||
+                            (service.getImage() != null && service.getImage().toLowerCase().contains(lowerCaseFilter));
+                }));
 
         categorieFilter.setItems(FXCollections.observableArrayList("Toutes", "Fitness", "Musculation", "Cardio", "Yoga"));
         categorieFilter.setValue("Toutes");
@@ -185,17 +180,10 @@ public class ServiceController {
     }
 
     private void applyFilters() {
-        String selectedCategory = categorieFilter.getValue();
-        if (selectedCategory == null) {
-            selectedCategory = "Toutes";
-        }
-
-        String finalSelectedCategory = selectedCategory;
-        filteredServices.setPredicate(service -> {
-            boolean matchesCategory = finalSelectedCategory.equals("Toutes") || service.getCategorie().equals(finalSelectedCategory);
-            boolean matchesPrice = service.getPrix() <= prixFilter.getValue();
-            return matchesCategory && matchesPrice;
-        });
+        String selectedCategory = categorieFilter.getValue() != null ? categorieFilter.getValue() : "Toutes";
+        filteredServices.setPredicate(service ->
+                ("Toutes".equals(selectedCategory) || service.getCategorie().equals(selectedCategory)) &&
+                        service.getPrix() <= prixFilter.getValue());
     }
 
     private void setupAutoRefresh() {
@@ -209,29 +197,26 @@ public class ServiceController {
 
     private void setupValidation() {
         nomField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null && !newVal.matches("^[a-zA-Z0-9\\s-]{3,100}$")) {
-                nomField.setStyle("-fx-border-color: red;");
-            } else {
-                nomField.setStyle("");
-            }
+            nomField.setStyle(newVal != null && newVal.matches("^[a-zA-ZÀ-ÿ0-9\\s-]{3,100}$") ? "" : "-fx-border-color: red;");
         });
 
         prixField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal.matches("\\d*\\.?\\d+")) {
+            try {
+                double prix = Double.parseDouble(newVal);
+                prixField.setStyle(prix > 0 && prix <= 1000 ? "" : "-fx-border-color: red;");
+            } catch (NumberFormatException e) {
                 prixField.setStyle("-fx-border-color: red;");
-            } else {
-                try {
-                    double prix = Double.parseDouble(newVal);
-                    if (prix <= 0 || prix > 1000) {
-                        prixField.setStyle("-fx-border-color: red;");
-                    } else {
-                        prixField.setStyle("");
-                    }
-                } catch (NumberFormatException e) {
-                    prixField.setStyle("-fx-border-color: red;");
-                }
             }
         });
+
+        // Add null check for imageField to prevent NullPointerException
+        if (imageField != null) {
+            imageField.textProperty().addListener((obs, oldVal, newVal) -> {
+                imageField.setStyle(newVal == null || newVal.isEmpty() || newVal.length() <= 255 ? "" : "-fx-border-color: red;");
+            });
+        } else {
+            System.err.println("Warning: imageField is not defined in the FXML file.");
+        }
     }
 
     private String generateFallbackDescription(String serviceName, String category, String level) {
@@ -246,19 +231,19 @@ public class ServiceController {
     }
 
     private void setupCharts() {
-        // Main window chart (reservations)
         XYChart.Series<String, Number> reservationSeries = new XYChart.Series<>();
         reservationSeries.setName("Réservations par jour");
-        reservationSeries.getData().add(new XYChart.Data<>("Lun", 23));
-        reservationSeries.getData().add(new XYChart.Data<>("Mar", 14));
-        reservationSeries.getData().add(new XYChart.Data<>("Mer", 15));
-        reservationSeries.getData().add(new XYChart.Data<>("Jeu", 24));
-        reservationSeries.getData().add(new XYChart.Data<>("Ven", 34));
-        reservationSeries.getData().add(new XYChart.Data<>("Sam", 36));
-        reservationSeries.getData().add(new XYChart.Data<>("Dim", 22));
+        reservationSeries.getData().addAll(
+                new XYChart.Data<>("Lun", 23),
+                new XYChart.Data<>("Mar", 14),
+                new XYChart.Data<>("Mer", 15),
+                new XYChart.Data<>("Jeu", 24),
+                new XYChart.Data<>("Ven", 34),
+                new XYChart.Data<>("Sam", 36),
+                new XYChart.Data<>("Dim", 22)
+        );
         statsChart.getData().add(reservationSeries);
 
-        // Setup popup charts
         categoryChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         categoryChart.setTitle("Services par Catégorie");
         categoryChart.getXAxis().setLabel("Catégorie");
@@ -281,14 +266,11 @@ public class ServiceController {
         XYChart.Series<String, Number> categorySeries = new XYChart.Series<>();
         categorySeries.setName("Nombre de Services par Catégorie");
 
-        Map<String, Integer> categoryCount = new HashMap<>();
-        for (Service service : services) {
-            categoryCount.put(service.getCategorie(), categoryCount.getOrDefault(service.getCategorie(), 0) + 1);
-        }
+        Map<String, Long> categoryCount = services.stream()
+                .collect(Collectors.groupingBy(Service::getCategorie, Collectors.counting()));
 
         categoryCount.forEach((category, count) ->
-                categorySeries.getData().add(new XYChart.Data<>(category, count))
-        );
+                categorySeries.getData().add(new XYChart.Data<>(category, count)));
 
         categoryChart.getData().add(categorySeries);
     }
@@ -298,15 +280,11 @@ public class ServiceController {
         XYChart.Series<String, Number> levelSeries = new XYChart.Series<>();
         levelSeries.setName("Nombre de Services par Niveau");
 
-        Map<String, Integer> levelCount = new HashMap<>();
-        for (Service service : services) {
-            String level = service.getNiveauDifficulte();
-            levelCount.put(level, levelCount.getOrDefault(level, 0) + 1);
-        }
+        Map<String, Long> levelCount = services.stream()
+                .collect(Collectors.groupingBy(Service::getNiveauDifficulte, Collectors.counting()));
 
         levelCount.forEach((level, count) ->
-                levelSeries.getData().add(new XYChart.Data<>(level, count))
-        );
+                levelSeries.getData().add(new XYChart.Data<>(level, count)));
 
         levelChart.getData().add(levelSeries);
     }
@@ -330,13 +308,10 @@ public class ServiceController {
             statsStage.setResizable(false);
             statsStage.show();
 
-            // Update charts when the popup opens
             updateCharts();
-
-            // Close the stage cleanly
             statsStage.setOnCloseRequest(event -> statsStage = null);
         } else {
-            statsStage.toFront(); // Bring to front if already open
+            statsStage.toFront();
             updateCharts();
         }
     }
@@ -361,12 +336,13 @@ public class ServiceController {
             service.setNom(nomField.getText());
             service.setDescription(descriptionArea.getText());
             service.setPrix(Double.parseDouble(prixField.getText()));
-            service.setcapaciteMax(capaciteSpinner.getValue());
+            service.setCapaciteMax(capaciteSpinner.getValue());
             service.setCategorie(categorie);
-            service.setdureeMinutes(dureeSpinner.getValue());
+            service.setDureeMinutes(dureeSpinner.getValue());
             service.setNiveau(niveau.equals("Débutant") ? 1 :
                     niveau.equals("Intermédiaire") ? 2 : 3);
             service.setEstActif(actifCheck.isSelected());
+            service.setImage(imageField != null ? imageField.getText() : null);
 
             loadingIndicator.setVisible(true);
 
@@ -378,11 +354,12 @@ public class ServiceController {
                     clearFields();
                     loadingIndicator.setVisible(false);
                     showNotification("Service ajouté avec succès", "success");
-                    updateCharts(); // Update charts in popup if open
+                    updateCharts();
                 });
             }).start();
 
         } catch (Exception e) {
+            loadingIndicator.setVisible(false);
             showNotification("Erreur lors de l'ajout: " + e.getMessage(), "error");
         }
     }
@@ -391,21 +368,21 @@ public class ServiceController {
         nomField.setText(service.getNom());
         descriptionArea.setText(service.getDescription());
         prixField.setText(String.valueOf(service.getPrix()));
-        capaciteSpinner.getValueFactory().setValue(service.getcapaciteMax());
+        capaciteSpinner.getValueFactory().setValue(service.getCapaciteMax());
         categorieCombo.setValue(service.getCategorie());
-        dureeSpinner.getValueFactory().setValue(service.getdureeMinutes());
+        dureeSpinner.getValueFactory().setValue(service.getDureeMinutes());
         niveauCombo.setValue(service.getNiveauDifficulte());
         actifCheck.setSelected(service.isEstActif());
+        if (imageField != null) {
+            imageField.setText(service.getImage());
+        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation de mise à jour");
         alert.setHeaderText("Mettre à jour le service ?");
         alert.setContentText("Êtes-vous sûr de vouloir mettre à jour ce service ?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            updateService(service);
-        }
+        alert.showAndWait().filter(result -> result == ButtonType.OK).ifPresent(result -> updateService(service));
     }
 
     private void updateService(Service service) {
@@ -418,12 +395,13 @@ public class ServiceController {
             service.setNom(nomField.getText());
             service.setDescription(descriptionArea.getText());
             service.setPrix(Double.parseDouble(prixField.getText()));
-            service.setcapaciteMax(capaciteSpinner.getValue());
+            service.setCapaciteMax(capaciteSpinner.getValue());
             service.setCategorie(categorieCombo.getValue());
-            service.setdureeMinutes(dureeSpinner.getValue());
+            service.setDureeMinutes(dureeSpinner.getValue());
             service.setNiveau(niveauCombo.getValue().equals("Débutant") ? 1 :
                     niveauCombo.getValue().equals("Intermédiaire") ? 2 : 3);
             service.setEstActif(actifCheck.isSelected());
+            service.setImage(imageField != null ? imageField.getText() : null);
 
             loadingIndicator.setVisible(true);
 
@@ -435,7 +413,7 @@ public class ServiceController {
                         clearFields();
                         loadingIndicator.setVisible(false);
                         showNotification("Service mis à jour avec succès", "success");
-                        updateCharts(); // Update charts in popup if open
+                        updateCharts();
                     });
                 } catch (SQLException e) {
                     javafx.application.Platform.runLater(() -> {
@@ -446,6 +424,7 @@ public class ServiceController {
             }).start();
 
         } catch (Exception e) {
+            loadingIndicator.setVisible(false);
             showNotification("Erreur lors de la mise à jour: " + e.getMessage(), "error");
         }
     }
@@ -453,36 +432,34 @@ public class ServiceController {
     private void handleDelete(Service service) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation de suppression");
-        alert.setHeaderText(null);
         alert.setContentText("Êtes-vous sûr de vouloir supprimer ce service ?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        alert.showAndWait().filter(result -> result == ButtonType.OK).ifPresent(result -> {
             try {
                 serviceService.deleteService(service.getId());
                 services.remove(service);
                 showNotification("Service supprimé avec succès", "success");
-                updateCharts(); // Update charts in popup if open
+                updateCharts();
             } catch (Exception e) {
-                showNotification("Erreur lors de la suppression : " + e.getMessage(), "error");
+                showNotification("Erreur lors de la suppression: " + e.getMessage(), "error");
             }
-        }
+        });
     }
 
     private boolean validateFields() {
-        boolean isValid = true;
         StringBuilder errors = new StringBuilder();
+        boolean isValid = true;
 
-        if (nomField.getText().trim().isEmpty() ||
-                !nomField.getText().matches("^[a-zA-Z0-9\\s-]{3,100}$")) {
-            errors.append("Nom invalide\n");
+        String nom = nomField.getText();
+        if (nom == null || nom.trim().isEmpty() || !nom.matches("^[a-zA-ZÀ-ÿ0-9\\s-]{3,100}$")) {
+            errors.append("Nom invalide (3-100 caractères, lettres, chiffres, espaces, tirets)\n");
             isValid = false;
         }
 
         try {
             double prix = Double.parseDouble(prixField.getText());
-            if (prix <= 0 || prix > 1000) {
-                errors.append("Prix invalide (0-1000)\n");
+            if (prix <= 0) {
+                errors.append("Prix doit être positif\n");
                 isValid = false;
             }
         } catch (NumberFormatException e) {
@@ -490,10 +467,33 @@ public class ServiceController {
             isValid = false;
         }
 
+        int capacite = capaciteSpinner.getValue();
+        if (capacite <= 0) {
+            errors.append("Capacité maximale doit être positive\n");
+            isValid = false;
+        }
+
+        String categorie = categorieCombo.getValue();
+        if (categorie == null || categorie.trim().isEmpty() || categorie.length() > 50) {
+            errors.append("Catégorie invalide (max 50 caractères)\n");
+            isValid = false;
+        }
+
+        int duree = dureeSpinner.getValue();
+        if (duree < 15 || duree > 240) {
+            errors.append("Durée doit être entre 15 et 240 minutes\n");
+            isValid = false;
+        }
+
+        String image = imageField != null ? imageField.getText() : null;
+        if (image != null && image.length() > 255) {
+            errors.append("Image ne peut pas dépasser 255 caractères\n");
+            isValid = false;
+        }
+
         if (!isValid) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
-            alert.setHeaderText(null);
             alert.setContentText(errors.toString());
             alert.showAndWait();
         }
@@ -508,11 +508,7 @@ public class ServiceController {
         notification.setAlignment(javafx.geometry.Pos.CENTER);
         notificationPane.getChildren().add(notification);
 
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(5),
-                evt -> notificationPane.getChildren().remove(notification)
-        ));
-        timeline.play();
+        new Timeline(new KeyFrame(Duration.seconds(5), evt -> notificationPane.getChildren().remove(notification))).play();
     }
 
     @FXML
@@ -525,6 +521,9 @@ public class ServiceController {
         dureeSpinner.getValueFactory().setValue(30);
         niveauCombo.setValue("Débutant");
         actifCheck.setSelected(true);
+        if (imageField != null) {
+            imageField.clear();
+        }
     }
 
     @FXML
@@ -537,7 +536,7 @@ public class ServiceController {
             javafx.application.Platform.runLater(() -> {
                 services.addAll(loadedServices);
                 loadingIndicator.setVisible(false);
-                updateCharts(); // Update charts in popup if open
+                updateCharts();
             });
         }).start();
     }
@@ -552,7 +551,7 @@ public class ServiceController {
         if (file != null) {
             try {
                 Document document = new Document();
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
+                PdfWriter.getInstance(document, new FileOutputStream(file));
                 document.open();
 
                 Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
@@ -564,7 +563,7 @@ public class ServiceController {
                 document.add(title);
                 document.add(new Paragraph("\n"));
 
-                PdfPTable table = new PdfPTable(4);
+                PdfPTable table = new PdfPTable(5);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(10f);
                 table.setSpacingAfter(10f);
@@ -573,12 +572,14 @@ public class ServiceController {
                 table.addCell(createCell("Prix", headerFont));
                 table.addCell(createCell("Niveau", headerFont));
                 table.addCell(createCell("Catégorie", headerFont));
+                table.addCell(createCell("Image", headerFont));
 
                 for (Service service : services) {
                     table.addCell(createCell(service.getNom(), cellFont));
                     table.addCell(createCell(String.format("%.2f €", service.getPrix()), cellFont));
                     table.addCell(createCell(service.getNiveauDifficulte(), cellFont));
                     table.addCell(createCell(service.getCategorie(), cellFont));
+                    table.addCell(createCell(service.getImage() != null ? service.getImage() : "", cellFont));
                 }
 
                 document.add(table);

@@ -57,7 +57,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MyConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/hive2"; // À adapter si besoin
+    private static final String URL = "jdbc:mysql://localhost:3306/hive3"; // À adapter si besoin
     private static final String LOGIN = "root"; // À adapter si besoin
     private static final String PWD = ""; // À adapter si besoin
     private static MyConnection instance;
