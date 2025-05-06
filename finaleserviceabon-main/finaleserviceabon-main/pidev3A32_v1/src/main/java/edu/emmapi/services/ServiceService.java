@@ -22,8 +22,8 @@ public class ServiceService implements IServiceService {
         }
 
         String sql = "INSERT INTO service (nom, description, prix, est_actif, capacite_max, " +
-                "categorie, duree_minutes, niveau, created_at, updated_at, note, nombre_reservations, image) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "categorie, duree_minutes, niveau, created_at, updated_at, note, nombre_reservations, image, salle) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, service.getNom());
@@ -43,6 +43,7 @@ public class ServiceService implements IServiceService {
             }
             pst.setInt(12, service.getNombreReservations());
             pst.setString(13, service.getImage());
+            pst.setString(14, service.getSalle() != null ? service.getSalle() : ""); // Provide a value for salle
 
             int affectedRows = pst.executeUpdate();
 
@@ -86,7 +87,7 @@ public class ServiceService implements IServiceService {
 
         String sql = "UPDATE service SET nom = ?, description = ?, prix = ?, est_actif = ?, " +
                 "capacite_max = ?, categorie = ?, duree_minutes = ?, niveau = ?, updated_at = ?, " +
-                "note = ?, nombre_reservations = ?, image = ? WHERE id = ?";
+                "note = ?, nombre_reservations = ?, image = ?, salle = ? WHERE id = ?";
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setString(1, service.getNom());
@@ -105,7 +106,8 @@ public class ServiceService implements IServiceService {
             }
             pst.setInt(11, service.getNombreReservations());
             pst.setString(12, service.getImage());
-            pst.setLong(13, service.getId());
+            pst.setString(13, service.getSalle() != null ? service.getSalle() : "");
+            pst.setLong(14, service.getId());
 
             int affectedRows = pst.executeUpdate();
             if (affectedRows == 0) {
@@ -324,6 +326,7 @@ public class ServiceService implements IServiceService {
         service.setNiveau(rs.getInt("niveau"));
         service.setNombreReservations(rs.getInt("nombre_reservations"));
         service.setImage(rs.getString("image"));
+        service.setSalle(rs.getString("salle")); // Map the salle column
 
         Double note = rs.getDouble("note");
         if (!rs.wasNull()) {

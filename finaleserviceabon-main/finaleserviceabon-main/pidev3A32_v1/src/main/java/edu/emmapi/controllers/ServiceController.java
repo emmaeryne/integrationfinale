@@ -334,6 +334,7 @@ public class ServiceController {
 
             Service service = new Service();
             service.setNom(nomField.getText());
+            //service.setSalle(salleField.getText());
             service.setDescription(descriptionArea.getText());
             service.setPrix(Double.parseDouble(prixField.getText()));
             service.setCapaciteMax(capaciteSpinner.getValue());
@@ -342,6 +343,7 @@ public class ServiceController {
             service.setNiveau(niveau.equals("Débutant") ? 1 :
                     niveau.equals("Intermédiaire") ? 2 : 3);
             service.setEstActif(actifCheck.isSelected());
+
             service.setImage(imageField != null ? imageField.getText() : null);
 
             loadingIndicator.setVisible(true);

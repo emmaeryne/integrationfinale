@@ -7,6 +7,7 @@ public class Service {
     private Long id;
     private String nom;
     private String description;
+    private String salle;
     private double prix;
     private boolean estActif;
     private int capaciteMax;
@@ -93,6 +94,10 @@ public class Service {
     }
 
 
+
+
+
+
     // Getters et Setters avec validation
     public Long getId() {
         return id;
@@ -133,6 +138,13 @@ public class Service {
             throw new IllegalArgumentException("Le prix doit être positif");
         }
         this.prix = prix;
+    }
+    public String getSalle() {
+        return salle;
+    }
+
+    public void setSalle(String salle) {
+        this.salle = salle;
     }
 
     public boolean isEstActif() {
