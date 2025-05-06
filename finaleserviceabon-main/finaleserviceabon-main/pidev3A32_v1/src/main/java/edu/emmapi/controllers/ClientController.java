@@ -175,8 +175,9 @@ public class ClientController {
         TypeAbonnement selectedAbonnement = abonnementComboBox.getValue();
         if (selectedAbonnement != null) {
             abonnementDetailsLabel.setText("Nom: " + selectedAbonnement.getNom() +
-                    ", Prix: " + selectedAbonnement.getPrix() +
-                    ", Statut: " + (selectedAbonnement.getIsPremium() ? "Premium" : "Standard"));
+                    ", Prix: " + selectedAbonnement.getPrix() //+
+                   // ", Statut: " + (selectedAbonnement.getIsPremium() ? "Premium" : "Standard")
+            );
         }
     }
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,56 +15,58 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.AbonnementController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.TypeAbonnementController">
     <content>
-        <VBox prefHeight="800.0" prefWidth="900.0" spacing="10" style="-fx-background-color: #2E3440;">
-            <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
+        <AnchorPane prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #1A2526;">
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="900.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
+                <VBox prefHeight="800.0" prefWidth="900.0" spacing="10" style="-fx-background-color: transparent;">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                    <AnchorPane prefHeight="100.0" prefWidth="880.0">
+                        <children>
+                            <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="360.0" layoutY="10.0">
+                                <image>
+                                    <Image url="@hjk-removebg-preview.png" />
+                                </image>
+                            </ImageView>
+                            <Label layoutX="320.0" layoutY="80.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Gestion des Types d'Abonnements" />
+                        </children>
+                    </AnchorPane>
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <ComboBox fx:id="sortComboBox" prefHeight="30.0" prefWidth="200.0" promptText="Trier par" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                        <TextField fx:id="searchField" prefHeight="30.0" prefWidth="200.0" promptText="Rechercher par nom" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-background-radius: 5;" />
 
-            <!-- Header -->
-            <AnchorPane prefHeight="100.0" prefWidth="880.0">
-                <children>
-                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="360.0" layoutY="10.0">
-                        <image>
-                            <Image url="@hjk-removebg-preview.png" /> <!-- Replace with your logo image -->
-                        </image>
-                    </ImageView>
-                    <Label layoutX="320.0" layoutY="80.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f4eeee;" text="Association Abonnement" />
-                </children>
-            </AnchorPane>
-
-            <!-- Filters and Actions -->
-            <HBox alignment="CENTER_LEFT" spacing="15">
-                <ComboBox fx:id="sortComboBox" prefHeight="30.0" prefWidth="200.0" promptText="Trier par" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" />
-                <Button onAction="#loadAbonnements" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5;" text="Actualiser" />
-                <Region HBox.hgrow="ALWAYS" />
-            </HBox>
-
-            <!-- Table -->
-            <TableView fx:id="abonnementTable" prefHeight="500.0" prefWidth="880.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="serviceIdColumn" prefWidth="220.0" text="Service" />
-                    <TableColumn fx:id="typeAbonnementIdColumn" prefWidth="220.0" text="Type Abonnement" />
-                    <TableColumn fx:id="prixTotalColumn" prefWidth="150.0" text="Prix Total (€)" />
-                    <TableColumn fx:id="statutColumn" prefWidth="150.0" text="Statut" />
-                </columns>
-            </TableView>
-
-            <!-- Buttons -->
-            <HBox alignment="CENTER_RIGHT" spacing="15">
-                <Button onAction="#handleAddAbonnement" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Ajouter" />
-                <Button onAction="#handleEditAbonnement" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Modifier" />
-                <Button onAction="#handleDeleteAbonnement" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Supprimer" />
-            </HBox>
-
-            <!-- IoT Notification Area -->
-            <VBox spacing="5">
-                <Label style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="Notifications IoT" />
-                <TextArea fx:id="iotNotifications" editable="false" prefHeight="100.0" prefWidth="880.0" style="-fx-background-color: #5E81AC; -fx-text-fill: #000000; -fx-border-color: #5E81AC; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
-            </VBox>
-            <!-- Footer -->
-            <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" />
-        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                    </HBox>
+                    <TableView fx:id="typeAbonnementTable" prefHeight="500.0" prefWidth="880.0" style="-fx-background-color: #2A3B42; -fx-border-color: #66C2D9; -fx-border-radius: 5; -fx-text-fill: #FFFFFF;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="nomColumn" prefWidth="150.0" text="Nom" />
+                            <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix (€)" />
+                            <TableColumn fx:id="dureeEnMoisColumn" prefWidth="100.0" text="Durée (mois)" />
+                            <TableColumn fx:id="isPremiumColumn" prefWidth="80.0" text="Premium" />
+                            <TableColumn fx:id="descriptionColumn" prefWidth="150.0" text="Description" />
+                            <TableColumn fx:id="reductionColumn" prefWidth="80.0" text="Réduction (%)" />
+                            <TableColumn fx:id="prixReduitColumn" prefWidth="100.0" text="Prix Réduit (€)" />
+                            <TableColumn fx:id="updatedAtColumn" prefWidth="120.0" text="Mis à jour" />
+                            <TableColumn fx:id="reservationCountColumn" prefWidth="100.0" text="Réservations" />
+                            <TableColumn fx:id="actionsColumn" prefWidth="200.0" text="Actions" />
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT" spacing="15">
+                        <Button onAction="#handleAddTypeAbonnement" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Ajouter" />
+                        <Button onAction="#handleImportExcel" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Importer Excel" />
+                        <Button onAction="#handleRecommendations" style="-fx-background-color: #66C2D9; -fx-text-fill: #FFFFFF; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Recommandations" />
+                        <Button onAction="#handleBackToHome" style="-fx-background-color: #66C2D9; -fx-text-fill: #FFFFFF; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 20; -fx-font-size: 14px;" text="Retour" />
+                    </HBox>
+                    <Label alignment="CENTER" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="© 2025 HIVE - Gestion Sportive" />
+                </VBox>
+            </children>
+        </AnchorPane>
     </content>
 </ScrollPane>

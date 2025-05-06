@@ -1,4 +1,4 @@
-package edu.emmapi.interfaces;
+/*package edu.emmapi.interfaces;
 
 import edu.emmapi.entities.Abonnement;
 
@@ -13,7 +13,7 @@ public interface IAbonnement {
      * @return the added abonnement with generated ID
      * @throws SQLException if there is an error during the operation
      */
-    Abonnement ajouterAbonnement(Abonnement abonnement) throws SQLException;
+    //Abonnement ajouterAbonnement(Abonnement abonnement) throws SQLException;
 
     /**
      * Retrieves all abonnements from the system.
@@ -21,39 +21,56 @@ public interface IAbonnement {
      * @return a list of all abonnements
      * @throws SQLException if there is an error during the operation
      */
-    List<Abonnement> getAllAbonnements() throws SQLException;
+   // List<Abonnement> getAllAbonnements() throws SQLException;
 
     /**
      * Deletes an abonnement by its ID.
      *
-     * @param id the ID of the abonnement to be deleted
-     * @throws SQLException if there is an error during the operation
+   //  * @param id the ID of the abonnement to be deleted
+   //  * @throws SQLException if there is an error during the operation
      */
-    void deleteAbonnement(Long id) throws SQLException;
+   // void deleteAbonnement(Long id) throws SQLException;
 
     /**
      * Updates an existing abonnement.
      *
-     * @param abonnement the abonnement with updated information
+     //* @param abonnement the abonnement with updated information
      * @throws SQLException if there is an error during the operation
      */
-    void updateAbonnement(Abonnement abonnement) throws SQLException;
+    //void updateAbonnement(Abonnement abonnement) throws SQLException;
 
     /**
      * Retrieves an abonnement by its ID.
      *
-     * @param id the ID of the abonnement to retrieve
+    // * @param id the ID of the abonnement to retrieve
      * @return the abonnement with the specified ID
-     * @throws SQLException if there is an error during the operation
+    // * @throws SQLException if there is an error during the operation
      */
-    Abonnement getAbonnementById(Long id) throws SQLException;
+    //Abonnement getAbonnementById(Long id) throws SQLException;
 
     /**
      * Searches for abonnements based on a keyword.
      *
-     * @param keyword the keyword to search for
+    // * @param keyword the keyword to search for
      * @return a list of abonnements matching the keyword
      * @throws SQLException if there is an error during the operation
      */
-    List<Abonnement> searchAbonnements(String keyword) throws SQLException;
+    //List<Abonnement> searchAbonnements(String keyword) throws SQLException;
+//}
+
+
+
+
+
+
+package edu.emmapi.interfaces;
+
+import edu.emmapi.entities.Abonnement;
+import java.util.List;
+
+public interface IAbonnement {
+    Abonnement ajouterAbonnement(Abonnement abonnement);
+    List<Abonnement> getAllAbonnements(String tri);
+    void updateAbonnement(Abonnement abonnement);
+    void deleteAbonnement(Integer id);
 }

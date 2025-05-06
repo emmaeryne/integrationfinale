@@ -1,4 +1,4 @@
-package edu.emmapi.interfaces;
+/*package edu.emmapi.interfaces;
 
 import edu.emmapi.entities.TypeAbonnement;
 
@@ -10,6 +10,19 @@ public interface ITypeAbonnement {
 
     List<TypeAbonnement> getAllTypeAbonnements(String tri);
 
+    void deleteTypeAbonnement(Long id);
+    void updateTypeAbonnement(TypeAbonnement typeAbonnement);
+    String genererDescription(TypeAbonnement typeAbonnement);
+}*/
+package edu.emmapi.interfaces;
+
+import edu.emmapi.entities.TypeAbonnement;
+
+import java.util.List;
+
+public interface ITypeAbonnement {
+    TypeAbonnement ajouterTypeAbonnement(TypeAbonnement typeAbonnement);
+    List<TypeAbonnement> getAllTypeAbonnements(String tri);
     void deleteTypeAbonnement(Long id);
     void updateTypeAbonnement(TypeAbonnement typeAbonnement);
     String genererDescription(TypeAbonnement typeAbonnement);
