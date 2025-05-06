@@ -518,10 +518,10 @@ public class AbonnementService implements IAbonnement {
     @Override
     public List<Abonnement> getAllAbonnements(String tri) {
         List<Abonnement> abonnements = new ArrayList<>();
-        String sql = "SELECT a.*, s.nom as service_nom, t.nom as type_nom " +
+        String sql = "SELECT a.*, s.nom AS service_nom, t.nom AS type_nom " +
                 "FROM abonnement a " +
                 "JOIN service s ON a.service_id = s.id " +
-                "JOIN typeabonnement t ON a.type_abonnement_id = t.id";
+                "JOIN type_abonnement t ON a.type_abonnement_id = t.id"; // Corrigé ici
         try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 Abonnement abonnement = new Abonnement();
