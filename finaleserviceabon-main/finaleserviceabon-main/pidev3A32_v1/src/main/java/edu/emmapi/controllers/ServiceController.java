@@ -50,6 +50,7 @@ public class ServiceController {
     @FXML private Spinner<Integer> dureeSpinner;
     @FXML private ComboBox<String> niveauCombo;
     @FXML private CheckBox actifCheck;
+    @FXML private ComboBox<String> salleCombo;
     @FXML private TextField imageField;
     @FXML private LineChart<String, Number> statsChart;
     @FXML private VBox notificationPane;
@@ -72,11 +73,15 @@ public class ServiceController {
 
         serviceTable.setItems(filteredServices);
 
+        // Initialize ComboBoxes
         niveauCombo.setItems(FXCollections.observableArrayList("Débutant", "Intermédiaire", "Avancé"));
         niveauCombo.setValue("Débutant");
 
         categorieCombo.setItems(FXCollections.observableArrayList("Fitness", "Musculation", "Cardio", "Yoga"));
         categorieCombo.setValue("Fitness");
+
+        salleCombo.setItems(FXCollections.observableArrayList("OUVERT", "FERME"));
+        salleCombo.setValue("OUVERT");
 
         setupTableColumns();
         setupFilters();
@@ -134,6 +139,9 @@ public class ServiceController {
         TableColumn<Service, String> categorieCol = new TableColumn<>("Catégorie");
         categorieCol.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 
+        TableColumn<Service, String> salleCol = new TableColumn<>("Statut Salle");
+        salleCol.setCellValueFactory(new PropertyValueFactory<>("salle"));
+
         TableColumn<Service, String> imageCol = new TableColumn<>("Image");
         imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
 
@@ -156,7 +164,7 @@ public class ServiceController {
             }
         });
 
-        serviceTable.getColumns().setAll(nomCol, prixCol, niveauCol, categorieCol, imageCol, actionCol);
+        serviceTable.getColumns().setAll(nomCol, prixCol, niveauCol, categorieCol, salleCol, imageCol, actionCol);
     }
 
     private void setupFilters() {
@@ -166,6 +174,7 @@ public class ServiceController {
                     String lowerCaseFilter = newValue.toLowerCase();
                     return (service.getNom() != null && service.getNom().toLowerCase().contains(lowerCaseFilter)) ||
                             (service.getDescription() != null && service.getDescription().toLowerCase().contains(lowerCaseFilter)) ||
+                            (service.getSalle() != null && service.getSalle().toLowerCase().contains(lowerCaseFilter)) ||
                             (service.getImage() != null && service.getImage().toLowerCase().contains(lowerCaseFilter));
                 }));
 
@@ -202,14 +211,21 @@ public class ServiceController {
 
         prixField.textProperty().addListener((obs, oldVal, newVal) -> {
             try {
+                if (newVal == null || newVal.trim().isEmpty()) {
+                    prixField.setStyle("-fx-border-color: red;");
+                    return;
+                }
                 double prix = Double.parseDouble(newVal);
-                prixField.setStyle(prix > 0 && prix <= 1000 ? "" : "-fx-border-color: red;");
+                prixField.setStyle(prix > 0 && prix <= 99999999.99 ? "" : "-fx-border-color: red;");
             } catch (NumberFormatException e) {
                 prixField.setStyle("-fx-border-color: red;");
             }
         });
 
-        // Add null check for imageField to prevent NullPointerException
+        salleCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
+            salleCombo.setStyle(newVal != null && (newVal.equals("OUVERT") || newVal.equals("FERME")) ? "" : "-fx-border-color: red;");
+        });
+
         if (imageField != null) {
             imageField.textProperty().addListener((obs, oldVal, newVal) -> {
                 imageField.setStyle(newVal == null || newVal.isEmpty() || newVal.length() <= 255 ? "" : "-fx-border-color: red;");
@@ -233,30 +249,28 @@ public class ServiceController {
     private void setupCharts() {
         XYChart.Series<String, Number> reservationSeries = new XYChart.Series<>();
         reservationSeries.setName("Réservations par jour");
-        reservationSeries.getData().addAll(
-                new XYChart.Data<>("Lun", 23),
-                new XYChart.Data<>("Mar", 14),
-                new XYChart.Data<>("Mer", 15),
-                new XYChart.Data<>("Jeu", 24),
-                new XYChart.Data<>("Ven", 34),
-                new XYChart.Data<>("Sam", 36),
-                new XYChart.Data<>("Dim", 22)
-        );
+        try {
+            Map<String, Integer> reservations = serviceService.getReservationsPerDay();
+            reservations.forEach((day, count) ->
+                    reservationSeries.getData().add(new XYChart.Data<>(day.substring(0, 3), count)));
+        } catch (SQLException e) {
+            showNotification("Erreur lors du chargement des stats: " + e.getMessage(), "error");
+        }
         statsChart.getData().add(reservationSeries);
 
         categoryChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         categoryChart.setTitle("Services par Catégorie");
         categoryChart.getXAxis().setLabel("Catégorie");
         categoryChart.getYAxis().setLabel("Nombre");
-        ((NumberAxis) categoryChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#f4eeee"));
-        categoryChart.setStyle("-fx-background-color: #3B4252;");
+        ((NumberAxis) categoryChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#FFFFFF"));
+        categoryChart.setStyle("-fx-background-color: #2A3B42;");
 
         levelChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
         levelChart.setTitle("Services par Niveau");
         levelChart.getXAxis().setLabel("Niveau");
         levelChart.getYAxis().setLabel("Nombre");
-        ((NumberAxis) levelChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#f4eeee"));
-        levelChart.setStyle("-fx-background-color: #3B4252;");
+        ((NumberAxis) levelChart.getYAxis()).setTickLabelFill(javafx.scene.paint.Color.web("#FFFFFF"));
+        levelChart.setStyle("-fx-background-color: #2A3B42;");
 
         updateCharts();
     }
@@ -301,7 +315,7 @@ public class ServiceController {
             statsStage.setTitle("Statistiques des Services");
             VBox statsVBox = new VBox(10, categoryChart, levelChart);
             statsVBox.setPadding(new Insets(10));
-            statsVBox.setStyle("-fx-background-color: #2E3440;");
+            statsVBox.setStyle("-fx-background-color: #2A3B42;");
 
             Scene scene = new Scene(statsVBox, 600, 500);
             statsStage.setScene(scene);
@@ -326,40 +340,55 @@ public class ServiceController {
 
             String categorie = categorieCombo.getValue();
             String niveau = niveauCombo.getValue();
+            String salle = salleCombo.getValue();
 
-            if (categorie == null || niveau == null) {
-                showNotification("Veuillez sélectionner une catégorie et un niveau", "error");
+            if (categorie == null || niveau == null || salle == null) {
+                showNotification("Veuillez sélectionner une catégorie, un niveau et un statut salle", "error");
                 return;
             }
 
             Service service = new Service();
             service.setNom(nomField.getText());
-            //service.setSalle(salleField.getText());
             service.setDescription(descriptionArea.getText());
-            service.setPrix(Double.parseDouble(prixField.getText()));
+            double prix = Double.parseDouble(prixField.getText());
+            if (prix > 99999999.99) {
+                showNotification("Le prix ne peut pas dépasser 99999999.99", "error");
+                return;
+            }
+            service.setPrix(prix);
             service.setCapaciteMax(capaciteSpinner.getValue());
             service.setCategorie(categorie);
             service.setDureeMinutes(dureeSpinner.getValue());
             service.setNiveau(niveau.equals("Débutant") ? 1 :
                     niveau.equals("Intermédiaire") ? 2 : 3);
             service.setEstActif(actifCheck.isSelected());
-
+            service.setSalle(salle);
             service.setImage(imageField != null ? imageField.getText() : null);
 
             loadingIndicator.setVisible(true);
 
             new Thread(() -> {
-                Service nouveauService = serviceService.ajouterService(service);
-                javafx.application.Platform.runLater(() -> {
-                    services.add(nouveauService);
-                    serviceTable.refresh();
-                    clearFields();
-                    loadingIndicator.setVisible(false);
-                    showNotification("Service ajouté avec succès", "success");
-                    updateCharts();
-                });
+                try {
+                    Service nouveauService = serviceService.ajouterService(service);
+                    javafx.application.Platform.runLater(() -> {
+                        services.add(nouveauService);
+                        serviceTable.refresh();
+                        clearFields();
+                        loadingIndicator.setVisible(false);
+                        showNotification("Service ajouté avec succès", "success");
+                        updateCharts();
+                    });
+                } catch (Exception e) {
+                    javafx.application.Platform.runLater(() -> {
+                        loadingIndicator.setVisible(false);
+                        showNotification("Erreur lors de l'ajout: " + e.getMessage(), "error");
+                    });
+                }
             }).start();
 
+        } catch (NumberFormatException e) {
+            loadingIndicator.setVisible(false);
+            showNotification("Prix invalide", "error");
         } catch (Exception e) {
             loadingIndicator.setVisible(false);
             showNotification("Erreur lors de l'ajout: " + e.getMessage(), "error");
@@ -375,6 +404,7 @@ public class ServiceController {
         dureeSpinner.getValueFactory().setValue(service.getDureeMinutes());
         niveauCombo.setValue(service.getNiveauDifficulte());
         actifCheck.setSelected(service.isEstActif());
+        salleCombo.setValue(service.getSalle());
         if (imageField != null) {
             imageField.setText(service.getImage());
         }
@@ -396,13 +426,19 @@ public class ServiceController {
 
             service.setNom(nomField.getText());
             service.setDescription(descriptionArea.getText());
-            service.setPrix(Double.parseDouble(prixField.getText()));
+            double prix = Double.parseDouble(prixField.getText());
+            if (prix > 99999999.99) {
+                showNotification("Le prix ne peut pas dépasser 99999999.99", "error");
+                return;
+            }
+            service.setPrix(prix);
             service.setCapaciteMax(capaciteSpinner.getValue());
             service.setCategorie(categorieCombo.getValue());
             service.setDureeMinutes(dureeSpinner.getValue());
             service.setNiveau(niveauCombo.getValue().equals("Débutant") ? 1 :
                     niveauCombo.getValue().equals("Intermédiaire") ? 2 : 3);
             service.setEstActif(actifCheck.isSelected());
+            service.setSalle(salleCombo.getValue());
             service.setImage(imageField != null ? imageField.getText() : null);
 
             loadingIndicator.setVisible(true);
@@ -425,6 +461,9 @@ public class ServiceController {
                 }
             }).start();
 
+        } catch (NumberFormatException e) {
+            loadingIndicator.setVisible(false);
+            showNotification("Prix invalide", "error");
         } catch (Exception e) {
             loadingIndicator.setVisible(false);
             showNotification("Erreur lors de la mise à jour: " + e.getMessage(), "error");
@@ -458,15 +497,21 @@ public class ServiceController {
             isValid = false;
         }
 
-        try {
-            double prix = Double.parseDouble(prixField.getText());
-            if (prix <= 0) {
-                errors.append("Prix doit être positif\n");
+        String prixText = prixField.getText();
+        if (prixText == null || prixText.trim().isEmpty()) {
+            errors.append("Prix requis\n");
+            isValid = false;
+        } else {
+            try {
+                double prix = Double.parseDouble(prixText);
+                if (prix <= 0 || prix > 99999999.99) {
+                    errors.append("Prix doit être entre 0.01 et 99999999.99\n");
+                    isValid = false;
+                }
+            } catch (NumberFormatException e) {
+                errors.append("Prix invalide (doit être un nombre)\n");
                 isValid = false;
             }
-        } catch (NumberFormatException e) {
-            errors.append("Prix invalide\n");
-            isValid = false;
         }
 
         int capacite = capaciteSpinner.getValue();
@@ -484,6 +529,12 @@ public class ServiceController {
         int duree = dureeSpinner.getValue();
         if (duree < 15 || duree > 240) {
             errors.append("Durée doit être entre 15 et 240 minutes\n");
+            isValid = false;
+        }
+
+        String salle = salleCombo.getValue();
+        if (salle == null || (!salle.equals("OUVERT") && !salle.equals("FERME"))) {
+            errors.append("Statut salle invalide (OUVERT ou FERME requis)\n");
             isValid = false;
         }
 
@@ -523,6 +574,7 @@ public class ServiceController {
         dureeSpinner.getValueFactory().setValue(30);
         niveauCombo.setValue("Débutant");
         actifCheck.setSelected(true);
+        salleCombo.setValue("OUVERT");
         if (imageField != null) {
             imageField.clear();
         }
@@ -534,12 +586,19 @@ public class ServiceController {
         services.clear();
 
         new Thread(() -> {
-            List<Service> loadedServices = serviceService.getAllServices();
-            javafx.application.Platform.runLater(() -> {
-                services.addAll(loadedServices);
-                loadingIndicator.setVisible(false);
-                updateCharts();
-            });
+            try {
+                List<Service> loadedServices = serviceService.getAllServices();
+                javafx.application.Platform.runLater(() -> {
+                    services.addAll(loadedServices);
+                    loadingIndicator.setVisible(false);
+                    updateCharts();
+                });
+            } catch (Exception e) {
+                javafx.application.Platform.runLater(() -> {
+                    loadingIndicator.setVisible(false);
+                    showNotification("Erreur lors du chargement: " + e.getMessage(), "error");
+                });
+            }
         }).start();
     }
 
@@ -565,7 +624,7 @@ public class ServiceController {
                 document.add(title);
                 document.add(new Paragraph("\n"));
 
-                PdfPTable table = new PdfPTable(5);
+                PdfPTable table = new PdfPTable(6);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(10f);
                 table.setSpacingAfter(10f);
@@ -574,6 +633,7 @@ public class ServiceController {
                 table.addCell(createCell("Prix", headerFont));
                 table.addCell(createCell("Niveau", headerFont));
                 table.addCell(createCell("Catégorie", headerFont));
+                table.addCell(createCell("Statut Salle", headerFont));
                 table.addCell(createCell("Image", headerFont));
 
                 for (Service service : services) {
@@ -581,6 +641,7 @@ public class ServiceController {
                     table.addCell(createCell(String.format("%.2f €", service.getPrix()), cellFont));
                     table.addCell(createCell(service.getNiveauDifficulte(), cellFont));
                     table.addCell(createCell(service.getCategorie(), cellFont));
+                    table.addCell(createCell(service.getSalle(), cellFont));
                     table.addCell(createCell(service.getImage() != null ? service.getImage() : "", cellFont));
                 }
 

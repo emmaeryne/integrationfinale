@@ -1,14 +1,12 @@
 package edu.emmapi.entities;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public class Service {
     private Long id;
     private String nom;
     private String description;
-    private String salle;
-    private double prix;
+    private Double prix;
     private boolean estActif;
     private int capaciteMax;
     private String categorie;
@@ -19,68 +17,54 @@ public class Service {
     private Double note;
     private int nombreReservations;
     private String image;
+    private String salle;
 
-    // Constructeur par défaut
     public Service() {
-        this.created_at = LocalDateTime.now();
-        this.updated_at = LocalDateTime.now();
         this.estActif = true;
+        this.capaciteMax = 1;
+        this.dureeMinutes = 30;
+        this.niveau = 1;
         this.nombreReservations = 0;
+        this.salle = "OUVERT"; // Default to OUVERT
     }
 
-    // Validation métier
-    public boolean estValide() {
-        return validateNom() &&
-                validatePrix() &&
-                validateDuree() &&
-                validateCapacite() &&
-                validateCategorie() &&
-                validateNiveau() &&
-                validateNote() &&
-                validateNombreReservations();
-    }
+    // Getters
+    public Long getId() { return id; }
+    public String getNom() { return nom; }
+    public String getDescription() { return description; }
+    public Double getPrix() { return prix; }
+    public boolean isEstActif() { return estActif; }
+    public int getCapaciteMax() { return capaciteMax; }
+    public String getCategorie() { return categorie; }
+    public int getDureeMinutes() { return dureeMinutes; }
+    public int getNiveau() { return niveau; }
+    public LocalDateTime getCreated_at() { return created_at; }
+    public LocalDateTime getUpdated_at() { return updated_at; }
+    public Double getNote() { return note; }
+    public int getNombreReservations() { return nombreReservations; }
+    public String getImage() { return image; }
+    public String getSalle() { return salle; }
 
-    private boolean validateNom() {
-        return nom != null &&
-                nom.length() >= 3 &&
-                nom.length() <= 100 &&
-                nom.matches("^[a-zA-ZÀ-ÿ0-9\\s-]+$");
-    }
-
-    private boolean validatePrix() {
-        return prix > 0;
-    }
-
-    private boolean validateDuree() {
-        return dureeMinutes >= 15 && dureeMinutes <= 240;
-    }
-
-    private boolean validateCapacite() {
-        return capaciteMax > 0;
-    }
-
-    private boolean validateCategorie() {
-        return categorie != null && !categorie.trim().isEmpty() && categorie.length() <= 50;
-    }
-
-    private boolean validateNiveau() {
-        return niveau >= 1 && niveau <= 3;
-    }
-
-    private boolean validateNote() {
-        return note == null || (note >= 0 && note <= 5);
-    }
-
-    private boolean validateNombreReservations() {
-        return nombreReservations >= 0;
-    }
-
-    // Méthodes métier
-    public void ajusterPrixSelonDemande(int nombreReservations) {
-        if (nombreReservations > 50) {
-            this.prix *= 1.1; // Augmentation de 10%
-        } else if (nombreReservations < 10) {
-            this.prix *= 0.9; // Réduction de 10%
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setNom(String nom) { this.nom = nom; }
+    public void setDescription(String description) { this.description = description; }
+    public void setPrix(Double prix) { this.prix = prix; }
+    public void setEstActif(boolean estActif) { this.estActif = estActif; }
+    public void setCapaciteMax(int capaciteMax) { this.capaciteMax = capaciteMax; }
+    public void setCategorie(String categorie) { this.categorie = categorie; }
+    public void setDureeMinutes(int dureeMinutes) { this.dureeMinutes = dureeMinutes; }
+    public void setNiveau(int niveau) { this.niveau = niveau; }
+    public void setCreated_at(LocalDateTime created_at) { this.created_at = created_at; }
+    public void setUpdated_at(LocalDateTime updated_at) { this.updated_at = updated_at; }
+    public void setNote(Double note) { this.note = note; }
+    public void setNombreReservations(int nombreReservations) { this.nombreReservations = nombreReservations; }
+    public void setImage(String image) { this.image = image; }
+    public void setSalle(String salle) {
+        if (salle == null || (!salle.equals("OUVERT") && !salle.equals("FERME"))) {
+            this.salle = "OUVERT"; // Default to OUVERT instead of throwing exception
+        } else {
+            this.salle = salle;
         }
     }
 
@@ -89,183 +73,49 @@ public class Service {
             case 1 -> "Débutant";
             case 2 -> "Intermédiaire";
             case 3 -> "Avancé";
-            default -> "Non spécifié";
+            default -> "Inconnu";
         };
     }
 
-
-
-
-
-
-    // Getters et Setters avec validation
-    public Long getId() {
-        return id;
+    public boolean estValide() {
+        return validateNom() && validateDescription() && validatePrix() && validateCapacite() &&
+                validateCategorie() && validateDuree() && validateNiveau() && validateSalle() && validateImage();
     }
 
-    public void setId(Long id) {
-        if (id == null || id <= 0) {
-            throw new IllegalArgumentException("L'ID doit être un nombre positif");
-        }
-        this.id = id;
+    public boolean validateNom() {
+        return nom != null && nom.matches("^[a-zA-ZÀ-ÿ0-9\\s-]{3,100}$");
     }
 
-    public String getNom() {
-        return nom;
+    public boolean validateDescription() {
+        return description == null || description.length() <= 500;
     }
 
-    public void setNom(String nom) {
-        if (nom == null || nom.trim().isEmpty()) {
-            throw new IllegalArgumentException("Le nom ne peut pas être vide");
-        }
-        this.nom = nom.trim();
+    public boolean validatePrix() {
+        return prix != null && prix > 0 && prix <= 1000;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean validateCapacite() {
+        return capaciteMax > 0;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public boolean validateCategorie() {
+        return categorie != null && categorie.length() <= 50;
     }
 
-    public double getPrix() {
-        return prix;
+    public boolean validateDuree() {
+        return dureeMinutes >= 15 && dureeMinutes <= 240;
     }
 
-    public void setPrix(double prix) {
-        if (prix <= 0) {
-            throw new IllegalArgumentException("Le prix doit être positif");
-        }
-        this.prix = prix;
-    }
-    public String getSalle() {
-        return salle;
+    public boolean validateNiveau() {
+        return niveau >= 1 && niveau <= 3;
     }
 
-    public void setSalle(String salle) {
-        this.salle = salle;
+    public boolean validateSalle() {
+        return salle != null && (salle.equals("OUVERT") || salle.equals("FERME"));
     }
 
-    public boolean isEstActif() {
-        return estActif;
-    }
-
-    public void setEstActif(boolean estActif) {
-        this.estActif = estActif;
-    }
-
-    public int getCapaciteMax() {
-        return capaciteMax;
-    }
-
-    public void setCapaciteMax(int capaciteMax) {
-        if (capaciteMax <= 0) {
-            throw new IllegalArgumentException("La capacité maximale doit être positive");
-        }
-        this.capaciteMax = capaciteMax;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(String categorie) {
-        if (categorie == null || categorie.trim().isEmpty()) {
-            throw new IllegalArgumentException("La catégorie ne peut pas être vide");
-        }
-        this.categorie = categorie;
-    }
-
-    public int getDureeMinutes() {
-        return dureeMinutes;
-    }
-
-    public void setDureeMinutes(int dureeMinutes) {
-        if (dureeMinutes < 15 || dureeMinutes > 240) {
-            throw new IllegalArgumentException("La durée doit être comprise entre 15 et 240 minutes");
-        }
-        this.dureeMinutes = dureeMinutes;
-    }
-
-    public int getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(int niveau) {
-        if (niveau < 1 || niveau > 3) {
-            throw new IllegalArgumentException("Le niveau doit être compris entre 1 et 3");
-        }
-        this.niveau = niveau;
-    }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        if (created_at == null) {
-            throw new IllegalArgumentException("La date de création ne peut pas être nulle");
-        }
-        this.created_at = created_at;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        if (updated_at == null) {
-            throw new IllegalArgumentException("La date de mise à jour ne peut pas être nulle");
-        }
-        this.updated_at = updated_at;
-    }
-
-    public Double getNote() {
-        return note;
-    }
-
-    public void setNote(Double note) {
-        if (note != null && (note < 0 || note > 5)) {
-            throw new IllegalArgumentException("La note doit être comprise entre 0 et 5");
-        }
-        this.note = note;
-    }
-
-    public int getNombreReservations() {
-        return nombreReservations;
-    }
-
-    public void setNombreReservations(int nombreReservations) {
-        if (nombreReservations < 0) {
-            throw new IllegalArgumentException("Le nombre de réservations ne peut pas être négatif");
-        }
-        this.nombreReservations = nombreReservations;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        if (image != null && image.length() > 255) {
-            throw new IllegalArgumentException("L'image ne peut pas dépasser 255 caractères");
-        }
-        this.image = image;
-    }
-
-    // Méthodes equals, hashCode et toString
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return Objects.equals(id, service.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean validateImage() {
+        return image == null || image.length() <= 255;
     }
 
     @Override
@@ -273,9 +123,19 @@ public class Service {
         return "Service{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
                 ", prix=" + prix +
-                ", niveau='" + getNiveauDifficulte() + '\'' +
                 ", estActif=" + estActif +
+                ", capaciteMax=" + capaciteMax +
+                ", categorie='" + categorie + '\'' +
+                ", dureeMinutes=" + dureeMinutes +
+                ", niveau=" + niveau +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", note=" + note +
+                ", nombreReservations=" + nombreReservations +
+                ", image='" + image + '\'' +
+                ", salle='" + salle + '\'' +
                 '}';
     }
 }

@@ -17,6 +17,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,112 +25,211 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ServiceController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #1A2526;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.ServiceController">
     <content>
-        <VBox prefHeight="800.0" prefWidth="1000.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
-            <padding>
-                <Insets bottom="15" left="15" right="15" top="15" />
-            </padding>
+        <AnchorPane prefHeight="800.0" prefWidth="1000.0">
+            <!-- Background Image -->
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="1000.0" opacity="0.2">
+                    <image>
+                        <Image url="@sports-high-resolution-desktop-backgrounds-wallpaper-preview.jpg" />
+                    </image>
+                </ImageView>
 
-            <!-- Header -->
-            <AnchorPane prefHeight="100.0" prefWidth="970.0">
-                <children>
-                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="405.0" layoutY="10.0">
-                        <image>
-                            <Image url="@hjk-removebg-preview.png" />
-                        </image>
-                    </ImageView>
-                    <Label layoutX="350.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Gestion des Services" textFill="#f4eeee" />
-                </children>
-            </AnchorPane>
+                <!-- Main Content -->
+                <VBox prefHeight="800.0" prefWidth="1000.0" spacing="15" style="-fx-background-color: rgba(42, 59, 66, 0.8); -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
 
-            <!-- Loading Indicator -->
-            <HBox alignment="CENTER_RIGHT" spacing="8">
-                <Region HBox.hgrow="ALWAYS" />
-                <ProgressIndicator fx:id="loadingIndicator" visible="false" />
-            </HBox>
-
-            <!-- Notifications -->
-            <VBox fx:id="notificationPane" spacing="5" />
-
-            <!-- Filters -->
-            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
-                <TextField fx:id="searchField" prefWidth="300.0" promptText="Rechercher..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
-                <ComboBox fx:id="categorieFilter" prefWidth="150.0" promptText="Catégorie" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-                <Label style="-fx-font-size: 14px;" text="Prix max:" textFill="#D8DEE9" />
-                <Slider fx:id="prixFilter" majorTickUnit="200" max="1000" min="0" minorTickCount="5" prefWidth="200.0" showTickLabels="true" showTickMarks="true" />
-            </HBox>
-
-            <!-- Main Content -->
-            <SplitPane dividerPositions="0.55" prefHeight="500.0" VBox.vgrow="ALWAYS">
-                <!-- Left Section: Table and Buttons -->
-                <VBox spacing="10">
-                    <TableView fx:id="serviceTable" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #3B4252; -fx-border-color: #4C566A; -fx-border-radius: 5;" VBox.vgrow="ALWAYS" />
-                    <HBox alignment="CENTER_RIGHT" spacing="10">
-                        <Button onAction="#loadServices" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Actualiser" />
-                        <Button onAction="#exportPDF" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Exporter" />
-                        <Button fx:id="toggleStatsButton" onAction="#showStatisticsPopup" style="-fx-background-color: #88C0D0; -fx-text-fill: #2E3440; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Voir Statistiques" />
+                    <!-- Header -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <ImageView fitHeight="80.0" fitWidth="160.0">
+                            <image>
+                                <Image url="@hjk-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Gestion des Services" />
                     </HBox>
-                </VBox>
 
-                <!-- Right Section: Form -->
-                <VBox prefWidth="450.0" spacing="10" styleClass="form-container">
-                    <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Détails du Service" textFill="#141414b2" />
-
-                    <Label style="-fx-font-size: 14px;" text="Nom" textFill="#2323247d" />
-                    <TextField fx:id="nomField" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <Label style="-fx-font-size: 14px;" text="Description" textFill="#2526267d" />
-                    <TextArea fx:id="descriptionArea" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true" />
-
-                    <Label style="-fx-font-size: 14px;" text="Prix" textFill="#1111127d" />
-                    <TextField fx:id="prixField" prefWidth="400.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <Label style="-fx-font-size: 14px;" text="Capacité max" textFill="#2323247d" />
-                    <Spinner fx:id="capaciteSpinner" editable="true" initialValue="1" max="100" min="1" prefWidth="100.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee;" />
-
-                    <Label style="-fx-font-size: 14px;" text="Catégorie" textFill="#1b1b1c7d" />
-                    <ComboBox fx:id="categorieCombo" prefWidth="200.0" promptText="Sélectionner une catégorie" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <Label style="-fx-font-size: 14px;" text="Durée (min)" textFill="#1616177d" />
-                    <Spinner fx:id="dureeSpinner" editable="true" initialValue="30" max="240" min="15" prefWidth="100.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee;" />
-
-                    <Label style="-fx-font-size: 14px;" text="Niveau" textFill="#1b1c1c7d" />
-                    <ComboBox fx:id="niveauCombo" prefWidth="200.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <CheckBox fx:id="actifCheck" selected="true" style="-fx-font-size: 14px;" text="Service actif" textFill="#1717177d" />
-
-                    <!-- Added TextField for salle -->
-                    <Label style="-fx-font-size: 14px;" text="Salle" textFill="#1717177d" />
-                    <TextField fx:id="salleField" prefWidth="400.0" promptText="Nom de la salle" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <!-- Existing TextField for image -->
-                    <Label style="-fx-font-size: 14px;" text="Image (URL)" textFill="#1717177d" />
-                    <TextField fx:id="imageField" prefWidth="400.0" promptText="URL de l'image" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
-
-                    <HBox alignment="CENTER_RIGHT" spacing="10">
-                        <Button onAction="#clearFields" style="-fx-background-color: #BF616A; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Annuler" />
-                        <Button onAction="#handleAjouterService" style="-fx-background-color: #5E81AC; -fx-text-fill: #f4eeee; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10 20; -fx-font-size: 14px;" text="Enregistrer" />
+                    <!-- Loading Indicator -->
+                    <HBox alignment="CENTER_RIGHT" spacing="8">
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ProgressIndicator fx:id="loadingIndicator" visible="false" />
                     </HBox>
+
+                    <!-- Notifications -->
+                    <VBox fx:id="notificationPane" spacing="5" />
+
+                    <!-- Filters -->
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <TextField fx:id="searchField" prefWidth="300.0" promptText="Rechercher..." style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                            <tooltip>
+                                <Tooltip text="Recherchez par nom, description, image ou statut salle" />
+                            </tooltip>
+                        </TextField>
+                        <ComboBox fx:id="categorieFilter" prefWidth="150.0" promptText="Catégorie" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                            <tooltip>
+                                <Tooltip text="Filtrer par catégorie" />
+                            </tooltip>
+                        </ComboBox>
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Prix max:" />
+                        <Slider fx:id="prixFilter" majorTickUnit="200" max="1000" min="0" minorTickCount="5" prefWidth="200.0" showTickLabels="true" showTickMarks="true">
+                            <tooltip>
+                                <Tooltip text="Filtrer par prix maximum" />
+                            </tooltip>
+                        </Slider>
+                    </HBox>
+
+                    <!-- Main Content -->
+                    <SplitPane dividerPositions="0.6" prefHeight="500.0" VBox.vgrow="ALWAYS">
+                        <!-- Left Section: Table and Buttons -->
+                        <VBox spacing="15">
+                            <TableView fx:id="serviceTable" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #2A3B42; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-text-fill: #FFFFFF;" VBox.vgrow="ALWAYS" />
+                            <HBox alignment="CENTER_RIGHT" spacing="10">
+                                <Button onAction="#loadServices" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Actualiser">
+                                    <tooltip>
+                                        <Tooltip text="Rafraîchir la liste des services" />
+                                    </tooltip>
+                                </Button>
+                                <Button onAction="#exportPDF" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Exporter">
+                                    <tooltip>
+                                        <Tooltip text="Exporter la liste en PDF" />
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="toggleStatsButton" onAction="#showStatisticsPopup" style="-fx-background-color: #66C2D9; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Statistiques">
+                                    <tooltip>
+                                        <Tooltip text="Afficher les statistiques des services" />
+                                    </tooltip>
+                                </Button>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Right Section: Form -->
+                        <VBox prefWidth="400.0" spacing="15" style="-fx-padding: 15; -fx-background-color: rgba(42, 59, 66, 0.9); -fx-border-radius: 10; -fx-background-radius: 10;">
+                            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-font-family: 'Arial';" text="Détails du Service" />
+
+                            <!-- Form Fields -->
+                            <VBox spacing="10">
+                                <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Nom" />
+                                <TextField fx:id="nomField" prefWidth="350.0" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                    <tooltip>
+                                        <Tooltip text="Entrez le nom du service (3-100 caractères)" />
+                                    </tooltip>
+                                </TextField>
+
+                                <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Description" />
+                                <TextArea fx:id="descriptionArea" prefHeight="80.0" prefWidth="350.0" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;" wrapText="true">
+                                    <tooltip>
+                                        <Tooltip text="Entrez une description du service" />
+                                    </tooltip>
+                                </TextArea>
+
+                                <HBox spacing="10">
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Prix (€)" />
+                                        <TextField fx:id="prixField" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                            <tooltip>
+                                                <Tooltip text="Entrez le prix (positif, max 1000)" />
+                                            </tooltip>
+                                        </TextField>
+                                    </VBox>
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Capacité max" />
+                                        <Spinner fx:id="capaciteSpinner" editable="true" initialValue="1" max="100" min="1" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;">
+                                            <tooltip>
+                                                <Tooltip text="Sélectionnez la capacité maximale" />
+                                            </tooltip>
+                                        </Spinner>
+                                    </VBox>
+                                </HBox>
+
+                                <HBox spacing="10">
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Catégorie" />
+                                        <ComboBox fx:id="categorieCombo" promptText="Sélectionner" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                            <tooltip>
+                                                <Tooltip text="Choisissez une catégorie" />
+                                            </tooltip>
+                                        </ComboBox>
+                                    </VBox>
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Durée (min)" />
+                                        <Spinner fx:id="dureeSpinner" editable="true" initialValue="30" max="240" min="15" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5;">
+                                            <tooltip>
+                                                <Tooltip text="Sélectionnez la durée (15-240 min)" />
+                                            </tooltip>
+                                        </Spinner>
+                                    </VBox>
+                                </HBox>
+
+                                <HBox spacing="10">
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Niveau" />
+                                        <ComboBox fx:id="niveauCombo" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                            <tooltip>
+                                                <Tooltip text="Choisissez le niveau de difficulté" />
+                                            </tooltip>
+                                        </ComboBox>
+                                    </VBox>
+                                    <VBox spacing="10" prefWidth="170.0">
+                                        <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Statut Salle" />
+                                        <ComboBox fx:id="salleCombo" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                            <tooltip>
+                                                <Tooltip text="Choisissez le statut de la salle (OUVERT ou FERME)" />
+                                            </tooltip>
+                                        </ComboBox>
+                                    </VBox>
+                                </HBox>
+
+                                <CheckBox fx:id="actifCheck" selected="true" style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Service actif">
+                                    <tooltip>
+                                        <Tooltip text="Cochez pour activer le service" />
+                                    </tooltip>
+                                </CheckBox>
+
+                                <Label style="-fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="Image (URL)" />
+                                <TextField fx:id="imageField" prefWidth="350.0" promptText="URL de l'image" style="-fx-background-color: #2A3B42; -fx-text-fill: #FFFFFF; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;">
+                                    <tooltip>
+                                        <Tooltip text="Entrez l'URL de l'image (facultatif, max 255 caractères)" />
+                                    </tooltip>
+                                </TextField>
+                            </VBox>
+
+                            <!-- Form Buttons -->
+                            <HBox alignment="CENTER_RIGHT" spacing="10">
+                                <Button onAction="#clearFields" style="-fx-background-color: #D32F2F; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Annuler">
+                                    <tooltip>
+                                        <Tooltip text="Réinitialiser le formulaire" />
+                                    </tooltip>
+                                </Button>
+                                <Button onAction="#handleAjouterService" style="-fx-background-color: #FF7043; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 20;" text="Enregistrer">
+                                    <tooltip>
+                                        <Tooltip text="Ajouter ou mettre à jour le service" />
+                                    </tooltip>
+                                </Button>
+                            </HBox>
+                        </VBox>
+                    </SplitPane>
+
+                    <!-- Reservations Chart -->
+                    <TitledPane expanded="false" text="Réservations par Jour" style="-fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold;" VBox.vgrow="NEVER">
+                        <content>
+                            <LineChart fx:id="statsChart" prefHeight="200.0" style="-fx-background-color: #2A3B42; -fx-border-color: #4C566A; -fx-border-radius: 5;">
+                                <xAxis>
+                                    <CategoryAxis label="Jour" tickLabelFill="#FFFFFF" style="-fx-font-size: 12px;" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Réservations" tickLabelFill="#FFFFFF" style="-fx-font-size: 12px;" />
+                                </yAxis>
+                            </LineChart>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Footer -->
+                    <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 12px; -fx-text-fill: #B0BEC5; -fx-font-family: 'Arial';" text="© 2025 HIVE - Gestion Sportive" VBox.vgrow="NEVER" />
                 </VBox>
-            </SplitPane>
-
-            <!-- Reservations Chart -->
-            <TitledPane expanded="false" text="Réservations par Jour" textFill="#f4eeee" VBox.vgrow="NEVER">
-                <content>
-                    <LineChart fx:id="statsChart" prefHeight="200.0" style="-fx-background-color: #3B4252;">
-                        <xAxis>
-                            <CategoryAxis label="Jour" tickLabelFill="#f4eeee" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Nombre de réservations" tickLabelFill="#f4eeee" />
-                        </yAxis>
-                    </LineChart>
-                </content>
-            </TitledPane>
-
-            <!-- Footer -->
-            <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
-        </VBox>
+            </children>
+        </AnchorPane>
     </content>
 </ScrollPane>

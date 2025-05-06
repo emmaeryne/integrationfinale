@@ -43,7 +43,7 @@ public class ServiceService implements IServiceService {
             }
             pst.setInt(12, service.getNombreReservations());
             pst.setString(13, service.getImage());
-            pst.setString(14, service.getSalle() != null ? service.getSalle() : ""); // Provide a value for salle
+            pst.setString(14, service.getSalle());
 
             int affectedRows = pst.executeUpdate();
 
@@ -106,7 +106,7 @@ public class ServiceService implements IServiceService {
             }
             pst.setInt(11, service.getNombreReservations());
             pst.setString(12, service.getImage());
-            pst.setString(13, service.getSalle() != null ? service.getSalle() : "");
+            pst.setString(13, service.getSalle());
             pst.setLong(14, service.getId());
 
             int affectedRows = pst.executeUpdate();
@@ -154,18 +154,31 @@ public class ServiceService implements IServiceService {
 
     @Override
     public Service getServiceById(int idService) throws SQLException {
+        String sql = "SELECT * FROM service WHERE id = ?";
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, idService);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToService(rs);
+                }
+            }
+        }
+
         return null;
     }
 
     @Override
     public List<Service> searchServices(String keyword) {
         List<Service> services = new ArrayList<>();
-        String sql = "SELECT * FROM service WHERE nom LIKE ? OR description LIKE ? OR image LIKE ?";
+        String sql = "SELECT * FROM service WHERE nom LIKE ? OR description LIKE ? OR image LIKE ? OR salle LIKE ?";
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setString(1, "%" + keyword + "%");
             pst.setString(2, "%" + keyword + "%");
             pst.setString(3, "%" + keyword + "%");
+            pst.setString(4, "%" + keyword + "%");
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
@@ -254,7 +267,6 @@ public class ServiceService implements IServiceService {
             }
         }
 
-        // Ensure all days are present
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (String day : days) {
             reservationsPerDay.putIfAbsent(day, 0);
@@ -279,7 +291,6 @@ public class ServiceService implements IServiceService {
             }
         }
 
-        // Ensure all days are present
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (String day : days) {
             revenuePerDay.putIfAbsent(day, 0.0);
@@ -304,7 +315,6 @@ public class ServiceService implements IServiceService {
             }
         }
 
-        // Ensure all days are present
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (String day : days) {
             activeServicesPerDay.putIfAbsent(day, 0);
@@ -326,7 +336,12 @@ public class ServiceService implements IServiceService {
         service.setNiveau(rs.getInt("niveau"));
         service.setNombreReservations(rs.getInt("nombre_reservations"));
         service.setImage(rs.getString("image"));
-        service.setSalle(rs.getString("salle")); // Map the salle column
+
+        String salle = rs.getString("salle");
+        if (salle != null && !salle.equals("OUVERT") && !salle.equals("FERME")) {
+            System.err.println("Invalid salle value for service ID " + rs.getLong("id") + ": " + salle + ". Defaulting to OUVERT.");
+        }
+        service.setSalle(salle); // Rely on setSalle to default to OUVERT if invalid
 
         Double note = rs.getDouble("note");
         if (!rs.wasNull()) {
