@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="419.0" prefWidth="601.0" style="-fx-background-color: #2E3440;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.emmapi.controllers.CoursesCardsController">
+    <content>
+        <VBox prefHeight="482.0" prefWidth="654.0" spacing="10" style="-fx-background-color: #2E3440;" styleClass="main-container">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+
+            <!-- Header -->
+            <AnchorPane prefHeight="100.0" prefWidth="970.0">
+                <children>
+                    <ImageView fitHeight="80.0" fitWidth="160.0" layoutX="253.0">
+                        <image>
+                            <Image url="@hjk-removebg-preview.png" />
+                        </image>
+                    </ImageView>
+                    <Label layoutX="190.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Les Cours Disponibles" textFill="#f4eeee" />
+                </children>
+            </AnchorPane>
+
+            <!-- Filters -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filters-container">
+                <TextField fx:id="searchField" prefHeight="23.0" prefWidth="852.0" promptText="Rechercher un cours..." style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="etatFilter" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #3B4252; -fx-text-fill: #f4eeee; -fx-border-color: #4C566A; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;" />
+            </HBox>
+
+            <!-- Main Content -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <!-- Navigation Links -->
+                <HBox alignment="CENTER_LEFT" spacing="20" />
+
+                <!-- Cards Section -->
+                <FlowPane fx:id="coursesFlowPane" hgap="15" prefWidth="970.0" style="-fx-background-color: #2E3440;" vgap="15" VBox.vgrow="ALWAYS" />
+            </VBox>
+
+            <!-- Footer -->
+            <Label alignment="CENTER" prefHeight="20.0" style="-fx-font-size: 14px; -fx-text-fill: #D8DEE9;" text="© 2025 HIVE" VBox.vgrow="NEVER" />
+        </VBox>
+    </content>
+</ScrollPane>

@@ -1,0 +1,88 @@
+.root {
+    -fx-background-color: #1A2526;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #2A3B42;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.table-view .column-header {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: rgba(42, 59, 66, 0.8);
+    -fx-padding: 8px;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: rgba(42, 59, 66, 0.6);
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #FF7043;
+}
+
+.button {
+    -fx-background-color: #FF7043;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #F4511E;
+}
+
+.dialog-pane {
+    -fx-background-color: #2A3B42;
+    -fx-padding: 20px;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+.combo-box, .date-picker {
+    -fx-pref-width: 200px;
+    -fx-background-color: #3B4252;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #66C2D9;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5px;
+}
+
+.combo-box .list-view .list-cell {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #3B4252;
+}
+
+.save-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4;
+}
+
+.button:cancel {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4;
+}
